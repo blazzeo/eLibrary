@@ -8,7 +8,7 @@ function Router() {
   // Yes -> Dashboard
   // No -> Register / Login forms
   
-  let hasAuthorized = GetCookies();
+  let hasAuthorized = GetAuthToken();
 
   return(
     hasAuthorized ? <Dashboard /> : <Register />

@@ -1,6 +1,6 @@
 import Header from "../../components/header"
 
-export default function AdminDashboard() {
+export default function UsersControlPanel() {
   return(<>
          <Header />
          </>)
