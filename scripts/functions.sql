@@ -102,7 +102,6 @@ $$ LANGUAGE plpgsql;
 
 --	RETURN BACK
 CREATE OR REPLACE FUNCTION return_book(
-    p_user_id INT,
     p_book_id INT
 ) RETURNS BOOLEAN AS $$
 DECLARE
@@ -110,7 +109,7 @@ DECLARE
 BEGIN
     -- Attempt to delete the book loan and count the affected rows
     DELETE FROM book_loans
-    WHERE user_id = p_user_id AND book_id = p_book_id
+    WHERE book_id = p_book_id
     RETURNING COUNT(*) INTO deleted_count;
 
     -- Return TRUE if one or more rows were deleted, otherwise FALSE
