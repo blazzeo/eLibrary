@@ -5,28 +5,20 @@ import {
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from "material-react-table";
-
-type Book = {
-  book_id: number;
-  title: string;
-  total_pages: number;
-  rating: number;
-  isbn: string;
-  published_date: Date;
-};
+import { BookData } from "../structs";
 
 interface Props {
-  books: Book[];
+  books: BookData[];
 }
 
-export default function BookTable({ books }: Props) {
-  const [booksArr] = useState<Book[]>(books);
+export default function BookDataTable({ books }: Props) {
+  const [booksArr] = useState<BookData[]>(books);
 
-  const columns = useMemo<MRT_ColumnDef<Book>[]>(
+  const columns = useMemo<MRT_ColumnDef<BookData>[]>(
     () => [
       {
         accessorKey: "book_id", //access nested data with dot notation
-        header: "Book ID",
+        header: "BookData ID",
         size: 150,
       },
       {
@@ -63,7 +55,7 @@ export default function BookTable({ books }: Props) {
     []
   );
 
-  const table = useMaterialReactTable<Book>({
+  const table = useMaterialReactTable<BookData>({
     columns,
     data: booksArr, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
   });
