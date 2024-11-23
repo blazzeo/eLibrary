@@ -1,18 +1,10 @@
-import Register from './pages/register';
-import Login from './pages/login';
-import Dashboard from './pages/dashboard';
+import Register from "./pages/RegisterForm";
+// import LoginForm from "./pages/LoginForm";
+import Dashboard from "./pages/user/userDashboard";
 
 function Router() {
-  // Get Cookies
-  // Have Cookies(Auth Info)?
-  // Yes -> Dashboard
-  // No -> Register / Login forms
-  
-  let hasAuthorized = GetAuthToken();
-
-  return(
-    hasAuthorized ? <Dashboard /> : <Register />
-  );
+  // let hasAuthorized = GetAuthToken();
+  // return 1 > 2 ? <Dashboard /> : <Register />;
 }
 
 export default Router;

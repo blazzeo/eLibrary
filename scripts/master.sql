@@ -11,6 +11,7 @@ grant connect on database eLibrary_db to dbuser;
 /* create replicator */
 
 /*	create tables	*/
+drop table authors;
 CREATE TABLE authors( 
   author_id   SERIAL NOT NULL,
   first_name  VARCHAR(100) NOT NULL, 

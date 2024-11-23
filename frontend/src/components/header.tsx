@@ -1,9 +1,9 @@
-import searchBar from "./searchBar"
-
 export default function Header() {
   return (
-    <header>
-      <a href="dashboard">Home</a>
-    </header>
+    <>
+      <a href="{dashboard}">
+      <img></img>
+      <a/>
+    </>
   )
 }
