@@ -1,4 +1,6 @@
-const { user, admin } = require('./db_roles');
+const { db_user, db_admin } = require('./db_roles');
+
+const user = db_user(5432);
 
 async function checkLogin(userLogin) {
   try {
@@ -50,4 +52,14 @@ async function returnBook(bookId) {
   }
 }
 
-module.exports = { checkLogin, checkUser, createUser, borrowBook, returnBook };
+async function getBooksTest() {
+  try {
+    const books = await user.query('select * from books;')
+    console.log(books.rowCount);
+    return books.rows;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+module.exports = { checkLogin, checkUser, createUser, borrowBook, returnBook, getBooksTest };

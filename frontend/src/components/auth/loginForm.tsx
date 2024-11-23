@@ -33,7 +33,8 @@ const LoginForm: React.FC<Props> = ({ authorized }) => {
     }
     setTimeout(() => {
       setError(null);
-    }, 5000);
+      setLoading(false);
+    }, 3000);
   };
 
   return (
@@ -79,7 +80,7 @@ const LoginForm: React.FC<Props> = ({ authorized }) => {
         </a>
       </div>
       {isLoading ? (
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center absolute">
           <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>

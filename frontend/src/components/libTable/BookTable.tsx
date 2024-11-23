@@ -12,13 +12,11 @@ interface Props {
 }
 
 export default function BookDataTable({ books }: Props) {
-  const [booksArr] = useState<BookData[]>(books);
-
   const columns = useMemo<MRT_ColumnDef<BookData>[]>(
     () => [
       {
         accessorKey: "book_id", //access nested data with dot notation
-        header: "BookData ID",
+        header: "Book ID",
         size: 150,
       },
       {
@@ -57,7 +55,7 @@ export default function BookDataTable({ books }: Props) {
 
   const table = useMaterialReactTable<BookData>({
     columns,
-    data: booksArr, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
+    data: books, // используйте переданные данные
   });
 
   return <MaterialReactTable table={table} />;
