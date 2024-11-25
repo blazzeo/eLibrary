@@ -1,9 +1,3 @@
 export default function Header() {
-  return (
-    <>
-      <a href="{dashboard}">
-      <img></img>
-      <a/>
-    </>
-  )
+  return <h1>Header</h1>;
 }

@@ -1,23 +1,41 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import { checkAvailableLogin, createUser } from "../api/DatabaseAPI";
 
-const RegisterForm: React.FC = () => {
+interface Props {
+  createAccountCallback: () => void;
+}
+
+const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Add your registration logic here
+    setLoading(true);
+    if (!(await checkAvailableLogin(username))) {
+      setError("Username isn't available.");
+      return;
+    }
+    setLoading(false);
+
     if (password !== confirmPassword) {
-      console.log("Passwords do not match.");
+      setError("Passwords don't match.");
       return;
     }
 
-    console.log("Username:", username);
-    console.log("Password:", password);
-    // Proceed with registration logic
+    setLoading(true);
+    if (!createUser({ username, password })) {
+      setError("Creating account failed.");
+      return;
+    }
+    setLoading(false);
+
+    createAccountCallback();
   };
 
   return (
@@ -69,7 +87,20 @@ const RegisterForm: React.FC = () => {
         <button type="submit" className="btn btn-primary">
           Register
         </button>
+        {error && <div className="alert alert-danger">{error}</div>}
       </form>
+      <div className="mt-3 text-center">
+        <button onClick={() => createAccountCallback()}>
+          Already have an account? Login here.
+        </button>
+      </div>
+      {isLoading ? (
+        <div className="d-flex justify-content-center absolute">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

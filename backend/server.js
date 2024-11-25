@@ -7,47 +7,67 @@ const { server_health } = require('./monitoring')
 
 app.use(cors())
 
-app.get('/api/check_login', async (req, res) => {
-  console.log("checkLogin")
-  const userLogin = req.query.login;
-  const result = await checkLogin(userLogin);
-  res.json({ result: result });
-});
-
-app.get('/api/check_user', async (req, res) => {
-  console.log("checkUser")
-  const userLogin = req.query.login;
-  const userPassword = req.query.password;
-  const result = await checkUser(userLogin, userPassword);
-  res.json({ result: result });
-});
-
-app.get('/api/create_user', async (req, res) => {
-  console.log("createUser")
-  const userLogin = req.query.login;
-  const userPassword = req.query.password;
-  const result = await createUser(userLogin, userPassword);
-  res.json({ result: result });
-});
-
-app.get('/api/borrow_book', async (req, res) => {
-  console.log("borrowBook")
-  const userId = req.query.user_id;
-  const bookId = req.query.book_id;
-  const result = await borrowBook(userId, bookId);
-  res.json({ result: result });
-});
-
-app.get('/api/return_book', async (req, res) => {
-  console.log("returnBook")
-  const bookId = req.query.book_id;
-  const result = await returnBook(bookId);
-  res.json({ result: result });
-});
-
-app.get('/api/get_books', async (req, res) => {
-  console.log("getBooks")
+app.get('/api/checklogin', async (req, res) => {
   try {
+    console.log("checkLogin")
+    const userLogin = req.query.login;
+    const result = await checkLogin(userLogin);
+    res.json({ result: result });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/checkuser', async (req, res) => {
+  try {
+    console.log("checkUser")
+    const userLogin = req.query.login;
+    const userPassword = req.query.password;
+    const result = await checkUser(userLogin, userPassword);
+    res.json({ result: result });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/createuser', async (req, res) => {
+  try {
+    console.log("createUser")
+    const userLogin = req.query.login;
+    const userPassword = req.query.password;
+    const result = await createUser(userLogin, userPassword);
+    res.json({ result: result });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/borrowbook', async (req, res) => {
+  try {
+    console.log("borrowBook")
+    const userId = req.query.user_id;
+    const bookId = req.query.book_id;
+    const result = await borrowBook(userId, bookId);
+    res.json({ result: result });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/returnbook', async (req, res) => {
+  try {
+    console.log("returnBook")
+    const bookId = req.query.book_id;
+    const result = await returnBook(bookId);
+    res.json({ result: result });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/getbooks', async (req, res) => {
+  try {
+    console.log("getBooks")
     const result = await getBooksTest();
     res.json(result);
   } catch (error) {

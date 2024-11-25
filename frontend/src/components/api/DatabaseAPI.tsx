@@ -4,53 +4,65 @@ import { BookData, UserData } from "../structs";
 const BACK_PORT = 3000;
 
 export async function checkUser({ username, password }: UserData) {
-  const response = await axios.get(
-    `http://localhost:${BACK_PORT}/api/checkuser`,
-    {
-      params: {
-        login: username,
-        password: password,
-      },
-    }
-  );
-  if (response.status == 200) {
-    return true;
+  try {
+    const response = await axios.get(
+      `http://localhost:${BACK_PORT}/api/checkuser`,
+      {
+        params: {
+          login: username,
+          password: password,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error checking user: ${error}`);
+    throw error;
   }
-  return false;
 }
 
 export async function checkAvailableLogin(userLogin: string) {
-  const response = await axios.get(
-    `http://localhost:${BACK_PORT}/api/checklogin`,
-    {
-      params: { login: userLogin },
-    }
-  );
-  return response;
+  try {
+    const response = await axios.get(
+      `http://localhost:${BACK_PORT}/api/checklogin`,
+      {
+        params: { login: userLogin },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error checking login:", error);
+    throw error;
+  }
 }
 
 export async function createUser({ username, password }: UserData) {
-  const response = await axios.get(
-    `http://localhost:${BACK_PORT}/api/createuser`,
-    {
-      params: {
-        login: username,
-        password: password,
-      },
-    }
-  );
-  return response;
+  try {
+    const response = await axios.get(
+      `http://localhost:${BACK_PORT}/api/createuser`,
+      {
+        params: {
+          login: username,
+          password: password,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error creating user: ${error}`);
+    throw error;
+  }
 }
 
 export async function getBooks() {
   try {
     const response: AxiosResponse<BookData[]> = await axios.get(
-      `http://localhost:${BACK_PORT}/api/get_books`
+      `http://localhost:${BACK_PORT}/api/getbooks`
     );
 
     return response.data;
   } catch (error) {
     console.error("Error fetching books:", error);
-    throw error; // Можно выбросить ошибку дальше или вернуть значение по умолчанию
+    throw error;
   }
 }

@@ -21,7 +21,7 @@ async function check_server_health() {
   const client = new Client({
     user: 'dbadmin',
     host: 'localhost',
-    database: 'elibrary_db',
+    database: 'elibrary',
     password: 'masteradmin',
     port: server_port,
   });

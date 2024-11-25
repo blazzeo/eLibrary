@@ -1,12 +1,8 @@
-import { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.css";
-import { BookData } from "./components/structs";
-import BookDataTable from "./components/libTable/BookTable";
-import { getBooks } from "./components/api/DatabaseAPI";
-import { LoginPage } from "./pages/LoginPage";
+import { useState } from "react";
+import { LoginPage } from "./pages/AuthPage";
+import Dashboard from "./pages/user/userDashboard";
 
 export default function App() {
-  const [books, setBooks] = useState<BookData[]>([]);
   const [authorized, setAuthorized] = useState(
     sessionStorage.getItem("authorized") === "authorized" ? true : false
   );
@@ -15,23 +11,5 @@ export default function App() {
     setAuthorized(true);
   }
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const bookData = await getBooks();
-        console.log(bookData);
-        setBooks(bookData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchBooks();
-  }, []);
-
-  return authorized ? (
-    <BookDataTable books={books} />
-  ) : (
-    <LoginPage sendData={authorize} />
-  );
+  return authorized ? <Dashboard /> : <LoginPage sendData={authorize} />;
 }

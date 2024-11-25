@@ -1,25 +1,25 @@
 const { Pool } = require('pg')
 
-const db_admin = (port) => {
+const dbadmin = (port) => {
   return new Pool({
-  user: 'dbadmin',
-  host: 'localhost',
-  database: 'postgres',
-  password: 'masteradmin',
-  port: port,
+    user: 'dbadmin',
+    host: 'localhost',
+    database: 'elibrary',
+    password: 'masteradmin',
+    port: port,
   })
 }
 
-const db_user = (port) => {
+const dbuser = (port) => {
   return new Pool({
     user: 'dbuser',
     host: 'localhost',
-    database: 'postgres',
+    database: 'elibrary',
     password: 'masteruser',
     port: port,
-  });
+  })
 } 
 
 module.exports = {
-  db_user, db_admin
+  dbuser, dbadmin
 }

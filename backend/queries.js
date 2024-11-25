@@ -1,12 +1,13 @@
-const { db_user, db_admin } = require('./db_roles');
+const { dbuser, dbadmin } = require('./db_roles');
 
-const user = db_user(5432);
+const user = dbuser(5432)
+const admin = dbadmin(5432)
 
 async function checkLogin(userLogin) {
   try {
-    const result = await admin.query('CALL check_available_login($1);', userLogin);
+    const result = await admin.query('SELECT check_available_login($1);', [userLogin]);
     console.log(result);
-    return result;
+    return result.rows;
   } catch(err) {
     console.error(err);
   }
@@ -14,9 +15,9 @@ async function checkLogin(userLogin) {
 
 async function checkUser(userLogin, userPassword) {
   try {
-    const result = await admin.query('CALL check_user($1, $2);', userLogin, userPassword);
+    const result = await admin.query('SELECT check_user($1, $2);', [userLogin, userPassword]);
     console.log(result);
-    return result;
+    return result.rows;
   } catch(err) {
     console.error(err);
   }
@@ -24,9 +25,9 @@ async function checkUser(userLogin, userPassword) {
 
 async function createUser(userLogin, userPassword) {
   try {
-    const result = await admin.query('CALL create_user($1, $2);', userLogin, userPassword)
+    const result = await admin.query('SELECT create_user($1, $2);', [userLogin, userPassword])
     console.log(result)
-    return result;
+    return result.rows;
   } catch(err) {
     console.error(err)
   }
@@ -34,9 +35,9 @@ async function createUser(userLogin, userPassword) {
 
 async function borrowBook(userId, bookId) {
   try {
-    const result = await user.query('CALL borrow_book($1, $2);', userId, bookId)
+    const result = await user.query('SELECT borrow_book($1, $2);', [userId, bookId])
     console.log(result)
-    return result;
+    return result.rows;
   } catch (err) {
     console.error(err)
   }
@@ -44,9 +45,9 @@ async function borrowBook(userId, bookId) {
 
 async function returnBook(bookId) {
   try {
-    const result = await user.query('CALL return_book($1);', bookId)
+    const result = await user.query('SELECT return_book($1);', [bookId])
     console.log(result)
-    return result;
+    return result.rows;
   } catch (err) {
     console.error(err);
   }

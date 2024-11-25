@@ -5,9 +5,10 @@ import { UserData } from "../structs";
 
 interface Props {
   authorized: (userData: UserData) => void;
+  noAccountCallback: () => void;
 }
 
-const LoginForm: React.FC<Props> = ({ authorized }) => {
+const LoginForm: React.FC<Props> = ({ authorized, noAccountCallback }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -75,9 +76,9 @@ const LoginForm: React.FC<Props> = ({ authorized }) => {
         </button>
       </form>
       <div className="mt-3 text-center">
-        <a href="#" onClick={() => console.log("Redirect to register")}>
+        <button onClick={() => noAccountCallback()}>
           Don't have an account? Register here.
-        </a>
+        </button>
       </div>
       {isLoading ? (
         <div className="d-flex justify-content-center absolute">
