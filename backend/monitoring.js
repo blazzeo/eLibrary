@@ -50,7 +50,11 @@ function server_health() {
   });
 }
 
+function get_current_server_port() {
+  return server_port;
+}
+
 module.exports = {
-  server_health
+  server_health, get_current_server_port
 }
 
