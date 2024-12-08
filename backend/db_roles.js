@@ -18,7 +18,7 @@ const dbuser = (port) => {
     password: 'masteruser',
     port: port,
   })
-} 
+}
 
 module.exports = {
   dbuser, dbadmin

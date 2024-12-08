@@ -20,8 +20,7 @@ function switch_server() {
 async function check_server_health() {
   const client = new Client({
     user: 'dbadmin',
-    host: 'localhost',
-    database: 'elibrary',
+    host: 'localhost', database: 'elibrary',
     password: 'masteradmin',
     port: server_port,
   });
