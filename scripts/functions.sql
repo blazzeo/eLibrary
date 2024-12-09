@@ -121,3 +121,23 @@ EXCEPTION
         RETURN FALSE;
 END;
 $$ LANGUAGE plpgsql;
+
+--	ADD BOOK
+create or replace function add_book(book JSON)
+returns boolean as $$ 
+declare
+	title VARCHAR(255) := book->>'title';
+  	total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
+  	rating DECIMAL(4, 2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4, 2);
+  	isbn VARCHAR(13) := book->>'isbn';
+  	published_date DATE := NULLIF(book->>'published_date', '')::DATE;
+begin
+	INSERT INTO books (title, total_pages, rating, isbn, published_date)
+  	VALUES (title, total_pages, rating, isbn, published_date);
+  
+  	RETURN TRUE;  -- Возвращаем TRUE, если вставка прошла успешно
+EXCEPTION
+  	WHEN OTHERS THEN
+    RETURN FALSE;  -- Возвращаем FALSE в случае ошибки
+end;
+$$ language plpgsql;

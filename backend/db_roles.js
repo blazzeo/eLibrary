@@ -1,6 +1,7 @@
-const { Pool } = require('pg')
+import pkg from 'pg'
+const { Pool } = pkg
 
-const dbadmin = (port) => {
+export const dbadmin = (port) => {
   return new Pool({
     user: 'dbadmin',
     host: 'localhost',
@@ -10,7 +11,7 @@ const dbadmin = (port) => {
   })
 }
 
-const dbuser = (port) => {
+export const dbuser = (port) => {
   return new Pool({
     user: 'dbuser',
     host: 'localhost',
@@ -18,8 +19,4 @@ const dbuser = (port) => {
     password: 'masteruser',
     port: port,
   })
-}
-
-module.exports = {
-  dbuser, dbadmin
 }

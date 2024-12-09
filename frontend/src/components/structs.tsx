@@ -4,7 +4,7 @@ export type UserData = {
 };
 
 export type BookData = {
-  book_id: number;
+  book_id: number | null;
   title: string;
   total_pages: number;
   rating: number;

@@ -1,4 +1,5 @@
-const { Client } = require('pg')
+import pkg from 'pg'
+const { Client } = pkg
 
 const MASTER = 5432
 const REPLICA = 5433
@@ -39,7 +40,7 @@ async function check_server_health() {
   }
 }
 
-function server_health() {
+export function server_health() {
   console.log("Checking server health...");
   const loop = setInterval(async () => {
     await check_server_health();
@@ -50,11 +51,7 @@ function server_health() {
   });
 }
 
-function get_current_server_port() {
+export function get_current_server_port() {
   return server_port;
-}
-
-module.exports = {
-  server_health, get_current_server_port
 }
 

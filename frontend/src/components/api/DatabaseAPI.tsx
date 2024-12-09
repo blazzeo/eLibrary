@@ -66,3 +66,13 @@ export async function getBooks() {
     throw error;
   }
 }
+
+export async function addBook(book: BookData) {
+  try {
+    const response = await axios.post(`http://localhost:${BACK_PORT}/api/addbook`, book)
+    return response.data
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
