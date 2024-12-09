@@ -36,14 +36,14 @@ begin
 end;
 $$ language plpgsql;
 
-
---	CREATE USER
-CREATE OR REPLACE FUNCTION create_user(
-    p_user_name VARCHAR,
-    p_user_password VARCHAR
+--	CREATE USER - json
+CREATE OR REPLACE FUNCTION add_users(
+    p_user JSON
 ) RETURNS BOOLEAN AS $$
 DECLARE
-    v_user_id INTEGER;
+    v_user_name varchar := p_user->>'user_name';
+	v_user_password varchar := p_user->>'user_password';
+	v_user_id int;
 BEGIN
     -- Insert the new user into the users table
     INSERT INTO users (user_name, user_password) 
@@ -122,8 +122,8 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql;
 
---	ADD BOOK
-create or replace function add_book(book JSON)
+--	ADD BOOK - json
+create or replace function add_books(book JSON)
 returns boolean as $$ 
 declare
 	title VARCHAR(255) := book->>'title';

@@ -26,7 +26,11 @@ export async function checkUser(userLogin, userPassword) {
 export async function createUser(userLogin, userPassword) {
   try {
     const admin = dbadmin(get_current_server_port())
-    const result = await admin.query('SELECT create_user($1, $2);', [userLogin, userPassword])
+    const user = {
+      user_name: userLogin,
+      user_password: userPassword
+    }
+    const result = await admin.query('SELECT add_users($1, $2);', [JSON.stringify(user)])
     console.log(result.rows)
     return result.rows;
   } catch (err) {
