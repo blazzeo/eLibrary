@@ -1,1455 +1,1457 @@
 /*	insert data	*/
 -- genres
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (69, 'Genres', NULL);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (4, 'Anthropology', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (10, 'Biography', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (17, 'Comics', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (14, 'Children''s', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (15, 'Christian', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (12, 'Buisness', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (29, 'Fantasy', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (30, 'Feminism', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (31, 'Fiction', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (7,  'Art', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (38, 'Humanities', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (39, 'Inspirational', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (55, 'Reference', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (56, 'Religion', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (57, 'Science', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (58, 'Science Fiction', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (60, 'Sequential Art', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (62, 'Sports and Games', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (8,  'Artificial Intelligence', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (49, 'Nonfiction', 69);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (59, 'Self Help', 49);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (6,  'Architecture', 49);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (1,  'Academic', 49);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (23, 'Design', 49);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (25, 'Economics', 49);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (51, 'Philosophy', 49);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (20, 'Computer Science', 57);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (61, 'Software', 20);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (3,  'Algorithms', 20);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (53, 'Programming', 20);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (54, 'Programming Languages', 20);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (63, 'Technical', 20);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (22, 'Cyberpunk', 58);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (24, 'Dystopia', 58);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (65, 'Usability', 23);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (68, 'Website Design', 23);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (52, 'Physics', 57);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (64, 'Technology', 57);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (11, 'Biology', 57);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (46, 'Mathematics', 57);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (2,  'Algebra', 46);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (19, 'Computation', 46);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (5,  'Apple', 12);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (44, 'Management', 12);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (50, 'Personal Development', 59);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (21, 'Computers', 20);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (40, 'Internet', 21);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (37, 'Hackers', 21);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (9,  'Autobiography', 10);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (34, 'Games', 62);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (35, 'Gaming', 62);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (33, 'Game Design', 34);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (66, 'Video Games', 34);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (13, 'Chess', 34);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (16, 'Coding', 20);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (41, 'Language', 38);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (18, 'Communication', 41);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (27, 'Engineering', 57);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (26, 'Electrical Engineering', 27);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (28, 'Entrepreneurship', 12);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (32, 'Finance', 25);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (36, 'Graphic Novels', 60);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (42, 'Linguistics', 38);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (43, 'Logic', 51);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (45, 'Manga', 60);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (47, 'Memoir', 9);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (48, 'Neuroscience', 11);
-INSERT INTO genres (genre_id, genre, parent_id) VALUES (67, 'Web', 40);
+INSERT INTO genres (genre_id, genre, parent_id) VALUES 
+ (69, 'Genres', NULL),
+ (4, 'Anthropology', 69),
+ (10, 'Biography', 69),
+ (17, 'Comics', 69),
+ (14, 'Children''s', 69),
+ (15, 'Christian', 69),
+ (12, 'Buisness', 69),
+ (29, 'Fantasy', 69),
+ (30, 'Feminism', 69),
+ (31, 'Fiction', 69),
+ (7,  'Art', 69),
+ (38, 'Humanities', 69),
+ (39, 'Inspirational', 69),
+ (55, 'Reference', 69),
+ (56, 'Religion', 69),
+ (57, 'Science', 69),
+ (58, 'Science Fiction', 69),
+ (60, 'Sequential Art', 69),
+ (62, 'Sports and Games', 69),
+ (8,  'Artificial Intelligence', 69),
+ (49, 'Nonfiction', 69),
+ (59, 'Self Help', 49),
+ (6,  'Architecture', 49),
+ (1,  'Academic', 49),
+ (23, 'Design', 49),
+ (25, 'Economics', 49),
+ (51, 'Philosophy', 49),
+ (20, 'Computer Science', 57),
+ (61, 'Software', 20),
+ (3,  'Algorithms', 20),
+ (53, 'Programming', 20),
+ (54, 'Programming Languages', 20),
+ (63, 'Technical', 20),
+ (22, 'Cyberpunk', 58),
+ (24, 'Dystopia', 58),
+ (65, 'Usability', 23),
+ (68, 'Website Design', 23),
+ (52, 'Physics', 57),
+ (64, 'Technology', 57),
+ (11, 'Biology', 57),
+ (46, 'Mathematics', 57),
+ (2,  'Algebra', 46),
+ (19, 'Computation', 46),
+ (5,  'Apple', 12),
+ (44, 'Management', 12),
+ (50, 'Personal Development', 59),
+ (21, 'Computers', 20),
+ (40, 'Internet', 21),
+ (37, 'Hackers', 21),
+ (9,  'Autobiography', 10),
+ (34, 'Games', 62),
+ (35, 'Gaming', 62),
+ (33, 'Game Design', 34),
+ (66, 'Video Games', 34),
+ (13, 'Chess', 34),
+ (16, 'Coding', 20),
+ (41, 'Language', 38),
+ (18, 'Communication', 41),
+ (27, 'Engineering', 57),
+ (26, 'Electrical Engineering', 27),
+ (28, 'Entrepreneurship', 12),
+ (32, 'Finance', 25),
+ (36, 'Graphic Novels', 60),
+ (42, 'Linguistics', 38),
+ (43, 'Logic', 51),
+ (45, 'Manga', 60),
+ (47, 'Memoir', 9),
+ (48, 'Neuroscience', 11),
+ (67, 'Web', 40);
 
 -- authors
  
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1,'Merritt',null,'Eric');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (2,'Linda',null,'Mui');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (3,'Alecos',null,'Papadatos');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (4,'Paul','C.van','Oorschot');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (5,'David',null,'Cronin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (6,'Richard',null,'Blum');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (7,'Yuval','Noah','Harari');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (8,'Paul',null,'Albitz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (9,'David',null,'Beazley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (10,'John','Paul','Shen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (11,'Andrew',null,'Miller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (12,'Melanie',null,'Swan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (13,'Neal',null,'Ford');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (14,'Nir',null,'Shavit');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (15,'Tim',null,'Kindberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (16,'Mike',null,'McQuaid');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (17,'Brian','P.','Hogan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (18,'Jean-Philippe',null,'Aumasson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (19,'Lance',null,'Fortnow');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (20,'Richard','C.','Jeffrey');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (21,'William','L.','Simon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (22,'Magnus','Lie','Hetland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (23,'Mike',null,'McShaffry');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (24,'Norman',null,'Matloff');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (25,'John','E.','Hopcroft');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (26,'S.',null,'Sudarshan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (27,'Bruce',null,'Eckel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (28,'Bill',null,'Gates');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (29,'Shane',null,'Harvie');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (30,'Ralph','P.','Grimaldi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (31,'Garry',null,'Kasparov');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (32,'Lawrence','C.','Paulson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (33,'Donella','H.','Meadows');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (34,'Maria',null,'Levitin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (35,'Joy','A.','Thomas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (36,'Scott',null,'Rosenberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (37,'Mark',null,'Nelson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (38,'Hal',null,'Abelson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (39,'Ray',null,'Seyfarth');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (40,'Fred',null,'Turner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (41,'Andrew',null,'Honig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (42,'Helen',null,'Sharp');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (43,'Katie',null,'Hafner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (44,'Christopher',null,'Negus');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (45,'Ralph',null,'Kimball');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (46,'Trent','R.','Hein');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (47,'Venkat',null,'Subramaniam');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (48,'Simon','J.D.','Prince');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (50,'Stephen',null,'Wolfram');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (51,'Jennifer',null,'Petoff');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (52,'Massimo',null,'Banzi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (53,'Mickey',null,'Petersen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (54,'Ethem',null,'Alpaydin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (55,'Ytaelena',null,'LA3pez');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (56,'John','L.','Hennessy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (57,'Cameron',null,'Moll');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (58,'Jamie',null,'Levy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (59,'Janet',null,'Gregory');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (60,'Jenifer',null,'Tidwell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (61,'Steven','S.','Skiena');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (62,'Jimmy',null,'Soni');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (63,'Tracy',null,'Kidder');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (64,'Douglas','R.','Hofstadter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (65,'Zed',null,'Shaw');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (66,'Yoav',null,'Shoham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (67,'Danny',null,'Goodman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (68,'Bert',null,'Bates');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (69,'David',null,'Gries');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (70,'Eric',null,'Newcomer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (71,'Jim','R.','Wilson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (72,'Maarten','van','Steen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (73,'Tsung-Hsien',null,'Lee');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (74,'M.','Mitchell','Waldrop');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (75, 'George', NULL, 'Pólya');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (76,'Richard','S.','Bird');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (77,'Ben',null,'Collins-Sussman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (78,'Micha',null,'Gorelick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (79,'Christopher','T.','Haynes');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (80,'Carlos',null,'Bueno');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (81,'Michael','L.','Scott');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (82,'William','Jr.','Gwaltney');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (83,'Binu',null,'John');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (84,'Dan',null,'Bader');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (85,'Chris',null,'Smith');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (86,'Andrew',null,'Stellman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (87,'Kevin',null,'Poulsen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (88,'Peter',null,'Linz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (89,'Jim',null,'OGorman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (90,'Ali',null,'Almossawi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (91,'David',null,'Robson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (92,'Brad',null,'Abrams');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (93,'Timothy',null,'Downs');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (94,'Kyle',null,'Loudon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (95,'Robert',null,'Eckstein');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (96,'Wolfgang',null,'Banzhaf');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (97,'Mike',null,'Beedle');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (98,'Luke',null,'Ruth');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (99,'Brad',null,'Stone');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (100,'David',null,'Gourley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (101,'Greg',null,'Kroah-Hartman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (102,'Jurgen',null,'Appelo');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (103,'Eric',null,'Ries');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (104,'Ian',null,'Parberry');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (105,'Johan',null,'Vromans');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (106,'Corey',null,'Sandler');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (107,'Devon',null,'Kearns');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (108,'Steven',null,'Feiner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (109,'Kevlin',null,'Henney');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (110,'Abraham',null,'Silberschatz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (111,'Mark',null,'Russinovich');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (112,'Carl',null,'Eastlund');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (113,'Hans',null,'Langtangen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (114,'Carin',null,'Meier');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (115,'Rebecca',null,'Wirfs-Brock');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (116,'Lasse',null,'Koskela');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (117,'David',null,'Chelimsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (118,'Why','Stiff','Lucky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (119,'Christopher',null,'Hadnagy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (120,'Sebastian',null,'Raschka');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (121,'Henk',null,'Barendregt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (122,'Tobias',null,'Nipkow');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (123,'Chris',null,'Bernhardt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (124,'Joost-Pieter',null,'Katoen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (125,'R.G.',null,'Dromey');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (126,'Andrew',null,'McAfee');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (127,'Jeff',null,'Hawkins');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (128,'Paul',null,'Deitel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (129,'Albert',null,'Meyer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (130,'Angus',null,'Croll');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (131,'Jason',null,'Hickey');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (132,'Nathan',null,'Marz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (133,'Miguel',null,'Revilla');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (134,'Maurice',null,'Herlihy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (135,'Gareth',null,'James');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (136,'Hanne',null,'Nielson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (137,'Vern',null,'Ceder');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (138,'Matt',null,'Pharr');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (139,'Joe',null,'Armstrong');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (140,'Mati',null,'Aharoni');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (141,'Patrick',null,'Debois');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (142,'Sandi',null,'Metz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (143,'Benedikt',null,'GroAY');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (144,'Peter',null,'Sanders');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (145,'Baron',null,'Schwartz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (146,'Paul',null,'Clements');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (147,'Scott',null,'Ambler');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (148,'R.',null,'Dybvig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (149,'Stephen',null,'Figgins');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (150,'Stephan',null,'Mertens');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (151,'Cay',null,'Horstmann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (152,'Luis',null,'Atencio');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (153,'Michael',null,'Nielsen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (154,'Aaron',null,'Courville');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (155,'W.H.',null,'Feijen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (156,'Richard',null,'Bejtlich');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (157,'Peter',null,'Bruce');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (158,'Adam',null,'Gibson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (159,'Vernon',null,'Ceder');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (160,'Patrick',null,'Winston');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (161,'Scott',null,'Vanstone');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (162,'Jon',null,'Duckett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (163,'Nick',null,'Bostrom');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (164,'Michael',null,'Dahlin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (165,'Eric',null,'Meyer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (166,'David',null,'Harel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (167,'Claude',null,'Shannon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (168,'Daryl',null,'Harms');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (169,'Dan',null,'North');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (170,'Roberto',null,'Tamassia');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (171,'Paul',null,'Freiberger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (172,'George',null,'Heineman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (173,'Jeffrey',null,'Yost');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (174,'Matt',null,'Weisfeld');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (175,'Luciano',null,'Ramalho');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (176,'Mary',null,'Poppendieck');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (177,'M.',null,'Ozsu');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (178,'Emily',null,'Chang');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (179,'Douglas',null,'Stinson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (180,'Sara',null,'Wachter-Boettcher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (181,'Rajeev',null,'Motwani');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (182,'John',null,'Sonmez');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (183,'Y.',null,'Liang');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (184,'Stanley',null,'Selkow');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (185,'Christopher',null,'Duncan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (186,'Michael',null,'Whitman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (187,'Ron',null,'Jeffries');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (188,'Johannes',null,'Braams');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (189,'SaA!a',null,'Juric');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (190,'Peter',null,'Thiel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (191,'Steve',null,'Souders');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (192,'Jerome',null,'Friedman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (193,'Scott',null,'Mueller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (194,'Mark',null,'Dowd');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (195,'Kelli',null,'Houston');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (196,'Hinrich',null,'Schütze');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (197,'Ethan',null,'Marcotte');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (198,'Mark',null,'Pilgrim');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (199,'Martin',null,'Davis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (200,'Craig',null,'Sharkie');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (201,'Addy',null,'Osmani');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (202,'N.',null,'Friedman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (203,'Daniel',null,'Rose');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (204,'Chris',null,'Houser');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (205,'Linus',null,'Torvalds');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (206,'Matthew',null,'Helmke');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (207,'John',null,'Battelle');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (208,'Jon',null,'Kleinberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (209,'Alan',null,'Cooper');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (210,'Yoshua',null,'Bengio');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (211,'Henrik',null,'Kniberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (212,'Anshul',null,'Gupta');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (213,'Judith',null,'Gersting');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (214,'Jared',null,'Spool');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (215,'William',null,'Brown');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (216,'Ward',null,'Cunningham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (217,'Wladston',null,'Filho');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (218,'Johnny',null,'Long');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (219,'Cathy',null,'ONeil');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (220,'June',null,'Barrow-Green');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (221,'Jason',null,'Williams');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (222,'Edward',null,'Skoudis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (223,'Jérémie',null,'Zimmermann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (224,'Mario',null,'Fusco');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (225,'Jason',null,'Gregory');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (226,'Micah',null,'Martin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (227,'Lloyd',null,'Trefethen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (228,'Erwin',null,'Schrödinger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (229,'Chris',null,'Dannen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (230,'Shlomo',null,'Angel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (231,'Tom',null,'Badgett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (232,'Shon',null,'Harris');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (233,'Brian',null,'Krebs');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (234,'Graham',null,'Hutton');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (235,'Ross',null,'Anderson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (236,'Linda',null,'Torczon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (237,'Steve',null,'Freeman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (238,'Simson',null,'Garfinkel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (239,'Ilya',null,'Grigorik');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (240,'Jan',null,'Eijck');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (241,'Philip',null,'Bernstein');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (242,'Larry',null,'Ullman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (243,'Michael',null,'Feathers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (244,'Linda',null,null);
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (245,'Martin',null,'Ford');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (246,'Sandro',null,'Mancuso');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (248,'Donald',null,'Rubin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (249,'Steve',null,'Matyas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (250,'Richard',null,'Woods');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (251,'Tim',null,'Roughgarden');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (252,'Jeff',null,'Edmonds');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (253,'Eoin',null,'Woods');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (254,'Brian',null,'Fitzpatrick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (255,'N.',null,'Mermin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (256,'Karl',null,'Seguin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (257,'Leo',null,'Brodie');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (258,'Robert',null,'Sebesta');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (259,'Janet',null,'Valade');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (260,'Bill',null,'Fenner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (261,'Lorna',null,'Mitchell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (262,'Satya',null,'Nadella');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (263,'Dan',null,'Cederholm');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (264,'Bryan',null,'Helmkamp');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (265,'Dale',null,'Dougherty');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (266,'Ka',null,'Cheung');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (267,'Mark',null,'Lutz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (268,'Tom',null,'Phoenix');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (269,'Mark',null,'Hamstra');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (270,'Gayle',null,'McDowell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (271,'Michael',null,'Swaine');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (272,'Yvonne',null,'Rogers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (273,'Edmond',null,'Lau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (274,'Mike',null,'Clark');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (275,'Gordon',null,'Blair');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (276,'Mark',null,'Ciampa');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (277,'Pramod',null,'Sadalage');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (278,'Subrata',null,'Dasgupta');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (279,'Stuart',null,'McClure');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (280,'Gary',null,'Bradski');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (281,'Brian',null,'Lonsdorf');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (282,'Jesse',null,'Robbins');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (283,'Steven',null,'Pinker');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (284,'David',null,'Stork');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (285,'Luke',null,'Wroblewski');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (286,'Graham',null,'Lee');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (287,'J.',null,'Adams');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (288,'Stephen',null,'Thorne');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (289,'Dmitry',null,'Jemerov');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (290,'Thomas',null,'Connolly');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (291,'J.',null,'Brookshear');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (292,'W.',null,'Hillis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (293,'Petar',null,'Tahchiev');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (294,'Arnold',null,'Robbins');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (295,'Chris',null,'Hankin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (296,'Jack',null,'Moffett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (297,'Andreas',null,'Wittig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (298,'Kjell',null,'Johnson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (299,'Christine',null,'Bresnahan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (300,'Tom',null,'Christiansen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (301,'Harvey',null,'Deitel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (302,'Allan',null,'Friedman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (303,'Tom',null,'DeMarco');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (304,'Chris',null,'Rowley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (305,'Chris',null,'Eagle');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (306,'Gina',null,'Smith');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (307,'David',null,'LeBlanc');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (308,'Andrea',null,'Arpaci-Dusseau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (309,'Martin',null,'Reddy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (310,'Eliezer',null,'Yudkowsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (311,'Alfred',null,'Aho');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (312,'John',null,'Maeda');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (313,'Janna',null,'Levin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (314,'Christopher',null,'Cunningham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (315,'Flemming',null,'Nielson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (316,'Anne',null,'Troelstra');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (317,'Hartley',null,'Rogers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (318,'Jonathan',null,'Katz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (319,'Cory',null,'Althoff');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (320,'Betty',null,'Toole');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (321,'H.',null,'Schwichtenberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (322,'Sara',null,'Ishikawa');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (323,'Dennis',null,'Shasha');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (324,'Daniela',null,'Witten');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (325,'Nilanjan',null,'Raychaudhuri');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (326,'Avdi',null,'Grimm');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (327,'Martin',null,'Fowler');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (328,'Brian',null,'Carper');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (329,'Mat',null,'Buckland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (330,'Amit',null,'Prakash');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (331,'V.',null,'Spraul');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (332,'Craig',null,'Martell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (333,'Svetlana',null,'Isakova');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (334,'James',null,'Trott');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (335,'Kenneth',null,'Rubin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (336,'William','Jr.','Shotts');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (337,'Ian',null,'Sommerville');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (338,'Dennis',null,'Ritchie');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (339,'Brendan',null,'Burns');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (340,'Adele',null,'Goldberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (341,'Conor',null,'McBride');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (342, 'Andy', NULL, 'Müller-Maguhn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (343,'Foster',null,'Provost');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (344,'Tom',null,'Mitchell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (345,'Duncan',null,'Watts');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (346,'David',null,'Wood');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (347,'Ming',null,'Li');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (348,'Alan',null,'McKean');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (349,'Tatiana',null,'Diaz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (350,'David',null,'III');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (351,'Nelson',null,'Beebe');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (352,'Mike',null,'Meyers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (353,'Bruce',null,'MacLennan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (354,'Suzanne',null,'Robertson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (355,'David',null,'Carlisle');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (356,'Peter',null,'Weinberger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (357,'Ingrid',null,'Fiksdahl-King');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (358,'Igal',null,'Tabachnik');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (359,'Greg',null,'Michaelson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (360,'Jeroen',null,'Janssens');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (361,'Nicholas',null,'Haemel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (362,'Felix',null,'Halim');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (363,'David',null,'Kennedy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (364,'Roger',null,'Pressman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (365,'J.P.',null,'Vossen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (366,'Daniel',null,'Higginbotham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (367,'Colin',null,'Evans');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (368,'Robert',null,'Nystrom');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (369,'Ron',null,'White');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (370,'Justin',null,'Schuh');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (371,'Carlos',null,'Coronel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (372,'Matt',null,'Carter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (373,'Guy',null,'Theraulaz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (374,'Zachary',null,'Tong');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (375,'Richard',null,'Stallman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (376,'David',null,'Holmes');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (377,'George',null,'Dyson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (378,'Kent',null,'Beck');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (379,'Nathan',null,'Ensmenger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (380,'Micah',null,'Alpern');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (381,'Steven',null,'Halim');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (382,'Greg',null,'Riccardi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (383,'Matthew',null,'Lyon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (384,'Dan',null,'Jurafsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (385,'Asanovi',null,null);
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (386,'Richard',null,'Gabriel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (387,'Marco',null,'Dorigo');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (388,'Brian',null,'Flannery');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (389,'Thomas',null,'Anderson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (390,'Ben',null,'Albahari');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (391,'Gary',null,'Pollice');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (392,'Jon',null,'Orwant');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (393,'Dave',null,'Fancher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (394,'John',null,'Smart');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (395,'Wallace',null,'Wang');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (396,'Julian',null,'Assange');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (397,'Alex',null,'Payne');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (398,'Terence',null,'Parr');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (399,'Kees',null,'Doets');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (400,'Eldad',null,'Eilam');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (401,'John',null,'Zelle');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (402,'Marsha',null,'Zaidman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (403,'Kip',null,'Irvine');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (404,'Deepak',null,'Alur');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (405,'Magnus',null,'Christerson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (406,'Martin',null,'Abbott');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (407,'F.',null,'Lawvere');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (408,'Robert',null,'Harper');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (409,'K.N.',null,'King');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (410,'Diana',null,'Wright');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (411,'Daniel',null,'Velleman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (412,'Frank',null,'OBrien');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (413,'Andrew',null,'Farris');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (414,'Niranjan',null,'Shivaratri');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (415,'Don',null,'Jones');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (416,'Adam',null,'Freeman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (417,'William',null,'Cook');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (418,'Andrei',null,'Alexandrescu');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (419,'Yehuda',null,'Katz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (420,'Richard',null,'Monson-Haefel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (421,'George',null,'Kurtz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (422,'Seth',null,'Stephens-Davidowitz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (423,'Martin',null,'Gardner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (424,'Bruce',null,'Lawson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (425,'Robert',null,'Knake');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (426,'Ellen',null,'Ullman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (427,'John',null,'Crupi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (428,'Diana',null,'Larsen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (429,'Eric',null,'Giguere');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (430,'Derek',null,'Balling');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (431,'Paul',null,'Ceruzzi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (432,'Tom',null,'Fawcett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (433,'Jeff',null,'Johnson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (434,'Jon',null,'Gertner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (435,'Yashavant',null,'Kanetkar');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (436,'Andy',null,'Oram');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (437,'Kenneth',null,'Steiglitz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (438,'Trevor',null,'Hastie');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (439,'Jeffrey',null,'Ullman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (440,'Adrian',null,'Holovaty');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (441,'Kevin',null,'Kelly');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (442,'Paul',null,'Barry');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (443, 'Uwe', NULL, 'SchÃ¶ning');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (444,'John',null,'Burgess');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (445,'Christopher',null,'Steiner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (446,'Eric',null,'Redmond');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (447,'Jon',null,'Erickson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (448,'Timothy',null,'Gowers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (449,'Karl',null,'Matthias');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (450,'Jason',null,'Fried');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (451,'Jacquelyn',null,'Carter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (452,'Jacob',null,'Appelbaum');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (453,'Andrew',null,'Glover');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (454,'John',null,'White');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (455,'Ed',null,'Yourdon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (456,'The',null,'Consortium');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (457,'Michael',null,'Lucas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (458,'Raphael',null,'Malveau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (459,'Simon',null,'Marlow');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (460,'Ralph',null,'Johnson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (461,'Bjarne',null,'Stroustrup');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (462,'Jeremy',null,'Kubica');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (463,'Dan',null,'Malks');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (464,'Michael',null,'Folk');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (465,'Allen',null,'Dutoit');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (466,'Jack',null,'Falk');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (467,'Andrew',null,'Tanenbaum');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (468,'Andrew',null,'Appel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (469,'Rachel',null,'Warren');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (470,'Nick',null,'Rozanski');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (471,'Gunnar',null,'Overgaard');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (472,'Debra',null,'Cameron');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (473,'Sanjay',null,'Patel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (474,'Greg',null,'Perry');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (475,'Andrew',null,'Barto');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (476,'Pedro',null,'Domingos');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (477,'Mordechai',null,'Ben-Ari');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (478,'John',null,'Koza');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (479,'Peter',null,'Pacheco');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (480,'David',null,'Bourg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (481,'Robert',null,'Martin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (482,'Philip',null,'Jackson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (483,'Paul',null,'Duvall');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (484,'Paul',null,'Churchland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (485,'David',null,'Patterson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (486,'Roland',null,'Mas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (487,'Imre',null,'Leader');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (488,'Michael',null,'Dirolf');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (489,'Jerome',null,'Saltzer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (490,'James',null,'Whittaker');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (491,'Betsy',null,'Beyer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (492, 'Albert-László', NULL, 'Barabási');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (493,'Lisa',null,'Crispin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (494,'Peter',null,'Wallack');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (495,'Trend-Pro',null,'Ltd.');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (496,'Sydney',null,'Padua');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (497,'Niklaus',null,'Wirth');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (498,'James',null,'Foley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (499,'Lawrence',null,'Lessig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (500,'Edward',null,'Tufte');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (501,'Carl',null,'Albing');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (502,'Luke',null,'Hohmann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (503,'Mark',null,'Ryan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (504,'Richard',null,'Sutton');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (505,'Fletcher',null,'Dunn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (506,'George',null,'Karypis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (507,'Maurice',null,'Naftalin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (508,'John',null,'Willis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (509,'Jez',null,'Humble');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (510,'Neil',null,'Jones');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (511,'Stanley',null,'Lippman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (512,'Simon',null,'Brown');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (513,'Eric',null,'Lengyel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (514,'Marc',null,'Kreveld');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (515,'Chris',null,'Jones');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (516,'Andrew',null,'Hodges');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (517,'Earle',null,'Castledine');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (518,'F.',null,'Leighton');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (519,'Philippe',null,'Flajolet');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (520,'Peter',null,'Hart');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (521,'Philip',null,'Japikse');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (522,'Michael',null,'Ligh');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (523,'Mark',null,'Richards');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (524,'Gary',null,'Wright');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (525, 'Viktor', NULL, 'Mayer-Schönberger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (526,'Gautam',null,'Shroff');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (527,'Jonathan',null,'Stoddard');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (528,'Richard',null,'Hamming');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (529,'Cristina',null,'Lopes');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (530,'Stoyan',null,'Stefanov');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (531,'Michael',null,'Abrash');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (532,'Bradley',null,'Miller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (533,'Jim',null,'Highsmith');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (534,'Anthony',null,'Molinaro');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (535,'Frank',null,'Buschmann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (536,'Peter',null,'Dayan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (537,'James',null,'Gleick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (538,'Tony',null,'Mason');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (539,'Nell',null,'Dale');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (540,'Kevin',null,'Fall');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (541,'Ryan',null,'Breidenbach');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (542,'Doug',null,'Hoyte');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (543,'Remy',null,'Sharp');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (544,'Chas',null,'Emerick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (545,'Daniel',null,'Shiffman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (546,'Flavio',null,'Junqueira');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (547,'Nello',null,'Cristianini');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (548,'Greg',null,'Wilson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (549,'Mike',null,'Cohn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (550,'Michael',null,'Lewis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (551,'Neal',null,'Gafter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (552,'William',null,'Byrd');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (553,'Frederick','Jr.','Brooks');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (554,'OReilly',null,'Team');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (555,'Axel',null,'Rauschmayer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (556,'Andrew',null,'Ng');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (557,'William',null,'Press');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (558,'ACM',null,'Staff');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (559,'Michael',null,'Fisher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (560,'John',null,'Lewis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (561,'Simon',null,'Haykin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (562,'Jim',null,'Blandy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (563,'Herbert',null,'Schildt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (564,'Rich',null,'Gibson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (565,'Markus',null,'Winand');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (566,'Seymour',null,'Papert');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (567,'Raghu',null,'Ramakrishnan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (568,'Greg',null,'Newman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (569,'Christopher',null,'Manning');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (570,'Gregor',null,'Hohpe');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (571,'Roland',null,'Kuhn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (572,'Doug',null,'Cutting');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (573,'Daniel',null,'Cohen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (574,'Brian',null,'Foy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (575,'Alan',null,'Mycroft');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (576,'Ian',null,'Witten');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (577,'Chad',null,'Fowler');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (578,'Ronen',null,'Feldman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (579,'Marvin',null,'Zelkowitz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (580,'Mana',null,'Takahashi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (581,'John',null,'Foreman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (582,'Andries',null,'Dam');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (583,'John',null,'Hughes');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (584,'William',null,'Kent');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (585,'Gene',null,'Kim');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (586,'Wes',null,'McKinney');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (587,'Brian',null,'Totty');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (588,'Matt',null,'Welsh');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (589,'Gojko',null,'Adzic');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (590,'Greg',null,'Nudelman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (591,'Dean',null,'Leffingwell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (592,'Peter',null,'Salus');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (593,'Jared',null,'Richardson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (594,'Willi',null,'Richert');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (595,'Winston',null,'Chang');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (596,'Martin',null,'Odersky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (597,'Drew',null,'Neil');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (598,'Gilbert',null,'Strang');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (599,'Jon',null,'Loeliger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (600,'Christos',null,'Papadimitriou');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (601,'Chris',null,'Shiflett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (602,'Glenn',null,'Greenwald');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (603,'Mike',null,'Gancarz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (604,'Kevin',null,'Beaver');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (605,'James',null,'Warren');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (606,'Reto',null,'Meier');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (607,'Jennifer',null,'Robbins');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (608,'Mike',null,'Loukides');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (609,'Aaron',null,'Tenenbaum');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (610,'Anany',null,'Levitin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (611,'Joshua',null,'Bloch');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (612,'Benjamin',null,'Reed');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (613,'Michael',null,'Goldwasser');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (614,'Marcus',null,'Pinto');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (615,'Robert',null,'Vamosi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (616,'Tariq',null,'Rashid');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (617,'Daphne',null,'Koller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (618,'James',null,'Reffell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (619,'Boaz',null,'Barak');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (620,'Steven',null,'Holzner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (621,'Franz',null,'Baader');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (622,'Sara',null,'Baase');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (623,'Christel',null,'Baier');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (624,'Jon',null,'Bentley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (625,'Hadley',null,'Wickham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (626,'Jeff',null,'Atwood');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (627,'John',null,'Mongan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (628,'Jeff',null,'Hammerbacher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (629,'John',null,'Mitchell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (630,'Marc',null,'Goodman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (631,'John',null,'Allen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (632,'Neil',null,'Matthew');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (633,'Tony',null,'Gaddis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (634,'Timothy',null,'Lister');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (635,'Carl',null,'Meyer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (636,'Amy',null,'Brown');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (637,'Eric',null,'Matthes');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (638,'Dan',null,'Gusfield');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (639,'Vincent',null,'Massol');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (640,'Robert',null,'Romano');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (641,'Christer',null,'Ericson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (642,'Andreas',null,'Zeller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (643,'Carolyn',null,'Begg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (644,'Claire',null,'Evans');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (645,'Dusty',null,'Phillips');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (646,'Dave',null,'Agans');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (647,'Mark',null,'Berg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (648,'Felipe',null,'Leme');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (649,'John',null,'Kelleher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (650,'Andy',null,'Hertzfeld');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (651,'Samuel',null,'Arbesman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (652,'Max',null,'Jacobson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (653,'Yale',null,'Patt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (654,'Dick',null,'Grune');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (655,'Michael',null,'Stonebraker');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (656, 'Tomas', NULL, 'Akenine-Möller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (657,'Ken',null,'Schwaber');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (658,'Michael',null,'Taylor');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (659,'Grady',null,'Booch');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (660,'Pete',null,'Goodliffe');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (661,'Joshua',null,'Suereth');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (662,'Garth',null,'Snyder');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (663,'Leo',null,'Dorst');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (664,'Barry',null,'OReilly');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (665,'Jennifer',null,'Greene');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (666,'Douglas',null,'Schmidt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (667,'Joseph',null,'Schmuller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (668,'Andrew',null,'Gelman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (669,'Karl',null,'Wiegers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (670,'Andreas',null,'Wirthensohn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (672,'Tom',null,'Liston');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (673,'Dean',null,'Miller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (674,'Jakob',null,'Nielsen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (675,'Elaine',null,'Rich');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (676,'Leland',null,'Purvis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (677,'Ivan',null,'Ristic');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (678,'Richard',null,'Warburton');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (679,'Michel',null,'Goossens');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (680,'S.',null,'Cooper');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (681,'Michael',null,'Mitzenmacher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (682,'Shamkant',null,'Navathe');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (683,'Gordon',null,'Lyon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (684,'Matthew',null,'Gast');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (685,'William',null,'Lidwell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (686,'Bruce',null,'Sterling');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (687,'Chuck',null,'Musciano');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (688,'Benjamin',null,'Lipchak');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (689,'Peter',null,'Zaitsev');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (690,'Keith',null,'Jones');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (691,'Steven',null,'Levithan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (692,'Bryan',null,'OSullivan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (693,'Ken',null,'Ledeen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (694,'Christopher',null,'Alexander');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (695,'Lar',null,'Kaufman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (696,'David',null,'Leavitt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (697,'Sam',null,'Williams');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (698,'Marco',null,'Cesati');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (699,'Alan',null,'Turing');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (700,'Ira',null,'Pohl');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (701,'Ernest',null,'Nagel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (702,'Eibe',null,'Frank');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (703,'George',null,'Boolos');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (704,'Peter',null,'Robson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (705,'Michael',null,'Lopp');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (707,'Dean',null,'Wampler');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (708,'Brett',null,'McLaughlin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (709,'P.J.',null,'Plauger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (710,'Herb',null,'Sutter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (711,'Peter',null,'Kim');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (712,'Russ',null,'Miles');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (713,'Alex',null,'Ionescu');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (714,'Prabhakar',null,'Raghavan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (715,'Chris',null,'Anley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (716,'Mor',null,'Harchol-Balter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (717,'Neal',null,'Stephenson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (718,'Harry',null,'Lewis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (719,'Andriy',null,'Burkov');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (720,'Vaughn',null,'Vernon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (721,'David',null,'Barber');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (722,'David',null,'Kahn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (723,'Toby',null,'Segaran');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (724,'Holden',null,'Karau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (725,'Nancy',null,'Lynch');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (726,'Shawn',null,'Hedman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (727,'Peter',null,'Hruschka');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (728,'Sailu',null,'Reddy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (729,'Christophe',null,'Grand');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (730,'Daniel',null,'Holden');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (731,'Joseph',null,'Bonneau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (732,'Andrew',null,'Blum');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (733,'Mark',null,'Overmars');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (734, 'Miran', NULL, 'LipovaÄa');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (735,'Gerald',null,'Weinberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (736,'Aoife',null,'DArcy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (737,'Anthony',null,'Williams');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (738,'Kent',null,'Kawahara');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (739,'Jeff',null,'Duntemann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (740,'Robert',null,'Glass');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (741,'Donald',null,'Yacktman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (742,'Terrence',null,'Pratt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (743,'Rachid',null,'Guerraoui');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (744,'Jan',null,'Goyvaerts');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (745,'Steve',null,'Oualline');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (746,'Edsger',null,'Dijkstra');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (747,'Jaron',null,'Lanier');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (748,'Bruce',null,'Dang');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (749,'Adam',null,'Tornhill');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (750,'Robert',null,'Maksimchuk');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (751,'Jon',null,'Skeet');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (752,'Richard',null,'Clarke');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (753,'David',null,'Goldberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (754,'Vadim',null,'Tkachenko');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (755,'Jeff',null,'Langr');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (756,'Andrew',null,'Case');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (757, 'Ãleen', NULL, 'Frisch');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (758,'Robert',null,'Tibshirani');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (759,'Edward',null,'Loper');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (760,'Martin',null,'Kleppmann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (761,'Narasimha',null,'Karumanchi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (762,'Elias',null,'Bachaalany');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (763,'Adam',null,'Chlipala');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (764,'Jamie',null,'Allen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (765,'Ellen',null,'Siever');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (766,'Don',null,'Widrig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (767,'Laurence',null,'Abbott');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (768,'Hung',null,'Nguyen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (769,'Alvaro',null,'Videla');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (770,'Nikhil',null,'Buduma');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (771, 'LuÃ­s', NULL, 'Rodrigues');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (772,'Stephen',null,'Schanuel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (773,'Kim',null,'Zetter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (774,'Raoul-Gabriel',null,'Urma');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (775,'Remzi',null,'Arpaci-Dusseau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (776,'Linda',null,'Liukas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (777,'Mukesh',null,'Singhal');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (778,'Ron',null,'Sigal');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (779,'Paul',null,'Hudak');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (780,'Jonathan',null,'Rosenberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (781,'Duane',null,'Bibby');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (782,'Ajay',null,'Agrawal');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (783,'Brendan',null,'Gregg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (784,'Trevor',null,'Foucher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (785,'Steven',null,'Bird');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (786,'Jimmy',null,'Nilsson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (787,'David',null,'Herman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (788,'Aaron',null,'Hillegass');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (789,'Edward',null,'Reingold');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (790,'Tom',null,'White');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (791,'Christopher',null,'Bishop');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (792,'Cathy',null,'Lazere');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (793,'Mark',null,'Chu-Carroll');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (794,'Gerard',null,'Tel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (795,'Jeffrey',null,'Zeldman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (796,'James',null,'Grenning');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (797,'Antonio',null,'Goncalves');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (798, 'György', 'E.', 'Révész');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (799,'Robert',null,'Reimann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (800,'Tom',null,'Poppendieck');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (801,'William',null,'Poundstone');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (802,'George',null,'Reese');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (803,'Susannah',null,'Pfalzer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (804,'Chris',null,'Sims');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (805,'Mark',null,'Sobell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (806,'Philipp',null,'Janert');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (807,'Nicolai',null,'Josuttis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (808,'Michael',null,'Huth');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (809,'Jonathan',null,'Seldin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (810,'William',null,'Couie');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (811,'Dave',null,'Shreiner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (812,'Gabriella',null,'Coleman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (813,'Douglas',null,'Comer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (814,'Indra',null,'Widjaja');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (815,'Albert',null,'Woodhull');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (816,'Daniel',null,'Brolund');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (817,'Jeremy',null,'Kun');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (818,'Curtis',null,'Rose');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (819,'Vijay',null,'Vazirani');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (820,'Leonard',null,'Richardson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (821,'Mitchell',null,'Wand');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (822,'Jonas',null,'BonA©r');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (823,'Judea',null,'Pearl');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (824,'Richard','Jr.','Wright');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (825,'Jeff',null,'Sutherland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (826,'Scott',null,'McCartney');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (827,'Mikko',null,'Lipasti');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (828,'George',null,'Varghese');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (829,'Alessandro',null,'Rubini');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (830,'Behrouz',null,'Forouzan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (831,'Marc',null,'Loy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (832,'Micheline',null,'Kamber');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (833,'Jamis',null,'Buck');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (834,'John',null,'Carlin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (835,'John',null,'Lions');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (836,'Ivar',null,'Jacobson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (837,'Ben',null,'Clark');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (838,'Joseph',null,'Weizenbaum');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (839,'John',null,'Resig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (840,'Stephen',null,'Huston');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (841,'Simon',null,'Collison');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (842,'Bill',null,'Phillips');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (843,'Jake',null,'Vanderplas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (844,'David',null,'Black');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (845,'Hans',null,'Rohnert');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (846,'Arthur',null,'Riel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (847,'Doug',null,'Brown');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (848,'James',null,'Newman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (849,'David',null,'Harris');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (850,'Swaroop',null,'C.H.');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (851,'Hsuan-Tien',null,'Lin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (852,'Dana',null,'Mackenzie');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (853,'Ray',null,'Kurzweil');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (854,'Walter',null,'Isaacson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (855,'Brian',null,'Okken');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (856,'Donald',null,'Knuth');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (857,'Ben',null,'Forta');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (858,'Hannah',null,'Fry');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (859,'Philip',null,'Klein');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (860,'Sanjoy',null,'Dasgupta');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (861,'Walter',null,'Savitch');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (862, 'Uwe', NULL, 'Schöning');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (863,'J.',null,'Scott');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (864,'George',null,'Neville-Neil');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (865,'Leon',null,'Breedt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (866,'Donald',null,'Norman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (867,'David',null,'McFarland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (868,'Conrad',null,'Barski');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (869,'Nathaniel',null,'Popper');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (870,'Martin',null,'Logan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (871,'Randall',null,'Hyde');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (872,'Raymond',null,'Chen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (873,'Emil',null,'Eifrem');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (874,'Kevin',null,'Murphy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (875,'A.E.',null,'Eiben');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (876,'Andreas',null,'Antonopoulos');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (877,'Dan',null,'Pilone');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (878,'George',null,'Luger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (879,'Nat',null,'Pryce');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (880,'Mark',null,'Bowden');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (881,'Eben',null,'Hewitt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (882,'Joshua',null,'Gay');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (883,'Ryan',null,'Boyd');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (884,'David',null,'Solomon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (885,'Alistair',null,'Cockburn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (886,'Melanie',null,'Mitchell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (887,'Sam',null,'Ruby');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (888,'B.',null,'Copeland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (889,'Clifford',null,'Stoll');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (890,'Paul',null,'Butcher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (891,'Roger',null,'Penrose');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (892,'Alberto',null,'Leon-Garcia');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (893,'Thomas',null,'Sudkamp');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (894,'Gary',null,'Flake');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (895, 'Aurélien', NULL, 'Géron');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (896,'Susanne',null,'Teschl');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (897,'Jacob',null,'Kaplan-Moss');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (898,'Robert',null,'Sedgewick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (899,'Tobias',null,'Klein');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (900,'Rob',null,'Goodman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (901,'Jamie',null,'Bartlett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (902,'Nicholas',null,'Carr');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (903,'Steve',null,'Wozniak');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (904,'Michael',null,'Dawson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (905,'J.E.',null,'Smith');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (906,'Grant',null,'Ingersoll');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (907,'David',null,'Anderson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (908,'Thomas',null,'Limoncelli');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (909,'Peter',null,'Kogge');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (910,'Zvonko',null,'Vranesic');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (911,'Luis',null,'Coelho');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (912,'Cameron',null,'Newham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (913,'Zbigniew',null,'Michalewicz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (914,'T.J.',null,'OConnor');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (915,'Vipin',null,'Kumar');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (916,'Kristina',null,'Chodorow');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (917,'Ceriel',null,'Jacobs');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (918,'Casey',null,'Reas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (919,'Mirco',null,'Mannucci');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (920,'Adnan',null,'Aziz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (921,'Luke',null,'Muehlhauser');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (922,'Daniel',null,'Dennett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (923,'Frank',null,'Mittelbach');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (924,'Marjorie',null,'Sayer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (925,'Jeff',null,'Carollo');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (926,'Kenneth',null,'Cukier');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (927,'A.K.',null,'Dewdney');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (928,'Helen',null,'Gaines');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (929,'Audrey',null,'Greenfeld');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (930,'M.',null,'Mano');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (931,'Keith',null,'Cooper');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (932,'Simon',null,'Thompson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (933,'Greg',null,'Gagne');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (934,'Per',null,'Hansen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (935,'Paul',null,'Wilson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (936,'Otfried',null,'Schwarzkopf');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (937,'Nathan',null,'Torkington');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (938,'David',null,'Vise');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (939,'Jeremy',null,'Zawodny');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (940,'Paul',null,'Horowitz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (941,'Douglas',null,'Rushkoff');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (942,'David',null,'Christiansen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (943,'Joe',null,'Celko');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (944,'Samuel','III','Harbison');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (945,'Michael',null,'Tilson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (946,'John',null,'Heasman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (947,'Yaser',null,'Abu-Mostafa');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (948,'Eric',null,'Haines');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (949, 'Paul', NULL, 'Vitányi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (950,'Noam',null,'Nisan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (951,'Mark',null,'Summerfield');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (952,'Evi',null,'Nemeth');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (953,'Adewale',null,'Oshineye');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (954,'John',null,'Markoff');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (955,'Zach',null,'Dennis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (956,'Matthias',null,'Felleisen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (957,'Ola',null,'Ellnestam');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (958,'Peter',null,'Harrington');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (959,'Aaron',null,'Weber');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (960,'Anil',null,'Madhavapeddy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (961,'Bob',null,'Baxley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (963,'Kyle',null,'Simpson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (964,'David',null,'Rogers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (965, 'Jürgen', NULL, 'Holdorf');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (966,'Warren',null,'Weaver');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (967,'Ian',null,'Goodfellow');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (968,'Hillary',null,'Johnson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (969,'Barbara',null,'Moo');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (970,'Justin',null,'Seitz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (971,'Eric',null,'Raymond');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (972,'Edward',null,'Yourdon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (973,'Mark',null,'Seemann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (974,'Bobbi',null,'Young');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (975,'Jim',null,'Conallen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (976,'Edwin',null,'Brady');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (977,'Steve',null,'Krug');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (978,'Jonathan',null,'Rasmusson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (979,'Russ',null,'Olsen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (980,'Paul',null,'Vigna');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (981,'Kelsey',null,'Hightower');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (982,'Caroline',null,'Jarrett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (983,'Keith',null,'Frankish');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (984,'Joseph',null,'Albahari');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (985,'Allen',null,'Downey');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (987,'Peter',null,'Seibel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (988,'Peter',null,'Norvig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (989,'David',null,'Flanagan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (990,'April',null,'Chu');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (991,'Marshall',null,'McKusick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (992,'Rick',null,'Kazman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (993,'Cynthia',null,'Andres');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (994,'Francesco',null,'Cesarini');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (995,'Pavel',null,'Pevzner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (996,'Andrew',null,'Koenig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (997,'Anshu',null,'Aggarwal');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (998,'Krzysztof',null,'Cwalina');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (999,'John',null,'Pierce');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1000,'Alexander',null,'Stepanov');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1001,'Blake',null,'Masters');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1002,'Stephen',null,'Prata');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1003,'Thomas',null,'Cormen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1004,'Joshua',null,'Kerievsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1005,'Niall',null,'Murphy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1006,'Patrick',null,'Niemeyer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1007,'Udi',null,'Manber');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1008,'Tom',null,'Stuart');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1009,'Kate',null,'Thompson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1010,'Joshua',null,'Gans');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1011,'Paolo',null,'Perrotta');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1012,'David',null,'Horn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1013,'Lex',null,'Spoon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1014,'Henry',null,'Korth');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1015,'Bill',null,'Wagner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1016,'Matt',null,'Carter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1017,'Philip',null,'Wadler');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1018,'Pete',null,'McBreen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1019,'Paul',null,'Graham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1020,'Dave',null,'Hoover');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1021,'Robert',null,'Cringely');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1022,'Stephen',null,'Davis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1023,'Kurt',null,'Beyer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1024,'Christian',null,'Rudder');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1025,'Randal',null,'Schwartz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1026,'Alan',null,'Beaulieu');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1027,'Jamie',null,'Taylor');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1028,'Bill',null,'Rosenblatt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1029,'David',null,'West');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1030,'Ben',null,'Whaley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1031,'Donald',null,'Stewart');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1032,'Christopher',null,'Date');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1033, 'Ãva', NULL, 'Tardos');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1034,'Tadayoshi',null,'Kohno');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1035,'George',null,'Coulouris');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1036,'Gary',null,'Gregory');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1037,'Cricket',null,'Liu');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1038,'Elizabeth',null,'Castro');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1039,'Jay',null,'Wengrow');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1040,'Dave',null,'Thomas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1041,'Murray',null,'Silverstein');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1042,'Scott',null,'Oaks');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1043,'Apostolos',null,'Doxiadis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1044,'Peter','Linden','der');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1045,'Robin',null,'Williams');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1046,'Saul',null,'Teukolsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1047,'Anand',null,'Rajaraman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1048,'Daniel',null,'Bovet');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1049,'Kevin',null,'Goldberg');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1050,'Mark',null,'Masse');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1051,'Andrew',null,'Troelsen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1052,'William',null,'Aspray');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1053,'Adam',null,'Shook');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1054,'Ryan',null,'Mitchell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1055,'Christian',null,'Cachin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1056,'Avi',null,'Goldfarb');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1057,'Max',null,'Kanat-Alexander');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1058,'Noson',null,'Yanofsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1059,'Elbert',null,'Hannah');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1060,'Bill',null,'Venners');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1061,'Rafael',null,'Gonzalez');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1062,'Eric',null,'Bonabeau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1063,'Richard',null,'Trudeau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1064,'Ananth',null,'Grama');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1065,'Robert',null,'Daigneau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1066,'Aleen',null,'Frisch');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1067,'Adam',null,'Drozdek');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1068,'Alfred',null,'Menezes');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1069,'Hal',null,'Stern');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1070,'P.W.',null,'Singer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1071,'Shoko',null,'Azuma');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1072,'Malik',null,'Magdon-Ismail');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1073,'Daniel',null,'Greenfeld');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1074,'Kurt',null,'Mehlhorn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1075,'Kevin',null,'Leyton-Brown');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1076,'Scott',null,'Page');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1077,'Brian',null,'Christian');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1078,'John',null,'Neumann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1079,'Jane',null,'Margolis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1080,'Adrian',null,'Kaehler');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1081,'Allen',null,'Harper');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1082,'Steven',null,'Muchnick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1083,'Herbert',null,'Simon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1084,'Stuart',null,'Halloway');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1085,'Ken',null,'Arnold');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1086,'Joseph',null,'Hellerstein');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1087,'Rob',null,'Conery');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1088,'Gerard',null,'Meszaros');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1089,'Kritina',null,'Holden');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1090,'Niels',null,'Ferguson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1091,'Annie',null,'Donna');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1092,'Jim',null,'Gray');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1093,'Oleg',null,'Kiselyov');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1094,'Ian',null,'Wienand');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1095,'Trevor',null,'Burnham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1096,'Josh',null,'Patterson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1097,'Amy',null,'Langville');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1098,'C.A.R.',null,'Hoare');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1099,'Susanna',null,'Epp');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1100,'Rina',null,'Dechter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1101,'Eric',null,'Sink');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1102,'Carlos',null,'Varela');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1103,'Lawrie',null,'Brown');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1104,'Jonathan',null,'Corbet');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1105,'Andrew',null,'Rudoff');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1106,'James',null,'Gosling');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1107,'Steve',null,'Maguire');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1108,'Michael',null,'Howard');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1109,'Audrey',null,'Roy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1110,'David',null,'Easley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1112,'Jean',null,'Dollimore');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1113,'James',null,'Sanger');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1114,'Gerald',null,'Teschl');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1115,'Eric',null,'Merritt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1116,'Damian',null,'Conway');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1117,'Roy',null,'Osherove');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1118,'Randy',null,'Pausch');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1119,'Scott',null,'Millett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1120,'Hays','McCormick','Skip');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1121,'Jack',null,'Koziol');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1122,'John',null,'Allspaw');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1123,'Jonathan',null,'Bartlett');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1124,'Eli',null,'Bressert');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1125,'Julia',null,'Lobur');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1126,'David',null,'Fogel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1127,'Dafydd',null,'Stuttard');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1128,'Jason',null,'Arbon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1129,'Thomas',null,'Fuchs');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1130,'Charlie',null,'Hunt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1131,'Patrik',null,'Jonsson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1132,'Benjamin',null,'Pierce');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1133,'Sanjeev',null,'Arora');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1134,'Noah',null,'Suojanen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1135,'Jeffrey',null,'Hicks');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1136,'Brian',null,'Macnamee');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1137,'Ada',null,'Lovelace');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1138,'Ehud',null,'Shapiro');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1139,'Jim',null,'Webber');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1140, 'Josée', NULL, 'Lajoie');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1141,'Scott',null,'Granneman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1142,'Clinton',null,'Gormley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1143,'David',null,'Kadavy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1144,'James',null,'Broad');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1145,'Bryan',null,'Basham');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1146,'Yehuda',null,'Lindell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1147,'Richard',null,'Stones');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1148,'Len',null,'Bass');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1149,'Leon',null,'Sterling');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1150,'Stephen',null,'Brown');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1151,'Max',null,'Kuhn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1152,'Jim',null,'Ottaviani');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1153,'Nick',null,'Bilton');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1154,'Jesse',null,'Storimer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1155,'Leslie',null,'Valiant');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1156,'Robert',null,'Love');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1157,'Robert',null,'Lafore');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1158,'Michael',null,'Heath');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1159,'D.S.',null,'Malik');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1160,'Richard',null,'Carlsson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1161, 'Raphaël', NULL, 'Hertzog');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1162,'Haralambos',null,'Marmanis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1163,'John',null,'Miller');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1164,'Hubert',null,'Dreyfus');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1165,'Michael',null,'Sikorski');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1166,'Erik',null,'Brynjolfsson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1167,'Ramez',null,'Elmasri');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1168,'Erik',null,'Buck');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1169,'Ron',null,'Patton');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1170,'Brian',null,'Kernighan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1171,'Dmitry',null,'Babenko');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1172,'Yves',null,'Bertot');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1173,'37',null,'Signals');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1174,'Dustin',null,'Boswell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1175,'Bertrand',null,'Meyer');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1176,'Stephen',null,'Mann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1177,'David',null,'Hansson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1178,'Brian',null,'Hardy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1179,'Sandra',null,'Blakeslee');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1180,'Mason',null,'Woo');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1181,'Rod',null,'Stephens');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1182,'Andrew',null,'Bruce');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1183,'Martin',null,'Campbell-Kelly');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1184,'James',null,'Elliott');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1185,'J.',null,'Hindley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1186,'Michael',null,'Engle');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1187,'Kenneth',null,'Louden');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1188,'Mig',null,'Greengard');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1189,'Richard',null,'Jones');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1190,'Alex',null,'Tapscott');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1191,'Frank',null,'Pasquale');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1192,'Gene',null,'Spafford');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1193,'Raymond',null,'Smullyan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1194,'Christopher',null,'Allen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1195,'Julie',null,'Moronuki');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1196,'Craig',null,'Walls');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1197,'Bruce',null,'Schneier');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1198,'Caleb',null,'Doxsey');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1199,'John',null,'Vlissides');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1200,'Dave',null,'Astels');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1201,'Reshma',null,'Saujani');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1202,'Noam',null,'Nison');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1203,'Drew',null,'Conway');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1204,'James',null,'Martin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1205,'Maurice',null,'Bach');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1206,'Stephen',null,'Marsland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1207,'Andy',null,'Terrel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1208,'Joe',null,'Kutner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1209,'Brian',null,'Jones');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1210,'Andrew',null,'Davison');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1211,'Nachum',null,'Dershowitz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1212,'Matthew',null,'Hahn');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1213,'Mark',null,'Weiss');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1214,'Kevin',null,'Mitnick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1215,'John',null,'Ousterhout');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1216,'Elisabeth',null,'Hendrickson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1217,'Wesley',null,'Chun');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1218,'Tim',null,'Wu');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1219,'Ian',null,'Robinson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1220,'Gigi',null,'Estabrook');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1221,'Andy',null,'Hunt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1222,'Alexandre',null,'Gazet');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1223,'James',null,'Barrat');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1224,'Joel',null,'Grus');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1225,'Doug',null,'Hellmann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1226,'Jonathan',null,'Knudsen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1227,'Patricia',null,'Churchland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1228,'David',null,'Ascher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1229,'Antonio',null,'MartAfÂ­nez');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1230,'Michael',null,'Fogus');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1231,'Richard',null,'Szeliski');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1232,'Michael',null,'Casey');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1233,'Ben',null,'Fry');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1234,'David',null,'Kushner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1235,'Daniel',null,'Fontijne');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1236,'Ole-Johan',null,'Dahl');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1237,'Ben',null,'Klemens');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1238,'V.',null,'Hamacher');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1239,'Patrick',null,'Engebretson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1240,'Alex',null,'Martelli');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1241,'Scott',null,'Meyers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1242,'Justin',null,'Zobel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1243,'Thomas',null,'Morton');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1244,'Douglas',null,'West');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1245,'Jill',null,'Butler');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1246,'Marvin',null,'Minsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1247,'Savas',null,'Parastatidis');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1248,'John',null,'Goerzen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1249,'Donald',null,'Reinertsen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1250,'Aaron',null,'Gustafson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1251,'Winfield',null,'Hill');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1252,'Aslak',null,'Hellesoy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1253,'Tim',null,'OReilly');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1254,'John',null,'Guttag');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1255,'Isaac',null,'Chuang');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1256,'Robin',null,'Milner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1257,'Pekka',null,'Himanen');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1258,'Vitalik',null,'Buterin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1259,'Nathan',null,'Yau');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1260,'Michael',null,'Wittig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1261,'Craig',null,'Hunt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1262,'Michael',null,'Morrison');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1263,'David',null,'Rensin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1264,'Christian',null,'Queinnec');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1265,'Rachel',null,'Schutt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1266,'Brett',null,'Slatkin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1267,'Yedidyah',null,'Langsam');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1268,'Donald',null,'Miner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1269,'Daniel',null,'Friedman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1270,'David',null,'Agans');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1271,'Thomas',null,'Cover');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1272,'Cristopher',null,'Moore');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1273,'Jeremy',null,'Keith');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1274,'Richard',null,'Duda');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1275,'Jay',null,'Fields');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1276,'Joel',null,'Spolsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1277,'John',null,'Levine');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1278,'Bill',null,'Kennedy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1279,'Steven',null,'Levy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1280,'David',null,'Diamond');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1281,'Glynn',null,'Winskel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1282,'Gary',null,'Cornell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1283,'W.',null,'Stevens');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1284,'Aaron',null,'Walters');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1285,'Peter',null,'Shirley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1286,'Shriram',null,'Krishnamurthi');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1287,'Alan',null,'Shalloway');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1288,'Sarah',null,'Harris');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1289,'Karim',null,'Yaghmour');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1290,'Al',null,'Sweigart');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1291,'Debasish',null,'Ghosh');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1292,'William',null,'Mougayar');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1293,'Stephane',null,'Faroult');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1294,'Brett',null,'Lantz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1295,'Michael',null,'Goodrich');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1296,'Eric',null,'Schmidt');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1297,'Raimondo',null,'Pictet');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1298,'Brian',null,'Ward');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1299,'Peter',null,'Denning');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1300,'Vint',null,'Cert');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1301,'Peter',null,'Abel');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1302,'Cory',null,'Doctorow');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1303,'Matei',null,'Zaharia');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1305,'Elisabeth',null,'Robson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1306,'Sean',null,'Kane');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1307,'Eric',null,'Lehman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1308,'Al',null,'Kelley');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1309,'John',null,'Gall');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1310,'Yaron',null,'Minsky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1311,'Glyn',null,'Moody');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1312,'Jon',null,'Stokes');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1313,'Joel',null,'Scambray');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1314,'Eric',null,'Freeman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1315,'Ken',null,'Thompson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1316,'John',null,'Lakos');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1317,'Andrew',null,'Huang');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1319,'Paul',null,'McJones');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1320,'Ewan',null,'Klein');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1321,'Artur',null,'Ejsmont');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1322,'Hans','Baeyer','Von');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1323,'Joy',null,'Beatty');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1324,'William',null,'Stallings');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1325,'Satnam',null,'Alag');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1327,'George',null,'Fairbanks');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1328,'Linda',null,'Lamb');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1329,'Ian',null,'Millington');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1330,'Andy',null,'Budd');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1331,'Stephen',null,'Kochan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1332,'Yukihiro',null,'Matsumoto');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1333,'Bobby',null,'Woolf');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1334,'Guy','Jr.','Steele');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1335,'Leland',null,'Wilkinson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1336,'Parmy',null,'Olson');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1337,'Bartosz',null,'Milewski');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1338,'Jerry',null,'Peek');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1339,'Peter',null,'Galvin');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1340,'Doug',null,'Lea');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1341,'David',null,'Simon');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1342,'Arvind',null,'Narayanan');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1343,'Edward',null,'Felten');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1344,'Elaine',null,'Weyuker');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1345,'Martin',null,'Erwig');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1346,'Michael',null,'Hiltzik');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1347,'Johannes',null,'Gehrke');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1348,'Carl',null,'Gunter');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1349,'Pat',null,'Shaughnessy');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1350,'Michal',null,'Zalewski');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1351,'Alan','Donovan','A.');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1352,'Joanne',null,'Molesky');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1353,'William',null,'Vetterling');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1354,'Kathy',null,'Sierra');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1355,'Esther',null,'Derby');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1356,'Jeffrey',null,'Ulman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1357,'Hartmut',null,'Bohnacker');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1358,'Cem',null,'Kaner');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1359,'Jonathan',null,'Gennick');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1360,'Cole',null,'Knaflic');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1361,'Michael',null,'Nygard');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1362,'Umesh',null,'Vazirani');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1363,'G.',null,'Zachary');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1364,'Nigel',null,'Cutland');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1365,'Joe',null,'Beda');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1366,'Glenford',null,'Myers');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1367,'Eric',null,'Roberts');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1368,'Gabe',null,'Zichermann');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1369,'John',null,'McDonald');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1370,'Peter',null,'Rob');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1371,'Steve',null,'McConnell');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1372,'Steven',null,'Goldfeder');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1373,'Mark',null,'Fenoglio');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1374,'Max',null,'Tegmark');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1375,'Laurie',null,'Wallmark');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1376,'Colleen',null,'Gorman');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1377,'Bear',null,'Bibeault');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1378,'Nicholas',null,'Zakas');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1379,'Herbert',null,'Mattord');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1380,'Bernd',null,'Bruegge');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1381,'Don',null,'Tapscott');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1382,'Jason',null,'Brownlee');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1383,'Anthony',null,'Hey');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1384,'Jiawei',null,'Han');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1385,'Andreas',null,'Schwarz');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1386,'Jennifer',null,'Widom');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1387,'Larry',null,'Wall');
-INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1388,'Seth',null,'Lloyd');
+INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES 
+ (1,'Merritt',null,'Eric'),
+ (2,'Linda',null,'Mui'),
+ (3,'Alecos',null,'Papadatos'),
+ (4,'Paul','C.van','Oorschot'),
+ (5,'David',null,'Cronin'),
+ (6,'Richard',null,'Blum'),
+ (7,'Yuval','Noah','Harari'),
+ (8,'Paul',null,'Albitz'),
+ (9,'David',null,'Beazley'),
+ (10,'John','Paul','Shen'),
+ (11,'Andrew',null,'Miller'),
+ (12,'Melanie',null,'Swan'),
+ (13,'Neal',null,'Ford'),
+ (14,'Nir',null,'Shavit'),
+ (15,'Tim',null,'Kindberg'),
+ (16,'Mike',null,'McQuaid'),
+ (17,'Brian','P.','Hogan'),
+ (18,'Jean-Philippe',null,'Aumasson'),
+ (19,'Lance',null,'Fortnow'),
+ (20,'Richard','C.','Jeffrey'),
+ (21,'William','L.','Simon'),
+ (22,'Magnus','Lie','Hetland'),
+ (23,'Mike',null,'McShaffry'),
+ (24,'Norman',null,'Matloff'),
+ (25,'John','E.','Hopcroft'),
+ (26,'S.',null,'Sudarshan'),
+ (27,'Bruce',null,'Eckel'),
+ (28,'Bill',null,'Gates'),
+ (29,'Shane',null,'Harvie'),
+ (30,'Ralph','P.','Grimaldi'),
+ (31,'Garry',null,'Kasparov'),
+ (32,'Lawrence','C.','Paulson'),
+ (33,'Donella','H.','Meadows'),
+ (34,'Maria',null,'Levitin'),
+ (35,'Joy','A.','Thomas'),
+ (36,'Scott',null,'Rosenberg'),
+ (37,'Mark',null,'Nelson'),
+ (38,'Hal',null,'Abelson'),
+ (39,'Ray',null,'Seyfarth'),
+ (40,'Fred',null,'Turner'),
+ (41,'Andrew',null,'Honig'),
+ (42,'Helen',null,'Sharp'),
+ (43,'Katie',null,'Hafner'),
+ (44,'Christopher',null,'Negus'),
+ (45,'Ralph',null,'Kimball'),
+ (46,'Trent','R.','Hein'),
+ (47,'Venkat',null,'Subramaniam'),
+ (48,'Simon','J.D.','Prince'),
+ (50,'Stephen',null,'Wolfram'),
+ (51,'Jennifer',null,'Petoff'),
+ (52,'Massimo',null,'Banzi'),
+ (53,'Mickey',null,'Petersen'),
+ (54,'Ethem',null,'Alpaydin'),
+ (55,'Ytaelena',null,'LA3pez'),
+ (56,'John','L.','Hennessy'),
+ (57,'Cameron',null,'Moll'),
+ (58,'Jamie',null,'Levy'),
+ (59,'Janet',null,'Gregory'),
+ (60,'Jenifer',null,'Tidwell'),
+ (61,'Steven','S.','Skiena'),
+ (62,'Jimmy',null,'Soni'),
+ (63,'Tracy',null,'Kidder'),
+ (64,'Douglas','R.','Hofstadter'),
+ (65,'Zed',null,'Shaw'),
+ (66,'Yoav',null,'Shoham'),
+ (67,'Danny',null,'Goodman'),
+ (68,'Bert',null,'Bates'),
+ (69,'David',null,'Gries'),
+ (70,'Eric',null,'Newcomer'),
+ (71,'Jim','R.','Wilson'),
+ (72,'Maarten','van','Steen'),
+ (73,'Tsung-Hsien',null,'Lee'),
+ (74,'M.','Mitchell','Waldrop'),
+ (75, 'George', NULL, 'Pólya'),
+ (76,'Richard','S.','Bird'),
+ (77,'Ben',null,'Collins-Sussman'),
+ (78,'Micha',null,'Gorelick'),
+ (79,'Christopher','T.','Haynes'),
+ (80,'Carlos',null,'Bueno'),
+ (81,'Michael','L.','Scott'),
+ (82,'William','Jr.','Gwaltney'),
+ (83,'Binu',null,'John'),
+ (84,'Dan',null,'Bader'),
+ (85,'Chris',null,'Smith'),
+ (86,'Andrew',null,'Stellman'),
+ (87,'Kevin',null,'Poulsen'),
+ (88,'Peter',null,'Linz'),
+ (89,'Jim',null,'OGorman'),
+ (90,'Ali',null,'Almossawi'),
+ (91,'David',null,'Robson'),
+ (92,'Brad',null,'Abrams'),
+ (93,'Timothy',null,'Downs'),
+ (94,'Kyle',null,'Loudon'),
+ (95,'Robert',null,'Eckstein'),
+ (96,'Wolfgang',null,'Banzhaf'),
+ (97,'Mike',null,'Beedle'),
+ (98,'Luke',null,'Ruth'),
+ (99,'Brad',null,'Stone'),
+ (100,'David',null,'Gourley'),
+ (101,'Greg',null,'Kroah-Hartman'),
+ (102,'Jurgen',null,'Appelo'),
+ (103,'Eric',null,'Ries'),
+ (104,'Ian',null,'Parberry'),
+ (105,'Johan',null,'Vromans'),
+ (106,'Corey',null,'Sandler'),
+ (107,'Devon',null,'Kearns'),
+ (108,'Steven',null,'Feiner'),
+ (109,'Kevlin',null,'Henney'),
+ (110,'Abraham',null,'Silberschatz'),
+ (111,'Mark',null,'Russinovich'),
+ (112,'Carl',null,'Eastlund'),
+ (113,'Hans',null,'Langtangen'),
+ (114,'Carin',null,'Meier'),
+ (115,'Rebecca',null,'Wirfs-Brock'),
+ (116,'Lasse',null,'Koskela'),
+ (117,'David',null,'Chelimsky'),
+ (118,'Why','Stiff','Lucky'),
+ (119,'Christopher',null,'Hadnagy'),
+ (120,'Sebastian',null,'Raschka'),
+ (121,'Henk',null,'Barendregt'),
+ (122,'Tobias',null,'Nipkow'),
+ (123,'Chris',null,'Bernhardt'),
+ (124,'Joost-Pieter',null,'Katoen'),
+ (125,'R.G.',null,'Dromey'),
+ (126,'Andrew',null,'McAfee'),
+ (127,'Jeff',null,'Hawkins'),
+ (128,'Paul',null,'Deitel'),
+ (129,'Albert',null,'Meyer'),
+ (130,'Angus',null,'Croll'),
+ (131,'Jason',null,'Hickey'),
+ (132,'Nathan',null,'Marz'),
+ (133,'Miguel',null,'Revilla'),
+ (134,'Maurice',null,'Herlihy'),
+ (135,'Gareth',null,'James'),
+ (136,'Hanne',null,'Nielson'),
+ (137,'Vern',null,'Ceder'),
+ (138,'Matt',null,'Pharr'),
+ (139,'Joe',null,'Armstrong'),
+ (140,'Mati',null,'Aharoni'),
+ (141,'Patrick',null,'Debois'),
+ (142,'Sandi',null,'Metz'),
+ (143,'Benedikt',null,'GroAY'),
+ (144,'Peter',null,'Sanders'),
+ (145,'Baron',null,'Schwartz'),
+ (146,'Paul',null,'Clements'),
+ (147,'Scott',null,'Ambler'),
+ (148,'R.',null,'Dybvig'),
+ (149,'Stephen',null,'Figgins'),
+ (150,'Stephan',null,'Mertens'),
+ (151,'Cay',null,'Horstmann'),
+ (152,'Luis',null,'Atencio'),
+ (153,'Michael',null,'Nielsen'),
+ (154,'Aaron',null,'Courville'),
+ (155,'W.H.',null,'Feijen'),
+ (156,'Richard',null,'Bejtlich'),
+ (157,'Peter',null,'Bruce'),
+ (158,'Adam',null,'Gibson'),
+ (159,'Vernon',null,'Ceder'),
+ (160,'Patrick',null,'Winston'),
+ (161,'Scott',null,'Vanstone'),
+ (162,'Jon',null,'Duckett'),
+ (163,'Nick',null,'Bostrom'),
+ (164,'Michael',null,'Dahlin'),
+ (165,'Eric',null,'Meyer'),
+ (166,'David',null,'Harel'),
+ (167,'Claude',null,'Shannon'),
+ (168,'Daryl',null,'Harms'),
+ (169,'Dan',null,'North'),
+ (170,'Roberto',null,'Tamassia'),
+ (171,'Paul',null,'Freiberger'),
+ (172,'George',null,'Heineman'),
+ (173,'Jeffrey',null,'Yost'),
+ (174,'Matt',null,'Weisfeld'),
+ (175,'Luciano',null,'Ramalho'),
+ (176,'Mary',null,'Poppendieck'),
+ (177,'M.',null,'Ozsu'),
+ (178,'Emily',null,'Chang'),
+ (179,'Douglas',null,'Stinson'),
+ (180,'Sara',null,'Wachter-Boettcher'),
+ (181,'Rajeev',null,'Motwani'),
+ (182,'John',null,'Sonmez'),
+ (183,'Y.',null,'Liang'),
+ (184,'Stanley',null,'Selkow'),
+ (185,'Christopher',null,'Duncan'),
+ (186,'Michael',null,'Whitman'),
+ (187,'Ron',null,'Jeffries'),
+ (188,'Johannes',null,'Braams'),
+ (189,'SaA!a',null,'Juric'),
+ (190,'Peter',null,'Thiel'),
+ (191,'Steve',null,'Souders'),
+ (192,'Jerome',null,'Friedman'),
+ (193,'Scott',null,'Mueller'),
+ (194,'Mark',null,'Dowd'),
+ (195,'Kelli',null,'Houston'),
+ (196,'Hinrich',null,'Schütze'),
+ (197,'Ethan',null,'Marcotte'),
+ (198,'Mark',null,'Pilgrim'),
+ (199,'Martin',null,'Davis'),
+ (200,'Craig',null,'Sharkie'),
+ (201,'Addy',null,'Osmani'),
+ (202,'N.',null,'Friedman'),
+ (203,'Daniel',null,'Rose'),
+ (204,'Chris',null,'Houser'),
+ (205,'Linus',null,'Torvalds'),
+ (206,'Matthew',null,'Helmke'),
+ (207,'John',null,'Battelle'),
+ (208,'Jon',null,'Kleinberg'),
+ (209,'Alan',null,'Cooper'),
+ (210,'Yoshua',null,'Bengio'),
+ (211,'Henrik',null,'Kniberg'),
+ (212,'Anshul',null,'Gupta'),
+ (213,'Judith',null,'Gersting'),
+ (214,'Jared',null,'Spool'),
+ (215,'William',null,'Brown'),
+ (216,'Ward',null,'Cunningham'),
+ (217,'Wladston',null,'Filho'),
+ (218,'Johnny',null,'Long'),
+ (219,'Cathy',null,'ONeil'),
+ (220,'June',null,'Barrow-Green'),
+ (221,'Jason',null,'Williams'),
+ (222,'Edward',null,'Skoudis'),
+ (223,'Jérémie',null,'Zimmermann'),
+ (224,'Mario',null,'Fusco'),
+ (225,'Jason',null,'Gregory'),
+ (226,'Micah',null,'Martin'),
+ (227,'Lloyd',null,'Trefethen'),
+ (228,'Erwin',null,'Schrödinger'),
+ (229,'Chris',null,'Dannen'),
+ (230,'Shlomo',null,'Angel'),
+ (231,'Tom',null,'Badgett'),
+ (232,'Shon',null,'Harris'),
+ (233,'Brian',null,'Krebs'),
+ (234,'Graham',null,'Hutton'),
+ (235,'Ross',null,'Anderson'),
+ (236,'Linda',null,'Torczon'),
+ (237,'Steve',null,'Freeman'),
+ (238,'Simson',null,'Garfinkel'),
+ (239,'Ilya',null,'Grigorik'),
+ (240,'Jan',null,'Eijck'),
+ (241,'Philip',null,'Bernstein'),
+ (242,'Larry',null,'Ullman'),
+ (243,'Michael',null,'Feathers'),
+ (244,'Linda',null,null),
+ (245,'Martin',null,'Ford'),
+ (246,'Sandro',null,'Mancuso'),
+ (248,'Donald',null,'Rubin'),
+ (249,'Steve',null,'Matyas'),
+ (250,'Richard',null,'Woods'),
+ (251,'Tim',null,'Roughgarden'),
+ (252,'Jeff',null,'Edmonds'),
+ (253,'Eoin',null,'Woods'),
+ (254,'Brian',null,'Fitzpatrick'),
+ (255,'N.',null,'Mermin'),
+ (256,'Karl',null,'Seguin'),
+ (257,'Leo',null,'Brodie'),
+ (258,'Robert',null,'Sebesta'),
+ (259,'Janet',null,'Valade'),
+ (260,'Bill',null,'Fenner'),
+ (261,'Lorna',null,'Mitchell'),
+ (262,'Satya',null,'Nadella'),
+ (263,'Dan',null,'Cederholm'),
+ (264,'Bryan',null,'Helmkamp'),
+ (265,'Dale',null,'Dougherty'),
+ (266,'Ka',null,'Cheung'),
+ (267,'Mark',null,'Lutz'),
+ (268,'Tom',null,'Phoenix'),
+ (269,'Mark',null,'Hamstra'),
+ (270,'Gayle',null,'McDowell'),
+ (271,'Michael',null,'Swaine'),
+ (272,'Yvonne',null,'Rogers'),
+ (273,'Edmond',null,'Lau'),
+ (274,'Mike',null,'Clark'),
+ (275,'Gordon',null,'Blair'),
+ (276,'Mark',null,'Ciampa'),
+ (277,'Pramod',null,'Sadalage'),
+ (278,'Subrata',null,'Dasgupta'),
+ (279,'Stuart',null,'McClure'),
+ (280,'Gary',null,'Bradski'),
+ (281,'Brian',null,'Lonsdorf'),
+ (282,'Jesse',null,'Robbins'),
+ (283,'Steven',null,'Pinker'),
+ (284,'David',null,'Stork'),
+ (285,'Luke',null,'Wroblewski'),
+ (286,'Graham',null,'Lee'),
+ (287,'J.',null,'Adams'),
+ (288,'Stephen',null,'Thorne'),
+ (289,'Dmitry',null,'Jemerov'),
+ (290,'Thomas',null,'Connolly'),
+ (291,'J.',null,'Brookshear'),
+ (292,'W.',null,'Hillis'),
+ (293,'Petar',null,'Tahchiev'),
+ (294,'Arnold',null,'Robbins'),
+ (295,'Chris',null,'Hankin'),
+ (296,'Jack',null,'Moffett'),
+ (297,'Andreas',null,'Wittig'),
+ (298,'Kjell',null,'Johnson'),
+ (299,'Christine',null,'Bresnahan'),
+ (300,'Tom',null,'Christiansen'),
+ (301,'Harvey',null,'Deitel'),
+ (302,'Allan',null,'Friedman'),
+ (303,'Tom',null,'DeMarco'),
+ (304,'Chris',null,'Rowley'),
+ (305,'Chris',null,'Eagle'),
+ (306,'Gina',null,'Smith'),
+ (307,'David',null,'LeBlanc'),
+ (308,'Andrea',null,'Arpaci-Dusseau'),
+ (309,'Martin',null,'Reddy'),
+ (310,'Eliezer',null,'Yudkowsky'),
+ (311,'Alfred',null,'Aho'),
+ (312,'John',null,'Maeda'),
+ (313,'Janna',null,'Levin'),
+ (314,'Christopher',null,'Cunningham'),
+ (315,'Flemming',null,'Nielson'),
+ (316,'Anne',null,'Troelstra'),
+ (317,'Hartley',null,'Rogers'),
+ (318,'Jonathan',null,'Katz'),
+ (319,'Cory',null,'Althoff'),
+ (320,'Betty',null,'Toole'),
+ (321,'H.',null,'Schwichtenberg'),
+ (322,'Sara',null,'Ishikawa'),
+ (323,'Dennis',null,'Shasha'),
+ (324,'Daniela',null,'Witten'),
+ (325,'Nilanjan',null,'Raychaudhuri'),
+ (326,'Avdi',null,'Grimm'),
+ (327,'Martin',null,'Fowler'),
+ (328,'Brian',null,'Carper'),
+ (329,'Mat',null,'Buckland'),
+ (330,'Amit',null,'Prakash'),
+ (331,'V.',null,'Spraul'),
+ (332,'Craig',null,'Martell'),
+ (333,'Svetlana',null,'Isakova'),
+ (334,'James',null,'Trott'),
+ (335,'Kenneth',null,'Rubin'),
+ (336,'William','Jr.','Shotts'),
+ (337,'Ian',null,'Sommerville'),
+ (338,'Dennis',null,'Ritchie'),
+ (339,'Brendan',null,'Burns'),
+ (340,'Adele',null,'Goldberg'),
+ (341,'Conor',null,'McBride'),
+ (342, 'Andy', NULL, 'Müller-Maguhn'),
+ (343,'Foster',null,'Provost'),
+ (344,'Tom',null,'Mitchell'),
+ (345,'Duncan',null,'Watts'),
+ (346,'David',null,'Wood'),
+ (347,'Ming',null,'Li'),
+ (348,'Alan',null,'McKean'),
+ (349,'Tatiana',null,'Diaz'),
+ (350,'David',null,'III'),
+ (351,'Nelson',null,'Beebe'),
+ (352,'Mike',null,'Meyers'),
+ (353,'Bruce',null,'MacLennan'),
+ (354,'Suzanne',null,'Robertson'),
+ (355,'David',null,'Carlisle'),
+ (356,'Peter',null,'Weinberger'),
+ (357,'Ingrid',null,'Fiksdahl-King'),
+ (358,'Igal',null,'Tabachnik'),
+ (359,'Greg',null,'Michaelson'),
+ (360,'Jeroen',null,'Janssens'),
+ (361,'Nicholas',null,'Haemel'),
+ (362,'Felix',null,'Halim'),
+ (363,'David',null,'Kennedy'),
+ (364,'Roger',null,'Pressman'),
+ (365,'J.P.',null,'Vossen'),
+ (366,'Daniel',null,'Higginbotham'),
+ (367,'Colin',null,'Evans'),
+ (368,'Robert',null,'Nystrom'),
+ (369,'Ron',null,'White'),
+ (370,'Justin',null,'Schuh'),
+ (371,'Carlos',null,'Coronel'),
+ (372,'Matt',null,'Carter'),
+ (373,'Guy',null,'Theraulaz'),
+ (374,'Zachary',null,'Tong'),
+ (375,'Richard',null,'Stallman'),
+ (376,'David',null,'Holmes'),
+ (377,'George',null,'Dyson'),
+ (378,'Kent',null,'Beck'),
+ (379,'Nathan',null,'Ensmenger'),
+ (380,'Micah',null,'Alpern'),
+ (381,'Steven',null,'Halim'),
+ (382,'Greg',null,'Riccardi'),
+ (383,'Matthew',null,'Lyon'),
+ (384,'Dan',null,'Jurafsky'),
+ (385,'Asanovi',null,null),
+ (386,'Richard',null,'Gabriel'),
+ (387,'Marco',null,'Dorigo'),
+ (388,'Brian',null,'Flannery'),
+ (389,'Thomas',null,'Anderson'),
+ (390,'Ben',null,'Albahari'),
+ (391,'Gary',null,'Pollice'),
+ (392,'Jon',null,'Orwant'),
+ (393,'Dave',null,'Fancher'),
+ (394,'John',null,'Smart'),
+ (395,'Wallace',null,'Wang'),
+ (396,'Julian',null,'Assange'),
+ (397,'Alex',null,'Payne'),
+ (398,'Terence',null,'Parr'),
+ (399,'Kees',null,'Doets'),
+ (400,'Eldad',null,'Eilam'),
+ (401,'John',null,'Zelle'),
+ (402,'Marsha',null,'Zaidman'),
+ (403,'Kip',null,'Irvine'),
+ (404,'Deepak',null,'Alur'),
+ (405,'Magnus',null,'Christerson'),
+ (406,'Martin',null,'Abbott'),
+ (407,'F.',null,'Lawvere'),
+ (408,'Robert',null,'Harper'),
+ (409,'K.N.',null,'King'),
+ (410,'Diana',null,'Wright'),
+ (411,'Daniel',null,'Velleman'),
+ (412,'Frank',null,'OBrien'),
+ (413,'Andrew',null,'Farris'),
+ (414,'Niranjan',null,'Shivaratri'),
+ (415,'Don',null,'Jones'),
+ (416,'Adam',null,'Freeman'),
+ (417,'William',null,'Cook'),
+ (418,'Andrei',null,'Alexandrescu'),
+ (419,'Yehuda',null,'Katz'),
+ (420,'Richard',null,'Monson-Haefel'),
+ (421,'George',null,'Kurtz'),
+ (422,'Seth',null,'Stephens-Davidowitz'),
+ (423,'Martin',null,'Gardner'),
+ (424,'Bruce',null,'Lawson'),
+ (425,'Robert',null,'Knake'),
+ (426,'Ellen',null,'Ullman'),
+ (427,'John',null,'Crupi'),
+ (428,'Diana',null,'Larsen'),
+ (429,'Eric',null,'Giguere'),
+ (430,'Derek',null,'Balling'),
+ (431,'Paul',null,'Ceruzzi'),
+ (432,'Tom',null,'Fawcett'),
+ (433,'Jeff',null,'Johnson'),
+ (434,'Jon',null,'Gertner'),
+ (435,'Yashavant',null,'Kanetkar'),
+ (436,'Andy',null,'Oram'),
+ (437,'Kenneth',null,'Steiglitz'),
+ (438,'Trevor',null,'Hastie'),
+ (439,'Jeffrey',null,'Ullman'),
+ (440,'Adrian',null,'Holovaty'),
+ (441,'Kevin',null,'Kelly'),
+ (442,'Paul',null,'Barry'),
+ (443, 'Uwe', NULL, 'SchÃ¶ning'),
+ (444,'John',null,'Burgess'),
+ (445,'Christopher',null,'Steiner'),
+ (446,'Eric',null,'Redmond'),
+ (447,'Jon',null,'Erickson'),
+ (448,'Timothy',null,'Gowers'),
+ (449,'Karl',null,'Matthias'),
+ (450,'Jason',null,'Fried'),
+ (451,'Jacquelyn',null,'Carter'),
+ (452,'Jacob',null,'Appelbaum'),
+ (453,'Andrew',null,'Glover'),
+ (454,'John',null,'White'),
+ (455,'Ed',null,'Yourdon'),
+ (456,'The',null,'Consortium'),
+ (457,'Michael',null,'Lucas'),
+ (458,'Raphael',null,'Malveau'),
+ (459,'Simon',null,'Marlow'),
+ (460,'Ralph',null,'Johnson'),
+ (461,'Bjarne',null,'Stroustrup'),
+ (462,'Jeremy',null,'Kubica'),
+ (463,'Dan',null,'Malks'),
+ (464,'Michael',null,'Folk'),
+ (465,'Allen',null,'Dutoit'),
+ (466,'Jack',null,'Falk'),
+ (467,'Andrew',null,'Tanenbaum'),
+ (468,'Andrew',null,'Appel'),
+ (469,'Rachel',null,'Warren'),
+ (470,'Nick',null,'Rozanski'),
+ (471,'Gunnar',null,'Overgaard'),
+ (472,'Debra',null,'Cameron'),
+ (473,'Sanjay',null,'Patel'),
+ (474,'Greg',null,'Perry'),
+ (475,'Andrew',null,'Barto'),
+ (476,'Pedro',null,'Domingos'),
+ (477,'Mordechai',null,'Ben-Ari'),
+ (478,'John',null,'Koza'),
+ (479,'Peter',null,'Pacheco'),
+ (480,'David',null,'Bourg'),
+ (481,'Robert',null,'Martin'),
+ (482,'Philip',null,'Jackson'),
+ (483,'Paul',null,'Duvall'),
+ (484,'Paul',null,'Churchland'),
+ (485,'David',null,'Patterson'),
+ (486,'Roland',null,'Mas'),
+ (487,'Imre',null,'Leader'),
+ (488,'Michael',null,'Dirolf'),
+ (489,'Jerome',null,'Saltzer'),
+ (490,'James',null,'Whittaker'),
+ (491,'Betsy',null,'Beyer'),
+ (492, 'Albert-László', NULL, 'Barabási'),
+ (493,'Lisa',null,'Crispin'),
+ (494,'Peter',null,'Wallack'),
+ (495,'Trend-Pro',null,'Ltd.'),
+ (496,'Sydney',null,'Padua'),
+ (497,'Niklaus',null,'Wirth'),
+ (498,'James',null,'Foley'),
+ (499,'Lawrence',null,'Lessig'),
+ (500,'Edward',null,'Tufte'),
+ (501,'Carl',null,'Albing'),
+ (502,'Luke',null,'Hohmann'),
+ (503,'Mark',null,'Ryan'),
+ (504,'Richard',null,'Sutton'),
+ (505,'Fletcher',null,'Dunn'),
+ (506,'George',null,'Karypis'),
+ (507,'Maurice',null,'Naftalin'),
+ (508,'John',null,'Willis'),
+ (509,'Jez',null,'Humble'),
+ (510,'Neil',null,'Jones'),
+ (511,'Stanley',null,'Lippman'),
+ (512,'Simon',null,'Brown'),
+ (513,'Eric',null,'Lengyel'),
+ (514,'Marc',null,'Kreveld'),
+ (515,'Chris',null,'Jones'),
+ (516,'Andrew',null,'Hodges'),
+ (517,'Earle',null,'Castledine'),
+ (518,'F.',null,'Leighton'),
+ (519,'Philippe',null,'Flajolet'),
+ (520,'Peter',null,'Hart'),
+ (521,'Philip',null,'Japikse'),
+ (522,'Michael',null,'Ligh'),
+ (523,'Mark',null,'Richards'),
+ (524,'Gary',null,'Wright'),
+ (525, 'Viktor', NULL, 'Mayer-Schönberger'),
+ (526,'Gautam',null,'Shroff'),
+ (527,'Jonathan',null,'Stoddard'),
+ (528,'Richard',null,'Hamming'),
+ (529,'Cristina',null,'Lopes'),
+ (530,'Stoyan',null,'Stefanov'),
+ (531,'Michael',null,'Abrash'),
+ (532,'Bradley',null,'Miller'),
+ (533,'Jim',null,'Highsmith'),
+ (534,'Anthony',null,'Molinaro'),
+ (535,'Frank',null,'Buschmann'),
+ (536,'Peter',null,'Dayan'),
+ (537,'James',null,'Gleick'),
+ (538,'Tony',null,'Mason'),
+ (539,'Nell',null,'Dale'),
+ (540,'Kevin',null,'Fall'),
+ (541,'Ryan',null,'Breidenbach'),
+ (542,'Doug',null,'Hoyte'),
+ (543,'Remy',null,'Sharp'),
+ (544,'Chas',null,'Emerick'),
+ (545,'Daniel',null,'Shiffman'),
+ (546,'Flavio',null,'Junqueira'),
+ (547,'Nello',null,'Cristianini'),
+ (548,'Greg',null,'Wilson'),
+ (549,'Mike',null,'Cohn'),
+ (550,'Michael',null,'Lewis'),
+ (551,'Neal',null,'Gafter'),
+ (552,'William',null,'Byrd'),
+ (553,'Frederick','Jr.','Brooks'),
+ (554,'OReilly',null,'Team'),
+ (555,'Axel',null,'Rauschmayer'),
+ (556,'Andrew',null,'Ng'),
+ (557,'William',null,'Press'),
+ (558,'ACM',null,'Staff'),
+ (559,'Michael',null,'Fisher'),
+ (560,'John',null,'Lewis'),
+ (561,'Simon',null,'Haykin'),
+ (562,'Jim',null,'Blandy'),
+ (563,'Herbert',null,'Schildt'),
+ (564,'Rich',null,'Gibson'),
+ (565,'Markus',null,'Winand'),
+ (566,'Seymour',null,'Papert'),
+ (567,'Raghu',null,'Ramakrishnan'),
+ (568,'Greg',null,'Newman'),
+ (569,'Christopher',null,'Manning'),
+ (570,'Gregor',null,'Hohpe'),
+ (571,'Roland',null,'Kuhn'),
+ (572,'Doug',null,'Cutting'),
+ (573,'Daniel',null,'Cohen'),
+ (574,'Brian',null,'Foy'),
+ (575,'Alan',null,'Mycroft'),
+ (576,'Ian',null,'Witten'),
+ (577,'Chad',null,'Fowler'),
+ (578,'Ronen',null,'Feldman'),
+ (579,'Marvin',null,'Zelkowitz'),
+ (580,'Mana',null,'Takahashi'),
+ (581,'John',null,'Foreman'),
+ (582,'Andries',null,'Dam'),
+ (583,'John',null,'Hughes'),
+ (584,'William',null,'Kent'),
+ (585,'Gene',null,'Kim'),
+ (586,'Wes',null,'McKinney'),
+ (587,'Brian',null,'Totty'),
+ (588,'Matt',null,'Welsh'),
+ (589,'Gojko',null,'Adzic'),
+ (590,'Greg',null,'Nudelman'),
+ (591,'Dean',null,'Leffingwell'),
+ (592,'Peter',null,'Salus'),
+ (593,'Jared',null,'Richardson'),
+ (594,'Willi',null,'Richert'),
+ (595,'Winston',null,'Chang'),
+ (596,'Martin',null,'Odersky'),
+ (597,'Drew',null,'Neil'),
+ (598,'Gilbert',null,'Strang'),
+ (599,'Jon',null,'Loeliger'),
+ (600,'Christos',null,'Papadimitriou'),
+ (601,'Chris',null,'Shiflett'),
+ (602,'Glenn',null,'Greenwald'),
+ (603,'Mike',null,'Gancarz'),
+ (604,'Kevin',null,'Beaver'),
+ (605,'James',null,'Warren'),
+ (606,'Reto',null,'Meier'),
+ (607,'Jennifer',null,'Robbins'),
+ (608,'Mike',null,'Loukides'),
+ (609,'Aaron',null,'Tenenbaum'),
+ (610,'Anany',null,'Levitin'),
+ (611,'Joshua',null,'Bloch'),
+ (612,'Benjamin',null,'Reed'),
+ (613,'Michael',null,'Goldwasser'),
+ (614,'Marcus',null,'Pinto'),
+ (615,'Robert',null,'Vamosi'),
+ (616,'Tariq',null,'Rashid'),
+ (617,'Daphne',null,'Koller'),
+ (618,'James',null,'Reffell'),
+ (619,'Boaz',null,'Barak'),
+ (620,'Steven',null,'Holzner'),
+ (621,'Franz',null,'Baader'),
+ (622,'Sara',null,'Baase'),
+ (623,'Christel',null,'Baier'),
+ (624,'Jon',null,'Bentley'),
+ (625,'Hadley',null,'Wickham'),
+ (626,'Jeff',null,'Atwood'),
+ (627,'John',null,'Mongan'),
+ (628,'Jeff',null,'Hammerbacher'),
+ (629,'John',null,'Mitchell'),
+ (630,'Marc',null,'Goodman'),
+ (631,'John',null,'Allen'),
+ (632,'Neil',null,'Matthew'),
+ (633,'Tony',null,'Gaddis'),
+ (634,'Timothy',null,'Lister'),
+ (635,'Carl',null,'Meyer'),
+ (636,'Amy',null,'Brown'),
+ (637,'Eric',null,'Matthes'),
+ (638,'Dan',null,'Gusfield'),
+ (639,'Vincent',null,'Massol'),
+ (640,'Robert',null,'Romano'),
+ (641,'Christer',null,'Ericson'),
+ (642,'Andreas',null,'Zeller'),
+ (643,'Carolyn',null,'Begg'),
+ (644,'Claire',null,'Evans'),
+ (645,'Dusty',null,'Phillips'),
+ (646,'Dave',null,'Agans'),
+ (647,'Mark',null,'Berg'),
+ (648,'Felipe',null,'Leme'),
+ (649,'John',null,'Kelleher'),
+ (650,'Andy',null,'Hertzfeld'),
+ (651,'Samuel',null,'Arbesman'),
+ (652,'Max',null,'Jacobson'),
+ (653,'Yale',null,'Patt'),
+ (654,'Dick',null,'Grune'),
+ (655,'Michael',null,'Stonebraker'),
+ (656, 'Tomas', NULL, 'Akenine-Möller'),
+ (657,'Ken',null,'Schwaber'),
+ (658,'Michael',null,'Taylor'),
+ (659,'Grady',null,'Booch'),
+ (660,'Pete',null,'Goodliffe'),
+ (661,'Joshua',null,'Suereth'),
+ (662,'Garth',null,'Snyder'),
+ (663,'Leo',null,'Dorst'),
+ (664,'Barry',null,'OReilly'),
+ (665,'Jennifer',null,'Greene'),
+ (666,'Douglas',null,'Schmidt'),
+ (667,'Joseph',null,'Schmuller'),
+ (668,'Andrew',null,'Gelman'),
+ (669,'Karl',null,'Wiegers'),
+ (670,'Andreas',null,'Wirthensohn'),
+ (672,'Tom',null,'Liston'),
+ (673,'Dean',null,'Miller'),
+ (674,'Jakob',null,'Nielsen'),
+ (675,'Elaine',null,'Rich'),
+ (676,'Leland',null,'Purvis'),
+ (677,'Ivan',null,'Ristic'),
+ (678,'Richard',null,'Warburton'),
+ (679,'Michel',null,'Goossens'),
+ (680,'S.',null,'Cooper'),
+ (681,'Michael',null,'Mitzenmacher'),
+ (682,'Shamkant',null,'Navathe'),
+ (683,'Gordon',null,'Lyon'),
+ (684,'Matthew',null,'Gast'),
+ (685,'William',null,'Lidwell'),
+ (686,'Bruce',null,'Sterling'),
+ (687,'Chuck',null,'Musciano'),
+ (688,'Benjamin',null,'Lipchak'),
+ (689,'Peter',null,'Zaitsev'),
+ (690,'Keith',null,'Jones'),
+ (691,'Steven',null,'Levithan'),
+ (692,'Bryan',null,'OSullivan'),
+ (693,'Ken',null,'Ledeen'),
+ (694,'Christopher',null,'Alexander'),
+ (695,'Lar',null,'Kaufman'),
+ (696,'David',null,'Leavitt'),
+ (697,'Sam',null,'Williams'),
+ (698,'Marco',null,'Cesati'),
+ (699,'Alan',null,'Turing'),
+ (700,'Ira',null,'Pohl'),
+ (701,'Ernest',null,'Nagel'),
+ (702,'Eibe',null,'Frank'),
+ (703,'George',null,'Boolos'),
+ (704,'Peter',null,'Robson'),
+ (705,'Michael',null,'Lopp'),
+ (707,'Dean',null,'Wampler'),
+ (708,'Brett',null,'McLaughlin'),
+ (709,'P.J.',null,'Plauger'),
+ (710,'Herb',null,'Sutter'),
+ (711,'Peter',null,'Kim'),
+ (712,'Russ',null,'Miles'),
+ (713,'Alex',null,'Ionescu'),
+ (714,'Prabhakar',null,'Raghavan'),
+ (715,'Chris',null,'Anley'),
+ (716,'Mor',null,'Harchol-Balter'),
+ (717,'Neal',null,'Stephenson'),
+ (718,'Harry',null,'Lewis'),
+ (719,'Andriy',null,'Burkov'),
+ (720,'Vaughn',null,'Vernon'),
+ (721,'David',null,'Barber'),
+ (722,'David',null,'Kahn'),
+ (723,'Toby',null,'Segaran'),
+ (724,'Holden',null,'Karau'),
+ (725,'Nancy',null,'Lynch'),
+ (726,'Shawn',null,'Hedman'),
+ (727,'Peter',null,'Hruschka'),
+ (728,'Sailu',null,'Reddy'),
+ (729,'Christophe',null,'Grand'),
+ (730,'Daniel',null,'Holden'),
+ (731,'Joseph',null,'Bonneau'),
+ (732,'Andrew',null,'Blum'),
+ (733,'Mark',null,'Overmars'),
+ (734, 'Miran', NULL, 'LipovaÄa'),
+ (735,'Gerald',null,'Weinberg'),
+ (736,'Aoife',null,'DArcy'),
+ (737,'Anthony',null,'Williams'),
+ (738,'Kent',null,'Kawahara'),
+ (739,'Jeff',null,'Duntemann'),
+ (740,'Robert',null,'Glass'),
+ (741,'Donald',null,'Yacktman'),
+ (742,'Terrence',null,'Pratt'),
+ (743,'Rachid',null,'Guerraoui'),
+ (744,'Jan',null,'Goyvaerts'),
+ (745,'Steve',null,'Oualline'),
+ (746,'Edsger',null,'Dijkstra'),
+ (747,'Jaron',null,'Lanier'),
+ (748,'Bruce',null,'Dang'),
+ (749,'Adam',null,'Tornhill'),
+ (750,'Robert',null,'Maksimchuk'),
+ (751,'Jon',null,'Skeet'),
+ (752,'Richard',null,'Clarke'),
+ (753,'David',null,'Goldberg'),
+ (754,'Vadim',null,'Tkachenko'),
+ (755,'Jeff',null,'Langr'),
+ (756,'Andrew',null,'Case'),
+ (757, 'Ãleen', NULL, 'Frisch'),
+ (758,'Robert',null,'Tibshirani'),
+ (759,'Edward',null,'Loper'),
+ (760,'Martin',null,'Kleppmann'),
+ (761,'Narasimha',null,'Karumanchi'),
+ (762,'Elias',null,'Bachaalany'),
+ (763,'Adam',null,'Chlipala'),
+ (764,'Jamie',null,'Allen'),
+ (765,'Ellen',null,'Siever'),
+ (766,'Don',null,'Widrig'),
+ (767,'Laurence',null,'Abbott'),
+ (768,'Hung',null,'Nguyen'),
+ (769,'Alvaro',null,'Videla'),
+ (770,'Nikhil',null,'Buduma'),
+ (771, 'LuÃ­s', NULL, 'Rodrigues'),
+ (772,'Stephen',null,'Schanuel'),
+ (773,'Kim',null,'Zetter'),
+ (774,'Raoul-Gabriel',null,'Urma'),
+ (775,'Remzi',null,'Arpaci-Dusseau'),
+ (776,'Linda',null,'Liukas'),
+ (777,'Mukesh',null,'Singhal'),
+ (778,'Ron',null,'Sigal'),
+ (779,'Paul',null,'Hudak'),
+ (780,'Jonathan',null,'Rosenberg'),
+ (781,'Duane',null,'Bibby'),
+ (782,'Ajay',null,'Agrawal'),
+ (783,'Brendan',null,'Gregg'),
+ (784,'Trevor',null,'Foucher'),
+ (785,'Steven',null,'Bird'),
+ (786,'Jimmy',null,'Nilsson'),
+ (787,'David',null,'Herman'),
+ (788,'Aaron',null,'Hillegass'),
+ (789,'Edward',null,'Reingold'),
+ (790,'Tom',null,'White'),
+ (791,'Christopher',null,'Bishop'),
+ (792,'Cathy',null,'Lazere'),
+ (793,'Mark',null,'Chu-Carroll'),
+ (794,'Gerard',null,'Tel'),
+ (795,'Jeffrey',null,'Zeldman'),
+ (796,'James',null,'Grenning'),
+ (797,'Antonio',null,'Goncalves'),
+ (798, 'György', 'E.', 'Révész'),
+ (799,'Robert',null,'Reimann'),
+ (800,'Tom',null,'Poppendieck'),
+ (801,'William',null,'Poundstone'),
+ (802,'George',null,'Reese'),
+ (803,'Susannah',null,'Pfalzer'),
+ (804,'Chris',null,'Sims'),
+ (805,'Mark',null,'Sobell'),
+ (806,'Philipp',null,'Janert'),
+ (807,'Nicolai',null,'Josuttis'),
+ (808,'Michael',null,'Huth'),
+ (809,'Jonathan',null,'Seldin'),
+ (810,'William',null,'Couie'),
+ (811,'Dave',null,'Shreiner'),
+ (812,'Gabriella',null,'Coleman'),
+ (813,'Douglas',null,'Comer'),
+ (814,'Indra',null,'Widjaja'),
+ (815,'Albert',null,'Woodhull'),
+ (816,'Daniel',null,'Brolund'),
+ (817,'Jeremy',null,'Kun'),
+ (818,'Curtis',null,'Rose'),
+ (819,'Vijay',null,'Vazirani'),
+ (820,'Leonard',null,'Richardson'),
+ (821,'Mitchell',null,'Wand'),
+ (822,'Jonas',null,'BonA©r'),
+ (823,'Judea',null,'Pearl'),
+ (824,'Richard','Jr.','Wright'),
+ (825,'Jeff',null,'Sutherland'),
+ (826,'Scott',null,'McCartney'),
+ (827,'Mikko',null,'Lipasti'),
+ (828,'George',null,'Varghese'),
+ (829,'Alessandro',null,'Rubini'),
+ (830,'Behrouz',null,'Forouzan'),
+ (831,'Marc',null,'Loy'),
+ (832,'Micheline',null,'Kamber'),
+ (833,'Jamis',null,'Buck'),
+ (834,'John',null,'Carlin'),
+ (835,'John',null,'Lions'),
+ (836,'Ivar',null,'Jacobson'),
+ (837,'Ben',null,'Clark'),
+ (838,'Joseph',null,'Weizenbaum'),
+ (839,'John',null,'Resig'),
+ (840,'Stephen',null,'Huston'),
+ (841,'Simon',null,'Collison'),
+ (842,'Bill',null,'Phillips'),
+ (843,'Jake',null,'Vanderplas'),
+ (844,'David',null,'Black'),
+ (845,'Hans',null,'Rohnert'),
+ (846,'Arthur',null,'Riel'),
+ (847,'Doug',null,'Brown'),
+ (848,'James',null,'Newman'),
+ (849,'David',null,'Harris'),
+ (850,'Swaroop',null,'C.H.'),
+ (851,'Hsuan-Tien',null,'Lin'),
+ (852,'Dana',null,'Mackenzie'),
+ (853,'Ray',null,'Kurzweil'),
+ (854,'Walter',null,'Isaacson'),
+ (855,'Brian',null,'Okken'),
+ (856,'Donald',null,'Knuth'),
+ (857,'Ben',null,'Forta'),
+ (858,'Hannah',null,'Fry'),
+ (859,'Philip',null,'Klein'),
+ (860,'Sanjoy',null,'Dasgupta'),
+ (861,'Walter',null,'Savitch'),
+ (862, 'Uwe', NULL, 'Schöning'),
+ (863,'J.',null,'Scott'),
+ (864,'George',null,'Neville-Neil'),
+ (865,'Leon',null,'Breedt'),
+ (866,'Donald',null,'Norman'),
+ (867,'David',null,'McFarland'),
+ (868,'Conrad',null,'Barski'),
+ (869,'Nathaniel',null,'Popper'),
+ (870,'Martin',null,'Logan'),
+ (871,'Randall',null,'Hyde'),
+ (872,'Raymond',null,'Chen'),
+ (873,'Emil',null,'Eifrem'),
+ (874,'Kevin',null,'Murphy'),
+ (875,'A.E.',null,'Eiben'),
+ (876,'Andreas',null,'Antonopoulos'),
+ (877,'Dan',null,'Pilone'),
+ (878,'George',null,'Luger'),
+ (879,'Nat',null,'Pryce'),
+ (880,'Mark',null,'Bowden'),
+ (881,'Eben',null,'Hewitt'),
+ (882,'Joshua',null,'Gay'),
+ (883,'Ryan',null,'Boyd'),
+ (884,'David',null,'Solomon'),
+ (885,'Alistair',null,'Cockburn'),
+ (886,'Melanie',null,'Mitchell'),
+ (887,'Sam',null,'Ruby'),
+ (888,'B.',null,'Copeland'),
+ (889,'Clifford',null,'Stoll'),
+ (890,'Paul',null,'Butcher'),
+ (891,'Roger',null,'Penrose'),
+ (892,'Alberto',null,'Leon-Garcia'),
+ (893,'Thomas',null,'Sudkamp'),
+ (894,'Gary',null,'Flake'),
+ (895, 'Aurélien', NULL, 'Géron'),
+ (896,'Susanne',null,'Teschl'),
+ (897,'Jacob',null,'Kaplan-Moss'),
+ (898,'Robert',null,'Sedgewick'),
+ (899,'Tobias',null,'Klein'),
+ (900,'Rob',null,'Goodman'),
+ (901,'Jamie',null,'Bartlett'),
+ (902,'Nicholas',null,'Carr'),
+ (903,'Steve',null,'Wozniak'),
+ (904,'Michael',null,'Dawson'),
+ (905,'J.E.',null,'Smith'),
+ (906,'Grant',null,'Ingersoll'),
+ (907,'David',null,'Anderson'),
+ (908,'Thomas',null,'Limoncelli'),
+ (909,'Peter',null,'Kogge'),
+ (910,'Zvonko',null,'Vranesic'),
+ (911,'Luis',null,'Coelho'),
+ (912,'Cameron',null,'Newham'),
+ (913,'Zbigniew',null,'Michalewicz'),
+ (914,'T.J.',null,'OConnor'),
+ (915,'Vipin',null,'Kumar'),
+ (916,'Kristina',null,'Chodorow'),
+ (917,'Ceriel',null,'Jacobs'),
+ (918,'Casey',null,'Reas'),
+ (919,'Mirco',null,'Mannucci'),
+ (920,'Adnan',null,'Aziz'),
+ (921,'Luke',null,'Muehlhauser'),
+ (922,'Daniel',null,'Dennett'),
+ (923,'Frank',null,'Mittelbach'),
+ (924,'Marjorie',null,'Sayer'),
+ (925,'Jeff',null,'Carollo'),
+ (926,'Kenneth',null,'Cukier'),
+ (927,'A.K.',null,'Dewdney'),
+ (928,'Helen',null,'Gaines'),
+ (929,'Audrey',null,'Greenfeld'),
+ (930,'M.',null,'Mano'),
+ (931,'Keith',null,'Cooper'),
+ (932,'Simon',null,'Thompson'),
+ (933,'Greg',null,'Gagne'),
+ (934,'Per',null,'Hansen'),
+ (935,'Paul',null,'Wilson'),
+ (936,'Otfried',null,'Schwarzkopf'),
+ (937,'Nathan',null,'Torkington'),
+ (938,'David',null,'Vise'),
+ (939,'Jeremy',null,'Zawodny'),
+ (940,'Paul',null,'Horowitz'),
+ (941,'Douglas',null,'Rushkoff'),
+ (942,'David',null,'Christiansen'),
+ (943,'Joe',null,'Celko'),
+ (944,'Samuel','III','Harbison'),
+ (945,'Michael',null,'Tilson'),
+ (946,'John',null,'Heasman'),
+ (947,'Yaser',null,'Abu-Mostafa'),
+ (948,'Eric',null,'Haines'),
+ (949, 'Paul', NULL, 'Vitányi'),
+ (950,'Noam',null,'Nisan'),
+ (951,'Mark',null,'Summerfield'),
+ (952,'Evi',null,'Nemeth'),
+ (953,'Adewale',null,'Oshineye'),
+ (954,'John',null,'Markoff'),
+ (955,'Zach',null,'Dennis'),
+ (956,'Matthias',null,'Felleisen'),
+ (957,'Ola',null,'Ellnestam'),
+ (958,'Peter',null,'Harrington'),
+ (959,'Aaron',null,'Weber'),
+ (960,'Anil',null,'Madhavapeddy'),
+ (961,'Bob',null,'Baxley'),
+ (963,'Kyle',null,'Simpson'),
+ (964,'David',null,'Rogers'),
+ (965, 'Jürgen', NULL, 'Holdorf'),
+ (966,'Warren',null,'Weaver'),
+ (967,'Ian',null,'Goodfellow'),
+ (968,'Hillary',null,'Johnson'),
+ (969,'Barbara',null,'Moo'),
+ (970,'Justin',null,'Seitz'),
+ (971,'Eric',null,'Raymond'),
+ (972,'Edward',null,'Yourdon'),
+ (973,'Mark',null,'Seemann'),
+ (974,'Bobbi',null,'Young'),
+ (975,'Jim',null,'Conallen'),
+ (976,'Edwin',null,'Brady'),
+ (977,'Steve',null,'Krug'),
+ (978,'Jonathan',null,'Rasmusson'),
+ (979,'Russ',null,'Olsen'),
+ (980,'Paul',null,'Vigna'),
+ (981,'Kelsey',null,'Hightower'),
+ (982,'Caroline',null,'Jarrett'),
+ (983,'Keith',null,'Frankish'),
+ (984,'Joseph',null,'Albahari'),
+ (985,'Allen',null,'Downey'),
+ (987,'Peter',null,'Seibel'),
+ (988,'Peter',null,'Norvig'),
+ (989,'David',null,'Flanagan'),
+ (990,'April',null,'Chu'),
+ (991,'Marshall',null,'McKusick'),
+ (992,'Rick',null,'Kazman'),
+ (993,'Cynthia',null,'Andres'),
+ (994,'Francesco',null,'Cesarini'),
+ (995,'Pavel',null,'Pevzner'),
+ (996,'Andrew',null,'Koenig'),
+ (997,'Anshu',null,'Aggarwal'),
+ (998,'Krzysztof',null,'Cwalina'),
+ (999,'John',null,'Pierce'),
+ (1000,'Alexander',null,'Stepanov'),
+ (1001,'Blake',null,'Masters'),
+ (1002,'Stephen',null,'Prata'),
+ (1003,'Thomas',null,'Cormen'),
+ (1004,'Joshua',null,'Kerievsky'),
+ (1005,'Niall',null,'Murphy'),
+ (1006,'Patrick',null,'Niemeyer'),
+ (1007,'Udi',null,'Manber'),
+ (1008,'Tom',null,'Stuart'),
+ (1009,'Kate',null,'Thompson'),
+ (1010,'Joshua',null,'Gans'),
+ (1011,'Paolo',null,'Perrotta'),
+ (1012,'David',null,'Horn'),
+ (1013,'Lex',null,'Spoon'),
+ (1014,'Henry',null,'Korth'),
+ (1015,'Bill',null,'Wagner'),
+ (1016,'Matt',null,'Carter'),
+ (1017,'Philip',null,'Wadler'),
+ (1018,'Pete',null,'McBreen'),
+ (1019,'Paul',null,'Graham'),
+ (1020,'Dave',null,'Hoover'),
+ (1021,'Robert',null,'Cringely'),
+ (1022,'Stephen',null,'Davis'),
+ (1023,'Kurt',null,'Beyer'),
+ (1024,'Christian',null,'Rudder'),
+ (1025,'Randal',null,'Schwartz'),
+ (1026,'Alan',null,'Beaulieu'),
+ (1027,'Jamie',null,'Taylor'),
+ (1028,'Bill',null,'Rosenblatt'),
+ (1029,'David',null,'West'),
+ (1030,'Ben',null,'Whaley'),
+ (1031,'Donald',null,'Stewart'),
+ (1032,'Christopher',null,'Date'),
+ (1033, 'Ãva', NULL, 'Tardos'),
+ (1034,'Tadayoshi',null,'Kohno'),
+ (1035,'George',null,'Coulouris'),
+ (1036,'Gary',null,'Gregory'),
+ (1037,'Cricket',null,'Liu'),
+ (1038,'Elizabeth',null,'Castro'),
+ (1039,'Jay',null,'Wengrow'),
+ (1040,'Dave',null,'Thomas'),
+ (1041,'Murray',null,'Silverstein'),
+ (1042,'Scott',null,'Oaks'),
+ (1043,'Apostolos',null,'Doxiadis'),
+ (1044,'Peter','Linden','der'),
+ (1045,'Robin',null,'Williams'),
+ (1046,'Saul',null,'Teukolsky'),
+ (1047,'Anand',null,'Rajaraman'),
+ (1048,'Daniel',null,'Bovet'),
+ (1049,'Kevin',null,'Goldberg'),
+ (1050,'Mark',null,'Masse'),
+ (1051,'Andrew',null,'Troelsen'),
+ (1052,'William',null,'Aspray'),
+ (1053,'Adam',null,'Shook'),
+ (1054,'Ryan',null,'Mitchell'),
+ (1055,'Christian',null,'Cachin'),
+ (1056,'Avi',null,'Goldfarb'),
+ (1057,'Max',null,'Kanat-Alexander'),
+ (1058,'Noson',null,'Yanofsky'),
+ (1059,'Elbert',null,'Hannah'),
+ (1060,'Bill',null,'Venners'),
+ (1061,'Rafael',null,'Gonzalez'),
+ (1062,'Eric',null,'Bonabeau'),
+ (1063,'Richard',null,'Trudeau'),
+ (1064,'Ananth',null,'Grama'),
+ (1065,'Robert',null,'Daigneau'),
+ (1066,'Aleen',null,'Frisch'),
+ (1067,'Adam',null,'Drozdek'),
+ (1068,'Alfred',null,'Menezes'),
+ (1069,'Hal',null,'Stern'),
+ (1070,'P.W.',null,'Singer'),
+ (1071,'Shoko',null,'Azuma'),
+ (1072,'Malik',null,'Magdon-Ismail'),
+ (1073,'Daniel',null,'Greenfeld'),
+ (1074,'Kurt',null,'Mehlhorn'),
+ (1075,'Kevin',null,'Leyton-Brown'),
+ (1076,'Scott',null,'Page'),
+ (1077,'Brian',null,'Christian'),
+ (1078,'John',null,'Neumann'),
+ (1079,'Jane',null,'Margolis'),
+ (1080,'Adrian',null,'Kaehler'),
+ (1081,'Allen',null,'Harper'),
+ (1082,'Steven',null,'Muchnick'),
+ (1083,'Herbert',null,'Simon'),
+ (1084,'Stuart',null,'Halloway'),
+ (1085,'Ken',null,'Arnold'),
+ (1086,'Joseph',null,'Hellerstein'),
+ (1087,'Rob',null,'Conery'),
+ (1088,'Gerard',null,'Meszaros'),
+ (1089,'Kritina',null,'Holden'),
+ (1090,'Niels',null,'Ferguson'),
+ (1091,'Annie',null,'Donna'),
+ (1092,'Jim',null,'Gray'),
+ (1093,'Oleg',null,'Kiselyov'),
+ (1094,'Ian',null,'Wienand'),
+ (1095,'Trevor',null,'Burnham'),
+ (1096,'Josh',null,'Patterson'),
+ (1097,'Amy',null,'Langville'),
+ (1098,'C.A.R.',null,'Hoare'),
+ (1099,'Susanna',null,'Epp'),
+ (1100,'Rina',null,'Dechter'),
+ (1101,'Eric',null,'Sink'),
+ (1102,'Carlos',null,'Varela'),
+ (1103,'Lawrie',null,'Brown'),
+ (1104,'Jonathan',null,'Corbet'),
+ (1105,'Andrew',null,'Rudoff'),
+ (1106,'James',null,'Gosling'),
+ (1107,'Steve',null,'Maguire'),
+ (1108,'Michael',null,'Howard'),
+ (1109,'Audrey',null,'Roy'),
+ (1110,'David',null,'Easley'),
+ (1112,'Jean',null,'Dollimore'),
+ (1113,'James',null,'Sanger'),
+ (1114,'Gerald',null,'Teschl'),
+ (1115,'Eric',null,'Merritt'),
+ (1116,'Damian',null,'Conway'),
+ (1117,'Roy',null,'Osherove'),
+ (1118,'Randy',null,'Pausch'),
+ (1119,'Scott',null,'Millett'),
+ (1120,'Hays','McCormick','Skip'),
+ (1121,'Jack',null,'Koziol'),
+ (1122,'John',null,'Allspaw'),
+ (1123,'Jonathan',null,'Bartlett'),
+ (1124,'Eli',null,'Bressert'),
+ (1125,'Julia',null,'Lobur'),
+ (1126,'David',null,'Fogel'),
+ (1127,'Dafydd',null,'Stuttard'),
+ (1128,'Jason',null,'Arbon'),
+ (1129,'Thomas',null,'Fuchs'),
+ (1130,'Charlie',null,'Hunt'),
+ (1131,'Patrik',null,'Jonsson'),
+ (1132,'Benjamin',null,'Pierce'),
+ (1133,'Sanjeev',null,'Arora'),
+ (1134,'Noah',null,'Suojanen'),
+ (1135,'Jeffrey',null,'Hicks'),
+ (1136,'Brian',null,'Macnamee'),
+ (1137,'Ada',null,'Lovelace'),
+ (1138,'Ehud',null,'Shapiro'),
+ (1139,'Jim',null,'Webber'),
+ (1140, 'Josée', NULL, 'Lajoie'),
+ (1141,'Scott',null,'Granneman'),
+ (1142,'Clinton',null,'Gormley'),
+ (1143,'David',null,'Kadavy'),
+ (1144,'James',null,'Broad'),
+ (1145,'Bryan',null,'Basham'),
+ (1146,'Yehuda',null,'Lindell'),
+ (1147,'Richard',null,'Stones'),
+ (1148,'Len',null,'Bass'),
+ (1149,'Leon',null,'Sterling'),
+ (1150,'Stephen',null,'Brown'),
+ (1151,'Max',null,'Kuhn'),
+ (1152,'Jim',null,'Ottaviani'),
+ (1153,'Nick',null,'Bilton'),
+ (1154,'Jesse',null,'Storimer'),
+ (1155,'Leslie',null,'Valiant'),
+ (1156,'Robert',null,'Love'),
+ (1157,'Robert',null,'Lafore'),
+ (1158,'Michael',null,'Heath'),
+ (1159,'D.S.',null,'Malik'),
+ (1160,'Richard',null,'Carlsson'),
+ (1161, 'Raphaël', NULL, 'Hertzog'),
+ (1162,'Haralambos',null,'Marmanis'),
+ (1163,'John',null,'Miller'),
+ (1164,'Hubert',null,'Dreyfus'),
+ (1165,'Michael',null,'Sikorski'),
+ (1166,'Erik',null,'Brynjolfsson'),
+ (1167,'Ramez',null,'Elmasri'),
+ (1168,'Erik',null,'Buck'),
+ (1169,'Ron',null,'Patton'),
+ (1170,'Brian',null,'Kernighan'),
+ (1171,'Dmitry',null,'Babenko'),
+ (1172,'Yves',null,'Bertot'),
+ (1173,'37',null,'Signals'),
+ (1174,'Dustin',null,'Boswell'),
+ (1175,'Bertrand',null,'Meyer'),
+ (1176,'Stephen',null,'Mann'),
+ (1177,'David',null,'Hansson'),
+ (1178,'Brian',null,'Hardy'),
+ (1179,'Sandra',null,'Blakeslee'),
+ (1180,'Mason',null,'Woo'),
+ (1181,'Rod',null,'Stephens'),
+ (1182,'Andrew',null,'Bruce'),
+ (1183,'Martin',null,'Campbell-Kelly'),
+ (1184,'James',null,'Elliott'),
+ (1185,'J.',null,'Hindley'),
+ (1186,'Michael',null,'Engle'),
+ (1187,'Kenneth',null,'Louden'),
+ (1188,'Mig',null,'Greengard'),
+ (1189,'Richard',null,'Jones'),
+ (1190,'Alex',null,'Tapscott'),
+ (1191,'Frank',null,'Pasquale'),
+ (1192,'Gene',null,'Spafford'),
+ (1193,'Raymond',null,'Smullyan'),
+ (1194,'Christopher',null,'Allen'),
+ (1195,'Julie',null,'Moronuki'),
+ (1196,'Craig',null,'Walls'),
+ (1197,'Bruce',null,'Schneier'),
+ (1198,'Caleb',null,'Doxsey'),
+ (1199,'John',null,'Vlissides'),
+ (1200,'Dave',null,'Astels'),
+ (1201,'Reshma',null,'Saujani'),
+ (1202,'Noam',null,'Nison'),
+ (1203,'Drew',null,'Conway'),
+ (1204,'James',null,'Martin'),
+ (1205,'Maurice',null,'Bach'),
+ (1206,'Stephen',null,'Marsland'),
+ (1207,'Andy',null,'Terrel'),
+ (1208,'Joe',null,'Kutner'),
+ (1209,'Brian',null,'Jones'),
+ (1210,'Andrew',null,'Davison'),
+ (1211,'Nachum',null,'Dershowitz'),
+ (1212,'Matthew',null,'Hahn'),
+ (1213,'Mark',null,'Weiss'),
+ (1214,'Kevin',null,'Mitnick'),
+ (1215,'John',null,'Ousterhout'),
+ (1216,'Elisabeth',null,'Hendrickson'),
+ (1217,'Wesley',null,'Chun'),
+ (1218,'Tim',null,'Wu'),
+ (1219,'Ian',null,'Robinson'),
+ (1220,'Gigi',null,'Estabrook'),
+ (1221,'Andy',null,'Hunt'),
+ (1222,'Alexandre',null,'Gazet'),
+ (1223,'James',null,'Barrat'),
+ (1224,'Joel',null,'Grus'),
+ (1225,'Doug',null,'Hellmann'),
+ (1226,'Jonathan',null,'Knudsen'),
+ (1227,'Patricia',null,'Churchland'),
+ (1228,'David',null,'Ascher'),
+ (1229,'Antonio',null,'MartAfÂ­nez'),
+ (1230,'Michael',null,'Fogus'),
+ (1231,'Richard',null,'Szeliski'),
+ (1232,'Michael',null,'Casey'),
+ (1233,'Ben',null,'Fry'),
+ (1234,'David',null,'Kushner'),
+ (1235,'Daniel',null,'Fontijne'),
+ (1236,'Ole-Johan',null,'Dahl'),
+ (1237,'Ben',null,'Klemens'),
+ (1238,'V.',null,'Hamacher'),
+ (1239,'Patrick',null,'Engebretson'),
+ (1240,'Alex',null,'Martelli'),
+ (1241,'Scott',null,'Meyers'),
+ (1242,'Justin',null,'Zobel'),
+ (1243,'Thomas',null,'Morton'),
+ (1244,'Douglas',null,'West'),
+ (1245,'Jill',null,'Butler'),
+ (1246,'Marvin',null,'Minsky'),
+ (1247,'Savas',null,'Parastatidis'),
+ (1248,'John',null,'Goerzen'),
+ (1249,'Donald',null,'Reinertsen'),
+ (1250,'Aaron',null,'Gustafson'),
+ (1251,'Winfield',null,'Hill'),
+ (1252,'Aslak',null,'Hellesoy'),
+ (1253,'Tim',null,'OReilly'),
+ (1254,'John',null,'Guttag'),
+ (1255,'Isaac',null,'Chuang'),
+ (1256,'Robin',null,'Milner'),
+ (1257,'Pekka',null,'Himanen'),
+ (1258,'Vitalik',null,'Buterin'),
+ (1259,'Nathan',null,'Yau'),
+ (1260,'Michael',null,'Wittig'),
+ (1261,'Craig',null,'Hunt'),
+ (1262,'Michael',null,'Morrison'),
+ (1263,'David',null,'Rensin'),
+ (1264,'Christian',null,'Queinnec'),
+ (1265,'Rachel',null,'Schutt'),
+ (1266,'Brett',null,'Slatkin'),
+ (1267,'Yedidyah',null,'Langsam'),
+ (1268,'Donald',null,'Miner'),
+ (1269,'Daniel',null,'Friedman'),
+ (1270,'David',null,'Agans'),
+ (1271,'Thomas',null,'Cover'),
+ (1272,'Cristopher',null,'Moore'),
+ (1273,'Jeremy',null,'Keith'),
+ (1274,'Richard',null,'Duda'),
+ (1275,'Jay',null,'Fields'),
+ (1276,'Joel',null,'Spolsky'),
+ (1277,'John',null,'Levine'),
+ (1278,'Bill',null,'Kennedy'),
+ (1279,'Steven',null,'Levy'),
+ (1280,'David',null,'Diamond'),
+ (1281,'Glynn',null,'Winskel'),
+ (1282,'Gary',null,'Cornell'),
+ (1283,'W.',null,'Stevens'),
+ (1284,'Aaron',null,'Walters'),
+ (1285,'Peter',null,'Shirley'),
+ (1286,'Shriram',null,'Krishnamurthi'),
+ (1287,'Alan',null,'Shalloway'),
+ (1288,'Sarah',null,'Harris'),
+ (1289,'Karim',null,'Yaghmour'),
+ (1290,'Al',null,'Sweigart'),
+ (1291,'Debasish',null,'Ghosh'),
+ (1292,'William',null,'Mougayar'),
+ (1293,'Stephane',null,'Faroult'),
+ (1294,'Brett',null,'Lantz'),
+ (1295,'Michael',null,'Goodrich'),
+ (1296,'Eric',null,'Schmidt'),
+ (1297,'Raimondo',null,'Pictet'),
+ (1298,'Brian',null,'Ward'),
+ (1299,'Peter',null,'Denning'),
+ (1300,'Vint',null,'Cert'),
+ (1301,'Peter',null,'Abel'),
+ (1302,'Cory',null,'Doctorow'),
+ (1303,'Matei',null,'Zaharia'),
+ (1305,'Elisabeth',null,'Robson'),
+ (1306,'Sean',null,'Kane'),
+ (1307,'Eric',null,'Lehman'),
+ (1308,'Al',null,'Kelley'),
+ (1309,'John',null,'Gall'),
+ (1310,'Yaron',null,'Minsky'),
+ (1311,'Glyn',null,'Moody'),
+ (1312,'Jon',null,'Stokes'),
+ (1313,'Joel',null,'Scambray'),
+ (1314,'Eric',null,'Freeman'),
+ (1315,'Ken',null,'Thompson'),
+ (1316,'John',null,'Lakos'),
+ (1317,'Andrew',null,'Huang'),
+ (1319,'Paul',null,'McJones'),
+ (1320,'Ewan',null,'Klein'),
+ (1321,'Artur',null,'Ejsmont'),
+ (1322,'Hans','Baeyer','Von'),
+ (1323,'Joy',null,'Beatty'),
+ (1324,'William',null,'Stallings'),
+ (1325,'Satnam',null,'Alag'),
+ (1327,'George',null,'Fairbanks'),
+ (1328,'Linda',null,'Lamb'),
+ (1329,'Ian',null,'Millington'),
+ (1330,'Andy',null,'Budd'),
+ (1331,'Stephen',null,'Kochan'),
+ (1332,'Yukihiro',null,'Matsumoto'),
+ (1333,'Bobby',null,'Woolf'),
+ (1334,'Guy','Jr.','Steele'),
+ (1335,'Leland',null,'Wilkinson'),
+ (1336,'Parmy',null,'Olson'),
+ (1337,'Bartosz',null,'Milewski'),
+ (1338,'Jerry',null,'Peek'),
+ (1339,'Peter',null,'Galvin'),
+ (1340,'Doug',null,'Lea'),
+ (1341,'David',null,'Simon'),
+ (1342,'Arvind',null,'Narayanan'),
+ (1343,'Edward',null,'Felten'),
+ (1344,'Elaine',null,'Weyuker'),
+ (1345,'Martin',null,'Erwig'),
+ (1346,'Michael',null,'Hiltzik'),
+ (1347,'Johannes',null,'Gehrke'),
+ (1348,'Carl',null,'Gunter'),
+ (1349,'Pat',null,'Shaughnessy'),
+ (1350,'Michal',null,'Zalewski'),
+ (1351,'Alan','Donovan','A.'),
+ (1352,'Joanne',null,'Molesky'),
+ (1353,'William',null,'Vetterling'),
+ (1354,'Kathy',null,'Sierra'),
+ (1355,'Esther',null,'Derby'),
+ (1356,'Jeffrey',null,'Ulman'),
+ (1357,'Hartmut',null,'Bohnacker'),
+ (1358,'Cem',null,'Kaner'),
+ (1359,'Jonathan',null,'Gennick'),
+ (1360,'Cole',null,'Knaflic'),
+ (1361,'Michael',null,'Nygard'),
+ (1362,'Umesh',null,'Vazirani'),
+ (1363,'G.',null,'Zachary'),
+ (1364,'Nigel',null,'Cutland'),
+ (1365,'Joe',null,'Beda'),
+ (1366,'Glenford',null,'Myers'),
+ (1367,'Eric',null,'Roberts'),
+ (1368,'Gabe',null,'Zichermann'),
+ (1369,'John',null,'McDonald'),
+ (1370,'Peter',null,'Rob'),
+ (1371,'Steve',null,'McConnell'),
+ (1372,'Steven',null,'Goldfeder'),
+ (1373,'Mark',null,'Fenoglio'),
+ (1374,'Max',null,'Tegmark'),
+ (1375,'Laurie',null,'Wallmark'),
+ (1376,'Colleen',null,'Gorman'),
+ (1377,'Bear',null,'Bibeault'),
+ (1378,'Nicholas',null,'Zakas'),
+ (1379,'Herbert',null,'Mattord'),
+ (1380,'Bernd',null,'Bruegge'),
+ (1381,'Don',null,'Tapscott'),
+ (1382,'Jason',null,'Brownlee'),
+ (1383,'Anthony',null,'Hey'),
+ (1384,'Jiawei',null,'Han'),
+ (1385,'Andreas',null,'Schwarz'),
+ (1386,'Jennifer',null,'Widom'),
+ (1387,'Larry',null,'Wall'),
+ (1388,'Seth',null,'Lloyd');
 
 select * from authors;
 
@@ -2549,4333 +2551,4335 @@ insert into books (title,total_pages,rating,isbn,published_date) values
 	 ('Algorithms',320,4.21,'9780070000000','2006-09-13');
 	
 
-INSERT INTO book_authors (book_id, author_id) values (1,176);
-INSERT INTO book_authors (book_id, author_id) values (1,533);
-INSERT INTO book_authors (book_id, author_id) values (1,657);
-INSERT INTO book_authors (book_id, author_id) values (1,800);
-INSERT INTO book_authors (book_id, author_id) values (2,921);
-INSERT INTO book_authors (book_id, author_id) values (3,325);
-INSERT INTO book_authors (book_id, author_id) values (4,386);
-INSERT INTO book_authors (book_id, author_id) values (5,631);
-INSERT INTO book_authors (book_id, author_id) values (6,699);
-INSERT INTO book_authors (book_id, author_id) values (7,1038);
-INSERT INTO book_authors (book_id, author_id) values (7,1049);
-INSERT INTO book_authors (book_id, author_id) values (8,534);
-INSERT INTO book_authors (book_id, author_id) values (9,412);
-INSERT INTO book_authors (book_id, author_id) values (10,372);
-INSERT INTO book_authors (book_id, author_id) values (10,1016);
-INSERT INTO book_authors (book_id, author_id) values (11,909);
-INSERT INTO book_authors (book_id, author_id) values (12,326);
-INSERT INTO book_authors (book_id, author_id) values (13,683);
-INSERT INTO book_authors (book_id, author_id) values (14,810);
-INSERT INTO book_authors (book_id, author_id) values (15,1021);
-INSERT INTO book_authors (book_id, author_id) values (16,424);
-INSERT INTO book_authors (book_id, author_id) values (16,543);
-INSERT INTO book_authors (book_id, author_id) values (17,801);
-INSERT INTO book_authors (book_id, author_id) values (18,439);
-INSERT INTO book_authors (book_id, author_id) values (19,211);
-INSERT INTO book_authors (book_id, author_id) values (20,708);
-INSERT INTO book_authors (book_id, author_id) values (21,735);
-INSERT INTO book_authors (book_id, author_id) values (22,578);
-INSERT INTO book_authors (book_id, author_id) values (22,1113);
-INSERT INTO book_authors (book_id, author_id) values (23,1100);
-INSERT INTO book_authors (book_id, author_id) values (24,349);
-INSERT INTO book_authors (book_id, author_id) values (24,601);
-INSERT INTO book_authors (book_id, author_id) values (24,937);
-INSERT INTO book_authors (book_id, author_id) values (25,700);
-INSERT INTO book_authors (book_id, author_id) values (25,1308);
-INSERT INTO book_authors (book_id, author_id) values (26,1158);
-INSERT INTO book_authors (book_id, author_id) values (27,741);
-INSERT INTO book_authors (book_id, author_id) values (27,1168);
-INSERT INTO book_authors (book_id, author_id) values (28,788);
-INSERT INTO book_authors (book_id, author_id) values (29,345);
-INSERT INTO book_authors (book_id, author_id) values (30,554);
-INSERT INTO book_authors (book_id, author_id) values (31,811);
-INSERT INTO book_authors (book_id, author_id) values (31,1180);
-INSERT INTO book_authors (book_id, author_id) values (32,708);
-INSERT INTO book_authors (book_id, author_id) values (32,1210);
-INSERT INTO book_authors (book_id, author_id) values (33,896);
-INSERT INTO book_authors (book_id, author_id) values (33,1114);
-INSERT INTO book_authors (book_id, author_id) values (34,666);
-INSERT INTO book_authors (book_id, author_id) values (34,840);
-INSERT INTO book_authors (book_id, author_id) values (35,314);
-INSERT INTO book_authors (book_id, author_id) values (35,1368);
-INSERT INTO book_authors (book_id, author_id) values (36,425);
-INSERT INTO book_authors (book_id, author_id) values (36,752);
-INSERT INTO book_authors (book_id, author_id) values (37,1015);
-INSERT INTO book_authors (book_id, author_id) values (41,1159);
-INSERT INTO book_authors (book_id, author_id) values (42,227);
-INSERT INTO book_authors (book_id, author_id) values (42,350);
-INSERT INTO book_authors (book_id, author_id) values (43,1249);
-INSERT INTO book_authors (book_id, author_id) values (44,1341);
-INSERT INTO book_authors (book_id, author_id) values (45,499);
-INSERT INTO book_authors (book_id, author_id) values (46,193);
-INSERT INTO book_authors (book_id, author_id) values (47,735);
-INSERT INTO book_authors (book_id, author_id) values (48,94);
-INSERT INTO book_authors (book_id, author_id) values (49,620);
-INSERT INTO book_authors (book_id, author_id) values (50,1101);
-INSERT INTO book_authors (book_id, author_id) values (51,113);
-INSERT INTO book_authors (book_id, author_id) values (52,745);
-INSERT INTO book_authors (book_id, author_id) values (80,1094);
-INSERT INTO book_authors (book_id, author_id) values (81,546);
-INSERT INTO book_authors (book_id, author_id) values (81,612);
-INSERT INTO book_authors (book_id, author_id) values (82,1073);
-INSERT INTO book_authors (book_id, author_id) values (82,1109);
-INSERT INTO book_authors (book_id, author_id) values (102,16);
-INSERT INTO book_authors (book_id, author_id) values (103,85);
-INSERT INTO book_authors (book_id, author_id) values (104,602);
-INSERT INTO book_authors (book_id, author_id) values (105,590);
-INSERT INTO book_authors (book_id, author_id) values (106,185);
-INSERT INTO book_authors (book_id, author_id) values (107,477);
-INSERT INTO book_authors (book_id, author_id) values (108,804);
-INSERT INTO book_authors (book_id, author_id) values (108,968);
-INSERT INTO book_authors (book_id, author_id) values (109,151);
-INSERT INTO book_authors (book_id, author_id) values (110,393);
-INSERT INTO book_authors (book_id, author_id) values (111,793);
-INSERT INTO book_authors (book_id, author_id) values (112,155);
-INSERT INTO book_authors (book_id, author_id) values (112,746);
-INSERT INTO book_authors (book_id, author_id) values (113,186);
-INSERT INTO book_authors (book_id, author_id) values (113,1379);
-INSERT INTO book_authors (book_id, author_id) values (114,415);
-INSERT INTO book_authors (book_id, author_id) values (114,1135);
-INSERT INTO book_authors (book_id, author_id) values (115,606);
-INSERT INTO book_authors (book_id, author_id) values (116,1363);
-INSERT INTO book_authors (book_id, author_id) values (117,1216);
-INSERT INTO book_authors (book_id, author_id) values (118,1225);
-INSERT INTO book_authors (book_id, author_id) values (119,293);
-INSERT INTO book_authors (book_id, author_id) values (119,639);
-INSERT INTO book_authors (book_id, author_id) values (119,648);
-INSERT INTO book_authors (book_id, author_id) values (119,1036);
-INSERT INTO book_authors (book_id, author_id) values (120,816);
-INSERT INTO book_authors (book_id, author_id) values (120,957);
-INSERT INTO book_authors (book_id, author_id) values (121,1050);
-INSERT INTO book_authors (book_id, author_id) values (122,804);
-INSERT INTO book_authors (book_id, author_id) values (122,968);
-INSERT INTO book_authors (book_id, author_id) values (123,276);
-INSERT INTO book_authors (book_id, author_id) values (124,294);
-INSERT INTO book_authors (book_id, author_id) values (124,351);
-INSERT INTO book_authors (book_id, author_id) values (124,937);
-INSERT INTO book_authors (book_id, author_id) values (125,1305);
-INSERT INTO book_authors (book_id, author_id) values (125,1314);
-INSERT INTO book_authors (book_id, author_id) values (126,285);
-INSERT INTO book_authors (book_id, author_id) values (127,753);
-INSERT INTO book_authors (book_id, author_id) values (128,794);
-INSERT INTO book_authors (book_id, author_id) values (129,890);
-INSERT INTO book_authors (book_id, author_id) values (130,500);
-INSERT INTO book_authors (book_id, author_id) values (131,526);
-INSERT INTO book_authors (book_id, author_id) values (132,70);
-INSERT INTO book_authors (book_id, author_id) values (132,241);
-INSERT INTO book_authors (book_id, author_id) values (133,64);
-INSERT INTO book_authors (book_id, author_id) values (133,922);
-INSERT INTO book_authors (book_id, author_id) values (134,455);
-INSERT INTO book_authors (book_id, author_id) values (134,591);
-INSERT INTO book_authors (book_id, author_id) values (134,766);
-INSERT INTO book_authors (book_id, author_id) values (135,1169);
-INSERT INTO book_authors (book_id, author_id) values (136,667);
-INSERT INTO book_authors (book_id, author_id) values (137,802);
-INSERT INTO book_authors (book_id, author_id) values (138,910);
-INSERT INTO book_authors (book_id, author_id) values (138,1150);
-INSERT INTO book_authors (book_id, author_id) values (139,789);
-INSERT INTO book_authors (book_id, author_id) values (139,1211);
-INSERT INTO book_authors (book_id, author_id) values (140,1197);
-INSERT INTO book_authors (book_id, author_id) values (141,628);
-INSERT INTO book_authors (book_id, author_id) values (141,640);
-INSERT INTO book_authors (book_id, author_id) values (141,723);
-INSERT INTO book_authors (book_id, author_id) values (142,1102);
-INSERT INTO book_authors (book_id, author_id) values (143,298);
-INSERT INTO book_authors (book_id, author_id) values (143,1151);
-INSERT INTO book_authors (book_id, author_id) values (144,114);
-INSERT INTO book_authors (book_id, author_id) values (145,29);
-INSERT INTO book_authors (book_id, author_id) values (145,327);
-INSERT INTO book_authors (book_id, author_id) values (145,378);
-INSERT INTO book_authors (book_id, author_id) values (145,1275);
-INSERT INTO book_authors (book_id, author_id) values (146,1289);
-INSERT INTO book_authors (book_id, author_id) values (147,394);
-INSERT INTO book_authors (book_id, author_id) values (148,121);
-INSERT INTO book_authors (book_id, author_id) values (149,143);
-INSERT INTO book_authors (book_id, author_id) values (149,1357);
-INSERT INTO book_authors (book_id, author_id) values (150,309);
-INSERT INTO book_authors (book_id, author_id) values (151,286);
-INSERT INTO book_authors (book_id, author_id) values (152,433);
-INSERT INTO book_authors (book_id, author_id) values (153,676);
-INSERT INTO book_authors (book_id, author_id) values (153,1152);
-INSERT INTO book_authors (book_id, author_id) values (154,1309);
-INSERT INTO book_authors (book_id, author_id) values (155,332);
-INSERT INTO book_authors (book_id, author_id) values (155,1299);
-INSERT INTO book_authors (book_id, author_id) values (155,1300);
-INSERT INTO book_authors (book_id, author_id) values (156,1);
-INSERT INTO book_authors (book_id, author_id) values (156,870);
-INSERT INTO book_authors (book_id, author_id) values (156,1115);
-INSERT INTO book_authors (book_id, author_id) values (156,1160);
-INSERT INTO book_authors (book_id, author_id) values (157,109);
-INSERT INTO book_authors (book_id, author_id) values (157,535);
-INSERT INTO book_authors (book_id, author_id) values (157,666);
-INSERT INTO book_authors (book_id, author_id) values (158,747);
-INSERT INTO book_authors (book_id, author_id) values (159,521);
-INSERT INTO book_authors (book_id, author_id) values (159,1051);
-INSERT INTO book_authors (book_id, author_id) values (160,833);
-INSERT INTO book_authors (book_id, author_id) values (161,527);
-INSERT INTO book_authors (book_id, author_id) values (162,456);
-INSERT INTO book_authors (book_id, author_id) values (163,1141);
-INSERT INTO book_authors (book_id, author_id) values (164,928);
-INSERT INTO book_authors (book_id, author_id) values (165,373);
-INSERT INTO book_authors (book_id, author_id) values (165,387);
-INSERT INTO book_authors (book_id, author_id) values (165,1062);
-INSERT INTO book_authors (book_id, author_id) values (166,951);
-INSERT INTO book_authors (book_id, author_id) values (167,1305);
-INSERT INTO book_authors (book_id, author_id) values (167,1314);
-INSERT INTO book_authors (book_id, author_id) values (168,607);
-INSERT INTO book_authors (book_id, author_id) values (169,929);
-INSERT INTO book_authors (book_id, author_id) values (169,1073);
-INSERT INTO book_authors (book_id, author_id) values (170,536);
-INSERT INTO book_authors (book_id, author_id) values (170,767);
-INSERT INTO book_authors (book_id, author_id) values (171,663);
-INSERT INTO book_authors (book_id, author_id) values (171,1176);
-INSERT INTO book_authors (book_id, author_id) values (171,1235);
-INSERT INTO book_authors (book_id, author_id) values (172,374);
-INSERT INTO book_authors (book_id, author_id) values (172,1142);
-INSERT INTO book_authors (book_id, author_id) values (173,248);
-INSERT INTO book_authors (book_id, author_id) values (173,668);
-INSERT INTO book_authors (book_id, author_id) values (173,834);
-INSERT INTO book_authors (book_id, author_id) values (173,1069);
-INSERT INTO book_authors (book_id, author_id) values (174,194);
-INSERT INTO book_authors (book_id, author_id) values (174,370);
-INSERT INTO book_authors (book_id, author_id) values (174,1369);
-INSERT INTO book_authors (book_id, author_id) values (175,177);
-INSERT INTO book_authors (book_id, author_id) values (176,144);
-INSERT INTO book_authors (book_id, author_id) values (176,1074);
-INSERT INTO book_authors (book_id, author_id) values (177,434);
-INSERT INTO book_authors (book_id, author_id) values (178,677);
-INSERT INTO book_authors (book_id, author_id) values (179,416);
-INSERT INTO book_authors (book_id, author_id) values (180,242);
-INSERT INTO book_authors (book_id, author_id) values (181,678);
-INSERT INTO book_authors (book_id, author_id) values (182,65);
-INSERT INTO book_authors (book_id, author_id) values (183,302);
-INSERT INTO book_authors (book_id, author_id) values (183,1070);
-INSERT INTO book_authors (book_id, author_id) values (184,104);
-INSERT INTO book_authors (book_id, author_id) values (184,505);
-INSERT INTO book_authors (book_id, author_id) values (185,795);
-INSERT INTO book_authors (book_id, author_id) values (185,1273);
-INSERT INTO book_authors (book_id, author_id) values (186,156);
-INSERT INTO book_authors (book_id, author_id) values (187,812);
-INSERT INTO book_authors (book_id, author_id) values (188,48);
-INSERT INTO book_authors (book_id, author_id) values (189,1063);
-INSERT INTO book_authors (book_id, author_id) values (189,1244);
-INSERT INTO book_authors (book_id, author_id) values (190,716);
-INSERT INTO book_authors (book_id, author_id) values (191,352);
-INSERT INTO book_authors (book_id, author_id) values (192,76);
-INSERT INTO book_authors (book_id, author_id) values (193,360);
-INSERT INTO book_authors (book_id, author_id) values (194,98);
-INSERT INTO book_authors (book_id, author_id) values (194,346);
-INSERT INTO book_authors (book_id, author_id) values (194,402);
-INSERT INTO book_authors (book_id, author_id) values (195,1191);
-INSERT INTO book_authors (book_id, author_id) values (196,786);
-INSERT INTO book_authors (book_id, author_id) values (197,1153);
-INSERT INTO book_authors (book_id, author_id) values (198,251);
-INSERT INTO book_authors (book_id, author_id) values (199,1301);
-INSERT INTO book_authors (book_id, author_id) values (200,403);
-INSERT INTO book_authors (book_id, author_id) values (201,152);
-INSERT INTO book_authors (book_id, author_id) values (205,178);
-INSERT INTO book_authors (book_id, author_id) values (206,145);
-INSERT INTO book_authors (book_id, author_id) values (206,689);
-INSERT INTO book_authors (book_id, author_id) values (206,754);
-INSERT INTO book_authors (book_id, author_id) values (223,822);
-INSERT INTO book_authors (book_id, author_id) values (224,1181);
-INSERT INTO book_authors (book_id, author_id) values (225,603);
-INSERT INTO book_authors (book_id, author_id) values (239,562);
-INSERT INTO book_authors (book_id, author_id) values (240,822);
-INSERT INTO book_authors (book_id, author_id) values (241,1095);
-INSERT INTO book_authors (book_id, author_id) values (242,1039);
-INSERT INTO book_authors (book_id, author_id) values (243,90);
-INSERT INTO book_authors (book_id, author_id) values (244,426);
-INSERT INTO book_authors (book_id, author_id) values (245,99);
-INSERT INTO book_authors (book_id, author_id) values (246,278);
-INSERT INTO book_authors (book_id, author_id) values (247,658);
-INSERT INTO book_authors (book_id, author_id) values (248,157);
-INSERT INTO book_authors (book_id, author_id) values (248,1182);
-INSERT INTO book_authors (book_id, author_id) values (249,228);
-INSERT INTO book_authors (book_id, author_id) values (249,891);
-INSERT INTO book_authors (book_id, author_id) values (250,855);
-INSERT INTO book_authors (book_id, author_id) values (251,980);
-INSERT INTO book_authors (book_id, author_id) values (251,1232);
-INSERT INTO book_authors (book_id, author_id) values (252,229);
-INSERT INTO book_authors (book_id, author_id) values (253,163);
-INSERT INTO book_authors (book_id, author_id) values (253,310);
-INSERT INTO book_authors (book_id, author_id) values (253,983);
-INSERT INTO book_authors (book_id, author_id) values (254,1170);
-INSERT INTO book_authors (book_id, author_id) values (255,1045);
-INSERT INTO book_authors (book_id, author_id) values (256,462);
-INSERT INTO book_authors (book_id, author_id) values (257,469);
-INSERT INTO book_authors (book_id, author_id) values (257,724);
-INSERT INTO book_authors (book_id, author_id) values (258,66);
-INSERT INTO book_authors (book_id, author_id) values (258,1075);
-INSERT INTO book_authors (book_id, author_id) values (259,555);
-INSERT INTO book_authors (book_id, author_id) values (260,1321);
-INSERT INTO book_authors (book_id, author_id) values (261,279);
-INSERT INTO book_authors (book_id, author_id) values (261,604);
-INSERT INTO book_authors (book_id, author_id) values (262,187);
-INSERT INTO book_authors (book_id, author_id) values (263,598);
-INSERT INTO book_authors (book_id, author_id) values (264,261);
-INSERT INTO book_authors (book_id, author_id) values (265,486);
-INSERT INTO book_authors (book_id, author_id) values (265,1161);
-INSERT INTO book_authors (book_id, author_id) values (266,509);
-INSERT INTO book_authors (book_id, author_id) values (266,664);
-INSERT INTO book_authors (book_id, author_id) values (266,1352);
-INSERT INTO book_authors (book_id, author_id) values (267,1022);
-INSERT INTO book_authors (book_id, author_id) values (268,657);
-INSERT INTO book_authors (book_id, author_id) values (269,649);
-INSERT INTO book_authors (book_id, author_id) values (269,736);
-INSERT INTO book_authors (book_id, author_id) values (269,1136);
-INSERT INTO book_authors (book_id, author_id) values (270,1322);
-INSERT INTO book_authors (book_id, author_id) values (271,556);
-INSERT INTO book_authors (book_id, author_id) values (272,1329);
-INSERT INTO book_authors (book_id, author_id) values (273,669);
-INSERT INTO book_authors (book_id, author_id) values (273,1323);
-INSERT INTO book_authors (book_id, author_id) values (274,17);
-INSERT INTO book_authors (book_id, author_id) values (274,266);
-INSERT INTO book_authors (book_id, author_id) values (275,796);
-INSERT INTO book_authors (book_id, author_id) values (276,761);
-INSERT INTO book_authors (book_id, author_id) values (277,813);
-INSERT INTO book_authors (book_id, author_id) values (278,861);
-INSERT INTO book_authors (book_id, author_id) values (279,22);
-INSERT INTO book_authors (book_id, author_id) values (280,478);
-INSERT INTO book_authors (book_id, author_id) values (281,320);
-INSERT INTO book_authors (book_id, author_id) values (281,1137);
-INSERT INTO book_authors (book_id, author_id) values (282,1118);
-INSERT INTO book_authors (book_id, author_id) values (283,136);
-INSERT INTO book_authors (book_id, author_id) values (283,295);
-INSERT INTO book_authors (book_id, author_id) values (283,315);
-INSERT INTO book_authors (book_id, author_id) values (284,122);
-INSERT INTO book_authors (book_id, author_id) values (284,621);
-INSERT INTO book_authors (book_id, author_id) values (285,989);
-INSERT INTO book_authors (book_id, author_id) values (286,1032);
-INSERT INTO book_authors (book_id, author_id) values (287,1256);
-INSERT INTO book_authors (book_id, author_id) values (288,932);
-INSERT INTO book_authors (book_id, author_id) values (288,994);
-INSERT INTO book_authors (book_id, author_id) values (289,37);
-INSERT INTO book_authors (book_id, author_id) values (290,38);
-INSERT INTO book_authors (book_id, author_id) values (290,693);
-INSERT INTO book_authors (book_id, author_id) values (290,718);
-INSERT INTO book_authors (book_id, author_id) values (291,579);
-INSERT INTO book_authors (book_id, author_id) values (291,742);
-INSERT INTO book_authors (book_id, author_id) values (292,871);
-INSERT INTO book_authors (book_id, author_id) values (293,212);
-INSERT INTO book_authors (book_id, author_id) values (293,506);
-INSERT INTO book_authors (book_id, author_id) values (293,915);
-INSERT INTO book_authors (book_id, author_id) values (293,1064);
-INSERT INTO book_authors (book_id, author_id) values (294,547);
-INSERT INTO book_authors (book_id, author_id) values (294,1212);
-INSERT INTO book_authors (book_id, author_id) values (295,861);
-INSERT INTO book_authors (book_id, author_id) values (296,82);
-INSERT INTO book_authors (book_id, author_id) values (296,593);
-INSERT INTO book_authors (book_id, author_id) values (297,802);
-INSERT INTO book_authors (book_id, author_id) values (298,1334);
-INSERT INTO book_authors (book_id, author_id) values (299,563);
-INSERT INTO book_authors (book_id, author_id) values (300,650);
-INSERT INTO book_authors (book_id, author_id) values (300,903);
-INSERT INTO book_authors (book_id, author_id) values (301,573);
-INSERT INTO book_authors (book_id, author_id) values (302,1324);
-INSERT INTO book_authors (book_id, author_id) values (303,1281);
-INSERT INTO book_authors (book_id, author_id) values (304,83);
-INSERT INTO book_authors (book_id, author_id) values (304,1130);
-INSERT INTO book_authors (book_id, author_id) values (305,563);
-INSERT INTO book_authors (book_id, author_id) values (306,338);
-INSERT INTO book_authors (book_id, author_id) values (306,592);
-INSERT INTO book_authors (book_id, author_id) values (306,835);
-INSERT INTO book_authors (book_id, author_id) values (306,945);
-INSERT INTO book_authors (book_id, author_id) values (306,1315);
-INSERT INTO book_authors (book_id, author_id) values (307,1197);
-INSERT INTO book_authors (book_id, author_id) values (308,814);
-INSERT INTO book_authors (book_id, author_id) values (308,892);
-INSERT INTO book_authors (book_id, author_id) values (309,1364);
-INSERT INTO book_authors (book_id, author_id) values (310,862);
-INSERT INTO book_authors (book_id, author_id) values (311,64);
-INSERT INTO book_authors (book_id, author_id) values (312,151);
-INSERT INTO book_authors (book_id, author_id) values (312,1282);
-INSERT INTO book_authors (book_id, author_id) values (313,294);
-INSERT INTO book_authors (book_id, author_id) values (313,1220);
-INSERT INTO book_authors (book_id, author_id) values (314,238);
-INSERT INTO book_authors (book_id, author_id) values (314,1192);
-INSERT INTO book_authors (book_id, author_id) values (315,510);
-INSERT INTO book_authors (book_id, author_id) values (315,995);
-INSERT INTO book_authors (book_id, author_id) values (316,826);
-INSERT INTO book_authors (book_id, author_id) values (317,218);
-INSERT INTO book_authors (book_id, author_id) values (318,938);
-INSERT INTO book_authors (book_id, author_id) values (319,735);
-INSERT INTO book_authors (book_id, author_id) values (320,709);
-INSERT INTO book_authors (book_id, author_id) values (321,632);
-INSERT INTO book_authors (book_id, author_id) values (321,1147);
-INSERT INTO book_authors (book_id, author_id) values (322,969);
-INSERT INTO book_authors (book_id, author_id) values (322,996);
-INSERT INTO book_authors (book_id, author_id) values (323,719);
-INSERT INTO book_authors (book_id, author_id) values (324,633);
-INSERT INTO book_authors (book_id, author_id) values (325,594);
-INSERT INTO book_authors (book_id, author_id) values (325,911);
-INSERT INTO book_authors (book_id, author_id) values (326,327);
-INSERT INTO book_authors (book_id, author_id) values (326,404);
-INSERT INTO book_authors (book_id, author_id) values (326,427);
-INSERT INTO book_authors (book_id, author_id) values (326,463);
-INSERT INTO book_authors (book_id, author_id) values (326,659);
-INSERT INTO book_authors (book_id, author_id) values (327,507);
-INSERT INTO book_authors (book_id, author_id) values (327,1017);
-INSERT INTO book_authors (book_id, author_id) values (328,1283);
-INSERT INTO book_authors (book_id, author_id) values (329,666);
-INSERT INTO book_authors (book_id, author_id) values (329,845);
-INSERT INTO book_authors (book_id, author_id) values (330,173);
-INSERT INTO book_authors (book_id, author_id) values (330,379);
-INSERT INTO book_authors (book_id, author_id) values (330,1052);
-INSERT INTO book_authors (book_id, author_id) values (330,1183);
-INSERT INTO book_authors (book_id, author_id) values (331,817);
-INSERT INTO book_authors (book_id, author_id) values (332,1187);
-INSERT INTO book_authors (book_id, author_id) values (333,958);
-INSERT INTO book_authors (book_id, author_id) values (334,608);
-INSERT INTO book_authors (book_id, author_id) values (335,435);
-INSERT INTO book_authors (book_id, author_id) values (336,1154);
-INSERT INTO book_authors (book_id, author_id) values (337,199);
-INSERT INTO book_authors (book_id, author_id) values (338,382);
-INSERT INTO book_authors (book_id, author_id) values (338,464);
-INSERT INTO book_authors (book_id, author_id) values (339,477);
-INSERT INTO book_authors (book_id, author_id) values (340,110);
-INSERT INTO book_authors (book_id, author_id) values (340,933);
-INSERT INTO book_authors (book_id, author_id) values (340,1339);
-INSERT INTO book_authors (book_id, author_id) values (341,904);
-INSERT INTO book_authors (book_id, author_id) values (342,1162);
-INSERT INTO book_authors (book_id, author_id) values (342,1171);
-INSERT INTO book_authors (book_id, author_id) values (343,436);
-INSERT INTO book_authors (book_id, author_id) values (343,548);
-INSERT INTO book_authors (book_id, author_id) values (344,110);
-INSERT INTO book_authors (book_id, author_id) values (344,933);
-INSERT INTO book_authors (book_id, author_id) values (344,1339);
-INSERT INTO book_authors (book_id, author_id) values (345,347);
-INSERT INTO book_authors (book_id, author_id) values (345,949);
-INSERT INTO book_authors (book_id, author_id) values (346,197);
-INSERT INTO book_authors (book_id, author_id) values (347,205);
-INSERT INTO book_authors (book_id, author_id) values (347,1257);
-INSERT INTO book_authors (book_id, author_id) values (348,1290);
-INSERT INTO book_authors (book_id, author_id) values (349,1206);
-INSERT INTO book_authors (book_id, author_id) values (350,1291);
-INSERT INTO book_authors (book_id, author_id) values (351,156);
-INSERT INTO book_authors (book_id, author_id) values (351,690);
-INSERT INTO book_authors (book_id, author_id) values (351,818);
-INSERT INTO book_authors (book_id, author_id) values (352,23);
-INSERT INTO book_authors (book_id, author_id) values (353,353);
-INSERT INTO book_authors (book_id, author_id) values (354,30);
-INSERT INTO book_authors (book_id, author_id) values (355,465);
-INSERT INTO book_authors (book_id, author_id) values (355,1380);
-INSERT INTO book_authors (book_id, author_id) values (356,528);
-INSERT INTO book_authors (book_id, author_id) values (357,388);
-INSERT INTO book_authors (book_id, author_id) values (357,557);
-INSERT INTO book_authors (book_id, author_id) values (357,1046);
-INSERT INTO book_authors (book_id, author_id) values (357,1353);
-INSERT INTO book_authors (book_id, author_id) values (358,880);
-INSERT INTO book_authors (book_id, author_id) values (359,57);
-INSERT INTO book_authors (book_id, author_id) values (359,841);
-INSERT INTO book_authors (book_id, author_id) values (359,1330);
-INSERT INTO book_authors (book_id, author_id) values (360,1079);
-INSERT INTO book_authors (book_id, author_id) values (361,1170);
-INSERT INTO book_authors (book_id, author_id) values (362,206);
-INSERT INTO book_authors (book_id, author_id) values (362,805);
-INSERT INTO book_authors (book_id, author_id) values (363,875);
-INSERT INTO book_authors (book_id, author_id) values (363,905);
-INSERT INTO book_authors (book_id, author_id) values (364,737);
-INSERT INTO book_authors (book_id, author_id) values (364,1381);
-INSERT INTO book_authors (book_id, author_id) values (365,1018);
-INSERT INTO book_authors (book_id, author_id) values (366,564);
-INSERT INTO book_authors (book_id, author_id) values (366,1305);
-INSERT INTO book_authors (book_id, author_id) values (366,1314);
-INSERT INTO book_authors (book_id, author_id) values (366,1354);
-INSERT INTO book_authors (book_id, author_id) values (367,95);
-INSERT INTO book_authors (book_id, author_id) values (368,622);
-INSERT INTO book_authors (book_id, author_id) values (369,2);
-INSERT INTO book_authors (book_id, author_id) values (369,105);
-INSERT INTO book_authors (book_id, author_id) values (370,710);
-INSERT INTO book_authors (book_id, author_id) values (371,641);
-INSERT INTO book_authors (book_id, author_id) values (372,1382);
-INSERT INTO book_authors (book_id, author_id) values (373,280);
-INSERT INTO book_authors (book_id, author_id) values (373,1080);
-INSERT INTO book_authors (book_id, author_id) values (374,1023);
-INSERT INTO book_authors (book_id, author_id) values (375,31);
-INSERT INTO book_authors (book_id, author_id) values (375,1188);
-INSERT INTO book_authors (book_id, author_id) values (376,158);
-INSERT INTO book_authors (book_id, author_id) values (376,1096);
-INSERT INTO book_authors (book_id, author_id) values (377,281);
-INSERT INTO book_authors (book_id, author_id) values (378,123);
-INSERT INTO book_authors (book_id, author_id) values (379,287);
-INSERT INTO book_authors (book_id, author_id) values (379,964);
-INSERT INTO book_authors (book_id, author_id) values (380,537);
-INSERT INTO book_authors (book_id, author_id) values (381,1324);
-INSERT INTO book_authors (book_id, author_id) values (382,243);
-INSERT INTO book_authors (book_id, author_id) values (382,1275);
-INSERT INTO book_authors (book_id, author_id) values (383,462);
-INSERT INTO book_authors (book_id, author_id) values (384,213);
-INSERT INTO book_authors (book_id, author_id) values (385,394);
-INSERT INTO book_authors (book_id, author_id) values (386,1258);
-INSERT INTO book_authors (book_id, author_id) values (386,1292);
-INSERT INTO book_authors (book_id, author_id) values (387,316);
-INSERT INTO book_authors (book_id, author_id) values (387,321);
-INSERT INTO book_authors (book_id, author_id) values (388,1119);
-INSERT INTO book_authors (book_id, author_id) values (389,220);
-INSERT INTO book_authors (book_id, author_id) values (389,448);
-INSERT INTO book_authors (book_id, author_id) values (389,487);
-INSERT INTO book_authors (book_id, author_id) values (390,449);
-INSERT INTO book_authors (book_id, author_id) values (390,1306);
-INSERT INTO book_authors (book_id, author_id) values (391,39);
-INSERT INTO book_authors (book_id, author_id) values (392,755);
-INSERT INTO book_authors (book_id, author_id) values (392,1040);
-INSERT INTO book_authors (book_id, author_id) values (392,1221);
-INSERT INTO book_authors (book_id, author_id) values (393,10);
-INSERT INTO book_authors (book_id, author_id) values (393,827);
-INSERT INTO book_authors (book_id, author_id) values (394,1259);
-INSERT INTO book_authors (book_id, author_id) values (395,609);
-INSERT INTO book_authors (book_id, author_id) values (395,1267);
-INSERT INTO book_authors (book_id, author_id) values (396,252);
-INSERT INTO book_authors (book_id, author_id) values (397,164);
-INSERT INTO book_authors (book_id, author_id) values (397,389);
-INSERT INTO book_authors (book_id, author_id) values (398,1076);
-INSERT INTO book_authors (book_id, author_id) values (398,1163);
-INSERT INTO book_authors (book_id, author_id) values (399,529);
-INSERT INTO book_authors (book_id, author_id) values (400,479);
-INSERT INTO book_authors (book_id, author_id) values (401,457);
-INSERT INTO book_authors (book_id, author_id) values (402,490);
-INSERT INTO book_authors (book_id, author_id) values (403,413);
-INSERT INTO book_authors (book_id, author_id) values (403,906);
-INSERT INTO book_authors (book_id, author_id) values (403,1243);
-INSERT INTO book_authors (book_id, author_id) values (404,871);
-INSERT INTO book_authors (book_id, author_id) values (405,151);
-INSERT INTO book_authors (book_id, author_id) values (405,1282);
-INSERT INTO book_authors (book_id, author_id) values (406,303);
-INSERT INTO book_authors (book_id, author_id) values (406,354);
-INSERT INTO book_authors (book_id, author_id) values (406,634);
-INSERT INTO book_authors (book_id, author_id) values (406,727);
-INSERT INTO book_authors (book_id, author_id) values (407,58);
-INSERT INTO book_authors (book_id, author_id) values (407,522);
-INSERT INTO book_authors (book_id, author_id) values (407,756);
-INSERT INTO book_authors (book_id, author_id) values (407,1284);
-INSERT INTO book_authors (book_id, author_id) values (408,466);
-INSERT INTO book_authors (book_id, author_id) values (408,768);
-INSERT INTO book_authors (book_id, author_id) values (408,1358);
-INSERT INTO book_authors (book_id, author_id) values (409,797);
-INSERT INTO book_authors (book_id, author_id) values (410,282);
-INSERT INTO book_authors (book_id, author_id) values (410,1122);
-INSERT INTO book_authors (book_id, author_id) values (411,115);
-INSERT INTO book_authors (book_id, author_id) values (411,348);
-INSERT INTO book_authors (book_id, author_id) values (412,365);
-INSERT INTO book_authors (book_id, author_id) values (412,501);
-INSERT INTO book_authors (book_id, author_id) values (412,912);
-INSERT INTO book_authors (book_id, author_id) values (413,221);
-INSERT INTO book_authors (book_id, author_id) values (413,769);
-INSERT INTO book_authors (book_id, author_id) values (414,283);
-INSERT INTO book_authors (book_id, author_id) values (415,1051);
-INSERT INTO book_authors (book_id, author_id) values (417,1065);
-INSERT INTO book_authors (book_id, author_id) values (418,6);
-INSERT INTO book_authors (book_id, author_id) values (419,24);
-INSERT INTO book_authors (book_id, author_id) values (420,1103);
-INSERT INTO book_authors (book_id, author_id) values (420,1324);
-INSERT INTO book_authors (book_id, author_id) values (421,390);
-INSERT INTO book_authors (book_id, author_id) values (421,984);
-INSERT INTO book_authors (book_id, author_id) values (422,1198);
-INSERT INTO book_authors (book_id, author_id) values (423,124);
-INSERT INTO book_authors (book_id, author_id) values (423,623);
-INSERT INTO book_authors (book_id, author_id) values (424,1066);
-INSERT INTO book_authors (book_id, author_id) values (425,1053);
-INSERT INTO book_authors (book_id, author_id) values (425,1268);
-INSERT INTO book_authors (book_id, author_id) values (426,131);
-INSERT INTO book_authors (book_id, author_id) values (426,960);
-INSERT INTO book_authors (book_id, author_id) values (426,1310);
-INSERT INTO book_authors (book_id, author_id) values (427,188);
-INSERT INTO book_authors (book_id, author_id) values (427,304);
-INSERT INTO book_authors (book_id, author_id) values (427,355);
-INSERT INTO book_authors (book_id, author_id) values (427,679);
-INSERT INTO book_authors (book_id, author_id) values (427,923);
-INSERT INTO book_authors (book_id, author_id) values (428,440);
-INSERT INTO book_authors (book_id, author_id) values (428,897);
-INSERT INTO book_authors (book_id, author_id) values (429,549);
-INSERT INTO book_authors (book_id, author_id) values (430,932);
-INSERT INTO book_authors (book_id, author_id) values (431,867);
-INSERT INTO book_authors (book_id, author_id) values (432,1348);
-INSERT INTO book_authors (book_id, author_id) values (433,1164);
-INSERT INTO book_authors (book_id, author_id) values (434,801);
-INSERT INTO book_authors (book_id, author_id) values (435,32);
-INSERT INTO book_authors (book_id, author_id) values (436,795);
-INSERT INTO book_authors (book_id, author_id) values (437,893);
-INSERT INTO book_authors (book_id, author_id) values (438,846);
-INSERT INTO book_authors (book_id, author_id) values (439,684);
-INSERT INTO book_authors (book_id, author_id) values (440,530);
-INSERT INTO book_authors (book_id, author_id) values (441,1331);
-INSERT INTO book_authors (book_id, author_id) values (442,1302);
-INSERT INTO book_authors (book_id, author_id) values (443,480);
-INSERT INTO book_authors (book_id, author_id) values (444,828);
-INSERT INTO book_authors (book_id, author_id) values (445,635);
-INSERT INTO book_authors (book_id, author_id) values (445,1097);
-INSERT INTO book_authors (book_id, author_id) values (446,819);
-INSERT INTO book_authors (book_id, author_id) values (447,253);
-INSERT INTO book_authors (book_id, author_id) values (447,470);
-INSERT INTO book_authors (book_id, author_id) values (448,934);
-INSERT INTO book_authors (book_id, author_id) values (449,624);
-INSERT INTO book_authors (book_id, author_id) values (450,100);
-INSERT INTO book_authors (book_id, author_id) values (450,587);
-INSERT INTO book_authors (book_id, author_id) values (450,728);
-INSERT INTO book_authors (book_id, author_id) values (450,924);
-INSERT INTO book_authors (book_id, author_id) values (450,997);
-INSERT INTO book_authors (book_id, author_id) values (451,1311);
-INSERT INTO book_authors (book_id, author_id) values (452,781);
-INSERT INTO book_authors (book_id, author_id) values (452,856);
-INSERT INTO book_authors (book_id, author_id) values (453,1359);
-INSERT INTO book_authors (book_id, author_id) values (454,101);
-INSERT INTO book_authors (book_id, author_id) values (454,829);
-INSERT INTO book_authors (book_id, author_id) values (454,1104);
-INSERT INTO book_authors (book_id, author_id) values (455,67);
-INSERT INTO book_authors (book_id, author_id) values (455,1262);
-INSERT INTO book_authors (book_id, author_id) values (456,622);
-INSERT INTO book_authors (book_id, author_id) values (457,405);
-INSERT INTO book_authors (book_id, author_id) values (457,471);
-INSERT INTO book_authors (book_id, author_id) values (457,558);
-INSERT INTO book_authors (book_id, author_id) values (457,836);
-INSERT INTO book_authors (book_id, author_id) values (457,1131);
-INSERT INTO book_authors (book_id, author_id) values (458,535);
-INSERT INTO book_authors (book_id, author_id) values (458,845);
-INSERT INTO book_authors (book_id, author_id) values (459,1316);
-INSERT INTO book_authors (book_id, author_id) values (460,146);
-INSERT INTO book_authors (book_id, author_id) values (460,1148);
-INSERT INTO book_authors (book_id, author_id) values (461,1199);
-INSERT INTO book_authors (book_id, author_id) values (462,18);
-INSERT INTO book_authors (book_id, author_id) values (463,84);
-INSERT INTO book_authors (book_id, author_id) values (464,502);
-INSERT INTO book_authors (book_id, author_id) values (465,288);
-INSERT INTO book_authors (book_id, author_id) values (465,491);
-INSERT INTO book_authors (book_id, author_id) values (465,738);
-INSERT INTO book_authors (book_id, author_id) values (465,1005);
-INSERT INTO book_authors (book_id, author_id) values (465,1263);
-INSERT INTO book_authors (book_id, author_id) values (466,339);
-INSERT INTO book_authors (book_id, author_id) values (466,981);
-INSERT INTO book_authors (book_id, author_id) values (466,1365);
-INSERT INTO book_authors (book_id, author_id) values (467,262);
-INSERT INTO book_authors (book_id, author_id) values (468,770);
-INSERT INTO book_authors (book_id, author_id) values (469,7);
-INSERT INTO book_authors (book_id, author_id) values (469,670);
-INSERT INTO book_authors (book_id, author_id) values (469,965);
-INSERT INTO book_authors (book_id, author_id) values (470,40);
-INSERT INTO book_authors (book_id, author_id) values (471,748);
-INSERT INTO book_authors (book_id, author_id) values (471,762);
-INSERT INTO book_authors (book_id, author_id) values (471,1222);
-INSERT INTO book_authors (book_id, author_id) values (472,1360);
-INSERT INTO book_authors (book_id, author_id) values (473,651);
-INSERT INTO book_authors (book_id, author_id) values (474,71);
-INSERT INTO book_authors (book_id, author_id) values (475,1155);
-INSERT INTO book_authors (book_id, author_id) values (476,91);
-INSERT INTO book_authors (book_id, author_id) values (476,340);
-INSERT INTO book_authors (book_id, author_id) values (477,165);
-INSERT INTO book_authors (book_id, author_id) values (478,685);
-INSERT INTO book_authors (book_id, author_id) values (478,1089);
-INSERT INTO book_authors (book_id, author_id) values (478,1245);
-INSERT INTO book_authors (book_id, author_id) values (479,211);
-INSERT INTO book_authors (book_id, author_id) values (480,96);
-INSERT INTO book_authors (book_id, author_id) values (481,531);
-INSERT INTO book_authors (book_id, author_id) values (482,1156);
-INSERT INTO book_authors (book_id, author_id) values (483,125);
-INSERT INTO book_authors (book_id, author_id) values (484,1335);
-INSERT INTO book_authors (book_id, author_id) values (485,1015);
-INSERT INTO book_authors (book_id, author_id) values (486,303);
-INSERT INTO book_authors (book_id, author_id) values (487,669);
-INSERT INTO book_authors (book_id, author_id) values (488,1325);
-INSERT INTO book_authors (book_id, author_id) values (489,686);
-INSERT INTO book_authors (book_id, author_id) values (490,704);
-INSERT INTO book_authors (book_id, author_id) values (490,1293);
-INSERT INTO book_authors (book_id, author_id) values (491,898);
-INSERT INTO book_authors (book_id, author_id) values (492,680);
-INSERT INTO book_authors (book_id, author_id) values (493,17);
-INSERT INTO book_authors (book_id, author_id) values (494,492);
-INSERT INTO book_authors (book_id, author_id) values (495,311);
-INSERT INTO book_authors (book_id, author_id) values (495,356);
-INSERT INTO book_authors (book_id, author_id) values (495,1170);
-INSERT INTO book_authors (book_id, author_id) values (496,511);
-INSERT INTO book_authors (book_id, author_id) values (497,59);
-INSERT INTO book_authors (book_id, author_id) values (497,493);
-INSERT INTO book_authors (book_id, author_id) values (497,549);
-INSERT INTO book_authors (book_id, author_id) values (497,393);
-INSERT INTO book_authors (book_id, author_id) values (498,328);
-INSERT INTO book_authors (book_id, author_id) values (498,544);
-INSERT INTO book_authors (book_id, author_id) values (498,729);
-INSERT INTO book_authors (book_id, author_id) values (499,1331);
-INSERT INTO book_authors (book_id, author_id) values (500,798);
-INSERT INTO book_authors (book_id, author_id) values (501,823);
-INSERT INTO book_authors (book_id, author_id) values (502,642);
-INSERT INTO book_authors (book_id, author_id) values (503,1276);
-INSERT INTO book_authors (book_id, author_id) values (503,1282);
-INSERT INTO book_authors (book_id, author_id) values (504,548);
-INSERT INTO book_authors (book_id, author_id) values (504,636);
-INSERT INTO book_authors (book_id, author_id) values (505,1305);
-INSERT INTO book_authors (book_id, author_id) values (505,1314);
-INSERT INTO book_authors (book_id, author_id) values (506,660);
-INSERT INTO book_authors (book_id, author_id) values (507,430);
-INSERT INTO book_authors (book_id, author_id) values (507,939);
-INSERT INTO book_authors (book_id, author_id) values (508,214);
-INSERT INTO book_authors (book_id, author_id) values (508,285);
-INSERT INTO book_authors (book_id, author_id) values (508,296);
-INSERT INTO book_authors (book_id, author_id) values (508,380);
-INSERT INTO book_authors (book_id, author_id) values (508,494);
-INSERT INTO book_authors (book_id, author_id) values (508,618);
-INSERT INTO book_authors (book_id, author_id) values (508,961);
-INSERT INTO book_authors (book_id, author_id) values (508,982);
-INSERT INTO book_authors (book_id, author_id) values (508,1250);
-INSERT INTO book_authors (book_id, author_id) values (509,215);
-INSERT INTO book_authors (book_id, author_id) values (509,458);
-INSERT INTO book_authors (book_id, author_id) values (509,1120);
-INSERT INTO book_authors (book_id, author_id) values (510,881);
-INSERT INTO book_authors (book_id, author_id) values (511,898);
-INSERT INTO book_authors (book_id, author_id) values (512,428);
-INSERT INTO book_authors (book_id, author_id) values (512,657);
-INSERT INTO book_authors (book_id, author_id) values (512,1355);
-INSERT INTO book_authors (book_id, author_id) values (513,406);
-INSERT INTO book_authors (book_id, author_id) values (513,559);
-INSERT INTO book_authors (book_id, author_id) values (514,1217);
-INSERT INTO book_authors (book_id, author_id) values (515,898);
-INSERT INTO book_authors (book_id, author_id) values (516,856);
-INSERT INTO book_authors (book_id, author_id) values (517,629);
-INSERT INTO book_authors (book_id, author_id) values (518,1324);
-INSERT INTO book_authors (book_id, author_id) values (519,1246);
-INSERT INTO book_authors (book_id, author_id) values (520,1246);
-INSERT INTO book_authors (book_id, author_id) values (521,1067);
-INSERT INTO book_authors (book_id, author_id) values (522,1329);
-INSERT INTO book_authors (book_id, author_id) values (523,951);
-INSERT INTO book_authors (book_id, author_id) values (524,876);
-INSERT INTO book_authors (book_id, author_id) values (525,940);
-INSERT INTO book_authors (book_id, author_id) values (525,1251);
-INSERT INTO book_authors (book_id, author_id) values (526,230);
-INSERT INTO book_authors (book_id, author_id) values (526,322);
-INSERT INTO book_authors (book_id, author_id) values (526,357);
-INSERT INTO book_authors (book_id, author_id) values (526,652);
-INSERT INTO book_authors (book_id, author_id) values (526,694);
-INSERT INTO book_authors (book_id, author_id) values (526,1041);
-INSERT INTO book_authors (book_id, author_id) values (527,72);
-INSERT INTO book_authors (book_id, author_id) values (527,467);
-INSERT INTO book_authors (book_id, author_id) values (528,1317);
-INSERT INTO book_authors (book_id, author_id) values (529,289);
-INSERT INTO book_authors (book_id, author_id) values (529,333);
-INSERT INTO book_authors (book_id, author_id) values (530,1054);
-INSERT INTO book_authors (book_id, author_id) values (531,954);
-INSERT INTO book_authors (book_id, author_id) values (532,1229);
-INSERT INTO book_authors (book_id, author_id) values (533,776);
-INSERT INTO book_authors (book_id, author_id) values (534,1009);
-INSERT INTO book_authors (book_id, author_id) values (535,395);
-INSERT INTO book_authors (book_id, author_id) values (536,523);
-INSERT INTO book_authors (book_id, author_id) values (537,189);
-INSERT INTO book_authors (book_id, author_id) values (538,366);
-INSERT INTO book_authors (book_id, author_id) values (539,481);
-INSERT INTO book_authors (book_id, author_id) values (540,441);
-INSERT INTO book_authors (book_id, author_id) values (541,290);
-INSERT INTO book_authors (book_id, author_id) values (541,643);
-INSERT INTO book_authors (book_id, author_id) values (542,53);
-INSERT INTO book_authors (book_id, author_id) values (543,990);
-INSERT INTO book_authors (book_id, author_id) values (543,1375);
-INSERT INTO book_authors (book_id, author_id) values (544,746);
-INSERT INTO book_authors (book_id, author_id) values (544,1098);
-INSERT INTO book_authors (book_id, author_id) values (544,1236);
-INSERT INTO book_authors (book_id, author_id) values (545,297);
-INSERT INTO book_authors (book_id, author_id) values (545,1260);
-INSERT INTO book_authors (book_id, author_id) values (546,375);
-INSERT INTO book_authors (book_id, author_id) values (546,499);
-INSERT INTO book_authors (book_id, author_id) values (546,882);
-INSERT INTO book_authors (book_id, author_id) values (547,720);
-INSERT INTO book_authors (book_id, author_id) values (548,102);
-INSERT INTO book_authors (book_id, author_id) values (549,755);
-INSERT INTO book_authors (book_id, author_id) values (550,563);
-INSERT INTO book_authors (book_id, author_id) values (551,941);
-INSERT INTO book_authors (book_id, author_id) values (552,761);
-INSERT INTO book_authors (book_id, author_id) values (553,317);
-INSERT INTO book_authors (book_id, author_id) values (554,1024);
-INSERT INTO book_authors (book_id, author_id) values (555,44);
-INSERT INTO book_authors (book_id, author_id) values (555,299);
-INSERT INTO book_authors (book_id, author_id) values (556,563);
-INSERT INTO book_authors (book_id, author_id) values (558,970);
-INSERT INTO book_authors (book_id, author_id) values (559,730);
-INSERT INTO book_authors (book_id, author_id) values (560,1349);
-INSERT INTO book_authors (book_id, author_id) values (561,899);
-INSERT INTO book_authors (book_id, author_id) values (562,414);
-INSERT INTO book_authors (book_id, author_id) values (562,777);
-INSERT INTO book_authors (book_id, author_id) values (563,431);
-INSERT INTO book_authors (book_id, author_id) values (564,1294);
-INSERT INTO book_authors (book_id, author_id) values (565,711);
-INSERT INTO book_authors (book_id, author_id) values (566,922);
-INSERT INTO book_authors (book_id, author_id) values (567,550);
-INSERT INTO book_authors (book_id, author_id) values (568,207);
-INSERT INTO book_authors (book_id, author_id) values (569,743);
-INSERT INTO book_authors (book_id, author_id) values (569,771);
-INSERT INTO book_authors (book_id, author_id) values (569,1055);
-INSERT INTO book_authors (book_id, author_id) values (570,153);
-INSERT INTO book_authors (book_id, author_id) values (571,1317);
-INSERT INTO book_authors (book_id, author_id) values (572,595);
-INSERT INTO book_authors (book_id, author_id) values (573,1237);
-INSERT INTO book_authors (book_id, author_id) values (574,488);
-INSERT INTO book_authors (book_id, author_id) values (574,916);
-INSERT INTO book_authors (book_id, author_id) values (595,830);
-INSERT INTO book_authors (book_id, author_id) values (596,1123);
-INSERT INTO book_authors (book_id, author_id) values (597,326);
-INSERT INTO book_authors (book_id, author_id) values (598,97);
-INSERT INTO book_authors (book_id, author_id) values (598,657);
-INSERT INTO book_authors (book_id, author_id) values (628,137);
-INSERT INTO book_authors (book_id, author_id) values (628,159);
-INSERT INTO book_authors (book_id, author_id) values (628,168);
-INSERT INTO book_authors (book_id, author_id) values (629,907);
-INSERT INTO book_authors (book_id, author_id) values (630,77);
-INSERT INTO book_authors (book_id, author_id) values (630,254);
-INSERT INTO book_authors (book_id, author_id) values (631,1213);
-INSERT INTO book_authors (book_id, author_id) values (632,1285);
-INSERT INTO book_authors (book_id, author_id) values (633,450);
-INSERT INTO book_authors (book_id, author_id) values (633,1177);
-INSERT INTO book_authors (book_id, author_id) values (634,407);
-INSERT INTO book_authors (book_id, author_id) values (634,772);
-INSERT INTO book_authors (book_id, author_id) values (635,1157);
-INSERT INTO book_authors (book_id, author_id) values (636,1143);
-INSERT INTO book_authors (book_id, author_id) values (637,1083);
-INSERT INTO book_authors (book_id, author_id) values (638,763);
-INSERT INTO book_authors (book_id, author_id) values (639,116);
-INSERT INTO book_authors (book_id, author_id) values (640,267);
-INSERT INTO book_authors (book_id, author_id) values (641,68);
-INSERT INTO book_authors (book_id, author_id) values (641,1354);
-INSERT INTO book_authors (book_id, author_id) values (642,1238);
-INSERT INTO book_authors (book_id, author_id) values (643,147);
-INSERT INTO book_authors (book_id, author_id) values (643,277);
-INSERT INTO book_authors (book_id, author_id) values (644,200);
-INSERT INTO book_authors (book_id, author_id) values (644,517);
-INSERT INTO book_authors (book_id, author_id) values (645,27);
-INSERT INTO book_authors (book_id, author_id) values (646,1006);
-INSERT INTO book_authors (book_id, author_id) values (646,1226);
-INSERT INTO book_authors (book_id, author_id) values (647,705);
-INSERT INTO book_authors (book_id, author_id) values (648,367);
-INSERT INTO book_authors (book_id, author_id) values (648,723);
-INSERT INTO book_authors (book_id, author_id) values (648,1027);
-INSERT INTO book_authors (book_id, author_id) values (649,263);
-INSERT INTO book_authors (book_id, author_id) values (650,830);
-INSERT INTO book_authors (book_id, author_id) values (651,1032);
-INSERT INTO book_authors (book_id, author_id) values (652,856);
-INSERT INTO book_authors (book_id, author_id) values (653,801);
-INSERT INTO book_authors (book_id, author_id) values (654,28);
-INSERT INTO book_authors (book_id, author_id) values (655,705);
-INSERT INTO book_authors (book_id, author_id) values (656,106);
-INSERT INTO book_authors (book_id, author_id) values (656,231);
-INSERT INTO book_authors (book_id, author_id) values (656,1366);
-INSERT INTO book_authors (book_id, author_id) values (657,117);
-INSERT INTO book_authors (book_id, author_id) values (657,169);
-INSERT INTO book_authors (book_id, author_id) values (657,264);
-INSERT INTO book_authors (book_id, author_id) values (657,451);
-INSERT INTO book_authors (book_id, author_id) values (657,955);
-INSERT INTO book_authors (book_id, author_id) values (657,1200);
-INSERT INTO book_authors (book_id, author_id) values (657,1252);
-INSERT INTO book_authors (book_id, author_id) values (658,524);
-INSERT INTO book_authors (book_id, author_id) values (658,1283);
-INSERT INTO book_authors (book_id, author_id) values (659,1098);
-INSERT INTO book_authors (book_id, author_id) values (660,1172);
-INSERT INTO book_authors (book_id, author_id) values (661,1189);
-INSERT INTO book_authors (book_id, author_id) values (662,371);
-INSERT INTO book_authors (book_id, author_id) values (662,1370);
-INSERT INTO book_authors (book_id, author_id) values (663,472);
-INSERT INTO book_authors (book_id, author_id) values (663,831);
-INSERT INTO book_authors (book_id, author_id) values (663,971);
-INSERT INTO book_authors (book_id, author_id) values (663,1028);
-INSERT INTO book_authors (book_id, author_id) values (663,1184);
-INSERT INTO book_authors (book_id, author_id) values (664,757);
-INSERT INTO book_authors (book_id, author_id) values (665,1261);
-INSERT INTO book_authors (book_id, author_id) values (666,259);
-INSERT INTO book_authors (book_id, author_id) values (667,856);
-INSERT INTO book_authors (book_id, author_id) values (668,710);
-INSERT INTO book_authors (book_id, author_id) values (669,341);
-INSERT INTO book_authors (book_id, author_id) values (669,408);
-INSERT INTO book_authors (book_id, author_id) values (669,942);
-INSERT INTO book_authors (book_id, author_id) values (669,1269);
-INSERT INTO book_authors (book_id, author_id) values (670,129);
-INSERT INTO book_authors (book_id, author_id) values (670,518);
-INSERT INTO book_authors (book_id, author_id) values (670,1307);
-INSERT INTO book_authors (book_id, author_id) values (671,179);
-INSERT INTO book_authors (book_id, author_id) values (672,482);
-INSERT INTO book_authors (book_id, author_id) values (673,1371);
-INSERT INTO book_authors (book_id, author_id) values (674,555);
-INSERT INTO book_authors (book_id, author_id) values (675,782);
-INSERT INTO book_authors (book_id, author_id) values (675,1010);
-INSERT INTO book_authors (book_id, author_id) values (675,1056);
-INSERT INTO book_authors (book_id, author_id) values (676,598);
-INSERT INTO book_authors (book_id, author_id) values (677,1201);
-INSERT INTO book_authors (book_id, author_id) values (678,180);
-INSERT INTO book_authors (book_id, author_id) values (679,985);
-INSERT INTO book_authors (book_id, author_id) values (680,255);
-INSERT INTO book_authors (book_id, author_id) values (681,339);
-INSERT INTO book_authors (book_id, author_id) values (682,294);
-INSERT INTO book_authors (book_id, author_id) values (682,608);
-INSERT INTO book_authors (book_id, author_id) values (682,1376);
-INSERT INTO book_authors (book_id, author_id) values (683,500);
-INSERT INTO book_authors (book_id, author_id) values (684,723);
-INSERT INTO book_authors (book_id, author_id) values (685,11);
-INSERT INTO book_authors (book_id, author_id) values (685,731);
-INSERT INTO book_authors (book_id, author_id) values (685,1342);
-INSERT INTO book_authors (book_id, author_id) values (685,1343);
-INSERT INTO book_authors (book_id, author_id) values (685,1372);
-INSERT INTO book_authors (book_id, author_id) values (686,268);
-INSERT INTO book_authors (book_id, author_id) values (686,574);
-INSERT INTO book_authors (book_id, author_id) values (686,1025);
-INSERT INTO book_authors (book_id, author_id) values (687,442);
-INSERT INTO book_authors (book_id, author_id) values (688,976);
-INSERT INTO book_authors (book_id, author_id) values (689,1291);
-INSERT INTO book_authors (book_id, author_id) values (690,630);
-INSERT INTO book_authors (book_id, author_id) values (691,12);
-INSERT INTO book_authors (book_id, author_id) values (692,1011);
-INSERT INTO book_authors (book_id, author_id) values (693,431);
-INSERT INTO book_authors (book_id, author_id) values (694,130);
-INSERT INTO book_authors (book_id, author_id) values (695,1327);
-INSERT INTO book_authors (book_id, author_id) values (696,512);
-INSERT INTO book_authors (book_id, author_id) values (697,78);
-INSERT INTO book_authors (book_id, author_id) values (697,1207);
-INSERT INTO book_authors (book_id, author_id) values (698,473);
-INSERT INTO book_authors (book_id, author_id) values (698,653);
-INSERT INTO book_authors (book_id, author_id) values (699,86);
-INSERT INTO book_authors (book_id, author_id) values (699,665);
-INSERT INTO book_authors (book_id, author_id) values (700,199);
-INSERT INTO book_authors (book_id, author_id) values (700,778);
-INSERT INTO book_authors (book_id, author_id) values (700,1344);
-INSERT INTO book_authors (book_id, author_id) values (701,571);
-INSERT INTO book_authors (book_id, author_id) values (701,764);
-INSERT INTO book_authors (book_id, author_id) values (702,222);
-INSERT INTO book_authors (book_id, author_id) values (702,672);
-INSERT INTO book_authors (book_id, author_id) values (703,842);
-INSERT INTO book_authors (book_id, author_id) values (703,1178);
-INSERT INTO book_authors (book_id, author_id) values (704,170);
-INSERT INTO book_authors (book_id, author_id) values (704,613);
-INSERT INTO book_authors (book_id, author_id) values (704,1295);
-INSERT INTO book_authors (book_id, author_id) values (705,1144);
-INSERT INTO book_authors (book_id, author_id) values (705,1239);
-INSERT INTO book_authors (book_id, author_id) values (706,883);
-INSERT INTO book_authors (book_id, author_id) values (707,459);
-INSERT INTO book_authors (book_id, author_id) values (708,417);
-INSERT INTO book_authors (book_id, author_id) values (709,625);
-INSERT INTO book_authors (book_id, author_id) values (710,467);
-INSERT INTO book_authors (book_id, author_id) values (711,1124);
-INSERT INTO book_authors (book_id, author_id) values (712,596);
-INSERT INTO book_authors (book_id, author_id) values (712,661);
-INSERT INTO book_authors (book_id, author_id) values (713,378);
-INSERT INTO book_authors (book_id, author_id) values (714,208);
-INSERT INTO book_authors (book_id, author_id) values (714,1110);
-INSERT INTO book_authors (book_id, author_id) values (715,223);
-INSERT INTO book_authors (book_id, author_id) values (715,342);
-INSERT INTO book_authors (book_id, author_id) values (715,396);
-INSERT INTO book_authors (book_id, author_id) values (715,452);
-INSERT INTO book_authors (book_id, author_id) values (716,746);
-INSERT INTO book_authors (book_id, author_id) values (717,908);
-INSERT INTO book_authors (book_id, author_id) values (718,732);
-INSERT INTO book_authors (book_id, author_id) values (719,52);
-INSERT INTO book_authors (book_id, author_id) values (720,174);
-INSERT INTO book_authors (book_id, author_id) values (721,256);
-INSERT INTO book_authors (book_id, author_id) values (722,943);
-INSERT INTO book_authors (book_id, author_id) values (723,745);
-INSERT INTO book_authors (book_id, author_id) values (724,989);
-INSERT INTO book_authors (book_id, author_id) values (725,654);
-INSERT INTO book_authors (book_id, author_id) values (725,917);
-INSERT INTO book_authors (book_id, author_id) values (726,856);
-INSERT INTO book_authors (book_id, author_id) values (727,856);
-INSERT INTO book_authors (book_id, author_id) values (728,872);
-INSERT INTO book_authors (book_id, author_id) values (729,1312);
-INSERT INTO book_authors (book_id, author_id) values (730,1240);
-INSERT INTO book_authors (book_id, author_id) values (731,712);
-INSERT INTO book_authors (book_id, author_id) values (731,877);
-INSERT INTO book_authors (book_id, author_id) values (732,329);
-INSERT INTO book_authors (book_id, author_id) values (733,538);
-INSERT INTO book_authors (book_id, author_id) values (733,847);
-INSERT INTO book_authors (book_id, author_id) values (733,1277);
-INSERT INTO book_authors (book_id, author_id) values (734,176);
-INSERT INTO book_authors (book_id, author_id) values (734,800);
-INSERT INTO book_authors (book_id, author_id) values (735,68);
-INSERT INTO book_authors (book_id, author_id) values (735,1145);
-INSERT INTO book_authors (book_id, author_id) values (735,1354);
-INSERT INTO book_authors (book_id, author_id) values (736,725);
-INSERT INTO book_authors (book_id, author_id) values (737,118);
-INSERT INTO book_authors (book_id, author_id) values (738,1116);
-INSERT INTO book_authors (book_id, author_id) values (739,687);
-INSERT INTO book_authors (book_id, author_id) values (739,1278);
-INSERT INTO book_authors (book_id, author_id) values (740,160);
-INSERT INTO book_authors (book_id, author_id) values (741,644);
-INSERT INTO book_authors (book_id, author_id) values (742,232);
-INSERT INTO book_authors (book_id, author_id) values (742,305);
-INSERT INTO book_authors (book_id, author_id) values (742,1081);
-INSERT INTO book_authors (book_id, author_id) values (743,54);
-INSERT INTO book_authors (book_id, author_id) values (743,344);
-INSERT INTO book_authors (book_id, author_id) values (744,1345);
-INSERT INTO book_authors (book_id, author_id) values (745,1383);
-INSERT INTO book_authors (book_id, author_id) values (746,749);
-INSERT INTO book_authors (book_id, author_id) values (747,843);
-INSERT INTO book_authors (book_id, author_id) values (748,1040);
-INSERT INTO book_authors (book_id, author_id) values (749,233);
-INSERT INTO book_authors (book_id, author_id) values (750,474);
-INSERT INTO book_authors (book_id, author_id) values (750,673);
-INSERT INTO book_authors (book_id, author_id) values (751,739);
-INSERT INTO book_authors (book_id, author_id) values (752,956);
-INSERT INTO book_authors (book_id, author_id) values (752,1269);
-INSERT INTO book_authors (book_id, author_id) values (753,809);
-INSERT INTO book_authors (book_id, author_id) values (753,1185);
-INSERT INTO book_authors (book_id, author_id) values (754,624);
-INSERT INTO book_authors (book_id, author_id) values (755,863);
-INSERT INTO book_authors (book_id, author_id) values (756,269);
-INSERT INTO book_authors (book_id, author_id) values (756,1303);
-INSERT INTO book_authors (book_id, author_id) values (757,1042);
-INSERT INTO book_authors (book_id, author_id) values (758,837);
-INSERT INTO book_authors (book_id, author_id) values (759,783);
-INSERT INTO book_authors (book_id, author_id) values (760,201);
-INSERT INTO book_authors (book_id, author_id) values (761,565);
-INSERT INTO book_authors (book_id, author_id) values (762,645);
-INSERT INTO book_authors (book_id, author_id) values (763,270);
-INSERT INTO book_authors (book_id, author_id) values (764,418);
-INSERT INTO book_authors (book_id, author_id) values (764,710);
-INSERT INTO book_authors (book_id, author_id) values (765,111);
-INSERT INTO book_authors (book_id, author_id) values (765,713);
-INSERT INTO book_authors (book_id, author_id) values (765,884);
-INSERT INTO book_authors (book_id, author_id) values (766,1208);
-INSERT INTO book_authors (book_id, author_id) values (767,1090);
-INSERT INTO book_authors (book_id, author_id) values (767,1197);
-INSERT INTO book_authors (book_id, author_id) values (768,249);
-INSERT INTO book_authors (book_id, author_id) values (768,453);
-INSERT INTO book_authors (book_id, author_id) values (768,483);
-INSERT INTO book_authors (book_id, author_id) values (769,857);
-INSERT INTO book_authors (book_id, author_id) values (770,1213);
-INSERT INTO book_authors (book_id, author_id) values (771,1218);
-INSERT INTO book_authors (book_id, author_id) values (772,721);
-INSERT INTO book_authors (book_id, author_id) values (773,539);
-INSERT INTO book_authors (book_id, author_id) values (773,560);
-INSERT INTO book_authors (book_id, author_id) values (774,1230);
-INSERT INTO book_authors (book_id, author_id) values (775,1336);
-INSERT INTO book_authors (book_id, author_id) values (776,726);
-INSERT INTO book_authors (book_id, author_id) values (777,787);
-INSERT INTO book_authors (book_id, author_id) values (778,171);
-INSERT INTO book_authors (book_id, author_id) values (778,271);
-INSERT INTO book_authors (book_id, author_id) values (779,41);
-INSERT INTO book_authors (book_id, author_id) values (779,1165);
-INSERT INTO book_authors (book_id, author_id) values (780,788);
-INSERT INTO book_authors (book_id, author_id) values (780,1373);
-INSERT INTO book_authors (book_id, author_id) values (781,1138);
-INSERT INTO book_authors (book_id, author_id) values (781,1149);
-INSERT INTO book_authors (book_id, author_id) values (782,985);
-INSERT INTO book_authors (book_id, author_id) values (783,584);
-INSERT INTO book_authors (book_id, author_id) values (784,1026);
-INSERT INTO book_authors (book_id, author_id) values (785,64);
-INSERT INTO book_authors (book_id, author_id) values (785,701);
-INSERT INTO book_authors (book_id, author_id) values (785,848);
-INSERT INTO book_authors (book_id, author_id) values (786,244);
-INSERT INTO book_authors (book_id, author_id) values (786,1125);
-INSERT INTO book_authors (book_id, author_id) values (787,419);
-INSERT INTO book_authors (book_id, author_id) values (787,1377);
-INSERT INTO book_authors (book_id, author_id) values (788,1367);
-INSERT INTO book_authors (book_id, author_id) values (789,972);
-INSERT INTO book_authors (book_id, author_id) values (790,397);
-INSERT INTO book_authors (book_id, author_id) values (790,707);
-INSERT INTO book_authors (book_id, author_id) values (791,1187);
-INSERT INTO book_authors (book_id, author_id) values (792,803);
-INSERT INTO book_authors (book_id, author_id) values (792,1084);
-INSERT INTO book_authors (book_id, author_id) values (793,361);
-INSERT INTO book_authors (book_id, author_id) values (793,688);
-INSERT INTO book_authors (book_id, author_id) values (793,824);
-INSERT INTO book_authors (book_id, author_id) values (794,257);
-INSERT INTO book_authors (book_id, author_id) values (795,1277);
-INSERT INTO book_authors (book_id, author_id) values (796,312);
-INSERT INTO book_authors (book_id, author_id) values (796,918);
-INSERT INTO book_authors (book_id, author_id) values (796,1233);
-INSERT INTO book_authors (book_id, author_id) values (797,674);
-INSERT INTO book_authors (book_id, author_id) values (798,148);
-INSERT INTO book_authors (book_id, author_id) values (799,9);
-INSERT INTO book_authors (book_id, author_id) values (800,409);
-INSERT INTO book_authors (book_id, author_id) values (801,468);
-INSERT INTO book_authors (book_id, author_id) values (802,111);
-INSERT INTO book_authors (book_id, author_id) values (802,713);
-INSERT INTO book_authors (book_id, author_id) values (802,884);
-INSERT INTO book_authors (book_id, author_id) values (803,60);
-INSERT INTO book_authors (book_id, author_id) values (804,443);
-INSERT INTO book_authors (book_id, author_id) values (805,495);
-INSERT INTO book_authors (book_id, author_id) values (805,580);
-INSERT INTO book_authors (book_id, author_id) values (805,1071);
-INSERT INTO book_authors (book_id, author_id) values (806,181);
-INSERT INTO book_authors (book_id, author_id) values (806,714);
-INSERT INTO book_authors (book_id, author_id) values (807,779);
-INSERT INTO book_authors (book_id, author_id) values (808,977);
-INSERT INTO book_authors (book_id, author_id) values (809,878);
-INSERT INTO book_authors (book_id, author_id) values (810,313);
-INSERT INTO book_authors (book_id, author_id) values (811,1378);
-INSERT INTO book_authors (book_id, author_id) values (812,489);
-INSERT INTO book_authors (book_id, author_id) values (813,251);
-INSERT INTO book_authors (book_id, author_id) values (813,950);
-INSERT INTO book_authors (book_id, author_id) values (813,1033);
-INSERT INTO book_authors (book_id, author_id) values (813,1202);
-INSERT INTO book_authors (book_id, author_id) values (814,561);
-INSERT INTO book_authors (book_id, author_id) values (815,588);
-INSERT INTO book_authors (book_id, author_id) values (815,695);
-INSERT INTO book_authors (book_id, author_id) values (816,260);
-INSERT INTO book_authors (book_id, author_id) values (816,1105);
-INSERT INTO book_authors (book_id, author_id) values (816,1283);
-INSERT INTO book_authors (book_id, author_id) values (817,376);
-INSERT INTO book_authors (book_id, author_id) values (817,1085);
-INSERT INTO book_authors (book_id, author_id) values (817,1106);
-INSERT INTO book_authors (book_id, author_id) values (818,838);
-INSERT INTO book_authors (book_id, author_id) values (819,61);
-INSERT INTO book_authors (book_id, author_id) values (819,133);
-INSERT INTO book_authors (book_id, author_id) values (820,913);
-INSERT INTO book_authors (book_id, author_id) values (820,1126);
-INSERT INTO book_authors (book_id, author_id) values (821,885);
-INSERT INTO book_authors (book_id, author_id) values (822,1340);
-INSERT INTO book_authors (book_id, author_id) values (823,858);
-INSERT INTO book_authors (book_id, author_id) values (824,62);
-INSERT INTO book_authors (book_id, author_id) values (824,900);
-INSERT INTO book_authors (book_id, author_id) values (825,1241);
-INSERT INTO book_authors (book_id, author_id) values (826,112);
-INSERT INTO book_authors (book_id, author_id) values (826,1269);
-INSERT INTO book_authors (book_id, author_id) values (827,901);
-INSERT INTO book_authors (book_id, author_id) values (828,138);
-INSERT INTO book_authors (book_id, author_id) values (829,362);
-INSERT INTO book_authors (book_id, author_id) values (829,381);
-INSERT INTO book_authors (book_id, author_id) values (830,859);
-INSERT INTO book_authors (book_id, author_id) values (831,190);
-INSERT INTO book_authors (book_id, author_id) values (831,1001);
-INSERT INTO book_authors (book_id, author_id) values (832,655);
-INSERT INTO book_authors (book_id, author_id) values (832,1086);
-INSERT INTO book_authors (book_id, author_id) values (833,45);
-INSERT INTO book_authors (book_id, author_id) values (834,637);
-INSERT INTO book_authors (book_id, author_id) values (835,581);
-INSERT INTO book_authors (book_id, author_id) values (836,1378);
-INSERT INTO book_authors (book_id, author_id) values (837,238);
-INSERT INTO book_authors (book_id, author_id) values (838,33);
-INSERT INTO book_authors (book_id, author_id) values (838,410);
-INSERT INTO book_authors (book_id, author_id) values (839,1138);
-INSERT INTO book_authors (book_id, author_id) values (839,1149);
-INSERT INTO book_authors (book_id, author_id) values (840,540);
-INSERT INTO book_authors (book_id, author_id) values (840,1283);
-INSERT INTO book_authors (book_id, author_id) values (841,868);
-INSERT INTO book_authors (book_id, author_id) values (841,956);
-INSERT INTO book_authors (book_id, author_id) values (841,1012);
-INSERT INTO book_authors (book_id, author_id) values (842,64);
-INSERT INTO book_authors (book_id, author_id) values (843,572);
-INSERT INTO book_authors (book_id, author_id) values (843,790);
-INSERT INTO book_authors (book_id, author_id) values (844,886);
-INSERT INTO book_authors (book_id, author_id) values (845,311);
-INSERT INTO book_authors (book_id, author_id) values (845,439);
-INSERT INTO book_authors (book_id, author_id) values (846,599);
-INSERT INTO book_authors (book_id, author_id) values (847,566);
-INSERT INTO book_authors (book_id, author_id) values (848,589);
-INSERT INTO book_authors (book_id, author_id) values (849,34);
-INSERT INTO book_authors (book_id, author_id) values (849,610);
-INSERT INTO book_authors (book_id, author_id) values (850,747);
-INSERT INTO book_authors (book_id, author_id) values (851,378);
-INSERT INTO book_authors (book_id, author_id) values (852,513);
-INSERT INTO book_authors (book_id, author_id) values (853,1057);
-INSERT INTO book_authors (book_id, author_id) values (854,92);
-INSERT INTO book_authors (book_id, author_id) values (854,998);
-INSERT INTO book_authors (book_id, author_id) values (855,3);
-INSERT INTO book_authors (book_id, author_id) values (855,600);
-INSERT INTO book_authors (book_id, author_id) values (855,1043);
-INSERT INTO book_authors (book_id, author_id) values (855,1091);
-INSERT INTO book_authors (book_id, author_id) values (856,318);
-INSERT INTO book_authors (book_id, author_id) values (856,1146);
-INSERT INTO book_authors (book_id, author_id) values (857,468);
-INSERT INTO book_authors (book_id, author_id) values (858,646);
-INSERT INTO book_authors (book_id, author_id) values (858,1270);
-INSERT INTO book_authors (book_id, author_id) values (859,1011);
-INSERT INTO book_authors (book_id, author_id) values (860,8);
-INSERT INTO book_authors (book_id, author_id) values (860,1037);
-INSERT INTO book_authors (book_id, author_id) values (861,119);
-INSERT INTO book_authors (book_id, author_id) values (861,935);
-INSERT INTO book_authors (book_id, author_id) values (862,468);
-INSERT INTO book_authors (book_id, author_id) values (863,806);
-INSERT INTO book_authors (book_id, author_id) values (864,856);
-INSERT INTO book_authors (book_id, author_id) values (865,978);
-INSERT INTO book_authors (book_id, author_id) values (866,4);
-INSERT INTO book_authors (book_id, author_id) values (866,161);
-INSERT INTO book_authors (book_id, author_id) values (866,1068);
-INSERT INTO book_authors (book_id, author_id) values (867,166);
-INSERT INTO book_authors (book_id, author_id) values (868,932);
-INSERT INTO book_authors (book_id, author_id) values (869,111);
-INSERT INTO book_authors (book_id, author_id) values (869,713);
-INSERT INTO book_authors (book_id, author_id) values (869,884);
-INSERT INTO book_authors (book_id, author_id) values (870,170);
-INSERT INTO book_authors (book_id, author_id) values (870,1157);
-INSERT INTO book_authors (book_id, author_id) values (870,1295);
-INSERT INTO book_authors (book_id, author_id) values (871,696);
-INSERT INTO book_authors (book_id, author_id) values (872,697);
-INSERT INTO book_authors (book_id, author_id) values (873,864);
-INSERT INTO book_authors (book_id, author_id) values (873,991);
-INSERT INTO book_authors (book_id, author_id) values (874,979);
-INSERT INTO book_authors (book_id, author_id) values (875,1346);
-INSERT INTO book_authors (book_id, author_id) values (876,1264);
-INSERT INTO book_authors (book_id, author_id) values (877,378);
-INSERT INTO book_authors (book_id, author_id) values (877,549);
-INSERT INTO book_authors (book_id, author_id) values (878,1139);
-INSERT INTO book_authors (book_id, author_id) values (878,1219);
-INSERT INTO book_authors (book_id, author_id) values (878,1247);
-INSERT INTO book_authors (book_id, author_id) values (879,1286);
-INSERT INTO book_authors (book_id, author_id) values (880,549);
-INSERT INTO book_authors (book_id, author_id) values (881,791);
-INSERT INTO book_authors (book_id, author_id) values (882,306);
-INSERT INTO book_authors (book_id, author_id) values (882,903);
-INSERT INTO book_authors (book_id, author_id) values (883,567);
-INSERT INTO book_authors (book_id, author_id) values (883,1347);
-INSERT INTO book_authors (book_id, author_id) values (884,420);
-INSERT INTO book_authors (book_id, author_id) values (885,717);
-INSERT INTO book_authors (book_id, author_id) values (886,1019);
-INSERT INTO book_authors (book_id, author_id) values (887,886);
-INSERT INTO book_authors (book_id, author_id) values (888,1107);
-INSERT INTO book_authors (book_id, author_id) values (889,307);
-INSERT INTO book_authors (book_id, author_id) values (889,1108);
-INSERT INTO book_authors (book_id, author_id) values (890,545);
-INSERT INTO book_authors (book_id, author_id) values (891,930);
-INSERT INTO book_authors (book_id, author_id) values (892,807);
-INSERT INTO book_authors (book_id, author_id) values (893,25);
-INSERT INTO book_authors (book_id, author_id) values (893,311);
-INSERT INTO book_authors (book_id, author_id) values (893,439);
-INSERT INTO book_authors (book_id, author_id) values (894,437);
-INSERT INTO book_authors (book_id, author_id) values (894,600);
-INSERT INTO book_authors (book_id, author_id) values (895,856);
-INSERT INTO book_authors (book_id, author_id) values (896,638);
-INSERT INTO book_authors (book_id, author_id) values (897,216);
-INSERT INTO book_authors (book_id, author_id) values (897,327);
-INSERT INTO book_authors (book_id, author_id) values (897,460);
-INSERT INTO book_authors (book_id, author_id) values (898,461);
-INSERT INTO book_authors (book_id, author_id) values (899,334);
-INSERT INTO book_authors (book_id, author_id) values (899,1287);
-INSERT INTO book_authors (book_id, author_id) values (900,54);
-INSERT INTO book_authors (book_id, author_id) values (901,1190);
-INSERT INTO book_authors (book_id, author_id) values (901,1381);
-INSERT INTO book_authors (book_id, author_id) values (902,245);
-INSERT INTO book_authors (book_id, author_id) values (903,239);
-INSERT INTO book_authors (book_id, author_id) values (904,825);
-INSERT INTO book_authors (book_id, author_id) values (905,343);
-INSERT INTO book_authors (book_id, author_id) values (905,432);
-INSERT INTO book_authors (book_id, author_id) values (906,167);
-INSERT INTO book_authors (book_id, author_id) values (906,966);
-INSERT INTO book_authors (book_id, author_id) values (907,902);
-INSERT INTO book_authors (book_id, author_id) values (908,1029);
-INSERT INTO book_authors (book_id, author_id) values (909,151);
-INSERT INTO book_authors (book_id, author_id) values (910,626);
-INSERT INTO book_authors (book_id, author_id) values (911,914);
-INSERT INTO book_authors (book_id, author_id) values (912,103);
-INSERT INTO book_authors (book_id, author_id) values (913,849);
-INSERT INTO book_authors (book_id, author_id) values (913,1288);
-INSERT INTO book_authors (book_id, author_id) values (914,979);
-INSERT INTO book_authors (book_id, author_id) values (915,149);
-INSERT INTO book_authors (book_id, author_id) values (915,294);
-INSERT INTO book_authors (book_id, author_id) values (915,765);
-INSERT INTO book_authors (book_id, author_id) values (915,959);
-INSERT INTO book_authors (book_id, author_id) values (915,1156);
-INSERT INTO book_authors (book_id, author_id) values (916,1231);
-INSERT INTO book_authors (book_id, author_id) values (917,1242);
-INSERT INTO book_authors (book_id, author_id) values (918,944);
-INSERT INTO book_authors (book_id, author_id) values (918,1334);
-INSERT INTO book_authors (book_id, author_id) values (919,919);
-INSERT INTO book_authors (book_id, author_id) values (919,1058);
-INSERT INTO book_authors (book_id, author_id) values (920,1193);
-INSERT INTO book_authors (book_id, author_id) values (921,850);
-INSERT INTO book_authors (book_id, author_id) values (922,1099);
-INSERT INTO book_authors (book_id, author_id) values (923,675);
-INSERT INTO book_authors (book_id, author_id) values (924,1246);
-INSERT INTO book_authors (book_id, author_id) values (925,265);
-INSERT INTO book_authors (book_id, author_id) values (925,294);
-INSERT INTO book_authors (book_id, author_id) values (926,209);
-INSERT INTO book_authors (book_id, author_id) values (927,246);
-INSERT INTO book_authors (book_id, author_id) values (928,963);
-INSERT INTO book_authors (book_id, author_id) values (929,963);
-INSERT INTO book_authors (book_id, author_id) values (930,548);
-INSERT INTO book_authors (book_id, author_id) values (930,636);
-INSERT INTO book_authors (book_id, author_id) values (931,418);
-INSERT INTO book_authors (book_id, author_id) values (931,1241);
-INSERT INTO book_authors (book_id, author_id) values (931,1199);
-INSERT INTO book_authors (book_id, author_id) values (932,182);
-INSERT INTO book_authors (book_id, author_id) values (933,773);
-INSERT INTO book_authors (book_id, author_id) values (934,73);
-INSERT INTO book_authors (book_id, author_id) values (934,330);
-INSERT INTO book_authors (book_id, author_id) values (934,920);
-INSERT INTO book_authors (book_id, author_id) values (935,279);
-INSERT INTO book_authors (book_id, author_id) values (935,421);
-INSERT INTO book_authors (book_id, author_id) values (935,1313);
-INSERT INTO book_authors (book_id, author_id) values (936,722);
-INSERT INTO book_authors (book_id, author_id) values (937,1082);
-INSERT INTO book_authors (book_id, author_id) values (938,1173);
-INSERT INTO book_authors (book_id, author_id) values (939,784);
-INSERT INTO book_authors (book_id, author_id) values (939,1174);
-INSERT INTO book_authors (book_id, author_id) values (940,930);
-INSERT INTO book_authors (book_id, author_id) values (941,398);
-INSERT INTO book_authors (book_id, author_id) values (942,118);
-INSERT INTO book_authors (book_id, author_id) values (942,989);
-INSERT INTO book_authors (book_id, author_id) values (942,1332);
-INSERT INTO book_authors (book_id, author_id) values (943,519);
-INSERT INTO book_authors (book_id, author_id) values (943,898);
-INSERT INTO book_authors (book_id, author_id) values (944,614);
-INSERT INTO book_authors (book_id, author_id) values (944,1127);
-INSERT INTO book_authors (book_id, author_id) values (945,120);
-INSERT INTO book_authors (book_id, author_id) values (946,871);
-INSERT INTO book_authors (book_id, author_id) values (947,219);
-INSERT INTO book_authors (book_id, author_id) values (947,1265);
-INSERT INTO book_authors (book_id, author_id) values (948,715);
-INSERT INTO book_authors (book_id, author_id) values (948,946);
-INSERT INTO book_authors (book_id, author_id) values (948,1121);
-INSERT INTO book_authors (book_id, author_id) values (949,69);
-INSERT INTO book_authors (book_id, author_id) values (950,503);
-INSERT INTO book_authors (book_id, author_id) values (950,808);
-INSERT INTO book_authors (book_id, author_id) values (951,42);
-INSERT INTO book_authors (book_id, author_id) values (951,272);
-INSERT INTO book_authors (book_id, author_id) values (952,1092);
-INSERT INTO book_authors (book_id, author_id) values (953,820);
-INSERT INTO book_authors (book_id, author_id) values (953,887);
-INSERT INTO book_authors (book_id, author_id) values (954,1175);
-INSERT INTO book_authors (book_id, author_id) values (955,856);
-INSERT INTO book_authors (book_id, author_id) values (956,1283);
-INSERT INTO book_authors (book_id, author_id) values (957,844);
-INSERT INTO book_authors (book_id, author_id) values (958,358);
-INSERT INTO book_authors (book_id, author_id) values (958,1337);
-INSERT INTO book_authors (book_id, author_id) values (959,319);
-INSERT INTO book_authors (book_id, author_id) values (960,869);
-INSERT INTO book_authors (book_id, author_id) values (961,1194);
-INSERT INTO book_authors (book_id, author_id) values (961,1195);
-INSERT INTO book_authors (book_id, author_id) values (962,691);
-INSERT INTO book_authors (book_id, author_id) values (962,744);
-INSERT INTO book_authors (book_id, author_id) values (963,963);
-INSERT INTO book_authors (book_id, author_id) values (964,183);
-INSERT INTO book_authors (book_id, author_id) values (965,530);
-INSERT INTO book_authors (book_id, author_id) values (966,35);
-INSERT INTO book_authors (book_id, author_id) values (966,1271);
-INSERT INTO book_authors (book_id, author_id) values (967,987);
-INSERT INTO book_authors (book_id, author_id) values (968,873);
-INSERT INTO book_authors (book_id, author_id) values (968,1139);
-INSERT INTO book_authors (book_id, author_id) values (968,1219);
-INSERT INTO book_authors (book_id, author_id) values (969,462);
-INSERT INTO book_authors (book_id, author_id) values (970,1279);
-INSERT INTO book_authors (book_id, author_id) values (971,294);
-INSERT INTO book_authors (book_id, author_id) values (971,1059);
-INSERT INTO book_authors (book_id, author_id) values (971,1328);
-INSERT INTO book_authors (book_id, author_id) values (972,132);
-INSERT INTO book_authors (book_id, author_id) values (972,605);
-INSERT INTO book_authors (book_id, author_id) values (973,277);
-INSERT INTO book_authors (book_id, author_id) values (973,327);
-INSERT INTO book_authors (book_id, author_id) values (974,46);
-INSERT INTO book_authors (book_id, author_id) values (974,662);
-INSERT INTO book_authors (book_id, author_id) values (974,952);
-INSERT INTO book_authors (book_id, author_id) values (974,1030);
-INSERT INTO book_authors (book_id, author_id) values (975,608);
-INSERT INTO book_authors (book_id, author_id) values (975,1253);
-INSERT INTO book_authors (book_id, author_id) values (975,1338);
-INSERT INTO book_authors (book_id, author_id) values (976,1350);
-INSERT INTO book_authors (book_id, author_id) values (977,532);
-INSERT INTO book_authors (book_id, author_id) values (978,283);
-INSERT INTO book_authors (book_id, author_id) values (978,422);
-INSERT INTO book_authors (book_id, author_id) values (979,141);
-INSERT INTO book_authors (book_id, author_id) values (979,508);
-INSERT INTO book_authors (book_id, author_id) values (979,509);
-INSERT INTO book_authors (book_id, author_id) values (979,585);
-INSERT INTO book_authors (book_id, author_id) values (980,1234);
-INSERT INTO book_authors (book_id, author_id) values (981,13);
-INSERT INTO book_authors (book_id, author_id) values (982,240);
-INSERT INTO book_authors (book_id, author_id) values (982,399);
-INSERT INTO book_authors (book_id, author_id) values (983,586);
-INSERT INTO book_authors (book_id, author_id) values (984,868);
-INSERT INTO book_authors (book_id, author_id) values (985,596);
-INSERT INTO book_authors (book_id, author_id) values (985,1013);
-INSERT INTO book_authors (book_id, author_id) values (985,1060);
-INSERT INTO book_authors (book_id, author_id) values (986,391);
-INSERT INTO book_authors (book_id, author_id) values (986,708);
-INSERT INTO book_authors (book_id, author_id) values (986,1029);
-INSERT INTO book_authors (book_id, author_id) values (987,300);
-INSERT INTO book_authors (book_id, author_id) values (987,937);
-INSERT INTO book_authors (book_id, author_id) values (988,1324);
-INSERT INTO book_authors (book_id, author_id) values (989,541);
-INSERT INTO book_authors (book_id, author_id) values (989,1196);
-INSERT INTO book_authors (book_id, author_id) values (990,615);
-INSERT INTO book_authors (book_id, author_id) values (990,1214);
-INSERT INTO book_authors (book_id, author_id) values (991,461);
-INSERT INTO book_authors (book_id, author_id) values (992,1087);
-INSERT INTO book_authors (book_id, author_id) values (993,43);
-INSERT INTO book_authors (book_id, author_id) values (993,383);
-INSERT INTO book_authors (book_id, author_id) values (994,1170);
-INSERT INTO book_authors (book_id, author_id) values (994,1351);
-INSERT INTO book_authors (book_id, author_id) values (995,496);
-INSERT INTO book_authors (book_id, author_id) values (996,74);
-INSERT INTO book_authors (book_id, author_id) values (997,224);
-INSERT INTO book_authors (book_id, author_id) values (997,575);
-INSERT INTO book_authors (book_id, author_id) values (997,774);
-INSERT INTO book_authors (book_id, author_id) values (998,335);
-INSERT INTO book_authors (book_id, author_id) values (999,851);
-INSERT INTO book_authors (book_id, author_id) values (999,947);
-INSERT INTO book_authors (book_id, author_id) values (999,1072);
-INSERT INTO book_authors (book_id, author_id) values (1000,191);
-INSERT INTO book_authors (book_id, author_id) values (1001,973);
-INSERT INTO book_authors (book_id, author_id) values (1002,76);
-INSERT INTO book_authors (book_id, author_id) values (1002,1017);
-INSERT INTO book_authors (book_id, author_id) values (1003,284);
-INSERT INTO book_authors (book_id, author_id) values (1003,520);
-INSERT INTO book_authors (book_id, author_id) values (1003,1274);
-INSERT INTO book_authors (book_id, author_id) values (1004,656);
-INSERT INTO book_authors (book_id, author_id) values (1004,948);
-INSERT INTO book_authors (book_id, author_id) values (1005,87);
-INSERT INTO book_authors (book_id, author_id) values (1006,408);
-INSERT INTO book_authors (book_id, author_id) values (1007,19);
-INSERT INTO book_authors (book_id, author_id) values (1008,1088);
-INSERT INTO book_authors (book_id, author_id) values (1009,514);
-INSERT INTO book_authors (book_id, author_id) values (1009,647);
-INSERT INTO book_authors (book_id, author_id) values (1009,733);
-INSERT INTO book_authors (book_id, author_id) values (1009,936);
-INSERT INTO book_authors (book_id, author_id) values (1010,86);
-INSERT INTO book_authors (book_id, author_id) values (1010,665);
-INSERT INTO book_authors (book_id, author_id) values (1011,139);
-INSERT INTO book_authors (book_id, author_id) values (1012,1002);
-INSERT INTO book_authors (book_id, author_id) values (1014,198);
-INSERT INTO book_authors (book_id, author_id) values (1015,551);
-INSERT INTO book_authors (book_id, author_id) values (1015,611);
-INSERT INTO book_authors (book_id, author_id) values (1016,912);
-INSERT INTO book_authors (book_id, author_id) values (1016,1028);
-INSERT INTO book_authors (book_id, author_id) values (1017,47);
-INSERT INTO book_authors (book_id, author_id) values (1017,1221);
-INSERT INTO book_authors (book_id, author_id) values (1018,50);
-INSERT INTO book_authors (book_id, author_id) values (1019,894);
-INSERT INTO book_authors (book_id, author_id) values (1020,1007);
-INSERT INTO book_authors (book_id, author_id) values (1021,14);
-INSERT INTO book_authors (book_id, author_id) values (1021,134);
-INSERT INTO book_authors (book_id, author_id) values (1022,999);
-INSERT INTO book_authors (book_id, author_id) values (1023,823);
-INSERT INTO book_authors (book_id, author_id) values (1023,852);
-INSERT INTO book_authors (book_id, author_id) values (1024,856);
-INSERT INTO book_authors (book_id, author_id) values (1025,1371);
-INSERT INTO book_authors (book_id, author_id) values (1026,1032);
-INSERT INTO book_authors (book_id, author_id) values (1027,267);
-INSERT INTO book_authors (book_id, author_id) values (1028,195);
-INSERT INTO book_authors (book_id, author_id) values (1028,659);
-INSERT INTO book_authors (book_id, author_id) values (1028,750);
-INSERT INTO book_authors (book_id, author_id) values (1028,974);
-INSERT INTO book_authors (book_id, author_id) values (1028,975);
-INSERT INTO book_authors (book_id, author_id) values (1028,1186);
-INSERT INTO book_authors (book_id, author_id) values (1029,576);
-INSERT INTO book_authors (book_id, author_id) values (1029,702);
-INSERT INTO book_authors (book_id, author_id) values (1030,616);
-INSERT INTO book_authors (book_id, author_id) values (1031,273);
-INSERT INTO book_authors (book_id, author_id) values (1032,985);
-INSERT INTO book_authors (book_id, author_id) values (1033,153);
-INSERT INTO book_authors (book_id, author_id) values (1034,780);
-INSERT INTO book_authors (book_id, author_id) values (1034,1296);
-INSERT INTO book_authors (book_id, author_id) values (1035,890);
-INSERT INTO book_authors (book_id, author_id) values (1036,985);
-INSERT INTO book_authors (book_id, author_id) values (1037,1254);
-INSERT INTO book_authors (book_id, author_id) values (1038,439);
-INSERT INTO book_authors (book_id, author_id) values (1038,1047);
-INSERT INTO book_authors (book_id, author_id) values (1039,5);
-INSERT INTO book_authors (book_id, author_id) values (1039,209);
-INSERT INTO book_authors (book_id, author_id) values (1039,799);
-INSERT INTO book_authors (book_id, author_id) values (1040,20);
-INSERT INTO book_authors (book_id, author_id) values (1040,444);
-INSERT INTO book_authors (book_id, author_id) values (1040,703);
-INSERT INTO book_authors (book_id, author_id) values (1041,76);
-INSERT INTO book_authors (book_id, author_id) values (1042,400);
-INSERT INTO book_authors (book_id, author_id) values (1043,88);
-INSERT INTO book_authors (book_id, author_id) values (1044,1241);
-INSERT INTO book_authors (book_id, author_id) values (1045,205);
-INSERT INTO book_authors (book_id, author_id) values (1045,1280);
-INSERT INTO book_authors (book_id, author_id) values (1046,1034);
-INSERT INTO book_authors (book_id, author_id) values (1046,1090);
-INSERT INTO book_authors (book_id, author_id) values (1046,1197);
-INSERT INTO book_authors (book_id, author_id) values (1047,21);
-INSERT INTO book_authors (book_id, author_id) values (1047,1214);
-INSERT INTO book_authors (book_id, author_id) values (1048,1374);
-INSERT INTO book_authors (book_id, author_id) values (1049,874);
-INSERT INTO book_authors (book_id, author_id) values (1050,963);
-INSERT INTO book_authors (book_id, author_id) values (1051,681);
-INSERT INTO book_authors (book_id, author_id) values (1052,126);
-INSERT INTO book_authors (book_id, author_id) values (1052,1166);
-INSERT INTO book_authors (book_id, author_id) values (1053,1223);
-INSERT INTO book_authors (book_id, author_id) values (1054,445);
-INSERT INTO book_authors (book_id, author_id) values (1055,699);
-INSERT INTO book_authors (book_id, author_id) values (1055,888);
-INSERT INTO book_authors (book_id, author_id) values (1056,411);
-INSERT INTO book_authors (book_id, author_id) values (1057,490);
-INSERT INTO book_authors (book_id, author_id) values (1057,925);
-INSERT INTO book_authors (book_id, author_id) values (1057,1128);
-INSERT INTO book_authors (book_id, author_id) values (1058,55);
-INSERT INTO book_authors (book_id, author_id) values (1058,80);
-INSERT INTO book_authors (book_id, author_id) values (1059,1132);
-INSERT INTO book_authors (book_id, author_id) values (1060,9);
-INSERT INTO book_authors (book_id, author_id) values (1060,1209);
-INSERT INTO book_authors (book_id, author_id) values (1061,876);
-INSERT INTO book_authors (book_id, author_id) values (1062,740);
-INSERT INTO book_authors (book_id, author_id) values (1063,89);
-INSERT INTO book_authors (book_id, author_id) values (1063,107);
-INSERT INTO book_authors (book_id, author_id) values (1063,140);
-INSERT INTO book_authors (book_id, author_id) values (1063,363);
-INSERT INTO book_authors (book_id, author_id) values (1064,71);
-INSERT INTO book_authors (book_id, author_id) values (1064,446);
-INSERT INTO book_authors (book_id, author_id) values (1065,1077);
-INSERT INTO book_authors (book_id, author_id) values (1066,327);
-INSERT INTO book_authors (book_id, author_id) values (1067,388);
-INSERT INTO book_authors (book_id, author_id) values (1067,557);
-INSERT INTO book_authors (book_id, author_id) values (1067,1046);
-INSERT INTO book_authors (book_id, author_id) values (1067,1353);
-INSERT INTO book_authors (book_id, author_id) values (1068,856);
-INSERT INTO book_authors (book_id, author_id) values (1069,1132);
-INSERT INTO book_authors (book_id, author_id) values (1070,423);
-INSERT INTO book_authors (book_id, author_id) values (1070,891);
-INSERT INTO book_authors (book_id, author_id) values (1071,956);
-INSERT INTO book_authors (book_id, author_id) values (1071,1269);
-INSERT INTO book_authors (book_id, author_id) values (1072,36);
-INSERT INTO book_authors (book_id, author_id) values (1073,454);
-INSERT INTO book_authors (book_id, author_id) values (1073,1203);
-INSERT INTO book_authors (book_id, author_id) values (1074,199);
-INSERT INTO book_authors (book_id, author_id) values (1075,1019);
-INSERT INTO book_authors (book_id, author_id) values (1076,327);
-INSERT INTO book_authors (book_id, author_id) values (1077,597);
-INSERT INTO book_authors (book_id, author_id) values (1078,202);
-INSERT INTO book_authors (book_id, author_id) values (1078,617);
-INSERT INTO book_authors (book_id, author_id) values (1079,1002);
-INSERT INTO book_authors (book_id, author_id) values (1080,225);
-INSERT INTO book_authors (book_id, author_id) values (1081,172);
-INSERT INTO book_authors (book_id, author_id) values (1081,184);
-INSERT INTO book_authors (book_id, author_id) values (1081,391);
-INSERT INTO book_authors (book_id, author_id) values (1082,832);
-INSERT INTO book_authors (book_id, author_id) values (1082,1384);
-INSERT INTO book_authors (book_id, author_id) values (1083,717);
-INSERT INTO book_authors (book_id, author_id) values (1084,291);
-INSERT INTO book_authors (book_id, author_id) values (1085,331);
-INSERT INTO book_authors (book_id, author_id) values (1086,25);
-INSERT INTO book_authors (book_id, author_id) values (1086,311);
-INSERT INTO book_authors (book_id, author_id) values (1086,439);
-INSERT INTO book_authors (book_id, author_id) values (1087,234);
-INSERT INTO book_authors (book_id, author_id) values (1088,150);
-INSERT INTO book_authors (book_id, author_id) values (1088,1272);
-INSERT INTO book_authors (book_id, author_id) values (1089,153);
-INSERT INTO book_authors (book_id, author_id) values (1089,1255);
-INSERT INTO book_authors (book_id, author_id) values (1090,853);
-INSERT INTO book_authors (book_id, author_id) values (1091,235);
-INSERT INTO book_authors (book_id, author_id) values (1092,1215);
-INSERT INTO book_authors (book_id, author_id) values (1093,217);
-INSERT INTO book_authors (book_id, author_id) values (1093,1297);
-INSERT INTO book_authors (book_id, author_id) values (1094,182);
-INSERT INTO book_authors (book_id, author_id) values (1095,75);
-INSERT INTO book_authors (book_id, author_id) values (1096,368);
-INSERT INTO book_authors (book_id, author_id) values (1097,963);
-INSERT INTO book_authors (book_id, author_id) values (1098,475);
-INSERT INTO book_authors (book_id, author_id) values (1098,504);
-INSERT INTO book_authors (book_id, author_id) values (1099,65);
-INSERT INTO book_authors (book_id, author_id) values (1099,568);
-INSERT INTO book_authors (book_id, author_id) values (1100,1197);
-INSERT INTO book_authors (book_id, author_id) values (1101,461);
-INSERT INTO book_authors (book_id, author_id) values (1102,162);
-INSERT INTO book_authors (book_id, author_id) values (1103,856);
-INSERT INTO book_authors (book_id, author_id) values (1104,226);
-INSERT INTO book_authors (book_id, author_id) values (1104,481);
-INSERT INTO book_authors (book_id, author_id) values (1105,274);
-INSERT INTO book_authors (book_id, author_id) values (1105,865);
-INSERT INTO book_authors (book_id, author_id) values (1105,1040);
-INSERT INTO book_authors (book_id, author_id) values (1105,1129);
-INSERT INTO book_authors (book_id, author_id) values (1105,1177);
-INSERT INTO book_authors (book_id, author_id) values (1105,1385);
-INSERT INTO book_authors (book_id, author_id) values (1106,600);
-INSERT INTO book_authors (book_id, author_id) values (1106,718);
-INSERT INTO book_authors (book_id, author_id) values (1107,250);
-INSERT INTO book_authors (book_id, author_id) values (1107,1061);
-INSERT INTO book_authors (book_id, author_id) values (1108,839);
-INSERT INTO book_authors (book_id, author_id) values (1108,1377);
-INSERT INTO book_authors (book_id, author_id) values (1109,127);
-INSERT INTO book_authors (book_id, author_id) values (1109,1179);
-INSERT INTO book_authors (book_id, author_id) values (1110,1197);
-INSERT INTO book_authors (book_id, author_id) values (1111,146);
-INSERT INTO book_authors (book_id, author_id) values (1111,992);
-INSERT INTO book_authors (book_id, author_id) values (1111,1148);
-INSERT INTO book_authors (book_id, author_id) values (1112,292);
-INSERT INTO book_authors (book_id, author_id) values (1113,364);
-INSERT INTO book_authors (book_id, author_id) values (1114,311);
-INSERT INTO book_authors (book_id, author_id) values (1114,1356);
-INSERT INTO book_authors (book_id, author_id) values (1115,401);
-INSERT INTO book_authors (book_id, author_id) values (1116,610);
-INSERT INTO book_authors (book_id, author_id) values (1117,93);
-INSERT INTO book_authors (book_id, author_id) values (1117,369);
-INSERT INTO book_authors (book_id, author_id) values (1118,27);
-INSERT INTO book_authors (book_id, author_id) values (1119,203);
-INSERT INTO book_authors (book_id, author_id) values (1119,1000);
-INSERT INTO book_authors (book_id, author_id) values (1120,552);
-INSERT INTO book_authors (book_id, author_id) values (1120,1093);
-INSERT INTO book_authors (book_id, author_id) values (1120,1269);
-INSERT INTO book_authors (book_id, author_id) values (1121,79);
-INSERT INTO book_authors (book_id, author_id) values (1121,821);
-INSERT INTO book_authors (book_id, author_id) values (1121,1269);
-INSERT INTO book_authors (book_id, author_id) values (1122,497);
-INSERT INTO book_authors (book_id, author_id) values (1123,1298);
-INSERT INTO book_authors (book_id, author_id) values (1124,175);
-INSERT INTO book_authors (book_id, author_id) values (1125,511);
-INSERT INTO book_authors (book_id, author_id) values (1125,969);
-INSERT INTO book_authors (book_id, author_id) values (1125,1140);
-INSERT INTO book_authors (book_id, author_id) values (1126,108);
-INSERT INTO book_authors (book_id, author_id) values (1126,498);
-INSERT INTO book_authors (book_id, author_id) values (1126,582);
-INSERT INTO book_authors (book_id, author_id) values (1126,583);
-INSERT INTO book_authors (book_id, author_id) values (1127,258);
-INSERT INTO book_authors (book_id, author_id) values (1128,204);
-INSERT INTO book_authors (book_id, author_id) values (1128,1230);
-INSERT INTO book_authors (book_id, author_id) values (1129,1117);
-INSERT INTO book_authors (book_id, author_id) values (1130,128);
-INSERT INTO book_authors (book_id, author_id) values (1130,301);
-INSERT INTO book_authors (book_id, author_id) values (1131,439);
-INSERT INTO book_authors (book_id, author_id) values (1131,1386);
-INSERT INTO book_authors (book_id, author_id) values (1132,853);
-INSERT INTO book_authors (book_id, author_id) values (1133,577);
-INSERT INTO book_authors (book_id, author_id) values (1133,1040);
-INSERT INTO book_authors (book_id, author_id) values (1133,1221);
-INSERT INTO book_authors (book_id, author_id) values (1134,889);
-INSERT INTO book_authors (book_id, author_id) values (1135,709);
-INSERT INTO book_authors (book_id, author_id) values (1135,1170);
-INSERT INTO book_authors (book_id, author_id) values (1136,963);
-INSERT INTO book_authors (book_id, author_id) values (1137,751);
-INSERT INTO book_authors (book_id, author_id) values (1138,219);
-INSERT INTO book_authors (book_id, author_id) values (1139,1224);
-INSERT INTO book_authors (book_id, author_id) values (1140,128);
-INSERT INTO book_authors (book_id, author_id) values (1140,301);
-INSERT INTO book_authors (book_id, author_id) values (1141,720);
-INSERT INTO book_authors (book_id, author_id) values (1142,542);
-INSERT INTO book_authors (book_id, author_id) values (1143,698);
-INSERT INTO book_authors (book_id, author_id) values (1143,1048);
-INSERT INTO book_authors (book_id, author_id) values (1144,359);
-INSERT INTO book_authors (book_id, author_id) values (1145,953);
-INSERT INTO book_authors (book_id, author_id) values (1145,1020);
-INSERT INTO book_authors (book_id, author_id) values (1146,1000);
-INSERT INTO book_authors (book_id, author_id) values (1146,1319);
-INSERT INTO book_authors (book_id, author_id) values (1147,236);
-INSERT INTO book_authors (book_id, author_id) values (1147,931);
-INSERT INTO book_authors (book_id, author_id) values (1148,717);
-INSERT INTO book_authors (book_id, author_id) values (1149,196);
-INSERT INTO book_authors (book_id, author_id) values (1149,569);
-INSERT INTO book_authors (book_id, author_id) values (1149,714);
-INSERT INTO book_authors (book_id, author_id) values (1150,300);
-INSERT INTO book_authors (book_id, author_id) values (1150,392);
-INSERT INTO book_authors (book_id, author_id) values (1150,1387);
-INSERT INTO book_authors (book_id, author_id) values (1151,1388);
-INSERT INTO book_authors (book_id, author_id) values (1152,895);
-INSERT INTO book_authors (book_id, author_id) values (1153,1371);
-INSERT INTO book_authors (book_id, author_id) values (1154,196);
-INSERT INTO book_authors (book_id, author_id) values (1154,569);
-INSERT INTO book_authors (book_id, author_id) values (1155,323);
-INSERT INTO book_authors (book_id, author_id) values (1155,792);
-INSERT INTO book_authors (book_id, author_id) values (1156,1266);
-INSERT INTO book_authors (book_id, author_id) values (1157,525);
-INSERT INTO book_authors (book_id, author_id) values (1157,926);
-INSERT INTO book_authors (book_id, author_id) values (1158,1241);
-INSERT INTO book_authors (book_id, author_id) values (1159,692);
-INSERT INTO book_authors (book_id, author_id) values (1159,1031);
-INSERT INTO book_authors (book_id, author_id) values (1159,1248);
-INSERT INTO book_authors (book_id, author_id) values (1160,1003);
-INSERT INTO book_authors (book_id, author_id) values (1161,377);
-INSERT INTO book_authors (book_id, author_id) values (1162,971);
-INSERT INTO book_authors (book_id, author_id) values (1163,26);
-INSERT INTO book_authors (book_id, author_id) values (1163,110);
-INSERT INTO book_authors (book_id, author_id) values (1163,1014);
-INSERT INTO book_authors (book_id, author_id) values (1164,327);
-INSERT INTO book_authors (book_id, author_id) values (1164,460);
-INSERT INTO book_authors (book_id, author_id) values (1164,1004);
-INSERT INTO book_authors (book_id, author_id) values (1165,51);
-INSERT INTO book_authors (book_id, author_id) values (1165,491);
-INSERT INTO book_authors (book_id, author_id) values (1165,515);
-INSERT INTO book_authors (book_id, author_id) values (1165,1005);
-INSERT INTO book_authors (book_id, author_id) values (1166,336);
-INSERT INTO book_authors (book_id, author_id) values (1167,927);
-INSERT INTO book_authors (book_id, author_id) values (1168,989);
-INSERT INTO book_authors (book_id, author_id) values (1169,1156);
-INSERT INTO book_authors (book_id, author_id) values (1170,81);
-INSERT INTO book_authors (book_id, author_id) values (1171,1008);
-INSERT INTO book_authors (book_id, author_id) values (1172,866);
-INSERT INTO book_authors (book_id, author_id) values (1173,854);
-INSERT INTO book_authors (book_id, author_id) values (1174,63);
-INSERT INTO book_authors (book_id, author_id) values (1175,192);
-INSERT INTO book_authors (book_id, author_id) values (1175,438);
-INSERT INTO book_authors (book_id, author_id) values (1175,758);
-INSERT INTO book_authors (book_id, author_id) values (1176,484);
-INSERT INTO book_authors (book_id, author_id) values (1176,1078);
-INSERT INTO book_authors (book_id, author_id) values (1176,1227);
-INSERT INTO book_authors (book_id, author_id) values (1177,570);
-INSERT INTO book_authors (book_id, author_id) values (1177,1333);
-INSERT INTO book_authors (book_id, author_id) values (1178,1361);
-INSERT INTO book_authors (book_id, author_id) values (1179,600);
-INSERT INTO book_authors (book_id, author_id) values (1179,619);
-INSERT INTO book_authors (book_id, author_id) values (1179,1133);
-INSERT INTO book_authors (book_id, author_id) values (1180,1290);
-INSERT INTO book_authors (book_id, author_id) values (1181,162);
-INSERT INTO book_authors (book_id, author_id) values (1182,384);
-INSERT INTO book_authors (book_id, author_id) values (1182,1204);
-INSERT INTO book_authors (book_id, author_id) values (1183,988);
-INSERT INTO book_authors (book_id, author_id) values (1184,481);
-INSERT INTO book_authors (book_id, author_id) values (1185,308);
-INSERT INTO book_authors (book_id, author_id) values (1185,775);
-INSERT INTO book_authors (book_id, author_id) values (1186,337);
-INSERT INTO book_authors (book_id, author_id) values (1187,64);
-INSERT INTO book_authors (book_id, author_id) values (1187,516);
-INSERT INTO book_authors (book_id, author_id) values (1188,1044);
-INSERT INTO book_authors (book_id, author_id) values (1189,467);
-INSERT INTO book_authors (book_id, author_id) values (1189,815);
-INSERT INTO book_authors (book_id, author_id) values (1190,1324);
-INSERT INTO book_authors (book_id, author_id) values (1191,268);
-INSERT INTO book_authors (book_id, author_id) values (1191,574);
-INSERT INTO book_authors (book_id, author_id) values (1191,1025);
-INSERT INTO book_authors (book_id, author_id) values (1191,1387);
-INSERT INTO book_authors (book_id, author_id) values (1192,378);
-INSERT INTO book_authors (book_id, author_id) values (1192,993);
-INSERT INTO book_authors (book_id, author_id) values (1193,135);
-INSERT INTO book_authors (book_id, author_id) values (1193,324);
-INSERT INTO book_authors (book_id, author_id) values (1193,438);
-INSERT INTO book_authors (book_id, author_id) values (1193,758);
-INSERT INTO book_authors (book_id, author_id) values (1194,553);
-INSERT INTO book_authors (book_id, author_id) values (1195,109);
-INSERT INTO book_authors (book_id, author_id) values (1196,21);
-INSERT INTO book_authors (book_id, author_id) values (1196,903);
-INSERT INTO book_authors (book_id, author_id) values (1196,1214);
-INSERT INTO book_authors (book_id, author_id) values (1197,759);
-INSERT INTO book_authors (book_id, author_id) values (1197,785);
-INSERT INTO book_authors (book_id, author_id) values (1197,1320);
-INSERT INTO book_authors (book_id, author_id) values (1198,996);
-INSERT INTO book_authors (book_id, author_id) values (1199,15);
-INSERT INTO book_authors (book_id, author_id) values (1199,275);
-INSERT INTO book_authors (book_id, author_id) values (1199,1035);
-INSERT INTO book_authors (book_id, author_id) values (1199,1112);
-INSERT INTO book_authors (book_id, author_id) values (1200,142);
-INSERT INTO book_authors (book_id, author_id) values (1201,682);
-INSERT INTO book_authors (book_id, author_id) values (1201,1167);
-INSERT INTO book_authors (book_id, author_id) values (1202,72);
-INSERT INTO book_authors (book_id, author_id) values (1202,467);
-INSERT INTO book_authors (book_id, author_id) values (1203,735);
-INSERT INTO book_authors (book_id, author_id) values (1205,1205);
-INSERT INTO book_authors (book_id, author_id) values (1206,429);
-INSERT INTO book_authors (book_id, author_id) values (1206,627);
-INSERT INTO book_authors (book_id, author_id) values (1206,1134);
-INSERT INTO book_authors (book_id, author_id) values (1207,1221);
-INSERT INTO book_authors (book_id, author_id) values (1208,734);
-INSERT INTO book_authors (book_id, author_id) values (1209,760);
-INSERT INTO book_authors (book_id, author_id) values (1210,476);
-INSERT INTO book_authors (book_id, author_id) values (1211,447);
-INSERT INTO book_authors (book_id, author_id) values (1212,791);
-INSERT INTO book_authors (book_id, author_id) values (1213,303);
-INSERT INTO book_authors (book_id, author_id) values (1213,634);
-INSERT INTO book_authors (book_id, author_id) values (1214,856);
-INSERT INTO book_authors (book_id, author_id) values (1215,270);
-INSERT INTO book_authors (book_id, author_id) values (1217,267);
-INSERT INTO book_authors (book_id, author_id) values (1217,1228);
-INSERT INTO book_authors (book_id, author_id) values (1218,1279);
-INSERT INTO book_authors (book_id, author_id) values (1219,154);
-INSERT INTO book_authors (book_id, author_id) values (1219,210);
-INSERT INTO book_authors (book_id, author_id) values (1219,967);
-INSERT INTO book_authors (book_id, author_id) values (1220,746);
-INSERT INTO book_authors (book_id, author_id) values (1221,208);
-INSERT INTO book_authors (book_id, author_id) values (1221,1033);
-INSERT INTO book_authors (book_id, author_id) values (1222,856);
-INSERT INTO book_authors (book_id, author_id) values (1223,56);
-INSERT INTO book_authors (book_id, author_id) values (1223,308);
-INSERT INTO book_authors (book_id, author_id) values (1223,385);
-INSERT INTO book_authors (book_id, author_id) values (1223,485);
-INSERT INTO book_authors (book_id, author_id) values (1223,775);
-INSERT INTO book_authors (book_id, author_id) values (1224,237);
-INSERT INTO book_authors (book_id, author_id) values (1224,879);
-INSERT INTO book_authors (book_id, author_id) values (1225,1283);
-INSERT INTO book_authors (book_id, author_id) values (1226,600);
-INSERT INTO book_authors (book_id, author_id) values (1226,860);
-INSERT INTO book_authors (book_id, author_id) values (1226,1362);
+INSERT INTO book_authors (book_id, author_id) values 
+ (1,176),
+ (1,533),
+ (1,657),
+ (1,800),
+ (2,921),
+ (3,325),
+ (4,386),
+ (5,631),
+ (6,699),
+ (7,1038),
+ (7,1049),
+ (8,534),
+ (9,412),
+ (10,372),
+ (10,1016),
+ (11,909),
+ (12,326),
+ (13,683),
+ (14,810),
+ (15,1021),
+ (16,424),
+ (16,543),
+ (17,801),
+ (18,439),
+ (19,211),
+ (20,708),
+ (21,735),
+ (22,578),
+ (22,1113),
+ (23,1100),
+ (24,349),
+ (24,601),
+ (24,937),
+ (25,700),
+ (25,1308),
+ (26,1158),
+ (27,741),
+ (27,1168),
+ (28,788),
+ (29,345),
+ (30,554),
+ (31,811),
+ (31,1180),
+ (32,708),
+ (32,1210),
+ (33,896),
+ (33,1114),
+ (34,666),
+ (34,840),
+ (35,314),
+ (35,1368),
+ (36,425),
+ (36,752),
+ (37,1015),
+ (41,1159),
+ (42,227),
+ (42,350),
+ (43,1249),
+ (44,1341),
+ (45,499),
+ (46,193),
+ (47,735),
+ (48,94),
+ (49,620),
+ (50,1101),
+ (51,113),
+ (52,745),
+ (80,1094),
+ (81,546),
+ (81,612),
+ (82,1073),
+ (82,1109),
+ (102,16),
+ (103,85),
+ (104,602),
+ (105,590),
+ (106,185),
+ (107,477),
+ (108,804),
+ (108,968),
+ (109,151),
+ (110,393),
+ (111,793),
+ (112,155),
+ (112,746),
+ (113,186),
+ (113,1379),
+ (114,415),
+ (114,1135),
+ (115,606),
+ (116,1363),
+ (117,1216),
+ (118,1225),
+ (119,293),
+ (119,639),
+ (119,648),
+ (119,1036),
+ (120,816),
+ (120,957),
+ (121,1050),
+ (122,804),
+ (122,968),
+ (123,276),
+ (124,294),
+ (124,351),
+ (124,937),
+ (125,1305),
+ (125,1314),
+ (126,285),
+ (127,753),
+ (128,794),
+ (129,890),
+ (130,500),
+ (131,526),
+ (132,70),
+ (132,241),
+ (133,64),
+ (133,922),
+ (134,455),
+ (134,591),
+ (134,766),
+ (135,1169),
+ (136,667),
+ (137,802),
+ (138,910),
+ (138,1150),
+ (139,789),
+ (139,1211),
+ (140,1197),
+ (141,628),
+ (141,640),
+ (141,723),
+ (142,1102),
+ (143,298),
+ (143,1151),
+ (144,114),
+ (145,29),
+ (145,327),
+ (145,378),
+ (145,1275),
+ (146,1289),
+ (147,394),
+ (148,121),
+ (149,143),
+ (149,1357),
+ (150,309),
+ (151,286),
+ (152,433),
+ (153,676),
+ (153,1152),
+ (154,1309),
+ (155,332),
+ (155,1299),
+ (155,1300),
+ (156,1),
+ (156,870),
+ (156,1115),
+ (156,1160),
+ (157,109),
+ (157,535),
+ (157,666),
+ (158,747),
+ (159,521),
+ (159,1051),
+ (160,833),
+ (161,527),
+ (162,456),
+ (163,1141),
+ (164,928),
+ (165,373),
+ (165,387),
+ (165,1062),
+ (166,951),
+ (167,1305),
+ (167,1314),
+ (168,607),
+ (169,929),
+ (169,1073),
+ (170,536),
+ (170,767),
+ (171,663),
+ (171,1176),
+ (171,1235),
+ (172,374),
+ (172,1142),
+ (173,248),
+ (173,668),
+ (173,834),
+ (173,1069),
+ (174,194),
+ (174,370),
+ (174,1369),
+ (175,177),
+ (176,144),
+ (176,1074),
+ (177,434),
+ (178,677),
+ (179,416),
+ (180,242),
+ (181,678),
+ (182,65),
+ (183,302),
+ (183,1070),
+ (184,104),
+ (184,505),
+ (185,795),
+ (185,1273),
+ (186,156),
+ (187,812),
+ (188,48),
+ (189,1063),
+ (189,1244),
+ (190,716),
+ (191,352),
+ (192,76),
+ (193,360),
+ (194,98),
+ (194,346),
+ (194,402),
+ (195,1191),
+ (196,786),
+ (197,1153),
+ (198,251),
+ (199,1301),
+ (200,403),
+ (201,152),
+ (205,178),
+ (206,145),
+ (206,689),
+ (206,754),
+ (223,822),
+ (224,1181),
+ (225,603),
+ (239,562),
+ (240,822),
+ (241,1095),
+ (242,1039),
+ (243,90),
+ (244,426),
+ (245,99),
+ (246,278),
+ (247,658),
+ (248,157),
+ (248,1182),
+ (249,228),
+ (249,891),
+ (250,855),
+ (251,980),
+ (251,1232),
+ (252,229),
+ (253,163),
+ (253,310),
+ (253,983),
+ (254,1170),
+ (255,1045),
+ (256,462),
+ (257,469),
+ (257,724),
+ (258,66),
+ (258,1075),
+ (259,555),
+ (260,1321),
+ (261,279),
+ (261,604),
+ (262,187),
+ (263,598),
+ (264,261),
+ (265,486),
+ (265,1161),
+ (266,509),
+ (266,664),
+ (266,1352),
+ (267,1022),
+ (268,657),
+ (269,649),
+ (269,736),
+ (269,1136),
+ (270,1322),
+ (271,556),
+ (272,1329),
+ (273,669),
+ (273,1323),
+ (274,17),
+ (274,266),
+ (275,796),
+ (276,761),
+ (277,813),
+ (278,861),
+ (279,22),
+ (280,478),
+ (281,320),
+ (281,1137),
+ (282,1118),
+ (283,136),
+ (283,295),
+ (283,315),
+ (284,122),
+ (284,621),
+ (285,989),
+ (286,1032),
+ (287,1256),
+ (288,932),
+ (288,994),
+ (289,37),
+ (290,38),
+ (290,693),
+ (290,718),
+ (291,579),
+ (291,742),
+ (292,871),
+ (293,212),
+ (293,506),
+ (293,915),
+ (293,1064),
+ (294,547),
+ (294,1212),
+ (295,861),
+ (296,82),
+ (296,593),
+ (297,802),
+ (298,1334),
+ (299,563),
+ (300,650),
+ (300,903),
+ (301,573),
+ (302,1324),
+ (303,1281),
+ (304,83),
+ (304,1130),
+ (305,563),
+ (306,338),
+ (306,592),
+ (306,835),
+ (306,945),
+ (306,1315),
+ (307,1197),
+ (308,814),
+ (308,892),
+ (309,1364),
+ (310,862),
+ (311,64),
+ (312,151),
+ (312,1282),
+ (313,294),
+ (313,1220),
+ (314,238),
+ (314,1192),
+ (315,510),
+ (315,995),
+ (316,826),
+ (317,218),
+ (318,938),
+ (319,735),
+ (320,709),
+ (321,632),
+ (321,1147),
+ (322,969),
+ (322,996),
+ (323,719),
+ (324,633),
+ (325,594),
+ (325,911),
+ (326,327),
+ (326,404),
+ (326,427),
+ (326,463),
+ (326,659),
+ (327,507),
+ (327,1017),
+ (328,1283),
+ (329,666),
+ (329,845),
+ (330,173),
+ (330,379),
+ (330,1052),
+ (330,1183),
+ (331,817),
+ (332,1187),
+ (333,958),
+ (334,608),
+ (335,435),
+ (336,1154),
+ (337,199),
+ (338,382),
+ (338,464),
+ (339,477),
+ (340,110),
+ (340,933),
+ (340,1339),
+ (341,904),
+ (342,1162),
+ (342,1171),
+ (343,436),
+ (343,548),
+ (344,110),
+ (344,933),
+ (344,1339),
+ (345,347),
+ (345,949),
+ (346,197),
+ (347,205),
+ (347,1257),
+ (348,1290),
+ (349,1206),
+ (350,1291),
+ (351,156),
+ (351,690),
+ (351,818),
+ (352,23),
+ (353,353),
+ (354,30),
+ (355,465),
+ (355,1380),
+ (356,528),
+ (357,388),
+ (357,557),
+ (357,1046),
+ (357,1353),
+ (358,880),
+ (359,57),
+ (359,841),
+ (359,1330),
+ (360,1079),
+ (361,1170),
+ (362,206),
+ (362,805),
+ (363,875),
+ (363,905),
+ (364,737),
+ (364,1381),
+ (365,1018),
+ (366,564),
+ (366,1305),
+ (366,1314),
+ (366,1354),
+ (367,95),
+ (368,622),
+ (369,2),
+ (369,105),
+ (370,710),
+ (371,641),
+ (372,1382),
+ (373,280),
+ (373,1080),
+ (374,1023),
+ (375,31),
+ (375,1188),
+ (376,158),
+ (376,1096),
+ (377,281),
+ (378,123),
+ (379,287),
+ (379,964),
+ (380,537),
+ (381,1324),
+ (382,243),
+ (382,1275),
+ (383,462),
+ (384,213),
+ (385,394),
+ (386,1258),
+ (386,1292),
+ (387,316),
+ (387,321),
+ (388,1119),
+ (389,220),
+ (389,448),
+ (389,487),
+ (390,449),
+ (390,1306),
+ (391,39),
+ (392,755),
+ (392,1040),
+ (392,1221),
+ (393,10),
+ (393,827),
+ (394,1259),
+ (395,609),
+ (395,1267),
+ (396,252),
+ (397,164),
+ (397,389),
+ (398,1076),
+ (398,1163),
+ (399,529),
+ (400,479),
+ (401,457),
+ (402,490),
+ (403,413),
+ (403,906),
+ (403,1243),
+ (404,871),
+ (405,151),
+ (405,1282),
+ (406,303),
+ (406,354),
+ (406,634),
+ (406,727),
+ (407,58),
+ (407,522),
+ (407,756),
+ (407,1284),
+ (408,466),
+ (408,768),
+ (408,1358),
+ (409,797),
+ (410,282),
+ (410,1122),
+ (411,115),
+ (411,348),
+ (412,365),
+ (412,501),
+ (412,912),
+ (413,221),
+ (413,769),
+ (414,283),
+ (415,1051),
+ (417,1065),
+ (418,6),
+ (419,24),
+ (420,1103),
+ (420,1324),
+ (421,390),
+ (421,984),
+ (422,1198),
+ (423,124),
+ (423,623),
+ (424,1066),
+ (425,1053),
+ (425,1268),
+ (426,131),
+ (426,960),
+ (426,1310),
+ (427,188),
+ (427,304),
+ (427,355),
+ (427,679),
+ (427,923),
+ (428,440),
+ (428,897),
+ (429,549),
+ (430,932),
+ (431,867),
+ (432,1348),
+ (433,1164),
+ (434,801),
+ (435,32),
+ (436,795),
+ (437,893),
+ (438,846),
+ (439,684),
+ (440,530),
+ (441,1331),
+ (442,1302),
+ (443,480),
+ (444,828),
+ (445,635),
+ (445,1097),
+ (446,819),
+ (447,253),
+ (447,470),
+ (448,934),
+ (449,624),
+ (450,100),
+ (450,587),
+ (450,728),
+ (450,924),
+ (450,997),
+ (451,1311),
+ (452,781),
+ (452,856),
+ (453,1359),
+ (454,101),
+ (454,829),
+ (454,1104),
+ (455,67),
+ (455,1262),
+ (456,622),
+ (457,405),
+ (457,471),
+ (457,558),
+ (457,836),
+ (457,1131),
+ (458,535),
+ (458,845),
+ (459,1316),
+ (460,146),
+ (460,1148),
+ (461,1199),
+ (462,18),
+ (463,84),
+ (464,502),
+ (465,288),
+ (465,491),
+ (465,738),
+ (465,1005),
+ (465,1263),
+ (466,339),
+ (466,981),
+ (466,1365),
+ (467,262),
+ (468,770),
+ (469,7),
+ (469,670),
+ (469,965),
+ (470,40),
+ (471,748),
+ (471,762),
+ (471,1222),
+ (472,1360),
+ (473,651),
+ (474,71),
+ (475,1155),
+ (476,91),
+ (476,340),
+ (477,165),
+ (478,685),
+ (478,1089),
+ (478,1245),
+ (479,211),
+ (480,96),
+ (481,531),
+ (482,1156),
+ (483,125),
+ (484,1335),
+ (485,1015),
+ (486,303),
+ (487,669),
+ (488,1325),
+ (489,686),
+ (490,704),
+ (490,1293),
+ (491,898),
+ (492,680),
+ (493,17),
+ (494,492),
+ (495,311),
+ (495,356),
+ (495,1170),
+ (496,511),
+ (497,59),
+ (497,493),
+ (497,549),
+ (497,393),
+ (498,328),
+ (498,544),
+ (498,729),
+ (499,1331),
+ (500,798),
+ (501,823),
+ (502,642),
+ (503,1276),
+ (503,1282),
+ (504,548),
+ (504,636),
+ (505,1305),
+ (505,1314),
+ (506,660),
+ (507,430),
+ (507,939),
+ (508,214),
+ (508,285),
+ (508,296),
+ (508,380),
+ (508,494),
+ (508,618),
+ (508,961),
+ (508,982),
+ (508,1250),
+ (509,215),
+ (509,458),
+ (509,1120),
+ (510,881),
+ (511,898),
+ (512,428),
+ (512,657),
+ (512,1355),
+ (513,406),
+ (513,559),
+ (514,1217),
+ (515,898),
+ (516,856),
+ (517,629),
+ (518,1324),
+ (519,1246),
+ (520,1246),
+ (521,1067),
+ (522,1329),
+ (523,951),
+ (524,876),
+ (525,940),
+ (525,1251),
+ (526,230),
+ (526,322),
+ (526,357),
+ (526,652),
+ (526,694),
+ (526,1041),
+ (527,72),
+ (527,467),
+ (528,1317),
+ (529,289),
+ (529,333),
+ (530,1054),
+ (531,954),
+ (532,1229),
+ (533,776),
+ (534,1009),
+ (535,395),
+ (536,523),
+ (537,189),
+ (538,366),
+ (539,481),
+ (540,441),
+ (541,290),
+ (541,643),
+ (542,53),
+ (543,990),
+ (543,1375),
+ (544,746),
+ (544,1098),
+ (544,1236),
+ (545,297),
+ (545,1260),
+ (546,375),
+ (546,499),
+ (546,882),
+ (547,720),
+ (548,102),
+ (549,755),
+ (550,563),
+ (551,941),
+ (552,761),
+ (553,317),
+ (554,1024),
+ (555,44),
+ (555,299),
+ (556,563),
+ (558,970),
+ (559,730),
+ (560,1349),
+ (561,899),
+ (562,414),
+ (562,777),
+ (563,431),
+ (564,1294),
+ (565,711),
+ (566,922),
+ (567,550),
+ (568,207),
+ (569,743),
+ (569,771),
+ (569,1055),
+ (570,153),
+ (571,1317),
+ (572,595),
+ (573,1237),
+ (574,488),
+ (574,916),
+ (595,830),
+ (596,1123),
+ (597,326),
+ (598,97),
+ (598,657),
+ (628,137),
+ (628,159),
+ (628,168),
+ (629,907),
+ (630,77),
+ (630,254),
+ (631,1213),
+ (632,1285),
+ (633,450),
+ (633,1177),
+ (634,407),
+ (634,772),
+ (635,1157),
+ (636,1143),
+ (637,1083),
+ (638,763),
+ (639,116),
+ (640,267),
+ (641,68),
+ (641,1354),
+ (642,1238),
+ (643,147),
+ (643,277),
+ (644,200),
+ (644,517),
+ (645,27),
+ (646,1006),
+ (646,1226),
+ (647,705),
+ (648,367),
+ (648,723),
+ (648,1027),
+ (649,263),
+ (650,830),
+ (651,1032),
+ (652,856),
+ (653,801),
+ (654,28),
+ (655,705),
+ (656,106),
+ (656,231),
+ (656,1366),
+ (657,117),
+ (657,169),
+ (657,264),
+ (657,451),
+ (657,955),
+ (657,1200),
+ (657,1252),
+ (658,524),
+ (658,1283),
+ (659,1098),
+ (660,1172),
+ (661,1189),
+ (662,371),
+ (662,1370),
+ (663,472),
+ (663,831),
+ (663,971),
+ (663,1028),
+ (663,1184),
+ (664,757),
+ (665,1261),
+ (666,259),
+ (667,856),
+ (668,710),
+ (669,341),
+ (669,408),
+ (669,942),
+ (669,1269),
+ (670,129),
+ (670,518),
+ (670,1307),
+ (671,179),
+ (672,482),
+ (673,1371),
+ (674,555),
+ (675,782),
+ (675,1010),
+ (675,1056),
+ (676,598),
+ (677,1201),
+ (678,180),
+ (679,985),
+ (680,255),
+ (681,339),
+ (682,294),
+ (682,608),
+ (682,1376),
+ (683,500),
+ (684,723),
+ (685,11),
+ (685,731),
+ (685,1342),
+ (685,1343),
+ (685,1372),
+ (686,268),
+ (686,574),
+ (686,1025),
+ (687,442),
+ (688,976),
+ (689,1291),
+ (690,630),
+ (691,12),
+ (692,1011),
+ (693,431),
+ (694,130),
+ (695,1327),
+ (696,512),
+ (697,78),
+ (697,1207),
+ (698,473),
+ (698,653),
+ (699,86),
+ (699,665),
+ (700,199),
+ (700,778),
+ (700,1344),
+ (701,571),
+ (701,764),
+ (702,222),
+ (702,672),
+ (703,842),
+ (703,1178),
+ (704,170),
+ (704,613),
+ (704,1295),
+ (705,1144),
+ (705,1239),
+ (706,883),
+ (707,459),
+ (708,417),
+ (709,625),
+ (710,467),
+ (711,1124),
+ (712,596),
+ (712,661),
+ (713,378),
+ (714,208),
+ (714,1110),
+ (715,223),
+ (715,342),
+ (715,396),
+ (715,452),
+ (716,746),
+ (717,908),
+ (718,732),
+ (719,52),
+ (720,174),
+ (721,256),
+ (722,943),
+ (723,745),
+ (724,989),
+ (725,654),
+ (725,917),
+ (726,856),
+ (727,856),
+ (728,872),
+ (729,1312),
+ (730,1240),
+ (731,712),
+ (731,877),
+ (732,329),
+ (733,538),
+ (733,847),
+ (733,1277),
+ (734,176),
+ (734,800),
+ (735,68),
+ (735,1145),
+ (735,1354),
+ (736,725),
+ (737,118),
+ (738,1116),
+ (739,687),
+ (739,1278),
+ (740,160),
+ (741,644),
+ (742,232),
+ (742,305),
+ (742,1081),
+ (743,54),
+ (743,344),
+ (744,1345),
+ (745,1383),
+ (746,749),
+ (747,843),
+ (748,1040),
+ (749,233),
+ (750,474),
+ (750,673),
+ (751,739),
+ (752,956),
+ (752,1269),
+ (753,809),
+ (753,1185),
+ (754,624),
+ (755,863),
+ (756,269),
+ (756,1303),
+ (757,1042),
+ (758,837),
+ (759,783),
+ (760,201),
+ (761,565),
+ (762,645),
+ (763,270),
+ (764,418),
+ (764,710),
+ (765,111),
+ (765,713),
+ (765,884),
+ (766,1208),
+ (767,1090),
+ (767,1197),
+ (768,249),
+ (768,453),
+ (768,483),
+ (769,857),
+ (770,1213),
+ (771,1218),
+ (772,721),
+ (773,539),
+ (773,560),
+ (774,1230),
+ (775,1336),
+ (776,726),
+ (777,787),
+ (778,171),
+ (778,271),
+ (779,41),
+ (779,1165),
+ (780,788),
+ (780,1373),
+ (781,1138),
+ (781,1149),
+ (782,985),
+ (783,584),
+ (784,1026),
+ (785,64),
+ (785,701),
+ (785,848),
+ (786,244),
+ (786,1125),
+ (787,419),
+ (787,1377),
+ (788,1367),
+ (789,972),
+ (790,397),
+ (790,707),
+ (791,1187),
+ (792,803),
+ (792,1084),
+ (793,361),
+ (793,688),
+ (793,824),
+ (794,257),
+ (795,1277),
+ (796,312),
+ (796,918),
+ (796,1233),
+ (797,674),
+ (798,148),
+ (799,9),
+ (800,409),
+ (801,468),
+ (802,111),
+ (802,713),
+ (802,884),
+ (803,60),
+ (804,443),
+ (805,495),
+ (805,580),
+ (805,1071),
+ (806,181),
+ (806,714),
+ (807,779),
+ (808,977),
+ (809,878),
+ (810,313),
+ (811,1378),
+ (812,489),
+ (813,251),
+ (813,950),
+ (813,1033),
+ (813,1202),
+ (814,561),
+ (815,588),
+ (815,695),
+ (816,260),
+ (816,1105),
+ (816,1283),
+ (817,376),
+ (817,1085),
+ (817,1106),
+ (818,838),
+ (819,61),
+ (819,133),
+ (820,913),
+ (820,1126),
+ (821,885),
+ (822,1340),
+ (823,858),
+ (824,62),
+ (824,900),
+ (825,1241),
+ (826,112),
+ (826,1269),
+ (827,901),
+ (828,138),
+ (829,362),
+ (829,381),
+ (830,859),
+ (831,190),
+ (831,1001),
+ (832,655),
+ (832,1086),
+ (833,45),
+ (834,637),
+ (835,581),
+ (836,1378),
+ (837,238),
+ (838,33),
+ (838,410),
+ (839,1138),
+ (839,1149),
+ (840,540),
+ (840,1283),
+ (841,868),
+ (841,956),
+ (841,1012),
+ (842,64),
+ (843,572),
+ (843,790),
+ (844,886),
+ (845,311),
+ (845,439),
+ (846,599),
+ (847,566),
+ (848,589),
+ (849,34),
+ (849,610),
+ (850,747),
+ (851,378),
+ (852,513),
+ (853,1057),
+ (854,92),
+ (854,998),
+ (855,3),
+ (855,600),
+ (855,1043),
+ (855,1091),
+ (856,318),
+ (856,1146),
+ (857,468),
+ (858,646),
+ (858,1270),
+ (859,1011),
+ (860,8),
+ (860,1037),
+ (861,119),
+ (861,935),
+ (862,468),
+ (863,806),
+ (864,856),
+ (865,978),
+ (866,4),
+ (866,161),
+ (866,1068),
+ (867,166),
+ (868,932),
+ (869,111),
+ (869,713),
+ (869,884),
+ (870,170),
+ (870,1157),
+ (870,1295),
+ (871,696),
+ (872,697),
+ (873,864),
+ (873,991),
+ (874,979),
+ (875,1346),
+ (876,1264),
+ (877,378),
+ (877,549),
+ (878,1139),
+ (878,1219),
+ (878,1247),
+ (879,1286),
+ (880,549),
+ (881,791),
+ (882,306),
+ (882,903),
+ (883,567),
+ (883,1347),
+ (884,420),
+ (885,717),
+ (886,1019),
+ (887,886),
+ (888,1107),
+ (889,307),
+ (889,1108),
+ (890,545),
+ (891,930),
+ (892,807),
+ (893,25),
+ (893,311),
+ (893,439),
+ (894,437),
+ (894,600),
+ (895,856),
+ (896,638),
+ (897,216),
+ (897,327),
+ (897,460),
+ (898,461),
+ (899,334),
+ (899,1287),
+ (900,54),
+ (901,1190),
+ (901,1381),
+ (902,245),
+ (903,239),
+ (904,825),
+ (905,343),
+ (905,432),
+ (906,167),
+ (906,966),
+ (907,902),
+ (908,1029),
+ (909,151),
+ (910,626),
+ (911,914),
+ (912,103),
+ (913,849),
+ (913,1288),
+ (914,979),
+ (915,149),
+ (915,294),
+ (915,765),
+ (915,959),
+ (915,1156),
+ (916,1231),
+ (917,1242),
+ (918,944),
+ (918,1334),
+ (919,919),
+ (919,1058),
+ (920,1193),
+ (921,850),
+ (922,1099),
+ (923,675),
+ (924,1246),
+ (925,265),
+ (925,294),
+ (926,209),
+ (927,246),
+ (928,963),
+ (929,963),
+ (930,548),
+ (930,636),
+ (931,418),
+ (931,1241),
+ (931,1199),
+ (932,182),
+ (933,773),
+ (934,73),
+ (934,330),
+ (934,920),
+ (935,279),
+ (935,421),
+ (935,1313),
+ (936,722),
+ (937,1082),
+ (938,1173),
+ (939,784),
+ (939,1174),
+ (940,930),
+ (941,398),
+ (942,118),
+ (942,989),
+ (942,1332),
+ (943,519),
+ (943,898),
+ (944,614),
+ (944,1127),
+ (945,120),
+ (946,871),
+ (947,219),
+ (947,1265),
+ (948,715),
+ (948,946),
+ (948,1121),
+ (949,69),
+ (950,503),
+ (950,808),
+ (951,42),
+ (951,272),
+ (952,1092),
+ (953,820),
+ (953,887),
+ (954,1175),
+ (955,856),
+ (956,1283),
+ (957,844),
+ (958,358),
+ (958,1337),
+ (959,319),
+ (960,869),
+ (961,1194),
+ (961,1195),
+ (962,691),
+ (962,744),
+ (963,963),
+ (964,183),
+ (965,530),
+ (966,35),
+ (966,1271),
+ (967,987),
+ (968,873),
+ (968,1139),
+ (968,1219),
+ (969,462),
+ (970,1279),
+ (971,294),
+ (971,1059),
+ (971,1328),
+ (972,132),
+ (972,605),
+ (973,277),
+ (973,327),
+ (974,46),
+ (974,662),
+ (974,952),
+ (974,1030),
+ (975,608),
+ (975,1253),
+ (975,1338),
+ (976,1350),
+ (977,532),
+ (978,283),
+ (978,422),
+ (979,141),
+ (979,508),
+ (979,509),
+ (979,585),
+ (980,1234),
+ (981,13),
+ (982,240),
+ (982,399),
+ (983,586),
+ (984,868),
+ (985,596),
+ (985,1013),
+ (985,1060),
+ (986,391),
+ (986,708),
+ (986,1029),
+ (987,300),
+ (987,937),
+ (988,1324),
+ (989,541),
+ (989,1196),
+ (990,615),
+ (990,1214),
+ (991,461),
+ (992,1087),
+ (993,43),
+ (993,383),
+ (994,1170),
+ (994,1351),
+ (995,496),
+ (996,74),
+ (997,224),
+ (997,575),
+ (997,774),
+ (998,335),
+ (999,851),
+ (999,947),
+ (999,1072),
+ (1000,191),
+ (1001,973),
+ (1002,76),
+ (1002,1017),
+ (1003,284),
+ (1003,520),
+ (1003,1274),
+ (1004,656),
+ (1004,948),
+ (1005,87),
+ (1006,408),
+ (1007,19),
+ (1008,1088),
+ (1009,514),
+ (1009,647),
+ (1009,733),
+ (1009,936),
+ (1010,86),
+ (1010,665),
+ (1011,139),
+ (1012,1002),
+ (1014,198),
+ (1015,551),
+ (1015,611),
+ (1016,912),
+ (1016,1028),
+ (1017,47),
+ (1017,1221),
+ (1018,50),
+ (1019,894),
+ (1020,1007),
+ (1021,14),
+ (1021,134),
+ (1022,999),
+ (1023,823),
+ (1023,852),
+ (1024,856),
+ (1025,1371),
+ (1026,1032),
+ (1027,267),
+ (1028,195),
+ (1028,659),
+ (1028,750),
+ (1028,974),
+ (1028,975),
+ (1028,1186),
+ (1029,576),
+ (1029,702),
+ (1030,616),
+ (1031,273),
+ (1032,985),
+ (1033,153),
+ (1034,780),
+ (1034,1296),
+ (1035,890),
+ (1036,985),
+ (1037,1254),
+ (1038,439),
+ (1038,1047),
+ (1039,5),
+ (1039,209),
+ (1039,799),
+ (1040,20),
+ (1040,444),
+ (1040,703),
+ (1041,76),
+ (1042,400),
+ (1043,88),
+ (1044,1241),
+ (1045,205),
+ (1045,1280),
+ (1046,1034),
+ (1046,1090),
+ (1046,1197),
+ (1047,21),
+ (1047,1214),
+ (1048,1374),
+ (1049,874),
+ (1050,963),
+ (1051,681),
+ (1052,126),
+ (1052,1166),
+ (1053,1223),
+ (1054,445),
+ (1055,699),
+ (1055,888),
+ (1056,411),
+ (1057,490),
+ (1057,925),
+ (1057,1128),
+ (1058,55),
+ (1058,80),
+ (1059,1132),
+ (1060,9),
+ (1060,1209),
+ (1061,876),
+ (1062,740),
+ (1063,89),
+ (1063,107),
+ (1063,140),
+ (1063,363),
+ (1064,71),
+ (1064,446),
+ (1065,1077),
+ (1066,327),
+ (1067,388),
+ (1067,557),
+ (1067,1046),
+ (1067,1353),
+ (1068,856),
+ (1069,1132),
+ (1070,423),
+ (1070,891),
+ (1071,956),
+ (1071,1269),
+ (1072,36),
+ (1073,454),
+ (1073,1203),
+ (1074,199),
+ (1075,1019),
+ (1076,327),
+ (1077,597),
+ (1078,202),
+ (1078,617),
+ (1079,1002),
+ (1080,225),
+ (1081,172),
+ (1081,184),
+ (1081,391),
+ (1082,832),
+ (1082,1384),
+ (1083,717),
+ (1084,291),
+ (1085,331),
+ (1086,25),
+ (1086,311),
+ (1086,439),
+ (1087,234),
+ (1088,150),
+ (1088,1272),
+ (1089,153),
+ (1089,1255),
+ (1090,853),
+ (1091,235),
+ (1092,1215),
+ (1093,217),
+ (1093,1297),
+ (1094,182),
+ (1095,75),
+ (1096,368),
+ (1097,963),
+ (1098,475),
+ (1098,504),
+ (1099,65),
+ (1099,568),
+ (1100,1197),
+ (1101,461),
+ (1102,162),
+ (1103,856),
+ (1104,226),
+ (1104,481),
+ (1105,274),
+ (1105,865),
+ (1105,1040),
+ (1105,1129),
+ (1105,1177),
+ (1105,1385),
+ (1106,600),
+ (1106,718),
+ (1107,250),
+ (1107,1061),
+ (1108,839),
+ (1108,1377),
+ (1109,127),
+ (1109,1179),
+ (1110,1197),
+ (1111,146),
+ (1111,992),
+ (1111,1148),
+ (1112,292),
+ (1113,364),
+ (1114,311),
+ (1114,1356),
+ (1115,401),
+ (1116,610),
+ (1117,93),
+ (1117,369),
+ (1118,27),
+ (1119,203),
+ (1119,1000),
+ (1120,552),
+ (1120,1093),
+ (1120,1269),
+ (1121,79),
+ (1121,821),
+ (1121,1269),
+ (1122,497),
+ (1123,1298),
+ (1124,175),
+ (1125,511),
+ (1125,969),
+ (1125,1140),
+ (1126,108),
+ (1126,498),
+ (1126,582),
+ (1126,583),
+ (1127,258),
+ (1128,204),
+ (1128,1230),
+ (1129,1117),
+ (1130,128),
+ (1130,301),
+ (1131,439),
+ (1131,1386),
+ (1132,853),
+ (1133,577),
+ (1133,1040),
+ (1133,1221),
+ (1134,889),
+ (1135,709),
+ (1135,1170),
+ (1136,963),
+ (1137,751),
+ (1138,219),
+ (1139,1224),
+ (1140,128),
+ (1140,301),
+ (1141,720),
+ (1142,542),
+ (1143,698),
+ (1143,1048),
+ (1144,359),
+ (1145,953),
+ (1145,1020),
+ (1146,1000),
+ (1146,1319),
+ (1147,236),
+ (1147,931),
+ (1148,717),
+ (1149,196),
+ (1149,569),
+ (1149,714),
+ (1150,300),
+ (1150,392),
+ (1150,1387),
+ (1151,1388),
+ (1152,895),
+ (1153,1371),
+ (1154,196),
+ (1154,569),
+ (1155,323),
+ (1155,792),
+ (1156,1266),
+ (1157,525),
+ (1157,926),
+ (1158,1241),
+ (1159,692),
+ (1159,1031),
+ (1159,1248),
+ (1160,1003),
+ (1161,377),
+ (1162,971),
+ (1163,26),
+ (1163,110),
+ (1163,1014),
+ (1164,327),
+ (1164,460),
+ (1164,1004),
+ (1165,51),
+ (1165,491),
+ (1165,515),
+ (1165,1005),
+ (1166,336),
+ (1167,927),
+ (1168,989),
+ (1169,1156),
+ (1170,81),
+ (1171,1008),
+ (1172,866),
+ (1173,854),
+ (1174,63),
+ (1175,192),
+ (1175,438),
+ (1175,758),
+ (1176,484),
+ (1176,1078),
+ (1176,1227),
+ (1177,570),
+ (1177,1333),
+ (1178,1361),
+ (1179,600),
+ (1179,619),
+ (1179,1133),
+ (1180,1290),
+ (1181,162),
+ (1182,384),
+ (1182,1204),
+ (1183,988),
+ (1184,481),
+ (1185,308),
+ (1185,775),
+ (1186,337),
+ (1187,64),
+ (1187,516),
+ (1188,1044),
+ (1189,467),
+ (1189,815),
+ (1190,1324),
+ (1191,268),
+ (1191,574),
+ (1191,1025),
+ (1191,1387),
+ (1192,378),
+ (1192,993),
+ (1193,135),
+ (1193,324),
+ (1193,438),
+ (1193,758),
+ (1194,553),
+ (1195,109),
+ (1196,21),
+ (1196,903),
+ (1196,1214),
+ (1197,759),
+ (1197,785),
+ (1197,1320),
+ (1198,996),
+ (1199,15),
+ (1199,275),
+ (1199,1035),
+ (1199,1112),
+ (1200,142),
+ (1201,682),
+ (1201,1167),
+ (1202,72),
+ (1202,467),
+ (1203,735),
+ (1205,1205),
+ (1206,429),
+ (1206,627),
+ (1206,1134),
+ (1207,1221),
+ (1208,734),
+ (1209,760),
+ (1210,476),
+ (1211,447),
+ (1212,791),
+ (1213,303),
+ (1213,634),
+ (1214,856),
+ (1215,270),
+ (1217,267),
+ (1217,1228),
+ (1218,1279),
+ (1219,154),
+ (1219,210),
+ (1219,967),
+ (1220,746),
+ (1221,208),
+ (1221,1033),
+ (1222,856),
+ (1223,56),
+ (1223,308),
+ (1223,385),
+ (1223,485),
+ (1223,775),
+ (1224,237),
+ (1224,879),
+ (1225,1283),
+ (1226,600),
+ (1226,860),
+ (1226,1362);
 
 select * from book_authors;
 
 select * from book_genres;
 
-INSERT INTO book_genres (book_id, genre_id) VALUES(1,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(2,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(2,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(3,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(3,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(3,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(4,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(4,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(4,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(4,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(5,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(6,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(7,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(7,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(7,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(7,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(7,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(8,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(8,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(8,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(8,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(10,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(10,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(11,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(11,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(12,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(12,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(12,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(12,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(13,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(13,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(13,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(13,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(14,28);
-INSERT INTO book_genres (book_id, genre_id) VALUES(15,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(16,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(16,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(16,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(16,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(17,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(18,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(18,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(19,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(19,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(19,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(20,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(20,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(20,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(21,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(21,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(21,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(21,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(24,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(24,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(24,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(24,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(24,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(25,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(25,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(25,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(25,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(26,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(27,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(27,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(28,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(28,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(28,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(28,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(28,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(30,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(30,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(31,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(31,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(31,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(31,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(31,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(32,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(32,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(34,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(35,33);
-INSERT INTO book_genres (book_id, genre_id) VALUES(35,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(35,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(36,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(37,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(37,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(41,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(41,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(41,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(42,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(42,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(43,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(44,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(44,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(45,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(46,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(46,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(47,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(48,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(48,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(48,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(48,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(49,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(49,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(50,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(50,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(50,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(50,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(50,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(51,19);
-INSERT INTO book_genres (book_id, genre_id) VALUES(51,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(51,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(52,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(52,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(52,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(81,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(81,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(81,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(82,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(82,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(82,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(102,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(102,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(102,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(103,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(103,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(103,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(104,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(105,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(105,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(106,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(106,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(106,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(106,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(107,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(107,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(108,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(108,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(109,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(109,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(109,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(109,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(110,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(111,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(111,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(111,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(112,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(112,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(113,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(114,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(114,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(114,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(114,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(114,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(115,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(115,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(115,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(115,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(116,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(116,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(117,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(118,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(118,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(118,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(119,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(119,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(119,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(119,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(120,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(120,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(120,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(121,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(121,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(121,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(122,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(122,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(123,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(124,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(124,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(124,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(125,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(125,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(125,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(125,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(125,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(126,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(126,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(127,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(127,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(128,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(128,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(129,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(129,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(129,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(129,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(130,7);
-INSERT INTO book_genres (book_id, genre_id) VALUES(130,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(131,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(131,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(131,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(133,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(133,48);
-INSERT INTO book_genres (book_id, genre_id) VALUES(136,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(136,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(137,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(137,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(137,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(137,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(138,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(138,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(140,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(141,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(141,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(141,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(142,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(143,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(143,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(144,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(144,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(144,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(145,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(145,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(145,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(145,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(145,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(146,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(146,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(147,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(147,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(147,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(147,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(148,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(148,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(149,7);
-INSERT INTO book_genres (book_id, genre_id) VALUES(149,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(149,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(149,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(149,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(150,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(150,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(150,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(151,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(151,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(153,17);
-INSERT INTO book_genres (book_id, genre_id) VALUES(153,36);
-INSERT INTO book_genres (book_id, genre_id) VALUES(154,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(154,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(154,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(154,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(155,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(156,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(156,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(156,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(156,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(157,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(157,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(157,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(158,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(159,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(159,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(160,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(160,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(161,15);
-INSERT INTO book_genres (book_id, genre_id) VALUES(161,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(161,56);
-INSERT INTO book_genres (book_id, genre_id) VALUES(162,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(163,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(163,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(165,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(166,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(166,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(166,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(166,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(167,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(167,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(167,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(167,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(167,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(167,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(168,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(168,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(168,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(168,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(169,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(169,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(169,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(170,48);
-INSERT INTO book_genres (book_id, genre_id) VALUES(172,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(172,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(172,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(172,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(174,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(174,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(174,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(174,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(176,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(177,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(178,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(178,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(179,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(179,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(179,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(179,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(180,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(180,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(180,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(181,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(181,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(181,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(181,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(182,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(182,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(182,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(183,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(184,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(184,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(184,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(185,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(185,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(185,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(186,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(187,4);
-INSERT INTO book_genres (book_id, genre_id) VALUES(187,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(188,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(189,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(189,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(189,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(189,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(191,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(191,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(191,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(192,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(192,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(193,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(193,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(195,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(196,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(196,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(196,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(196,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(196,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(197,28);
-INSERT INTO book_genres (book_id, genre_id) VALUES(197,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(198,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(198,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(198,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(198,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(199,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(200,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(200,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(200,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(201,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(201,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(201,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(205,30);
-INSERT INTO book_genres (book_id, genre_id) VALUES(205,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(206,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(206,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(206,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(223,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(223,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(223,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(223,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(224,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(224,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(224,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(225,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(225,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(239,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(239,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(239,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(240,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(240,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(241,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(241,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(241,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(242,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(242,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(242,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(242,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(243,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(244,47);
-INSERT INTO book_genres (book_id, genre_id) VALUES(244,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(245,28);
-INSERT INTO book_genres (book_id, genre_id) VALUES(245,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(246,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(247,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(247,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(247,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(248,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(248,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(248,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(249,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(250,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(250,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(250,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(250,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(251,32);
-INSERT INTO book_genres (book_id, genre_id) VALUES(251,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(252,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(252,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(253,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(253,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(254,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(255,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(255,7);
-INSERT INTO book_genres (book_id, genre_id) VALUES(255,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(255,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(256,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(256,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(257,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(257,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(257,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(257,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(258,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(258,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(259,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(259,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(259,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(260,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(260,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(261,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(261,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(261,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(261,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(262,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(262,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(262,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(263,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(264,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(264,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(264,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(265,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(265,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(265,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(266,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(266,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(267,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(267,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(268,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(268,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(268,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(268,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(268,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(268,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(269,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(269,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(271,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(272,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(272,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(272,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(272,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(273,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(273,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(273,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(273,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(273,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(274,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(274,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(274,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(274,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(275,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(275,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(275,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(275,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(275,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(276,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(276,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(276,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(277,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(277,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(277,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(277,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(278,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(278,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(278,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(278,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(279,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(279,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(279,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(279,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(280,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(280,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(280,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(282,39);
-INSERT INTO book_genres (book_id, genre_id) VALUES(282,47);
-INSERT INTO book_genres (book_id, genre_id) VALUES(284,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(284,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(285,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(285,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(285,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(285,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(286,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(288,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(288,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(288,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(289,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(289,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(289,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(289,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(290,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(290,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(290,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(291,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(291,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(292,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(292,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(292,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(292,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(292,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(292,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(292,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(293,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(293,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(293,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(295,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(295,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(295,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(295,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(295,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(296,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(296,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(296,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(296,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(297,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(297,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(297,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(297,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(298,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(298,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(298,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(299,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(299,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(300,5);
-INSERT INTO book_genres (book_id, genre_id) VALUES(300,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(301,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(302,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(303,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(304,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(304,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(304,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(304,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(305,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(305,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(305,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(305,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(306,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(306,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(307,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(308,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(309,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(312,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(312,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(312,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(312,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(312,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(313,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(313,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(313,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(313,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(314,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(314,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(314,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(314,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(315,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(315,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(315,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(316,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(317,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(317,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(317,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(318,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(319,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(319,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(320,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(320,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(320,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(321,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(321,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(321,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(321,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(321,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(322,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(323,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(323,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(323,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(324,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(324,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(325,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(325,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(326,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(326,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(326,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(327,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(327,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(327,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(327,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(328,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(328,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(328,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(329,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(329,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(329,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(329,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(329,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(329,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(330,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(331,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(331,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(331,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(332,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(332,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(333,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(333,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(333,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(333,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(334,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(334,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(335,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(335,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(335,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(336,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(336,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(336,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(336,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(337,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(339,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(341,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(341,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(341,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(342,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(342,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(343,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(343,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(343,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(344,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(346,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(346,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(346,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(346,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(347,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(347,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(348,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(348,35);
-INSERT INTO book_genres (book_id, genre_id) VALUES(348,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(348,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(348,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(349,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(349,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(350,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(350,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(350,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(351,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(352,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(352,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(354,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(354,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(354,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(355,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(355,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(356,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(357,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(357,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(357,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(358,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(359,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(359,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(359,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(359,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(359,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(360,30);
-INSERT INTO book_genres (book_id, genre_id) VALUES(360,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(360,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(361,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(361,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(362,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(362,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(362,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(363,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(363,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(364,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(365,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(365,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(365,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(365,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(366,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(366,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(366,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(366,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(366,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(367,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(367,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(367,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(367,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(367,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(367,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(368,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(368,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(368,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(368,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(369,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(369,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(369,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(369,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(370,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(370,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(370,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(371,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(371,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(371,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(371,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(371,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(371,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(372,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(372,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(372,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(372,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(372,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(373,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(373,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(373,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(374,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(375,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(375,13);
-INSERT INTO book_genres (book_id, genre_id) VALUES(375,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(376,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(376,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(376,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(377,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(377,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(377,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(377,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(378,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(378,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(379,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(380,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(381,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(381,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(381,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(381,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(382,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(382,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(382,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(383,29);
-INSERT INTO book_genres (book_id, genre_id) VALUES(383,31);
-INSERT INTO book_genres (book_id, genre_id) VALUES(384,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(385,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(385,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(385,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(386,32);
-INSERT INTO book_genres (book_id, genre_id) VALUES(386,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(388,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(388,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(388,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(389,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(389,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(390,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(390,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(390,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(390,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(390,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(391,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(392,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(392,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(392,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(394,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(395,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(395,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(395,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(396,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(396,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(397,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(397,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(399,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(399,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(399,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(400,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(400,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(401,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(401,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(401,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(402,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(402,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(403,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(403,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(403,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(404,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(404,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(404,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(404,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(405,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(405,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(405,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(406,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(406,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(406,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(406,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(406,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(407,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(407,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(407,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(407,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(407,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(408,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(408,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(408,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(408,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(408,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(408,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(409,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(409,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(410,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(410,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(410,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(410,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(411,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(411,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(411,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(412,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(412,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(413,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(413,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(413,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(414,48);
-INSERT INTO book_genres (book_id, genre_id) VALUES(415,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(415,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(415,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(417,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(417,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(417,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(417,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(417,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(417,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(417,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(418,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(418,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(418,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(419,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(419,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(419,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(419,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(419,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(420,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(421,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(421,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(421,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(421,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(422,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(422,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(422,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(423,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(423,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(424,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(424,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(424,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(425,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(425,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(426,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(426,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(426,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(427,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(427,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(427,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(427,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(428,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(428,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(428,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(429,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(429,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(429,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(430,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(431,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(431,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(431,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(431,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(431,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(431,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(431,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(432,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(433,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(433,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(434,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(435,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(435,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(436,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(436,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(436,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(436,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(436,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(436,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(437,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(438,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(438,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(438,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(439,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(439,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(439,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(440,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(440,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(440,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(440,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(440,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(440,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(440,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(441,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(441,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(441,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(441,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(442,24);
-INSERT INTO book_genres (book_id, genre_id) VALUES(442,31);
-INSERT INTO book_genres (book_id, genre_id) VALUES(443,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(443,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(443,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(444,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(444,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(445,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(446,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(446,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(446,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(447,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(447,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(447,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(447,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(449,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(449,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(450,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(450,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(450,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(450,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(451,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(451,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(452,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(452,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(453,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(453,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(454,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(454,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(454,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(455,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(455,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(455,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(455,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(455,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(456,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(456,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(456,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(456,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(457,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(457,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(457,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(457,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(458,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(458,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(458,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(458,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(459,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(459,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(460,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(460,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(460,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(461,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(461,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(461,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(462,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(462,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(463,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(463,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(463,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(463,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(464,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(464,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(464,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(464,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(465,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(465,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(465,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(466,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(466,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(466,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(466,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(466,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(467,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(468,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(468,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(470,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(471,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(471,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(471,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(472,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(473,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(474,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(474,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(474,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(474,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(476,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(476,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(476,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(476,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(477,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(477,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(477,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(477,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(477,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(478,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(479,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(479,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(479,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(481,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(481,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(482,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(482,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(482,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(482,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(483,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(485,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(485,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(485,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(485,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(485,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(486,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(487,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(487,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(487,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(487,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(487,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(487,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(488,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(488,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(488,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(489,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(489,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(490,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(490,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(490,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(491,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(491,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(493,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(493,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(493,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(493,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(495,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(495,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(495,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(496,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(496,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(497,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(497,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(497,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(497,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(498,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(498,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(498,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(499,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(499,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(499,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(500,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(501,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(502,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(502,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(503,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(503,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(503,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(504,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(504,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(504,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(505,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(505,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(505,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(505,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(505,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(505,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(505,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(506,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(506,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(506,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(506,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(506,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(507,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(507,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(507,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(507,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(508,65);
-INSERT INTO book_genres (book_id, genre_id) VALUES(508,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(508,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(509,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(509,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(509,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(509,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(510,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(510,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(510,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(511,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(511,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(511,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(511,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(511,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(512,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(512,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(512,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(513,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(513,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(513,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(513,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(514,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(514,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(514,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(514,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(514,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(514,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(515,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(515,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(515,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(515,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(515,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(515,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(515,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(516,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(516,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(517,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(517,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(518,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(519,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(520,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(521,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(522,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(522,33);
-INSERT INTO book_genres (book_id, genre_id) VALUES(522,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(522,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(522,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(522,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(522,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(523,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(523,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(523,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(524,32);
-INSERT INTO book_genres (book_id, genre_id) VALUES(524,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(524,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(525,26);
-INSERT INTO book_genres (book_id, genre_id) VALUES(525,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(525,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(525,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(525,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(526,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(527,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(527,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(528,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(528,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(529,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(529,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(529,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(529,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(530,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(530,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(530,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(531,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(532,47);
-INSERT INTO book_genres (book_id, genre_id) VALUES(532,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(533,14);
-INSERT INTO book_genres (book_id, genre_id) VALUES(533,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(533,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(534,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(534,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(534,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(534,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(534,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(535,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(535,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(536,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(536,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(536,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(536,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(537,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(537,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(537,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(537,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(538,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(538,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(539,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(539,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(539,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(539,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(539,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(540,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(540,28);
-INSERT INTO book_genres (book_id, genre_id) VALUES(540,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(541,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(541,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(541,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(541,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(542,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(542,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(543,14);
-INSERT INTO book_genres (book_id, genre_id) VALUES(544,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(544,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(544,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(544,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(545,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(545,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(545,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(545,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(545,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(545,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(546,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(547,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(547,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(547,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(547,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(548,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(548,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(549,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(549,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(550,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(550,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(550,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(550,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(551,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(551,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(552,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(552,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(552,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(553,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(554,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(555,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(555,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(555,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(555,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(556,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(556,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(556,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(556,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(558,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(558,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(558,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(558,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(558,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(558,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(558,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(559,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(560,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(560,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(560,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(561,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(561,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(563,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(564,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(564,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(565,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(565,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(565,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(565,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(567,32);
-INSERT INTO book_genres (book_id, genre_id) VALUES(568,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(569,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(569,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(569,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(570,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(571,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(571,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(571,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(572,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(572,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(572,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(572,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(572,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(573,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(573,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(573,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(574,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(574,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(574,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(574,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(595,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(596,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(596,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(596,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(597,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(597,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(597,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(597,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(598,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(598,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(598,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(598,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(628,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(628,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(628,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(628,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(628,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(629,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(629,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(630,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(630,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(630,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(631,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(631,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(631,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(632,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(632,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(633,28);
-INSERT INTO book_genres (book_id, genre_id) VALUES(633,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(633,50);
-INSERT INTO book_genres (book_id, genre_id) VALUES(633,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(634,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(635,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(635,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(636,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(636,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(636,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(637,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(637,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(638,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(639,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(639,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(639,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(639,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(639,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(640,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(640,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(640,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(641,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(641,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(641,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(642,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(642,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(643,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(643,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(643,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(643,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(643,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(644,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(644,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(644,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(644,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(644,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(644,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(645,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(645,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(645,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(646,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(646,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(646,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(647,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(647,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(647,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(648,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(648,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(648,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(649,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(649,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(650,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(650,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(651,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(651,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(651,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(652,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(653,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(653,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(654,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(655,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(655,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(656,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(656,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(657,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(657,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(657,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(657,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(658,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(658,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(658,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(658,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(659,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(659,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(659,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(660,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(660,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(661,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(661,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(661,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(662,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(662,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(662,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(662,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(662,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(662,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(663,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(663,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(664,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(664,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(664,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(664,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(664,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(665,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(665,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(665,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(666,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(666,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(666,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(666,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(666,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(667,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(667,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(668,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(668,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(668,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(669,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(669,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(670,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(670,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(671,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(671,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(672,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(672,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(673,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(673,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(673,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(673,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(674,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(674,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(674,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(674,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(674,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(675,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(675,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(676,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(676,2);
-INSERT INTO book_genres (book_id, genre_id) VALUES(676,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(676,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(677,14);
-INSERT INTO book_genres (book_id, genre_id) VALUES(677,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(678,30);
-INSERT INTO book_genres (book_id, genre_id) VALUES(678,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(679,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(679,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(679,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(680,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(681,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(681,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(681,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(681,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(681,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(682,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(682,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(682,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(683,7);
-INSERT INTO book_genres (book_id, genre_id) VALUES(683,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(684,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(684,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(684,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(684,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(685,32);
-INSERT INTO book_genres (book_id, genre_id) VALUES(685,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(686,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(686,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(686,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(686,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(687,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(687,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(687,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(688,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(688,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(689,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(689,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(689,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(689,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(690,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(691,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(692,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(692,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(692,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(692,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(693,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(694,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(694,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(695,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(695,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(695,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(695,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(695,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(695,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(696,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(696,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(696,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(696,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(697,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(697,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(697,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(697,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(698,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(698,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(699,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(699,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(699,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(701,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(701,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(701,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(701,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(701,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(702,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(702,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(702,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(703,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(703,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(703,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(703,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(703,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(703,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(704,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(704,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(704,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(704,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(705,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(705,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(705,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(706,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(706,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(706,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(706,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(707,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(707,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(709,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(710,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(710,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(711,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(711,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(712,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(712,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(712,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(713,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(713,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(713,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(713,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(714,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(714,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(714,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(714,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(715,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(716,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(716,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(716,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(717,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(717,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(718,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(719,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(719,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(719,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(719,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(720,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(720,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(720,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(720,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(721,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(721,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(722,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(722,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(722,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(722,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(723,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(723,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(723,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(723,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(723,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(723,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(724,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(724,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(724,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(725,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(725,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(726,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(727,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(728,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(728,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(728,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(729,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(729,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(730,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(730,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(730,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(731,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(731,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(731,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(731,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(732,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(732,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(732,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(733,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(733,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(733,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(734,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(734,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(734,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(735,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(735,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(735,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(735,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(736,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(736,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(736,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(736,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(736,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(737,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(737,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(737,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(738,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(738,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(738,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(738,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(739,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(739,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(739,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(739,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(740,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(741,30);
-INSERT INTO book_genres (book_id, genre_id) VALUES(741,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(742,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(742,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(742,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(743,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(743,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(743,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(744,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(744,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(744,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(744,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(745,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(746,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(746,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(746,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(746,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(747,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(747,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(748,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(748,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(748,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(748,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(749,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(750,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(750,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(750,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(751,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(751,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(751,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(751,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(752,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(752,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(752,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(752,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(753,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(754,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(754,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(754,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(754,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(754,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(754,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(755,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(755,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(755,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(755,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(756,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(756,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(756,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(756,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(756,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(757,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(757,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(757,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(757,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(758,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(758,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(758,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(758,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(759,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(759,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(759,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(760,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(760,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(760,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(760,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(761,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(761,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(761,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(762,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(762,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(762,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(763,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(763,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(764,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(764,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(764,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(765,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(765,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(765,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(765,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(766,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(766,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(767,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(767,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(768,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(768,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(768,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(768,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(769,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(769,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(769,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(769,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(770,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(770,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(770,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(771,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(772,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(772,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(773,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(773,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(774,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(774,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(774,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(774,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(774,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(774,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(775,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(775,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(776,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(776,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(777,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(777,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(777,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(777,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(777,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(778,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(779,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(779,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(780,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(780,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(780,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(780,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(780,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(780,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(781,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(781,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(781,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(782,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(782,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(782,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(782,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(782,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(783,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(783,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(783,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(784,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(784,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(784,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(784,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(785,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(786,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(787,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(787,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(787,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(788,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(788,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(788,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(788,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(788,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(789,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(789,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(789,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(790,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(790,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(791,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(791,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(791,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(792,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(792,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(792,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(792,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(793,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(793,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(794,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(794,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(794,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(795,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(795,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(795,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(795,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(796,7);
-INSERT INTO book_genres (book_id, genre_id) VALUES(796,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(796,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(796,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(797,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(797,65);
-INSERT INTO book_genres (book_id, genre_id) VALUES(797,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(798,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(798,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(799,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(799,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(799,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(799,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(799,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(800,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(800,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(800,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(800,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(800,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(801,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(802,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(802,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(803,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(803,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(805,36);
-INSERT INTO book_genres (book_id, genre_id) VALUES(805,45);
-INSERT INTO book_genres (book_id, genre_id) VALUES(805,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(805,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(806,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(806,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(806,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(806,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(807,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(807,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(808,65);
-INSERT INTO book_genres (book_id, genre_id) VALUES(809,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(809,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(810,31);
-INSERT INTO book_genres (book_id, genre_id) VALUES(811,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(811,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(811,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(811,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(813,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(814,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(815,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(815,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(816,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(816,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(816,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(817,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(817,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(817,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(817,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(817,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(818,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(818,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(818,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(819,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(819,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(819,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(819,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(819,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(820,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(820,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(821,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(821,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(822,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(822,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(822,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(822,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(823,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(824,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(825,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(825,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(825,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(826,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(826,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(827,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(828,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(828,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(828,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(829,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(829,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(830,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(831,28);
-INSERT INTO book_genres (book_id, genre_id) VALUES(832,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(832,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(832,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(833,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(833,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(833,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(834,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(834,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(834,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(835,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(835,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(836,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(836,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(836,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(837,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(837,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(837,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(839,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(839,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(839,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(840,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(840,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(840,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(840,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(841,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(843,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(843,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(843,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(843,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(843,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(844,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(845,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(845,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(846,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(846,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(846,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(846,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(846,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(846,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(847,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(848,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(848,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(848,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(849,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(849,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(850,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(851,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(851,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(851,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(851,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(852,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(852,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(853,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(853,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(853,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(853,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(854,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(854,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(854,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(854,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(855,17);
-INSERT INTO book_genres (book_id, genre_id) VALUES(855,36);
-INSERT INTO book_genres (book_id, genre_id) VALUES(855,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(857,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(857,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(857,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(857,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(858,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(858,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(858,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(858,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(858,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(859,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(859,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(859,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(859,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(860,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(860,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(860,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(860,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(861,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(862,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(862,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(863,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(863,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(863,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(864,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(864,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(865,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(865,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(865,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(865,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(865,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(867,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(867,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(867,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(868,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(868,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(868,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(868,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(869,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(869,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(869,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(870,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(870,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(870,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(870,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(870,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(870,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(870,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(872,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(872,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(874,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(874,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(874,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(874,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(874,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(874,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(875,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(875,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(875,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(876,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(876,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(876,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(877,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(877,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(877,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(877,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(877,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(877,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(878,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(878,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(878,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(878,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(879,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(879,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(880,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(880,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(880,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(881,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(881,48);
-INSERT INTO book_genres (book_id, genre_id) VALUES(881,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(881,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(881,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(882,47);
-INSERT INTO book_genres (book_id, genre_id) VALUES(882,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(883,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(883,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(883,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(883,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(884,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(884,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(884,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(884,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(885,22);
-INSERT INTO book_genres (book_id, genre_id) VALUES(885,31);
-INSERT INTO book_genres (book_id, genre_id) VALUES(886,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(886,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(886,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(887,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(887,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(888,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(888,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(888,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(888,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(889,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(889,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(889,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(890,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(890,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(891,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(891,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(892,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(892,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(892,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(892,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(892,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(893,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(893,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(893,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(894,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(894,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(894,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(894,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(895,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(895,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(896,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(896,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(897,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(897,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(897,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(897,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(898,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(899,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(899,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(899,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(899,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(900,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(901,32);
-INSERT INTO book_genres (book_id, genre_id) VALUES(901,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(902,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(902,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(903,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(903,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(903,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(903,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(904,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(905,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(906,18);
-INSERT INTO book_genres (book_id, genre_id) VALUES(907,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(908,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(908,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(908,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(909,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(909,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(909,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(910,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(910,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(910,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(910,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(911,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(911,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(911,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(911,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(912,28);
-INSERT INTO book_genres (book_id, genre_id) VALUES(912,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(913,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(913,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(913,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(914,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(914,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(914,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(914,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(915,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(915,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(915,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(916,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(916,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(916,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(917,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(917,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(918,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(918,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(918,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(918,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(918,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(918,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(919,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(919,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(919,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(920,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(920,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(921,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(921,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(921,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(922,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(922,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(923,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(923,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(923,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(924,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(925,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(925,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(925,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(925,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(925,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(926,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(926,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(927,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(927,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(927,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(928,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(928,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(928,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(929,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(929,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(929,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(930,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(930,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(930,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(930,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(931,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(931,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(931,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(932,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(932,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(932,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(933,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(934,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(934,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(934,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(934,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(935,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(935,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(935,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(936,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(936,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(937,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(937,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(937,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(937,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(938,28);
-INSERT INTO book_genres (book_id, genre_id) VALUES(938,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(938,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(939,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(939,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(939,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(939,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(939,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(939,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(940,1);
-INSERT INTO book_genres (book_id, genre_id) VALUES(940,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(941,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(941,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(941,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(942,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(942,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(942,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(942,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(943,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(943,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(944,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(944,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(944,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(945,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(945,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(945,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(945,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(946,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(946,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(946,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(946,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(947,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(947,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(947,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(948,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(948,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(948,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(949,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(949,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(949,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(950,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(950,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(950,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(950,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(951,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(952,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(952,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(952,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(953,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(953,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(953,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(953,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(953,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(954,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(954,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(954,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(954,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(955,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(955,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(955,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(956,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(956,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(956,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(957,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(957,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(957,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(957,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(957,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(958,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(959,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(959,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(960,32);
-INSERT INTO book_genres (book_id, genre_id) VALUES(960,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(961,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(961,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(961,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(962,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(962,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(962,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(962,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(963,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(963,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(963,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(964,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(964,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(965,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(965,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(965,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(965,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(967,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(967,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(968,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(968,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(968,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(968,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(969,29);
-INSERT INTO book_genres (book_id, genre_id) VALUES(969,31);
-INSERT INTO book_genres (book_id, genre_id) VALUES(969,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(969,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(970,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(971,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(971,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(971,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(971,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(972,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(972,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(972,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(973,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(973,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(973,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(973,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(973,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(974,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(974,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(974,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(974,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(975,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(975,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(975,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(975,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(975,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(975,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(976,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(976,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(977,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(977,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(977,26);
-INSERT INTO book_genres (book_id, genre_id) VALUES(977,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(977,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(978,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(979,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(979,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(979,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(980,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(980,66);
-INSERT INTO book_genres (book_id, genre_id) VALUES(981,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(981,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(981,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(981,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(982,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(982,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(983,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(983,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(983,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(983,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(983,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(984,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(984,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(985,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(985,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(985,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(986,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(986,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(986,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(986,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(987,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(987,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(987,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(987,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(987,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(988,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(988,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(989,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(989,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(989,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(989,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(989,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(989,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(990,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(990,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(990,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(991,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(991,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(991,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(991,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(991,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(992,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(992,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(992,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(992,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(993,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(994,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(994,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(994,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(994,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(995,17);
-INSERT INTO book_genres (book_id, genre_id) VALUES(995,36);
-INSERT INTO book_genres (book_id, genre_id) VALUES(996,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(997,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(997,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(997,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(997,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(998,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(998,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(998,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(999,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(999,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1000,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1000,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1000,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1000,67);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1001,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1001,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1001,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1002,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1002,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1003,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1004,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1005,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1006,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1006,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1006,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1006,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1007,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1008,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1008,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1008,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1008,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1009,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1010,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1010,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1010,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1010,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1010,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1010,68);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1011,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1011,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1011,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1012,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1012,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1012,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1012,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1014,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1014,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1014,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1014,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1014,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1015,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1015,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1015,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1016,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1016,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1016,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1016,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1016,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1017,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1017,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1017,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1017,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1019,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1020,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1020,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1020,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1020,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1021,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1021,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1021,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1023,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1024,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1024,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1025,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1025,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1025,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1025,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1026,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1026,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1027,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1027,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1027,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1028,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1028,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1028,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1029,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1029,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1029,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1030,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1030,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1031,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1031,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1031,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1031,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1032,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1032,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1032,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1032,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1033,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1033,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1034,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1034,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1035,6);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1035,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1035,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1035,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1035,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1036,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1036,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1037,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1037,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1038,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1039,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1040,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1040,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1040,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1041,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1041,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1041,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1042,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1042,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1042,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1042,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1043,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1044,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1044,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1044,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1045,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1045,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1046,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1046,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1046,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1046,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1046,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1047,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1047,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1048,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1048,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1049,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1049,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1050,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1050,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1050,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1050,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1051,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1051,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1051,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1052,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1052,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1053,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1053,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1054,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1055,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1055,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1055,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1056,43);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1057,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1057,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1058,14);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1058,29);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1058,31);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1058,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1058,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1060,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1060,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1060,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1060,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1060,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1061,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1061,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1062,44);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1062,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1062,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1062,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1063,37);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1063,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1063,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1064,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1064,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1064,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1065,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1066,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1066,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1066,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1066,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1067,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1067,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1067,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1068,56);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1068,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1069,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1069,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1069,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1070,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1071,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1071,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1072,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1072,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1072,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1073,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1073,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1073,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1075,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1075,19);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1075,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1075,54);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1075,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1075,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1075,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1076,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1076,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1076,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1076,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1076,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1077,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1077,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1077,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1077,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1078,8);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1079,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1079,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1079,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1080,33);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1080,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1080,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1080,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1080,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1080,66);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1081,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1081,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1081,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1081,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1082,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1082,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1083,22);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1083,31);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1084,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1084,55);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1084,61);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1084,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1084,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1085,16);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1085,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1085,63);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1086,3);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1086,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1087,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1087,64);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1088,26);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1088,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1088,53);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1089,52);
-INSERT INTO book_genres (book_id, genre_id) VALUES(1090,64);
+INSERT INTO book_genres (book_id, genre_id) VALUES
+(1,53),
+(1,61),
+(2,8),
+(2,64),
+(3,53),
+(3,63),
+(3,64),
+(4,53),
+(4,61),
+(4,63),
+(4,64),
+(5,53),
+(6,8),
+(7,1),
+(7,53),
+(7,55),
+(7,63),
+(7,64),
+(8,53),
+(8,55),
+(8,63),
+(8,64),
+(10,8),
+(10,64),
+(11,53),
+(11,63),
+(12,53),
+(12,61),
+(12,63),
+(12,64),
+(13,37),
+(13,55),
+(13,63),
+(13,64),
+(14,28),
+(15,64),
+(16,53),
+(16,64),
+(16,67),
+(16,68),
+(17,64),
+(18,53),
+(18,55),
+(19,53),
+(19,61),
+(19,64),
+(20,53),
+(20,55),
+(20,64),
+(21,44),
+(21,53),
+(21,61),
+(21,64),
+(24,53),
+(24,55),
+(24,63),
+(24,64),
+(24,67),
+(25,53),
+(25,55),
+(25,61),
+(25,63),
+(26,55),
+(27,53),
+(27,63),
+(28,53),
+(28,55),
+(28,61),
+(28,63),
+(28,64),
+(30,63),
+(30,64),
+(31,53),
+(31,55),
+(31,61),
+(31,63),
+(31,64),
+(32,53),
+(32,63),
+(34,53),
+(35,33),
+(35,53),
+(35,63),
+(36,64),
+(37,53),
+(37,64),
+(41,1),
+(41,53),
+(41,64),
+(42,1),
+(42,55),
+(43,44),
+(44,55),
+(44,64),
+(45,64),
+(46,55),
+(46,64),
+(47,61),
+(48,3),
+(48,53),
+(48,63),
+(48,64),
+(49,53),
+(49,55),
+(50,53),
+(50,55),
+(50,61),
+(50,63),
+(50,64),
+(51,19),
+(51,53),
+(51,55),
+(52,53),
+(52,55),
+(52,63),
+(81,53),
+(81,63),
+(81,64),
+(82,53),
+(82,63),
+(82,64),
+(102,53),
+(102,61),
+(102,64),
+(103,53),
+(103,55),
+(103,64),
+(104,64),
+(105,53),
+(105,64),
+(106,53),
+(106,61),
+(106,63),
+(106,64),
+(107,55),
+(107,63),
+(108,55),
+(108,64),
+(109,53),
+(109,61),
+(109,63),
+(109,64),
+(110,53),
+(111,53),
+(111,63),
+(111,64),
+(112,53),
+(112,64),
+(113,64),
+(114,53),
+(114,55),
+(114,61),
+(114,63),
+(114,64),
+(115,53),
+(115,55),
+(115,63),
+(115,64),
+(116,53),
+(116,64),
+(117,53),
+(118,53),
+(118,55),
+(118,64),
+(119,53),
+(119,61),
+(119,63),
+(119,64),
+(120,16),
+(120,53),
+(120,61),
+(121,53),
+(121,63),
+(121,64),
+(122,53),
+(122,64),
+(123,64),
+(124,53),
+(124,55),
+(124,64),
+(125,53),
+(125,55),
+(125,63),
+(125,64),
+(125,68),
+(126,67),
+(126,68),
+(127,3),
+(127,8),
+(128,3),
+(128,53),
+(129,53),
+(129,61),
+(129,63),
+(129,64),
+(130,7),
+(130,55),
+(131,8),
+(131,55),
+(131,64),
+(133,8),
+(133,48),
+(136,53),
+(136,63),
+(137,16),
+(137,53),
+(137,55),
+(137,63),
+(138,55),
+(138,63),
+(140,64),
+(141,53),
+(141,63),
+(141,64),
+(142,53),
+(143,53),
+(143,63),
+(144,53),
+(144,61),
+(144,64),
+(145,16),
+(145,53),
+(145,55),
+(145,61),
+(145,64),
+(146,53),
+(146,63),
+(147,53),
+(147,55),
+(147,63),
+(147,64),
+(148,43),
+(148,53),
+(149,7),
+(149,16),
+(149,53),
+(149,55),
+(149,64),
+(150,53),
+(150,61),
+(150,64),
+(151,53),
+(151,64),
+(153,17),
+(153,36),
+(154,44),
+(154,53),
+(154,63),
+(154,64),
+(155,64),
+(156,53),
+(156,61),
+(156,63),
+(156,64),
+(157,6),
+(157,61),
+(157,64),
+(158,64),
+(159,53),
+(159,61),
+(160,3),
+(160,53),
+(161,15),
+(161,53),
+(161,56),
+(162,55),
+(163,53),
+(163,55),
+(165,8),
+(166,53),
+(166,55),
+(166,61),
+(166,64),
+(167,16),
+(167,53),
+(167,55),
+(167,63),
+(167,64),
+(167,68),
+(168,53),
+(168,55),
+(168,64),
+(168,68),
+(169,16),
+(169,53),
+(169,64),
+(170,48),
+(172,53),
+(172,61),
+(172,63),
+(172,64),
+(174,37),
+(174,53),
+(174,61),
+(174,64),
+(176,3),
+(177,64),
+(178,63),
+(178,64),
+(179,53),
+(179,61),
+(179,64),
+(179,67),
+(180,53),
+(180,55),
+(180,64),
+(181,53),
+(181,61),
+(181,63),
+(181,64),
+(182,16),
+(182,53),
+(182,64),
+(183,64),
+(184,53),
+(184,55),
+(184,63),
+(185,55),
+(185,63),
+(185,64),
+(186,64),
+(187,4),
+(187,64),
+(188,64),
+(189,53),
+(189,55),
+(189,63),
+(189,64),
+(191,55),
+(191,63),
+(191,64),
+(192,53),
+(192,54),
+(193,53),
+(193,64),
+(195,64),
+(196,6),
+(196,53),
+(196,61),
+(196,63),
+(196,64),
+(197,28),
+(197,64),
+(198,3),
+(198,53),
+(198,63),
+(198,64),
+(199,53),
+(200,53),
+(200,55),
+(200,64),
+(201,53),
+(201,61),
+(201,63),
+(205,30),
+(205,64),
+(206,53),
+(206,63),
+(206,64),
+(223,6),
+(223,53),
+(223,61),
+(223,64),
+(224,3),
+(224,53),
+(224,55),
+(225,53),
+(225,64),
+(239,53),
+(239,63),
+(239,64),
+(240,53),
+(240,64),
+(241,53),
+(241,63),
+(241,64),
+(242,3),
+(242,53),
+(242,61),
+(242,64),
+(243,3),
+(244,47),
+(244,64),
+(245,28),
+(245,64),
+(246,64),
+(247,8),
+(247,53),
+(247,64),
+(248,53),
+(248,55),
+(248,64),
+(249,52),
+(250,16),
+(250,53),
+(250,61),
+(250,64),
+(251,32),
+(251,64),
+(252,53),
+(252,64),
+(253,8),
+(253,64),
+(254,64),
+(255,1),
+(255,7),
+(255,55),
+(255,68),
+(256,3),
+(256,53),
+(257,53),
+(257,55),
+(257,63),
+(257,64),
+(258,8),
+(258,53),
+(259,53),
+(259,61),
+(259,64),
+(260,64),
+(260,67),
+(261,37),
+(261,53),
+(261,55),
+(261,64),
+(262,53),
+(262,61),
+(262,64),
+(263,53),
+(264,53),
+(264,63),
+(264,64),
+(265,53),
+(265,55),
+(265,63),
+(266,44),
+(266,64),
+(267,53),
+(267,55),
+(268,44),
+(268,53),
+(268,55),
+(268,61),
+(268,63),
+(268,64),
+(269,8),
+(269,64),
+(271,8),
+(272,52),
+(272,53),
+(272,61),
+(272,63),
+(273,44),
+(273,53),
+(273,55),
+(273,61),
+(273,64),
+(274,53),
+(274,61),
+(274,63),
+(274,64),
+(275,53),
+(275,55),
+(275,61),
+(275,63),
+(275,64),
+(276,16),
+(276,53),
+(276,64),
+(277,53),
+(277,55),
+(277,63),
+(277,64),
+(278,53),
+(278,55),
+(278,61),
+(278,63),
+(279,3),
+(279,53),
+(279,63),
+(279,64),
+(280,8),
+(280,53),
+(280,63),
+(282,39),
+(282,47),
+(284,43),
+(284,53),
+(285,53),
+(285,55),
+(285,61),
+(285,63),
+(286,53),
+(288,53),
+(288,54),
+(288,64),
+(289,3),
+(289,53),
+(289,55),
+(289,63),
+(290,1),
+(290,55),
+(290,64),
+(291,53),
+(291,54),
+(292,16),
+(292,37),
+(292,53),
+(292,55),
+(292,61),
+(292,63),
+(292,64),
+(293,53),
+(293,55),
+(293,63),
+(295,1),
+(295,53),
+(295,55),
+(295,63),
+(295,64),
+(296,53),
+(296,61),
+(296,63),
+(296,64),
+(297,6),
+(297,53),
+(297,61),
+(297,64),
+(298,53),
+(298,55),
+(298,63),
+(299,53),
+(299,55),
+(300,5),
+(300,64),
+(301,53),
+(302,64),
+(303,54),
+(304,53),
+(304,61),
+(304,63),
+(304,64),
+(305,53),
+(305,55),
+(305,61),
+(305,63),
+(306,53),
+(306,63),
+(307,64),
+(308,55),
+(309,53),
+(312,53),
+(312,55),
+(312,61),
+(312,63),
+(312,64),
+(313,53),
+(313,55),
+(313,63),
+(313,64),
+(314,53),
+(314,55),
+(314,63),
+(314,64),
+(315,1),
+(315,53),
+(315,55),
+(316,64),
+(317,37),
+(317,63),
+(317,64),
+(318,64),
+(319,44),
+(319,61),
+(320,53),
+(320,61),
+(320,63),
+(321,53),
+(321,55),
+(321,61),
+(321,63),
+(321,64),
+(322,53),
+(323,8),
+(323,53),
+(323,63),
+(324,53),
+(324,61),
+(325,8),
+(325,53),
+(326,53),
+(326,61),
+(326,64),
+(327,53),
+(327,55),
+(327,63),
+(327,64),
+(328,53),
+(328,55),
+(328,64),
+(329,6),
+(329,53),
+(329,55),
+(329,61),
+(329,63),
+(329,64),
+(330,64),
+(331,53),
+(331,63),
+(331,64),
+(332,53),
+(332,55),
+(333,8),
+(333,53),
+(333,61),
+(333,64),
+(334,63),
+(334,64),
+(335,53),
+(335,55),
+(335,63),
+(336,53),
+(336,61),
+(336,63),
+(336,64),
+(337,55),
+(339,43),
+(341,53),
+(341,55),
+(341,64),
+(342,53),
+(342,64),
+(343,53),
+(343,61),
+(343,63),
+(344,1),
+(346,53),
+(346,64),
+(346,67),
+(346,68),
+(347,37),
+(347,64),
+(348,16),
+(348,35),
+(348,53),
+(348,55),
+(348,64),
+(349,8),
+(349,53),
+(350,53),
+(350,61),
+(350,64),
+(351,55),
+(352,53),
+(352,55),
+(354,1),
+(354,55),
+(354,63),
+(355,53),
+(355,61),
+(356,53),
+(357,52),
+(357,53),
+(357,55),
+(358,64),
+(359,53),
+(359,55),
+(359,64),
+(359,67),
+(359,68),
+(360,30),
+(360,53),
+(360,64),
+(361,63),
+(361,64),
+(362,53),
+(362,55),
+(362,64),
+(363,8),
+(363,53),
+(364,64),
+(365,53),
+(365,61),
+(365,63),
+(365,64),
+(366,53),
+(366,55),
+(366,63),
+(366,64),
+(366,68),
+(367,53),
+(367,55),
+(367,63),
+(367,64),
+(367,67),
+(367,68),
+(368,1),
+(368,53),
+(368,55),
+(368,64),
+(369,53),
+(369,55),
+(369,63),
+(369,64),
+(370,53),
+(370,54),
+(370,63),
+(371,52),
+(371,53),
+(371,55),
+(371,61),
+(371,63),
+(371,64),
+(372,3),
+(372,8),
+(372,53),
+(372,63),
+(372,64),
+(373,8),
+(373,53),
+(373,55),
+(374,64),
+(375,8),
+(375,13),
+(375,64),
+(376,8),
+(376,53),
+(376,63),
+(377,53),
+(377,61),
+(377,63),
+(377,64),
+(378,53),
+(378,64),
+(379,53),
+(380,52),
+(381,1),
+(381,55),
+(381,61),
+(381,64),
+(382,53),
+(382,61),
+(382,64),
+(383,29),
+(383,31),
+(384,53),
+(385,53),
+(385,61),
+(385,63),
+(386,32),
+(386,64),
+(388,6),
+(388,53),
+(388,64),
+(389,1),
+(389,55),
+(390,53),
+(390,61),
+(390,63),
+(390,64),
+(390,67),
+(391,53),
+(392,53),
+(392,61),
+(392,64),
+(394,55),
+(395,3),
+(395,53),
+(395,55),
+(396,3),
+(396,53),
+(397,55),
+(397,64),
+(399,53),
+(399,63),
+(399,64),
+(400,53),
+(400,61),
+(401,53),
+(401,63),
+(401,64),
+(402,53),
+(402,63),
+(403,53),
+(403,55),
+(403,64),
+(404,16),
+(404,53),
+(404,61),
+(404,64),
+(405,53),
+(405,55),
+(405,64),
+(406,44),
+(406,53),
+(406,61),
+(406,63),
+(406,64),
+(407,37),
+(407,53),
+(407,55),
+(407,63),
+(407,64),
+(408,16),
+(408,53),
+(408,55),
+(408,61),
+(408,63),
+(408,64),
+(409,53),
+(409,61),
+(410,53),
+(410,63),
+(410,64),
+(410,67),
+(411,53),
+(411,61),
+(411,64),
+(412,53),
+(412,55),
+(413,53),
+(413,63),
+(413,64),
+(414,48),
+(415,53),
+(415,55),
+(415,61),
+(417,6),
+(417,53),
+(417,55),
+(417,61),
+(417,63),
+(417,64),
+(417,67),
+(418,53),
+(418,55),
+(418,63),
+(419,16),
+(419,53),
+(419,55),
+(419,63),
+(419,64),
+(420,55),
+(421,53),
+(421,55),
+(421,63),
+(421,64),
+(422,53),
+(422,63),
+(422,64),
+(423,55),
+(423,63),
+(424,53),
+(424,55),
+(424,63),
+(425,53),
+(425,61),
+(426,53),
+(426,63),
+(426,64),
+(427,53),
+(427,55),
+(427,61),
+(427,63),
+(428,53),
+(428,63),
+(428,64),
+(429,44),
+(429,53),
+(429,64),
+(430,53),
+(431,53),
+(431,55),
+(431,61),
+(431,63),
+(431,64),
+(431,67),
+(431,68),
+(432,55),
+(433,8),
+(433,64),
+(434,52),
+(435,53),
+(435,63),
+(436,53),
+(436,55),
+(436,63),
+(436,64),
+(436,67),
+(436,68),
+(437,55),
+(438,53),
+(438,61),
+(438,64),
+(439,55),
+(439,63),
+(439,64),
+(440,53),
+(440,54),
+(440,55),
+(440,61),
+(440,63),
+(440,64),
+(440,67),
+(441,53),
+(441,61),
+(441,63),
+(441,64),
+(442,24),
+(442,31),
+(443,52),
+(443,53),
+(443,55),
+(444,3),
+(444,64),
+(445,64),
+(446,3),
+(446,53),
+(446,55),
+(447,6),
+(447,53),
+(447,61),
+(447,64),
+(449,53),
+(449,63),
+(450,53),
+(450,63),
+(450,64),
+(450,67),
+(451,53),
+(451,64),
+(452,53),
+(452,55),
+(453,53),
+(453,55),
+(454,53),
+(454,55),
+(454,63),
+(455,53),
+(455,55),
+(455,63),
+(455,64),
+(455,67),
+(456,3),
+(456,53),
+(456,55),
+(456,64),
+(457,53),
+(457,61),
+(457,63),
+(457,64),
+(458,6),
+(458,53),
+(458,61),
+(458,63),
+(459,53),
+(459,61),
+(460,6),
+(460,61),
+(460,64),
+(461,53),
+(461,61),
+(461,63),
+(462,53),
+(462,64),
+(463,16),
+(463,53),
+(463,55),
+(463,64),
+(464,6),
+(464,53),
+(464,61),
+(464,64),
+(465,53),
+(465,63),
+(465,64),
+(466,53),
+(466,55),
+(466,61),
+(466,63),
+(466,64),
+(467,64),
+(468,8),
+(468,53),
+(470,64),
+(471,37),
+(471,53),
+(471,64),
+(472,63),
+(473,64),
+(474,53),
+(474,61),
+(474,63),
+(474,64),
+(476,53),
+(476,54),
+(476,63),
+(476,64),
+(477,53),
+(477,55),
+(477,63),
+(477,64),
+(477,67),
+(478,55),
+(479,44),
+(479,61),
+(479,64),
+(481,53),
+(481,63),
+(482,53),
+(482,55),
+(482,63),
+(482,64),
+(483,53),
+(485,53),
+(485,55),
+(485,61),
+(485,63),
+(485,64),
+(486,44),
+(487,44),
+(487,53),
+(487,55),
+(487,61),
+(487,63),
+(487,64),
+(488,8),
+(488,53),
+(488,64),
+(489,37),
+(489,64),
+(490,53),
+(490,63),
+(490,64),
+(491,3),
+(491,53),
+(493,16),
+(493,53),
+(493,63),
+(493,64),
+(495,53),
+(495,55),
+(495,64),
+(496,53),
+(496,61),
+(497,53),
+(497,61),
+(497,63),
+(497,64),
+(498,53),
+(498,63),
+(498,64),
+(499,53),
+(499,55),
+(499,64),
+(500,53),
+(501,8),
+(502,53),
+(502,63),
+(503,16),
+(503,53),
+(503,61),
+(504,6),
+(504,53),
+(504,64),
+(505,16),
+(505,53),
+(505,55),
+(505,63),
+(505,64),
+(505,67),
+(505,68),
+(506,16),
+(506,53),
+(506,61),
+(506,63),
+(506,64),
+(507,53),
+(507,61),
+(507,63),
+(507,64),
+(508,65),
+(508,67),
+(508,68),
+(509,53),
+(509,61),
+(509,63),
+(509,64),
+(510,53),
+(510,61),
+(510,64),
+(511,3),
+(511,53),
+(511,54),
+(511,55),
+(511,63),
+(512,44),
+(512,53),
+(512,63),
+(513,53),
+(513,61),
+(513,63),
+(513,64),
+(514,16),
+(514,53),
+(514,55),
+(514,61),
+(514,63),
+(514,64),
+(515,3),
+(515,16),
+(515,53),
+(515,55),
+(515,61),
+(515,63),
+(515,64),
+(516,3),
+(516,53),
+(517,53),
+(517,63),
+(518,63),
+(519,8),
+(520,8),
+(521,53),
+(522,8),
+(522,33),
+(522,53),
+(522,55),
+(522,61),
+(522,63),
+(522,64),
+(523,53),
+(523,55),
+(523,64),
+(524,32),
+(524,53),
+(524,64),
+(525,26),
+(525,52),
+(525,55),
+(525,63),
+(525,64),
+(526,6),
+(527,53),
+(527,64),
+(528,37),
+(528,64),
+(529,53),
+(529,61),
+(529,63),
+(529,64),
+(530,16),
+(530,53),
+(530,64),
+(531,64),
+(532,47),
+(532,64),
+(533,14),
+(533,16),
+(533,64),
+(534,16),
+(534,53),
+(534,61),
+(534,63),
+(534,64),
+(535,53),
+(535,64),
+(536,6),
+(536,53),
+(536,63),
+(536,64),
+(537,53),
+(537,61),
+(537,63),
+(537,64),
+(538,53),
+(538,64),
+(539,16),
+(539,53),
+(539,61),
+(539,63),
+(539,64),
+(540,8),
+(540,28),
+(540,64),
+(541,1),
+(541,53),
+(541,55),
+(541,64),
+(542,53),
+(542,64),
+(543,14),
+(544,53),
+(544,61),
+(544,63),
+(544,64),
+(545,16),
+(545,53),
+(545,61),
+(545,63),
+(545,64),
+(545,67),
+(546,64),
+(547,6),
+(547,53),
+(547,61),
+(547,63),
+(548,44),
+(548,61),
+(549,53),
+(549,61),
+(550,53),
+(550,55),
+(550,63),
+(550,64),
+(551,53),
+(551,64),
+(552,3),
+(552,53),
+(552,64),
+(553,53),
+(554,64),
+(555,53),
+(555,55),
+(555,63),
+(555,64),
+(556,53),
+(556,55),
+(556,63),
+(556,64),
+(558,16),
+(558,37),
+(558,53),
+(558,55),
+(558,61),
+(558,63),
+(558,64),
+(559,53),
+(560,53),
+(560,63),
+(560,64),
+(561,37),
+(561,53),
+(563,64),
+(564,53),
+(564,55),
+(565,37),
+(565,53),
+(565,63),
+(565,64),
+(567,32),
+(568,64),
+(569,53),
+(569,61),
+(569,64),
+(570,64),
+(571,37),
+(571,53),
+(571,64),
+(572,1),
+(572,53),
+(572,55),
+(572,63),
+(572,64),
+(573,53),
+(573,55),
+(573,64),
+(574,53),
+(574,61),
+(574,63),
+(574,64),
+(595,1),
+(596,53),
+(596,63),
+(596,64),
+(597,53),
+(597,61),
+(597,63),
+(597,64),
+(598,44),
+(598,53),
+(598,61),
+(598,64),
+(628,53),
+(628,55),
+(628,61),
+(628,63),
+(628,64),
+(629,44),
+(629,64),
+(630,44),
+(630,53),
+(630,64),
+(631,53),
+(631,55),
+(631,64),
+(632,53),
+(632,61),
+(633,28),
+(633,44),
+(633,50),
+(633,64),
+(634,53),
+(635,53),
+(635,63),
+(636,63),
+(636,64),
+(636,68),
+(637,8),
+(637,64),
+(638,53),
+(639,53),
+(639,55),
+(639,61),
+(639,63),
+(639,64),
+(640,53),
+(640,55),
+(640,63),
+(641,53),
+(641,63),
+(641,64),
+(642,53),
+(642,55),
+(643,53),
+(643,55),
+(643,61),
+(643,63),
+(643,64),
+(644,53),
+(644,55),
+(644,63),
+(644,64),
+(644,67),
+(644,68),
+(645,53),
+(645,55),
+(645,63),
+(646,53),
+(646,55),
+(646,63),
+(647,44),
+(647,53),
+(647,64),
+(648,53),
+(648,64),
+(648,67),
+(649,53),
+(649,64),
+(650,55),
+(650,64),
+(651,61),
+(651,63),
+(651,64),
+(652,53),
+(653,44),
+(653,53),
+(654,64),
+(655,53),
+(655,64),
+(656,53),
+(656,64),
+(657,53),
+(657,61),
+(657,63),
+(657,64),
+(658,53),
+(658,55),
+(658,63),
+(658,64),
+(659,53),
+(659,63),
+(659,64),
+(660,43),
+(660,53),
+(661,53),
+(661,54),
+(661,64),
+(662,1),
+(662,53),
+(662,55),
+(662,61),
+(662,63),
+(662,64),
+(663,53),
+(663,64),
+(664,53),
+(664,55),
+(664,61),
+(664,63),
+(664,64),
+(665,53),
+(665,55),
+(665,63),
+(666,53),
+(666,55),
+(666,63),
+(666,64),
+(666,67),
+(667,3),
+(667,53),
+(668,53),
+(668,61),
+(668,63),
+(669,53),
+(669,61),
+(670,53),
+(670,63),
+(671,55),
+(671,61),
+(672,8),
+(672,64),
+(673,44),
+(673,53),
+(673,61),
+(673,63),
+(674,53),
+(674,55),
+(674,63),
+(674,64),
+(674,67),
+(675,8),
+(675,64),
+(676,1),
+(676,2),
+(676,55),
+(676,63),
+(677,14),
+(677,16),
+(678,30),
+(678,64),
+(679,53),
+(679,55),
+(679,64),
+(680,52),
+(681,6),
+(681,53),
+(681,61),
+(681,63),
+(681,64),
+(682,53),
+(682,55),
+(682,63),
+(683,7),
+(683,55),
+(684,8),
+(684,53),
+(684,63),
+(684,64),
+(685,32),
+(685,64),
+(686,53),
+(686,55),
+(686,63),
+(686,64),
+(687,53),
+(687,55),
+(687,64),
+(688,53),
+(688,61),
+(689,53),
+(689,61),
+(689,63),
+(689,64),
+(690,64),
+(691,64),
+(692,16),
+(692,53),
+(692,61),
+(692,64),
+(693,64),
+(694,53),
+(694,63),
+(695,6),
+(695,16),
+(695,53),
+(695,61),
+(695,63),
+(695,64),
+(696,6),
+(696,53),
+(696,61),
+(696,64),
+(697,53),
+(697,55),
+(697,63),
+(697,64),
+(698,53),
+(698,55),
+(699,44),
+(699,53),
+(699,64),
+(701,6),
+(701,53),
+(701,61),
+(701,63),
+(701,64),
+(702,37),
+(702,55),
+(702,64),
+(703,16),
+(703,53),
+(703,55),
+(703,61),
+(703,63),
+(703,64),
+(704,3),
+(704,53),
+(704,61),
+(704,64),
+(705,37),
+(705,55),
+(705,64),
+(706,53),
+(706,55),
+(706,63),
+(706,67),
+(707,53),
+(707,61),
+(709,53),
+(710,53),
+(710,64),
+(711,53),
+(711,55),
+(712,53),
+(712,63),
+(712,64),
+(713,53),
+(713,61),
+(713,63),
+(713,64),
+(714,1),
+(714,53),
+(714,55),
+(714,64),
+(715,64),
+(716,53),
+(716,63),
+(716,64),
+(717,55),
+(717,64),
+(718,64),
+(719,53),
+(719,55),
+(719,63),
+(719,64),
+(720,53),
+(720,61),
+(720,63),
+(720,64),
+(721,53),
+(721,63),
+(722,53),
+(722,55),
+(722,63),
+(722,64),
+(723,16),
+(723,53),
+(723,55),
+(723,61),
+(723,63),
+(723,64),
+(724,53),
+(724,55),
+(724,63),
+(725,3),
+(725,53),
+(726,53),
+(727,53),
+(728,53),
+(728,61),
+(728,64),
+(729,53),
+(729,64),
+(730,53),
+(730,55),
+(730,61),
+(731,53),
+(731,55),
+(731,61),
+(731,64),
+(732,8),
+(732,53),
+(732,55),
+(733,53),
+(733,55),
+(733,63),
+(734,44),
+(734,53),
+(734,61),
+(735,53),
+(735,61),
+(735,63),
+(735,64),
+(736,3),
+(736,53),
+(736,55),
+(736,61),
+(736,64),
+(737,53),
+(737,63),
+(737,64),
+(738,53),
+(738,55),
+(738,63),
+(738,64),
+(739,53),
+(739,55),
+(739,63),
+(739,64),
+(740,53),
+(741,30),
+(741,64),
+(742,37),
+(742,55),
+(742,64),
+(743,8),
+(743,53),
+(743,64),
+(744,3),
+(744,16),
+(744,53),
+(744,64),
+(745,52),
+(746,53),
+(746,61),
+(746,63),
+(746,64),
+(747,16),
+(747,53),
+(748,53),
+(748,61),
+(748,63),
+(748,64),
+(749,64),
+(750,53),
+(750,63),
+(750,64),
+(751,53),
+(751,54),
+(751,55),
+(751,64),
+(752,53),
+(752,61),
+(752,63),
+(752,64),
+(753,53),
+(754,3),
+(754,16),
+(754,53),
+(754,61),
+(754,63),
+(754,64),
+(755,16),
+(755,53),
+(755,63),
+(755,64),
+(756,53),
+(756,55),
+(756,61),
+(756,63),
+(756,64),
+(757,53),
+(757,61),
+(757,63),
+(757,64),
+(758,37),
+(758,55),
+(758,63),
+(758,64),
+(759,53),
+(759,63),
+(759,64),
+(760,16),
+(760,53),
+(760,63),
+(760,64),
+(761,53),
+(761,61),
+(761,64),
+(762,53),
+(762,61),
+(762,64),
+(763,53),
+(763,64),
+(764,53),
+(764,61),
+(764,63),
+(765,53),
+(765,55),
+(765,63),
+(765,64),
+(766,53),
+(766,64),
+(767,53),
+(767,63),
+(768,53),
+(768,61),
+(768,63),
+(768,64),
+(769,53),
+(769,55),
+(769,63),
+(769,64),
+(770,3),
+(770,53),
+(770,55),
+(771,64),
+(772,8),
+(772,55),
+(773,53),
+(773,64),
+(774,16),
+(774,53),
+(774,61),
+(774,63),
+(774,64),
+(774,67),
+(775,37),
+(775,64),
+(776,43),
+(776,55),
+(777,16),
+(777,53),
+(777,61),
+(777,63),
+(777,64),
+(778,64),
+(779,37),
+(779,64),
+(780,16),
+(780,53),
+(780,55),
+(780,61),
+(780,63),
+(780,64),
+(781,53),
+(781,63),
+(781,64),
+(782,16),
+(782,53),
+(782,55),
+(782,63),
+(782,64),
+(783,53),
+(783,61),
+(783,64),
+(784,53),
+(784,55),
+(784,63),
+(784,64),
+(785,43),
+(786,64),
+(787,53),
+(787,63),
+(787,64),
+(788,1),
+(788,16),
+(788,53),
+(788,55),
+(788,64),
+(789,44),
+(789,53),
+(789,61),
+(790,53),
+(790,63),
+(791,53),
+(791,55),
+(791,63),
+(792,53),
+(792,61),
+(792,63),
+(792,64),
+(793,53),
+(793,55),
+(794,53),
+(794,61),
+(794,64),
+(795,53),
+(795,55),
+(795,61),
+(795,64),
+(796,7),
+(796,16),
+(796,53),
+(796,55),
+(797,53),
+(797,65),
+(797,67),
+(798,53),
+(798,55),
+(799,53),
+(799,55),
+(799,61),
+(799,63),
+(799,64),
+(800,53),
+(800,54),
+(800,55),
+(800,61),
+(800,64),
+(801,53),
+(802,55),
+(802,64),
+(803,53),
+(803,55),
+(805,36),
+(805,45),
+(805,53),
+(805,55),
+(806,1),
+(806,3),
+(806,53),
+(806,63),
+(807,53),
+(807,64),
+(808,65),
+(809,8),
+(809,63),
+(810,31),
+(811,53),
+(811,61),
+(811,63),
+(811,64),
+(813,3),
+(814,8),
+(815,55),
+(815,63),
+(816,53),
+(816,55),
+(816,64),
+(817,53),
+(817,55),
+(817,61),
+(817,63),
+(817,64),
+(818,8),
+(818,53),
+(818,64),
+(819,3),
+(819,53),
+(819,55),
+(819,63),
+(819,64),
+(820,55),
+(820,64),
+(821,53),
+(821,61),
+(822,53),
+(822,61),
+(822,63),
+(822,64),
+(823,64),
+(824,64),
+(825,53),
+(825,61),
+(825,63),
+(826,53),
+(826,61),
+(827,64),
+(828,53),
+(828,55),
+(828,63),
+(829,3),
+(829,53),
+(830,53),
+(831,28),
+(832,53),
+(832,61),
+(832,63),
+(833,53),
+(833,63),
+(833,64),
+(834,16),
+(834,53),
+(834,64),
+(835,53),
+(835,64),
+(836,53),
+(836,63),
+(836,64),
+(837,53),
+(837,63),
+(837,64),
+(839,53),
+(839,63),
+(839,64),
+(840,53),
+(840,55),
+(840,63),
+(840,64),
+(841,53),
+(843,53),
+(843,55),
+(843,61),
+(843,63),
+(843,64),
+(844,52),
+(845,55),
+(845,63),
+(846,16),
+(846,53),
+(846,55),
+(846,61),
+(846,63),
+(846,64),
+(847,64),
+(848,53),
+(848,61),
+(848,64),
+(849,53),
+(849,64),
+(850,64),
+(851,53),
+(851,61),
+(851,63),
+(851,64),
+(852,53),
+(852,55),
+(853,53),
+(853,61),
+(853,63),
+(853,64),
+(854,53),
+(854,61),
+(854,63),
+(854,64),
+(855,17),
+(855,36),
+(855,43),
+(857,53),
+(857,55),
+(857,61),
+(857,63),
+(858,16),
+(858,53),
+(858,61),
+(858,63),
+(858,64),
+(859,53),
+(859,61),
+(859,63),
+(859,64),
+(860,53),
+(860,55),
+(860,63),
+(860,64),
+(861,37),
+(862,53),
+(862,54),
+(863,53),
+(863,55),
+(863,64),
+(864,3),
+(864,53),
+(865,44),
+(865,53),
+(865,61),
+(865,63),
+(865,64),
+(867,1),
+(867,3),
+(867,53),
+(868,53),
+(868,55),
+(868,63),
+(868,64),
+(869,53),
+(869,55),
+(869,63),
+(870,1),
+(870,3),
+(870,53),
+(870,55),
+(870,61),
+(870,63),
+(870,64),
+(872,53),
+(872,64),
+(874,16),
+(874,53),
+(874,55),
+(874,61),
+(874,63),
+(874,64),
+(875,53),
+(875,61),
+(875,64),
+(876,53),
+(876,54),
+(876,63),
+(877,44),
+(877,53),
+(877,55),
+(877,61),
+(877,63),
+(877,64),
+(878,53),
+(878,61),
+(878,63),
+(878,64),
+(879,53),
+(879,54),
+(880,44),
+(880,53),
+(880,64),
+(881,8),
+(881,48),
+(881,53),
+(881,55),
+(881,63),
+(882,47),
+(882,64),
+(883,53),
+(883,55),
+(883,61),
+(883,63),
+(884,6),
+(884,53),
+(884,61),
+(884,64),
+(885,22),
+(885,31),
+(886,53),
+(886,55),
+(886,64),
+(887,8),
+(887,53),
+(888,53),
+(888,61),
+(888,63),
+(888,64),
+(889,53),
+(889,61),
+(889,63),
+(890,53),
+(890,64),
+(891,55),
+(891,63),
+(892,53),
+(892,55),
+(892,61),
+(892,63),
+(892,64),
+(893,3),
+(893,53),
+(893,55),
+(894,3),
+(894,53),
+(894,55),
+(894,63),
+(895,3),
+(895,53),
+(896,3),
+(896,53),
+(897,53),
+(897,61),
+(897,63),
+(897,64),
+(898,53),
+(899,53),
+(899,61),
+(899,63),
+(899,64),
+(900,53),
+(901,32),
+(901,64),
+(902,8),
+(902,64),
+(903,53),
+(903,61),
+(903,63),
+(903,64),
+(904,44),
+(905,64),
+(906,18),
+(907,64),
+(908,53),
+(908,61),
+(908,64),
+(909,53),
+(909,63),
+(909,64),
+(910,53),
+(910,61),
+(910,63),
+(910,64),
+(911,37),
+(911,53),
+(911,55),
+(911,64),
+(912,28),
+(912,44),
+(913,53),
+(913,63),
+(913,64),
+(914,53),
+(914,61),
+(914,63),
+(914,64),
+(915,53),
+(915,55),
+(915,63),
+(916,8),
+(916,53),
+(916,64),
+(917,1),
+(917,55),
+(918,53),
+(918,54),
+(918,55),
+(918,61),
+(918,63),
+(918,64),
+(919,52),
+(919,53),
+(919,63),
+(920,43),
+(920,53),
+(921,53),
+(921,63),
+(921,64),
+(922,53),
+(922,55),
+(923,8),
+(923,53),
+(923,63),
+(924,8),
+(925,53),
+(925,55),
+(925,61),
+(925,63),
+(925,64),
+(926,53),
+(926,64),
+(927,53),
+(927,61),
+(927,63),
+(928,53),
+(928,63),
+(928,64),
+(929,53),
+(929,63),
+(929,64),
+(930,53),
+(930,61),
+(930,63),
+(930,64),
+(931,53),
+(931,55),
+(931,63),
+(932,53),
+(932,61),
+(932,64),
+(933,64),
+(934,53),
+(934,61),
+(934,63),
+(934,64),
+(935,37),
+(935,55),
+(935,63),
+(936,55),
+(936,64),
+(937,53),
+(937,54),
+(937,63),
+(937,64),
+(938,28),
+(938,53),
+(938,64),
+(939,16),
+(939,53),
+(939,55),
+(939,61),
+(939,63),
+(939,64),
+(940,1),
+(940,63),
+(941,53),
+(941,61),
+(941,64),
+(942,53),
+(942,55),
+(942,63),
+(942,64),
+(943,3),
+(943,53),
+(944,37),
+(944,53),
+(944,64),
+(945,8),
+(945,53),
+(945,63),
+(945,64),
+(946,16),
+(946,53),
+(946,63),
+(946,64),
+(947,53),
+(947,63),
+(947,64),
+(948,37),
+(948,53),
+(948,63),
+(949,53),
+(949,61),
+(949,64),
+(950,43),
+(950,53),
+(950,55),
+(950,64),
+(951,55),
+(952,53),
+(952,63),
+(952,64),
+(953,53),
+(953,61),
+(953,63),
+(953,64),
+(953,67),
+(954,53),
+(954,61),
+(954,63),
+(954,64),
+(955,53),
+(955,61),
+(955,63),
+(956,53),
+(956,55),
+(956,64),
+(957,16),
+(957,53),
+(957,61),
+(957,63),
+(957,64),
+(958,53),
+(959,53),
+(959,64),
+(960,32),
+(960,64),
+(961,53),
+(961,61),
+(961,64),
+(962,53),
+(962,55),
+(962,63),
+(962,64),
+(963,53),
+(963,63),
+(963,64),
+(964,53),
+(964,55),
+(965,53),
+(965,61),
+(965,63),
+(965,64),
+(967,53),
+(967,54),
+(968,53),
+(968,55),
+(968,63),
+(968,64),
+(969,29),
+(969,31),
+(969,53),
+(969,64),
+(970,64),
+(971,53),
+(971,55),
+(971,63),
+(971,64),
+(972,53),
+(972,63),
+(972,64),
+(973,6),
+(973,53),
+(973,61),
+(973,63),
+(973,64),
+(974,53),
+(974,55),
+(974,63),
+(974,64),
+(975,16),
+(975,53),
+(975,55),
+(975,61),
+(975,63),
+(975,64),
+(976,37),
+(976,64),
+(977,3),
+(977,16),
+(977,26),
+(977,53),
+(977,64),
+(978,64),
+(979,53),
+(979,63),
+(979,64),
+(980,64),
+(980,66),
+(981,53),
+(981,61),
+(981,63),
+(981,64),
+(982,43),
+(982,53),
+(983,16),
+(983,53),
+(983,55),
+(983,63),
+(983,64),
+(984,53),
+(984,64),
+(985,53),
+(985,55),
+(985,61),
+(986,53),
+(986,61),
+(986,63),
+(986,64),
+(987,53),
+(987,55),
+(987,61),
+(987,63),
+(987,64),
+(988,53),
+(988,55),
+(989,16),
+(989,53),
+(989,55),
+(989,61),
+(989,63),
+(989,64),
+(990,37),
+(990,63),
+(990,64),
+(991,53),
+(991,55),
+(991,61),
+(991,63),
+(991,64),
+(992,53),
+(992,61),
+(992,63),
+(992,64),
+(993,64),
+(994,53),
+(994,61),
+(994,63),
+(994,64),
+(995,17),
+(995,36),
+(996,64),
+(997,53),
+(997,61),
+(997,63),
+(997,64),
+(998,44),
+(998,53),
+(998,64),
+(999,8),
+(999,55),
+(1000,53),
+(1000,63),
+(1000,64),
+(1000,67),
+(1001,53),
+(1001,61),
+(1001,64),
+(1002,53),
+(1002,63),
+(1003,63),
+(1004,53),
+(1005,64),
+(1006,53),
+(1006,54),
+(1006,63),
+(1006,64),
+(1007,64),
+(1008,53),
+(1008,61),
+(1008,63),
+(1008,64),
+(1009,53),
+(1010,53),
+(1010,55),
+(1010,61),
+(1010,63),
+(1010,64),
+(1010,68),
+(1011,53),
+(1011,63),
+(1011,64),
+(1012,16),
+(1012,53),
+(1012,55),
+(1012,63),
+(1014,16),
+(1014,53),
+(1014,55),
+(1014,63),
+(1014,64),
+(1015,53),
+(1015,61),
+(1015,64),
+(1016,53),
+(1016,55),
+(1016,61),
+(1016,63),
+(1016,64),
+(1017,53),
+(1017,61),
+(1017,63),
+(1017,64),
+(1019,53),
+(1020,3),
+(1020,53),
+(1020,63),
+(1020,64),
+(1021,53),
+(1021,63),
+(1021,64),
+(1023,8),
+(1024,53),
+(1024,64),
+(1025,44),
+(1025,53),
+(1025,61),
+(1025,64),
+(1026,53),
+(1026,55),
+(1027,53),
+(1027,55),
+(1027,64),
+(1028,53),
+(1028,61),
+(1028,63),
+(1029,53),
+(1029,55),
+(1029,64),
+(1030,8),
+(1030,53),
+(1031,53),
+(1031,61),
+(1031,63),
+(1031,64),
+(1032,53),
+(1032,61),
+(1032,63),
+(1032,64),
+(1033,8),
+(1033,53),
+(1034,44),
+(1034,64),
+(1035,6),
+(1035,53),
+(1035,61),
+(1035,63),
+(1035,64),
+(1036,53),
+(1036,64),
+(1037,53),
+(1037,64),
+(1038,53),
+(1039,53),
+(1040,43),
+(1040,53),
+(1040,55),
+(1041,3),
+(1041,53),
+(1041,63),
+(1042,37),
+(1042,53),
+(1042,55),
+(1042,63),
+(1043,55),
+(1044,53),
+(1044,61),
+(1044,63),
+(1045,53),
+(1045,64),
+(1046,53),
+(1046,55),
+(1046,61),
+(1046,63),
+(1046,64),
+(1047,37),
+(1047,64),
+(1048,8),
+(1048,64),
+(1049,8),
+(1049,63),
+(1050,16),
+(1050,53),
+(1050,63),
+(1050,64),
+(1051,3),
+(1051,55),
+(1051,64),
+(1052,8),
+(1052,64),
+(1053,8),
+(1053,64),
+(1054,64),
+(1055,8),
+(1055,43),
+(1055,64),
+(1056,43),
+(1057,53),
+(1057,64),
+(1058,14),
+(1058,29),
+(1058,31),
+(1058,53),
+(1058,64),
+(1060,53),
+(1060,55),
+(1060,61),
+(1060,63),
+(1060,64),
+(1061,53),
+(1061,64),
+(1062,44),
+(1062,53),
+(1062,61),
+(1062,64),
+(1063,37),
+(1063,55),
+(1063,63),
+(1064,53),
+(1064,63),
+(1064,64),
+(1065,64),
+(1066,53),
+(1066,61),
+(1066,63),
+(1066,64),
+(1067,53),
+(1067,55),
+(1067,63),
+(1068,56),
+(1068,64),
+(1069,53),
+(1069,63),
+(1069,64),
+(1070,52),
+(1071,53),
+(1071,63),
+(1072,53),
+(1072,61),
+(1072,64),
+(1073,8),
+(1073,53),
+(1073,64),
+(1075,16),
+(1075,19),
+(1075,53),
+(1075,54),
+(1075,61),
+(1075,63),
+(1075,64),
+(1076,53),
+(1076,55),
+(1076,61),
+(1076,63),
+(1076,64),
+(1077,53),
+(1077,55),
+(1077,63),
+(1077,64),
+(1078,8),
+(1079,53),
+(1079,55),
+(1079,63),
+(1080,33),
+(1080,53),
+(1080,55),
+(1080,63),
+(1080,64),
+(1080,66),
+(1081,3),
+(1081,53),
+(1081,63),
+(1081,64),
+(1082,53),
+(1082,55),
+(1083,22),
+(1083,31),
+(1084,53),
+(1084,55),
+(1084,61),
+(1084,63),
+(1084,64),
+(1085,16),
+(1085,53),
+(1085,63),
+(1086,3),
+(1086,53),
+(1087,53),
+(1087,64),
+(1088,26),
+(1088,52),
+(1088,53),
+(1089,52),
+(1090,64);

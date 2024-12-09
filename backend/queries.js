@@ -79,7 +79,7 @@ export async function addBook(book) {
   }
 }
 
-export async function addBook(book_id) {
+export async function deleteBook(book_id) {
   try {
     const admin = dbadmin(get_current_server_port())
     console.log(`book_id: ${book_id}`)

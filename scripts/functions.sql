@@ -105,15 +105,15 @@ CREATE OR REPLACE FUNCTION return_book(
     p_book_id INT
 ) RETURNS BOOLEAN AS $$
 DECLARE
-    deleted_count INT;  -- Variable to hold the number of deleted rows
+    deleted_row RECORD;  -- Variable to hold the number of deleted rows
 BEGIN
     -- Attempt to delete the book loan and count the affected rows
     DELETE FROM book_loans
     WHERE book_id = p_book_id
-    RETURNING COUNT(*) INTO deleted_count;
+    RETURNING * INTO deleted_row;
 
     -- Return TRUE if one or more rows were deleted, otherwise FALSE
-    RETURN deleted_count > 0;
+    RETURN deleted_row is not null;
 
 EXCEPTION
     WHEN OTHERS THEN
@@ -141,3 +141,48 @@ EXCEPTION
     RETURN FALSE;  -- Возвращаем FALSE в случае ошибки
 end;
 $$ language plpgsql;
+
+--	DELETE BOOK
+create or replace function delete_book(p_book_id INT)
+returns boolean as $$
+declare
+	deleted_row RECORD; 
+begin
+	delete from books 
+	where book_id = book_id
+	returning * into deleted_row;  
+  
+  	RETURN deleted_row is not null;
+EXCEPTION
+  	WHEN OTHERS THEN
+    RETURN FALSE;  -- Возвращаем FALSE в случае ошибки
+end;
+$$ language plpgsql;
+
+-- REGISTER NEW USER
+CREATE OR REPLACE FUNCTION create_database_user(username TEXT, password TEXT)
+RETURNS BOOLEAN AS $$
+DECLARE
+    user_exists INT;
+BEGIN
+    -- Проверяем, существует ли пользователь
+    SELECT COUNT(*) INTO user_exists 
+    FROM pg_roles 
+    WHERE rolname = username;
+
+    IF user_exists > 0 THEN
+        RAISE NOTICE 'Пользователь "%" уже существует.', username;
+        RETURN FALSE;  -- Пользователь уже существует
+    END IF;
+
+    -- Создаем нового пользователя
+    EXECUTE format('CREATE USER %I WITH PASSWORD %L', username, password);
+    RAISE NOTICE 'Пользователь "%" успешно создан.', username;
+
+    RETURN TRUE;  -- Пользователь успешно создан
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE ERROR 'Ошибка при создании пользователя: %', SQLERRM;
+        RETURN FALSE;  -- Возвращаем FALSE в случае ошибки
+END;
+$$ LANGUAGE plpgsql;
