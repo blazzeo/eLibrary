@@ -54,10 +54,10 @@ export async function createUser({ username, password }: UserData) {
   }
 }
 
-export async function getBooks() {
+export async function getBooks(userId: number) {
   try {
     const response: AxiosResponse<BookData[]> = await axios.get(
-      `http://localhost:${BACK_PORT}/api/getbooks`
+      `http://localhost:${BACK_PORT}/api/getbooks?user_id=${userId}`
     );
 
     return response.data;

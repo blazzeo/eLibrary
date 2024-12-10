@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import * as db_request from './queries.js'
+import { server_health } from './monitoring.js';
 
 const PORT = 3000;
 const app = express();
@@ -46,9 +47,9 @@ app.get('/api/createuser', async (req, res) => {
 app.get('/api/borrowbook', async (req, res) => {
   try {
     console.log("borrowBook")
-    const userId = req.query.user_id;
-    const bookId = req.query.book_id;
-    const result = await db_request.borrowBook(userId, bookId);
+    const user_id = req.query.user_id;
+    const book_id = req.query.book_id;
+    const result = await db_request.borrowBook(user_id, book_id);
     res.json({ result: result });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -58,8 +59,8 @@ app.get('/api/borrowbook', async (req, res) => {
 app.get('/api/returnbook', async (req, res) => {
   try {
     console.log("returnBook")
-    const bookId = req.query.book_id;
-    const result = await db_request.returnBook(bookId);
+    const book_id = req.query.book_id;
+    const result = await db_request.returnBook(book_id);
     res.json({ result: result });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -69,7 +70,8 @@ app.get('/api/returnbook', async (req, res) => {
 app.get('/api/getbooks', async (req, res) => {
   try {
     console.log("getBooks")
-    const result = await db_request.getBooksTest();
+    const user_id = req.query.user_id;
+    const result = await db_request.getBooksTest(user_id);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -97,6 +99,8 @@ app.get('/api/deletebook', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 })
+
+server_health();
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

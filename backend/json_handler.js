@@ -13,7 +13,7 @@ export function import_json(filePath, tableName) {
 
     try {
       const jsonData = JSON.parse(data);
-      console.log('Parsed JSON data:', jsonData);
+      console.log('Parsed JSON rows:', jsonData.length);
 
       jsonData.forEach(obj => {
         admin.query(`select add_${tableName}($1::json);`, [JSON.stringify(obj)])
@@ -34,7 +34,7 @@ export async function export_json(filePath, tableName) {
       if (err) {
         console.error('Error writing to file:', err);
       } else {
-        console.log('File has been written successfully.');
+        console.log(`File has been written successfully. Rows: ${tableContent.rowCount}`);
       }
     });
   } catch (error) {

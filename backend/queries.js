@@ -38,10 +38,10 @@ export async function createUser(userLogin, userPassword) {
   }
 }
 
-export async function borrowBook(userId, bookId) {
+export async function borrowBook(user_id, book_id) {
   try {
     const user = dbuser(get_current_server_port())
-    const result = await user.query('SELECT borrow_book($1, $2);', [userId, bookId])
+    const result = await user.query('SELECT borrow_book($1, $2);', [user_id, book_id])
     console.log(result.rows)
     return result.rows;
   } catch (err) {
@@ -49,10 +49,10 @@ export async function borrowBook(userId, bookId) {
   }
 }
 
-export async function returnBook(bookId) {
+export async function returnBook(book_id) {
   try {
     const user = dbuser(get_current_server_port())
-    const result = await user.query('SELECT return_book($1);', [bookId])
+    const result = await user.query('SELECT return_book($1);', [book_id])
     console.log(result.rows)
     return result.rows;
   } catch (err) {
@@ -60,10 +60,10 @@ export async function returnBook(bookId) {
   }
 }
 
-export async function getBooksTest() {
+export async function getBooksTest(user_id) {
   try {
     const user = dbuser(get_current_server_port())
-    const books = await user.query('select * from books;')
+    const books = await user.query('select get_books($1);', [user_id])
     console.log(books.rowCount);
     return books.rows;
   } catch (err) {

@@ -85,7 +85,7 @@ CREATE TABLE book_loans (
 
 --	grant privilleges 
 grant connect on database elibrary to dbuser;
-grant connect on database elibrary to dbuser;
+grant connect on database elibrary to dbadmin;
 
 GRANT SELECT ON books TO dbuser;
 
