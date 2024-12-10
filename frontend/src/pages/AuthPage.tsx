@@ -4,18 +4,17 @@ import { useState } from "react";
 import RegisterForm from "../components/auth/RegisterForm";
 
 interface Props {
-  sendData: (data: UserData) => void;
+  setRole: (role: string) => void;
 }
 
-export function LoginPage({ sendData }: Props) {
+export function AuthPage({ setRole }: Props) {
   const [noAccount, setNoAccount] = useState(false);
 
-  function authorized(authData: UserData) {
-    sessionStorage.setItem("authorized", "true");
-    sessionStorage.setItem("username", authData.username);
+  function authorize(authData: UserData, role: string) {
+    sessionStorage.setItem("userName", authData.username);
     sessionStorage.setItem("password", authData.password);
 
-    sendData(authData);
+    setRole(role);
   }
 
   return (
@@ -24,7 +23,7 @@ export function LoginPage({ sendData }: Props) {
         <RegisterForm createAccountCallback={() => setNoAccount(!noAccount)} />
       ) : (
         <LoginForm
-          authorized={authorized}
+          authorizeCallback={authorize}
           noAccountCallback={() => setNoAccount(!noAccount)}
         />
       )}

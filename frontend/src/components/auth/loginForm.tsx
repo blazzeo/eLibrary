@@ -4,11 +4,11 @@ import { checkUser } from "../api/DatabaseAPI";
 import { UserData } from "../structs";
 
 interface Props {
-  authorized: (userData: UserData) => void;
+  authorizeCallback: (authData: UserData, user_role: string) => void;
   noAccountCallback: () => void;
 }
 
-const LoginForm: React.FC<Props> = ({ authorized, noAccountCallback }) => {
+const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -21,10 +21,10 @@ const LoginForm: React.FC<Props> = ({ authorized, noAccountCallback }) => {
     try {
       setLoading(true);
       const userData: UserData = { username, password };
-      const userExists = await checkUser(userData);
+      const userExists: string = await checkUser(userData);
       setLoading(false);
-      if (userExists) {
-        authorized(userData); // Call the authorized callback
+      if (userExists != null) {
+        authorizeCallback(userData, userExists); // Call the authorized callback
       } else {
         setError("User not found. Please check your credentials.");
       }

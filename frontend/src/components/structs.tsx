@@ -10,4 +10,5 @@ export type BookData = {
   rating: number;
   isbn: string;
   published_date: Date;
+  loan_status: number;
 };

@@ -10,15 +10,16 @@ export default function UserDashboard() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const bookData = await getBooks();
-        console.log(bookData);
-        setBooks(bookData);
+        const userName = sessionStorage.getItem("userName")
+        const bookData = await getBooks(userName)
+        console.log(bookData)
+        setBooks(bookData)
       } catch (err) {
-        console.error(err);
+        console.error(err)
       }
     };
 
-    fetchBooks();
+    fetchBooks()
   }, []);
   return (
     <>

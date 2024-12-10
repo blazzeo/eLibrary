@@ -54,10 +54,12 @@ export async function createUser({ username, password }: UserData) {
   }
 }
 
-export async function getBooks(userId: number) {
+export async function getBooks(username: string | null) {
   try {
+    if (username === null)
+      throw "invalid username"
     const response: AxiosResponse<BookData[]> = await axios.get(
-      `http://localhost:${BACK_PORT}/api/getbooks?user_id=${userId}`
+      `http://localhost:${BACK_PORT}/api/getbooks?username=${username}`
     );
 
     return response.data;

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function Header() {
-  const userName = sessionStorage.getItem("username")
+  const userName = sessionStorage.getItem("userName")
 
   function logout() {
     sessionStorage.clear()
@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <div className="container">
       <div className="d-flex justify-content-between align-items-center">
-        <Link to="/userdashboard">Library</Link>
+        <Link to="/">Library</Link>
         <Link to="/mybooks">Book Shelf</Link>
         <div className="">
           <p>${userName}</p>
