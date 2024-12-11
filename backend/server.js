@@ -44,12 +44,13 @@ app.get('/api/createuser', async (req, res) => {
   }
 });
 
-app.get('/api/borrowbook', async (req, res) => {
+app.post('/api/borrowbook', async (req, res) => {
   try {
     console.log("borrowBook")
-    const user_id = req.query.user_id;
-    const book_id = req.query.book_id;
-    const result = await db_request.borrowBook(user_id, book_id);
+    const borrow_data = req.body;
+    const user_name = borrow_data.user_name;
+    const book_id = borrow_data.book_id;
+    const result = await db_request.borrowBook(user_name, book_id);
     res.json({ result: result });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -70,8 +71,8 @@ app.get('/api/returnbook', async (req, res) => {
 app.get('/api/getbooks', async (req, res) => {
   try {
     console.log("getBooks")
-    const user_id = req.query.user_id;
-    const result = await db_request.getBooksTest(user_id);
+    const user_name = req.query.username;
+    const result = await db_request.getBooks(user_name);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });

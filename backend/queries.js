@@ -38,10 +38,10 @@ export async function createUser(userLogin, userPassword) {
   }
 }
 
-export async function borrowBook(user_id, book_id) {
+export async function borrowBook(user_name, book_id) {
   try {
     const user = dbuser(get_current_server_port())
-    const result = await user.query('SELECT borrow_book($1, $2);', [user_id, book_id])
+    const result = await user.query('SELECT borrow_book($1, $2);', [user_name, book_id])
     console.log(result.rows)
     return result.rows;
   } catch (err) {
@@ -60,12 +60,37 @@ export async function returnBook(book_id) {
   }
 }
 
-export async function getBooksTest(user_id) {
+export async function getBooks(user_name) {
   try {
+    console.log(user_name)
     const user = dbuser(get_current_server_port())
-    const books = await user.query('select get_books($1);', [user_id])
-    console.log(books.rowCount);
-    return books.rows;
+    const res = await user.query('select get_books($1);', [user_name])
+
+    const books = res.rows.map(row => {
+      // Extract the string
+      const bookString = row.get_books;
+
+      // Use regex to match the components
+      const regex = /^\((\d+),"([^"]+)",(\d+|NULL),([\d.]+),(\d+|NULL),([\d-]+|NULL),(\d)\)$/;
+      const match = regex.exec(bookString);
+
+      if (match) {
+        return {
+          book_id: parseInt(match[1], 10),
+          title: match[2],
+          total_pages: match === 'NULL' ? null : parseInt(match[3], 10),
+          rating: parseFloat(match[4]),
+          isbn: match[5] === 'NULL' ? null : match[5],
+          published_date: match[6] === 'NULL' ? null : new Date(match[6]),
+          loan_status: parseInt(match[7], 10)
+        };
+      }
+      return null; // In case of no match
+    }).filter(Boolean); // Filter out any null results
+
+    console.log(books.length); // This will log the parsed book objects
+
+    return books;
   } catch (err) {
     console.error(err)
   }
