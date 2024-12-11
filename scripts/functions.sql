@@ -2,13 +2,13 @@
 create or replace function check_user(
 	p_user_name varchar,
 	p_user_password varchar
-) returns BOOLEAN as $$
+) returns varchar as $$
 declare
-	user_exists BOOLEAN;
+	user_exists varchar;
 begin
 	-- Check if the user exists with the provided username and password
     SELECT EXISTS (
-        SELECT 1
+        SELECT user_role
         FROM users
         WHERE user_name = p_user_name AND user_password = p_user_password
     ) INTO user_exists;
@@ -16,7 +16,6 @@ begin
     RETURN user_exists;
 end;
 $$ LANGUAGE plpgsql;
-
 
 --	CHECK AVAILABLE LOGIN
 create or replace function check_available_login(
@@ -36,7 +35,7 @@ begin
 end;
 $$ language plpgsql;
 
--- Add User - JSON
+--	ADD USER - JSON
 CREATE OR REPLACE FUNCTION add_users(
     p_user JSON
 ) RETURNS BOOLEAN AS $$
@@ -109,7 +108,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
 --	RETURN BACK
 CREATE OR REPLACE FUNCTION return_book(
     p_user_id INT,
@@ -175,8 +173,8 @@ EXCEPTION
 end;
 $$ language plpgsql;
 
--- GET BOOKS + USER's
-CREATE OR REPLACE FUNCTION get_books(p_user_id INT)
+-- GET BOOKS + USER's BOOKSHELF
+CREATE OR REPLACE FUNCTION get_books(p_user_name varchar)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
@@ -186,7 +184,10 @@ RETURNS TABLE(
     published_date DATE,
     loan_status INT  -- 0: not borrowed, 1: borrowed by user, 2: borrowed by another user
 ) AS $$
+declare
+	p_user_id int;
 BEGIN
+	select user_id into p_user_id from users where user_name = p_user_name;
     RETURN QUERY
     SELECT 
         b.book_id,

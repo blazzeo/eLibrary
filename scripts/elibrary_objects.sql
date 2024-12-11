@@ -59,14 +59,14 @@ CREATE TABLE book_genres(
     REFERENCES genres(genre_id) ON DELETE CASCADE
 );
 
-
-CREATE TABLE users(
+CREATE TYPE user_role AS ENUM ('admin', 'user');
+create TABLE users(
   user_id SERIAL NOT NULL,
   user_name VARCHAR(50) NOT NULL UNIQUE,
   user_password VARCHAR(255) NOT NULL,
+  user_role user_role not null default 'user',
   PRIMARY KEY(user_id)
 );
-
 
 CREATE TABLE book_loans (
     loan_id SERIAL NOT NULL,
