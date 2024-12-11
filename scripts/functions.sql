@@ -72,13 +72,20 @@ END;
 $$ LANGUAGE plpgsql;
 
 --	BORROW BOOK
-CREATE OR REPLACE FUNCTION borrow_book(p_user_id INT, p_book_id INT)
+CREATE OR REPLACE FUNCTION borrow_book(p_user_name varchar, p_book_id INT)
 RETURNS INT AS $$
 DECLARE
     v_loan_date DATE := CURRENT_DATE;
     v_return_date DATE := v_loan_date + INTERVAL '1 month';
     r_borrow_id INT;
+	p_user_id int;
 BEGIN
+	-- get user's id
+	select user_id 
+	into p_user_id 
+	from users 
+	where user_name = p_user_name;
+
     -- Check if the user exists
     IF NOT EXISTS (SELECT 1 FROM users WHERE user_id = p_user_id) THEN
         RAISE EXCEPTION 'User with ID % does not exist', p_user_id;
@@ -173,8 +180,8 @@ EXCEPTION
 end;
 $$ language plpgsql;
 
--- GET BOOKS + USER's BOOKSHELF
-CREATE OR REPLACE FUNCTION get_books(p_user_name varchar)
+--  GET BOOKS + USER's BOOKSHELF
+REATE OR REPLACE FUNCTION get_books(p_user_name varchar)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
@@ -184,11 +191,12 @@ RETURNS TABLE(
     published_date DATE,
     loan_status INT  -- 0: not borrowed, 1: borrowed by user, 2: borrowed by another user
 ) AS $$
-declare
-	p_user_id int;
+DECLARE
+    p_user_id INT;
 BEGIN
-	select user_id into p_user_id from users where user_name = p_user_name;
-    RETURN QUERY
+    SELECT user_id INTO p_user_id FROM users WHERE user_name = p_user_name;
+
+    RETURN query
     SELECT 
         b.book_id,
         b.title,

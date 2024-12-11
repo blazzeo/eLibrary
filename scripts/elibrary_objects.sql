@@ -12,7 +12,6 @@ CREATE TABLE authors(
   PRIMARY KEY(author_id)
 );
 
-
 CREATE TABLE books(
   book_id        SERIAL NOT NULL, 
   title          VARCHAR(255) NOT NULL, 
@@ -88,6 +87,7 @@ grant connect on database elibrary to dbuser;
 grant connect on database elibrary to dbadmin;
 
 GRANT SELECT ON books TO dbuser;
+grant select on book_loans to dbuser;
 
 --	drop all objects
 
