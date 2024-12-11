@@ -90,3 +90,15 @@ export async function borrowBook(username: string | null, bookId: number | null)
     throw error
   }
 }
+
+export async function returnBook(bookId: number | null) {
+  try {
+    if (bookId === null)
+      throw 'invalid bookid'
+    const response = await axios.post(`http://localhost:${BACK_PORT}/api/returnbook`, bookId)
+    return response.data
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}

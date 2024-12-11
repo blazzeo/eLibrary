@@ -21,16 +21,17 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
     try {
       setLoading(true);
       const userData: UserData = { username, password };
-      const userExists: string = await checkUser(userData);
+      const userRole = await checkUser(userData);
       setLoading(false);
-      if (userExists != null) {
-        authorizeCallback(userData, userExists); // Call the authorized callback
+      if (userRole.result == 'admin' || userRole.result == 'user') {
+        authorizeCallback(userData, userRole.result);
       } else {
-        setError("User not found. Please check your credentials.");
+        setError("User not found. Please check your credentials.")
+        throw "User not found."
       }
     } catch (err) {
       console.error("Error checking user:", err);
-      setError("An error occurred. Please try again later.");
+      setError("User not found.");
     }
     setTimeout(() => {
       setError(null);

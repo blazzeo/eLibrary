@@ -16,8 +16,8 @@ export async function checkUser(userLogin, userPassword) {
   try {
     const admin = dbadmin(get_current_server_port())
     const result = await admin.query('SELECT check_user($1, $2);', [userLogin, userPassword])
-    console.log(result.rows)
-    return result.rows
+    console.log(result.rows[0].check_user)
+    return result.rows[0].check_user
   } catch (err) {
     console.error(err)
   }

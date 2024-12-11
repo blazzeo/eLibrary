@@ -4,16 +4,15 @@ create or replace function check_user(
 	p_user_password varchar
 ) returns varchar as $$
 declare
-	user_exists varchar;
+	r_user_role varchar;
 begin
 	-- Check if the user exists with the provided username and password
-    SELECT EXISTS (
         SELECT user_role
+		into r_user_role
         FROM users
-        WHERE user_name = p_user_name AND user_password = p_user_password
-    ) INTO user_exists;
+        WHERE user_name = p_user_name AND user_password = p_user_password;
 
-    RETURN user_exists;
+    RETURN r_user_role;
 end;
 $$ LANGUAGE plpgsql;
 
@@ -117,14 +116,13 @@ $$ LANGUAGE plpgsql;
 
 --	RETURN BACK
 CREATE OR REPLACE FUNCTION return_book(
-    p_user_id INT,
     p_book_id INT
 ) RETURNS BOOLEAN AS $$
 DECLARE
     deleted_row RECORD;  -- Variable to hold the deleted loan record
 BEGIN
     -- Check if the user has borrowed this book
-    IF NOT EXISTS (SELECT 1 FROM book_loans WHERE user_id = p_user_id AND book_id = p_book_id AND return_date IS NULL) THEN
+    IF NOT EXISTS (SELECT 1 FROM book_loans WHERE book_id = p_book_id AND return_date IS NULL) THEN
         RAISE EXCEPTION 'No active loan for user ID % and book ID %', p_user_id, p_book_id;
     END IF;
 
@@ -181,7 +179,7 @@ end;
 $$ language plpgsql;
 
 --  GET BOOKS + USER's BOOKSHELF
-REATE OR REPLACE FUNCTION get_books(p_user_name varchar)
+CREATE OR REPLACE FUNCTION get_books(p_user_name varchar)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
@@ -213,7 +211,7 @@ BEGIN
             WHEN EXISTS (
                 SELECT 1 
                 FROM book_loans bl 
-                WHERE bl.book_id = b.book_id AND bl.user_id = p_user_id AND bl.return_date IS NULL
+                WHERE bl.book_id = b.book_id AND bl.user_id = p_user_id
             ) THEN 1  -- Book is borrowed by the specified user
             ELSE 2  -- Book is borrowed by another user
         END AS loan_status

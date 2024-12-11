@@ -60,7 +60,7 @@ app.post('/api/borrowbook', async (req, res) => {
 app.get('/api/returnbook', async (req, res) => {
   try {
     console.log("returnBook")
-    const book_id = req.query.book_id;
+    const book_id = req.body.book_id;
     const result = await db_request.returnBook(book_id);
     res.json({ result: result });
   } catch (error) {
