@@ -7,24 +7,28 @@ import { getBooks } from "../../components/api/DatabaseAPI";
 export default function UserDashboard() {
   const [books, setBooks] = useState<BookData[]>([]);
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const userName = sessionStorage.getItem("userName")
-        const bookData = await getBooks(userName)
-        console.log(bookData)
-        setBooks(bookData)
-      } catch (err) {
-        console.error(err)
-      }
-    };
+  const fetchBooks = async () => {
+    try {
+      sessionStorage.setItem("userName", "test")
+      const userName = sessionStorage.getItem("userName")
+      const bookData = await getBooks(userName)
+      setBooks(bookData)
+    } catch (err) {
+      console.error(err)
+    }
+  };
 
+  useEffect(() => {
     fetchBooks()
+    console.log(books);
+
   }, []);
+
   return (
     <>
       <Header />
-      <BookDataTable books={books} />
+      <h1>User</h1>
+      <BookDataTable books={books} updateBooks={fetchBooks} />
     </>
   );
 }

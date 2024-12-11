@@ -78,3 +78,15 @@ export async function addBook(book: BookData) {
     throw error
   }
 }
+
+export async function borrowBook(username: string | null, bookId: number | null) {
+  try {
+    if (username === null || bookId === null)
+      throw 'invalid username or bookid'
+    const response = await axios.post(`http://localhost:${BACK_PORT}/api/borrowbook`, { user_name: username, book_id: bookId })
+    return response.data
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}

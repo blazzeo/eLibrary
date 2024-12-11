@@ -7,10 +7,18 @@ import UserDashboard from "./pages/user/UserDashboard.tsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
 import { BookShelf } from "./components/libTable/BookShelf.tsx";
 
+
 function Main() {
   const [userRole, setUserRole] = useState<string | null>(null);
 
+  setInterval(() => {
+    if (sessionStorage.getItem("userRole") === null && userRole !== null) {
+      setUserRole(null)
+    }
+  }, 500)
+
   useEffect(() => {
+    sessionStorage.setItem("userRole", "user");
     const role = sessionStorage.getItem("userRole");
     setUserRole(role);
   }, []);
@@ -20,18 +28,25 @@ function Main() {
     setUserRole(user_role);
   }
 
+  const authorizedHandler = () => {
+    if (userRole === null) {
+      return <Route path="*" element={<Navigate to="/login" />} />
+    }
+
+    switch (userRole) {
+      case 'admin':
+        return <Route path="/" element={<AdminDashboard />} />;
+      case 'user':
+        return <Route path="/" element={<UserDashboard />} />;
+    }
+  }
+
   return (
     <BrowserRouter>
       <Routes>
-        {userRole === 'admin' ? (
-          <Route path="/" element={<AdminDashboard />} />
-        ) : userRole === 'user' ? (
-          <Route path="/" element={<UserDashboard />} />
-        ) : (
-          <Route path="/login" element={<AuthPage setRole={setRole} />} />
-        )}
+        {authorizedHandler()}
         <Route path="/mybooks" element={<BookShelf />} />
-        <Route path="*" element={<Navigate to={userRole ? "/" : "/login"} />} />
+        <Route path="/login" element={userRole ? <Navigate to="/" /> : <AuthPage setRole={setRole} />} />
       </Routes>
     </BrowserRouter>
   );
