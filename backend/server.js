@@ -57,7 +57,7 @@ app.post('/api/borrowbook', async (req, res) => {
   }
 });
 
-app.get('/api/returnbook', async (req, res) => {
+app.post('/api/returnbook', async (req, res) => {
   try {
     console.log("returnBook")
     const book_id = req.body.book_id;

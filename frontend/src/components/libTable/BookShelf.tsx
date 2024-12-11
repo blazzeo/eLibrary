@@ -18,7 +18,7 @@ export function BookShelf({ books, updateBooks }: Props) {
       {
         accessorKey: "book_id", //access nested data with dot notation
         header: "Book ID",
-        size: 150,
+        size: 50,
       },
       {
         accessorKey: "title",
@@ -28,17 +28,17 @@ export function BookShelf({ books, updateBooks }: Props) {
       {
         accessorKey: "total_pages", //normal accessorKey
         header: "Pages",
-        size: 150,
+        size: 50,
       },
       {
         accessorKey: "rating",
         header: "Rating",
-        size: 150,
+        size: 50,
       },
       {
         accessorKey: "published_date",
         header: "Published",
-        size: 150,
+        size: 50,
         Cell: ({ cell }) => {
           // Format the date for display
           const date = new Date(cell.getValue() as string);
@@ -48,11 +48,11 @@ export function BookShelf({ books, updateBooks }: Props) {
       {
         accessorKey: "loan_status",
         header: "Action",
-        size: 150,
+        size: 50,
         Cell: ({ row }) => {
-          const handleReturn = () => {
+          const handleReturn = async () => {
             const bookId = row.original.book_id
-            returnBook(bookId)
+            await returnBook(bookId)
             updateBooks()
           }
           return <button className="btn btn-success" onClick={handleReturn}>

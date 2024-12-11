@@ -17,8 +17,12 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
     event.preventDefault();
 
     setLoading(true);
-    if (!(await checkAvailableLogin(username))) {
+    setError(null)
+    const loginAvailable = await checkAvailableLogin(username);
+
+    if (!loginAvailable.result) {
       setError("Username isn't available.");
+      setLoading(false)
       return;
     }
     setLoading(false);
@@ -29,8 +33,11 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
     }
 
     setLoading(true);
-    if (!createUser({ username, password })) {
+    const canCreate = await createUser({ username, password });
+
+    if (!canCreate.result) {
       setError("Creating account failed.");
+      setLoading(false)
       return;
     }
     setLoading(false);

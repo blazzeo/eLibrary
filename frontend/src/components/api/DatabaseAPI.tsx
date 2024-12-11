@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { BookData, UserData } from "../structs";
 
-const BACK_PORT = 3000;
+const SERVER = 'http://localhost:3000'
 
 export async function checkUser({ username, password }: UserData) {
   try {
     const response = await axios.get(
-      `http://localhost:${BACK_PORT}/api/checkuser`,
+      SERVER + `/api/checkuser`,
       {
         params: {
           login: username,
@@ -24,7 +24,7 @@ export async function checkUser({ username, password }: UserData) {
 export async function checkAvailableLogin(userLogin: string) {
   try {
     const response = await axios.get(
-      `http://localhost:${BACK_PORT}/api/checklogin`,
+      SERVER + `/api/checklogin`,
       {
         params: { login: userLogin },
       }
@@ -39,7 +39,7 @@ export async function checkAvailableLogin(userLogin: string) {
 export async function createUser({ username, password }: UserData) {
   try {
     const response = await axios.get(
-      `http://localhost:${BACK_PORT}/api/createuser`,
+      SERVER + `/api/createuser`,
       {
         params: {
           login: username,
@@ -59,7 +59,7 @@ export async function getBooks(username: string | null) {
     if (username === null)
       throw "invalid username"
     const response: AxiosResponse<BookData[]> = await axios.get(
-      `http://localhost:${BACK_PORT}/api/getbooks?username=${username}`
+      SERVER + `/api/getbooks?username=${username}`
     );
 
     return response.data;
@@ -71,7 +71,7 @@ export async function getBooks(username: string | null) {
 
 export async function addBook(book: BookData) {
   try {
-    const response = await axios.post(`http://localhost:${BACK_PORT}/api/addbook`, book)
+    const response = await axios.post(SERVER + `/api/addbook`, book)
     return response.data
   } catch (error) {
     console.error(error)
@@ -83,7 +83,7 @@ export async function borrowBook(username: string | null, bookId: number | null)
   try {
     if (username === null || bookId === null)
       throw 'invalid username or bookid'
-    const response = await axios.post(`http://localhost:${BACK_PORT}/api/borrowbook`, { user_name: username, book_id: bookId })
+    const response = await axios.post(SERVER + `/api/borrowbook`, { user_name: username, book_id: bookId })
     return response.data
   } catch (error) {
     console.error(error)
@@ -95,7 +95,7 @@ export async function returnBook(bookId: number | null) {
   try {
     if (bookId === null)
       throw 'invalid bookid'
-    const response = await axios.post(`http://localhost:${BACK_PORT}/api/returnbook`, bookId)
+    const response = await axios.post(SERVER + `/api/returnbook`, { book_id: bookId })
     return response.data
   } catch (error) {
     console.error(error)

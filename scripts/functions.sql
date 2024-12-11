@@ -122,21 +122,22 @@ DECLARE
     deleted_row RECORD;  -- Variable to hold the deleted loan record
 BEGIN
     -- Check if the user has borrowed this book
-    IF NOT EXISTS (SELECT 1 FROM book_loans WHERE book_id = p_book_id AND return_date IS NULL) THEN
-        RAISE EXCEPTION 'No active loan for user ID % and book ID %', p_user_id, p_book_id;
+    IF NOT EXISTS (SELECT 1 FROM book_loans WHERE book_id = p_book_id) THEN
+        RAISE EXCEPTION 'No active loan for book ID %', p_book_id;
     END IF;
 
     -- Attempt to delete the book loan and count the affected rows
     DELETE FROM book_loans
-    WHERE user_id = p_user_id AND book_id = p_book_id AND return_date IS NULL
+    WHERE book_id = p_book_id
     RETURNING * INTO deleted_row;
 
     -- Return TRUE if one or more rows were deleted, otherwise FALSE
-    RETURN deleted_row IS NOT NULL;
+    RETURN FOUND;
 
 EXCEPTION
     WHEN OTHERS THEN
         -- Optionally handle exceptions and return FALSE on error
+		RAISE NOTICE 'An error occurred: %', SQLERRM;
         RETURN FALSE;
 END;
 $$ LANGUAGE plpgsql;

@@ -5,8 +5,8 @@ export async function checkLogin(userLogin) {
   try {
     const admin = dbadmin(get_current_server_port())
     const result = await admin.query('SELECT check_available_login($1);', [userLogin])
-    console.log(result.rows)
-    return result.rows
+    console.log(result.rows[0].check_available_login)
+    return result.rows[0].check_available_login
   } catch (err) {
     console.error(err)
   }
@@ -30,9 +30,9 @@ export async function createUser(userLogin, userPassword) {
       user_name: userLogin,
       user_password: userPassword
     }
-    const result = await admin.query('SELECT add_users($1, $2);', [JSON.stringify(user)])
-    console.log(result.rows)
-    return result.rows;
+    const result = await admin.query('SELECT add_users($1);', [JSON.stringify(user)])
+    console.log(result.rows[0].add_users)
+    return result.rows[0].add_users;
   } catch (err) {
     console.error(err)
   }
@@ -52,7 +52,8 @@ export async function borrowBook(user_name, book_id) {
 export async function returnBook(book_id) {
   try {
     const user = dbuser(get_current_server_port())
-    const result = await user.query('SELECT return_book($1);', [book_id])
+    console.log(`bookId: ${book_id}`)
+    const result = await user.query('select return_book($1);', [book_id])
     console.log(result.rows)
     return result.rows;
   } catch (err) {
@@ -62,16 +63,19 @@ export async function returnBook(book_id) {
 
 export async function getBooks(user_name) {
   try {
-    console.log(user_name)
+    console.log(`user: ${user_name}`)
     const user = dbuser(get_current_server_port())
     const res = await user.query('select get_books($1);', [user_name])
+
+    console.log(res.rows[0])
 
     const books = res.rows.map(row => {
       // Extract the string
       const bookString = row.get_books;
 
       // Use regex to match the components
-      const regex = /^\((\d+),"([^"]+)",(\d+|NULL),([\d.]+),(\d+|NULL),([\d-]+|NULL),(\d)\)$/;
+      //const regex = /^\((\d+),"([^"]+)",(\d+|NULL),([\d.]+),(\d+|NULL),([\d-]+|NULL),(\d)\)$/;
+      const regex = /^\((\d+),(.+),(\d+)?,([\d.]+)?,(\d+)?,([\d-]+)?,(\d)\)$/;
       const match = regex.exec(bookString);
 
       if (match) {
@@ -84,6 +88,8 @@ export async function getBooks(user_name) {
           published_date: match[6] === 'NULL' ? null : new Date(match[6]),
           loan_status: parseInt(match[7], 10)
         };
+      } else {
+        console.log(bookString)
       }
       return null; // In case of no match
     }).filter(Boolean); // Filter out any null results
