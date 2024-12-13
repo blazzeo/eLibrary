@@ -102,3 +102,34 @@ export async function returnBook(bookId: number | null) {
     throw error
   }
 }
+
+export async function getUsers() {
+  try {
+    const response = await axios.get(SERVER + `/api/getusers`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+
+  }
+}
+
+export async function deleteUser(userName: string) {
+  try {
+    const response = await axios.post(SERVER + `/api/deleteuser`, { user_name: userName })
+    return response.data
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getLoans() {
+  try {
+    const response = await axios.get(SERVER + '/api/getloans')
+    return response.data
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

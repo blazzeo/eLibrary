@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+import { UserData } from '../structs';
+import { deleteUser } from '../api/DatabaseAPI';
 
-interface User {
-  user_id: number;
-  user_name: string;
-  user_password: string;
+interface Props {
+  users: UserData[];
+  updateUsers: () => void;
 }
 
-const users: User[] = [
-  { user_id: 1, user_name: 'Alice', user_password: 'password123' },
-  { user_id: 2, user_name: 'Bob', user_password: 'qwerty' },
-  { user_id: 3, user_name: 'Charlie', user_password: 'abc123' },
-];
+export function UserTable({ users, updateUsers }: Props) {
+  const deleteCallback = async (username: string) => {
+    await deleteUser(username)
+    updateUsers()
+  }
 
-const UserTable: React.FC = () => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -27,18 +27,14 @@ const UserTable: React.FC = () => {
         </TableHead>
         <TableBody>
           {users.map((user) => (
-            <TableRow key={user.user_id}>
-              <TableCell>{user.user_id}</TableCell>
-              <TableCell>{user.user_name}</TableCell>
+            <TableRow key={user.username}>
+              <TableCell>{user.username}</TableCell>
               <TableCell>
-                <PasswordCell password={user.user_password} />
+                <PasswordCell password={user.password} />
               </TableCell>
               <TableCell>
-                <Button variant="contained" color="primary">
-                  Action 1
-                </Button>
-                <Button variant="contained" color="secondary">
-                  Action 2
+                <Button onClick={() => deleteCallback(user.username)} variant="contained" color="primary">
+                  Delete
                 </Button>
               </TableCell>
             </TableRow>
@@ -62,5 +58,3 @@ const PasswordCell: React.FC<{ password: string }> = ({ password }) => {
     </span>
   );
 };
-
-export default UserTable;

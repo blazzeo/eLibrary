@@ -15,7 +15,8 @@ export default function Header() {
       <nav className="navbar navbar-expand-md navbar-light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">Library</Link>
-          <Link className="nav-link" to="/mybooks">Book Shelf</Link>
+          {sessionStorage.getItem("userRole") === 'user' ? <Link className="nav-link" to="/mybooks">Book Shelf</Link> : null}
+          {sessionStorage.getItem("userRole") === 'admin' ? <Link className="nav-link" to="/usercontrol">User Control</Link> : null}
           <div className="d-flex align-items-center">
             <span className="me-3">{userName}</span>
             <button className="btn btn-outline-danger" onClick={logout}>
@@ -25,7 +26,7 @@ export default function Header() {
             </button>
           </div>
         </div>
-      </nav>
-    </div>
+      </nav >
+    </div >
   );
 }
