@@ -31,9 +31,8 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    fetchBooks()
     fetchUsers()
-    console.log(books);
+    fetchBooks()
   }, []);
 
   return (

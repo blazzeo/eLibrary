@@ -1,10 +1,10 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from "material-react-table";
-import { BookData, UserData } from "../structs";
+import { BookData, UserData, BookLoan } from "../structs";
 import { getLoans, returnBook } from "../api/DatabaseAPI";
 
 interface Props {
@@ -13,32 +13,42 @@ interface Props {
   updateBooks: () => void;
 }
 
-type BookLoan = {
-  user_id: number,
-  user_name: string,
-  book_id: number
-}
-
 export function AdminBookTable({ books, users, updateBooks }: Props) {
-  let bookLoans: BookLoan[];
+  const [bookLoans, setBookLoans] = useState<BookLoan[]>([]); // Состояние для хранение данных о займах
 
   const fetchLoans = async () => {
-    bookLoans = await getLoans();
-    console.log(bookLoans);
-  }
-
-  const hasOwner = (bookId: number | null) => {
-    return bookLoans.find(loan => loan.book_id == bookId);
-  }
+    const loans = await getLoans();
+    setBookLoans(loans);
+  };
 
   useEffect(() => {
-    fetchLoans()
-  })
+    fetchLoans();
+  }, []); // Загружаем данные только один раз при монтировании компонента
+
+  const hasOwner = (bookId: number): boolean => {
+    return !!bookLoans.find((loan) => loan.book_id === bookId);
+  };
+
+  // Проверка, что пользователи уже загружены
+  const getOwnerName = (bookId: number): string | null => {
+    const bookOwner = bookLoans.find((loan) => loan.book_id === bookId);
+    if (bookOwner) {
+      // Проверяем, что users не пустой
+      if (users.length === 0) {
+        console.warn("Users data is empty");
+        return null;
+      }
+      console.log(users);
+      const owner = users.find((user) => user.user_name === bookOwner.user_name);
+      return owner ? owner.user_name : "Unknown Owner";
+    }
+    return null; // Если владельца нет
+  };
 
   const columns = useMemo<MRT_ColumnDef<BookData>[]>(
     () => [
       {
-        accessorKey: "book_id", //access nested data with dot notation
+        accessorKey: "book_id",
         header: "Book ID",
         size: 50,
       },
@@ -48,7 +58,7 @@ export function AdminBookTable({ books, users, updateBooks }: Props) {
         size: 150,
       },
       {
-        accessorKey: "total_pages", //normal accessorKey
+        accessorKey: "total_pages",
         header: "Pages",
         size: 50,
       },
@@ -62,9 +72,8 @@ export function AdminBookTable({ books, users, updateBooks }: Props) {
         header: "Published",
         size: 50,
         Cell: ({ cell }) => {
-          // Format the date for display
           const date = new Date(cell.getValue() as string);
-          return date.toLocaleDateString(); // Adjust format as needed },
+          return date.toLocaleDateString();
         },
       },
       {
@@ -72,9 +81,8 @@ export function AdminBookTable({ books, users, updateBooks }: Props) {
         size: 50,
         Cell: ({ row }) => {
           const bookId = row.original.book_id;
-          const bookOwner = bookLoans.find(loan => loan.book_id == bookId);
-          const ownerName = users.find(user => user.username == bookOwner?.user_name)
-          return ownerName === undefined ? null : ownerName.username;
+          const ownerName = getOwnerName(bookId);
+          return ownerName || "Available"; // Если владельца нет, выводим "Available"
         },
       },
       {
@@ -82,34 +90,36 @@ export function AdminBookTable({ books, users, updateBooks }: Props) {
         size: 50,
         Cell: ({ row }) => {
           const handleReturn = async () => {
-            const bookId = row.original.book_id
-            await returnBook(bookId)
-            updateBooks()
-          }
-          return (hasOwner(row.original.book_id) ?
-            <button className="btn btn-success" onClick={handleReturn} >
+            const bookId = row.original.book_id;
+            await returnBook(bookId);
+            setBookLoans((prevLoans) => prevLoans.filter((loan) => loan.book_id !== bookId));
+            updateBooks();
+          };
+
+          return hasOwner(row.original.book_id) ? (
+            <button className="btn btn-success" onClick={handleReturn}>
               Return
-            </button> :
-            null
-          )
-        }
+            </button>
+          ) : null;
+        },
       },
       {
         header: "Edit",
         size: 50,
         Cell: ({ row }) => {
-          const handleEdit = async () => {
-            const bookId = row.original.book_id
-            await returnBook(bookId)
-            updateBooks()
-          }
-          return <button className="btn btn-success" onClick={handleEdit} >
-            Edit
-          </button>
-        }
+          const handleEdit = () => {
+            console.log("Edit functionality is not yet implemented.");
+            // Реализуйте функциональность редактирования по мере необходимости
+          };
+          return (
+            <button className="btn btn-success" onClick={handleEdit}>
+              Edit
+            </button>
+          );
+        },
       },
     ],
-    []
+    [bookLoans, users] // Пересчитываем столбцы при изменении данных о книгах и пользователях
   );
 
   const table = useMaterialReactTable<BookData>({

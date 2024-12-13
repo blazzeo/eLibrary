@@ -12,3 +12,9 @@ export type BookData = {
   published_date: Date;
   loan_status: number;
 };
+
+export type BookLoan = {
+  user_id: number;
+  user_name: string;
+  book_id: number;
+};
