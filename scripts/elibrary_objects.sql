@@ -4,10 +4,10 @@ create role dbuser with LOGIN password 'masteruser';
 
 --	create tables
 
-CREATE TABLE authors( 
+CREATE TABLE authors(
   author_id   SERIAL NOT NULL,
   first_name  VARCHAR(100) NOT NULL, 
-  middle_name VARCHAR(50) NULL, 
+  middle_name VARCHAR(50) NULL,
   last_name   VARCHAR(100) NULL,
   PRIMARY KEY(author_id)
 );
@@ -15,13 +15,12 @@ CREATE TABLE authors(
 CREATE TABLE books(
   book_id        SERIAL NOT NULL, 
   title          VARCHAR(255) NOT NULL, 
-  total_pages    INT NULL, 
+  total_pages    INT NULL,
   rating         DECIMAL(4, 2) NULL, 
   isbn           VARCHAR(13) NULL, 
   published_date DATE, 
   PRIMARY KEY(book_id)
 );
-
 
 CREATE TABLE book_authors (
   book_id   INT NOT NULL, 
@@ -35,7 +34,6 @@ CREATE TABLE book_authors (
     REFERENCES authors(author_id) ON DELETE CASCADE
 );
 
-
 CREATE TABLE genres (
   genre_id  SERIAL NOT NULL,
   genre     VARCHAR(255) NOT NULL, 
@@ -44,7 +42,6 @@ CREATE TABLE genres (
   CONSTRAINT fk_parent 
     FOREIGN KEY(parent_id) REFERENCES genres(genre_id)
 );
-
 
 CREATE TABLE book_genres(
   book_id  INT NOT NULL, 

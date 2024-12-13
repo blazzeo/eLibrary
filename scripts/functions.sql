@@ -70,6 +70,26 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql;
 
+--	ADD BOOK - json
+create or replace function add_books(book JSON)
+returns boolean as $$ 
+declare
+	title VARCHAR(255) := book->>'title';
+  	total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
+  	rating DECIMAL(4, 2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4, 2);
+  	isbn VARCHAR(13) := book->>'isbn';
+  	published_date DATE := NULLIF(book->>'published_date', '')::DATE;
+begin
+	INSERT INTO books (title, total_pages, rating, isbn, published_date)
+  	VALUES (title, total_pages, rating, isbn, published_date);
+  
+  	RETURN TRUE;  -- Возвращаем TRUE, если вставка прошла успешно
+EXCEPTION
+  	WHEN OTHERS THEN
+    RETURN FALSE;  -- Возвращаем FALSE в случае ошибки
+end;
+$$ language plpgsql;
+
 --	BORROW BOOK
 CREATE OR REPLACE FUNCTION borrow_book(p_user_name varchar, p_book_id INT)
 RETURNS INT AS $$
@@ -142,32 +162,17 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql;
 
---	ADD BOOK - json
-create or replace function add_books(book JSON)
-returns boolean as $$ 
-declare
-	title VARCHAR(255) := book->>'title';
-  	total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
-  	rating DECIMAL(4, 2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4, 2);
-  	isbn VARCHAR(13) := book->>'isbn';
-  	published_date DATE := NULLIF(book->>'published_date', '')::DATE;
-begin
-	INSERT INTO books (title, total_pages, rating, isbn, published_date)
-  	VALUES (title, total_pages, rating, isbn, published_date);
-  
-  	RETURN TRUE;  -- Возвращаем TRUE, если вставка прошла успешно
-EXCEPTION
-  	WHEN OTHERS THEN
-    RETURN FALSE;  -- Возвращаем FALSE в случае ошибки
-end;
-$$ language plpgsql;
-
 --	DELETE BOOK
 create or replace function delete_book(p_book_id INT)
 returns boolean as $$
 declare
 	deleted_row RECORD; 
 begin
+	IF EXISTS (SELECT 1 FROM book_loans WHERE book_id = p_book_id) THEN
+        delete from book_loans
+		where p_book_id = book_id;
+    END IF;
+
 	delete from books 
 	where book_id = book_id
 	returning * into deleted_row;  
@@ -180,7 +185,7 @@ end;
 $$ language plpgsql;
 
 --  GET BOOKS + USER's BOOKSHELF
-CREATE OR REPLACE FUNCTION get_books(p_user_name varchar)
+CREATE OR REPLACE FUNCTION get_books(p_user_name VARCHAR)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
@@ -193,9 +198,13 @@ RETURNS TABLE(
 DECLARE
     p_user_id INT;
 BEGIN
-    SELECT user_id INTO p_user_id FROM users WHERE user_name = p_user_name;
+    -- Check if p_user_name is provided
+    IF p_user_name IS NOT NULL THEN
+        -- Get user_id for the provided user_name
+        SELECT user_id INTO p_user_id FROM users WHERE user_name = p_user_name;
+    END IF;
 
-    RETURN query
+    RETURN QUERY
     SELECT 
         b.book_id,
         b.title,
@@ -209,7 +218,7 @@ BEGIN
                 FROM book_loans bl 
                 WHERE bl.book_id = b.book_id
             ) THEN 0  -- Book is not borrowed by anyone
-            WHEN EXISTS (
+            WHEN p_user_name IS NOT NULL AND EXISTS (
                 SELECT 1 
                 FROM book_loans bl 
                 WHERE bl.book_id = b.book_id AND bl.user_id = p_user_id
@@ -219,4 +228,97 @@ BEGIN
     FROM 
         books b;
 END;
+$$ LANGUAGE plpgsql;
+
+--	GET USERS
+create or replace function get_users()
+returns table(
+	user_id int,
+	user_name varchar,
+	user_password varchar,
+	user_role user_role
+) as $$
+begin
+	return query
+	select u.user_id, u.user_name, u.user_password, u.user_role
+	from users as u; 
+end;
+$$ LANGUAGE plpgsql;
+
+--	DELETE USER
+CREATE OR REPLACE FUNCTION delete_user(p_user_name VARCHAR)
+RETURNS BOOLEAN AS $$
+DECLARE
+    user_exists BOOLEAN;
+BEGIN
+    -- Проверяем, существует ли пользователь
+    SELECT EXISTS (SELECT 1 FROM users WHERE user_name = p_user_name) INTO user_exists;
+
+    IF NOT user_exists THEN
+        -- Если пользователь не найден, возвращаем false
+        RETURN FALSE;
+    END IF;
+
+    -- Удаляем пользователя
+    DELETE FROM users WHERE user_name = p_user_name;
+
+    -- Проверяем, был ли удален пользователь
+    IF NOT EXISTS (SELECT 1 FROM users WHERE user_name = p_user_name) THEN
+        RETURN TRUE;  -- Удаление прошло успешно
+    ELSE
+        RETURN FALSE; -- Удаление не удалось
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+--	GET LOANS
+create or replace function get_loans()
+returns table(
+	user_id int,
+	user_name varchar,
+	book_id int
+) as $$ 
+begin
+	return query
+	select bl.user_id, u.user_name, bl.book_id 
+	from book_loans as bl 
+	inner join users as u 
+	on bl.user_id = u.user_id;
+end;
+$$ language plpgsql;
+
+--	EDIT BOOK
+create or replace function edit_book(p_book JSON)
+returns boolean as $$
+declare
+	book_id INT := (p_book->>'book_id')::INT;
+    title VARCHAR := p_book->>'title';
+    total_pages INT := (p_book->>'total_pages')::INT;
+    rating DECIMAL(4, 2) := (p_book->>'rating')::DECIMAL;
+    isbn VARCHAR := p_book->>'isbn';
+    published_date DATE := (p_book->>'published_date')::DATE;
+    rows_updated INT;
+begin
+	if not exists(select 1 from books as b where book_id = b.book_id) then
+		return false;
+	end if;
+
+	update books as b
+	set b.title = title, 
+		b.total_pages = total_pages, 
+		b.rating = rating, 
+		b.isbn = isbn, 
+		b.published_date = published_date 
+	where b.book_id = book_id;
+
+	GET DIAGNOSTICS rows_updated = ROW_COUNT;
+
+	GET DIAGNOSTICS rows_updated = ROW_COUNT;
+
+    IF rows_updated > 0 THEN
+        RETURN TRUE;  -- Book was edited
+    ELSE
+        RETURN FALSE; -- No book was edited
+    END IF;
+end;
 $$ LANGUAGE plpgsql;

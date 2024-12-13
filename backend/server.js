@@ -93,11 +93,43 @@ app.post('/api/addbook', async (req, res) => {
 app.get('/api/deletebook', async (req, res) => {
   try {
     console.log('deleteBook')
-    req.query.book_id
+    const book_id = req.query.book_id
     const result = await db_request.deleteBook(book_id)
     res.json(result)
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+})
+
+app.get('/api/getusers', async (req, res) => {
+  try {
+    console.log('getUsers')
+    const result = await db_request.getUsers()
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+
+  }
+})
+
+app.post('/api/deleteuser', async (req, res) => {
+  try {
+    console.log('deleteUser')
+    const user_name = req.body.user_name;
+    const result = await db_request.deleteUser(user_name)
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.get('/api/getloans', async (req, res) => {
+  try {
+    console.log('getLoans')
+    const result = await db_request.getLoans()
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
   }
 })
 

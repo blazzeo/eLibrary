@@ -1,3 +1,4 @@
+import { response } from 'express'
 import { dbuser, dbadmin } from './db_roles.js'
 import { get_current_server_port } from './monitoring.js'
 
@@ -67,14 +68,11 @@ export async function getBooks(user_name) {
     const user = dbuser(get_current_server_port())
     const res = await user.query('select get_books($1);', [user_name])
 
-    console.log(res.rows[0])
-
     const books = res.rows.map(row => {
       // Extract the string
       const bookString = row.get_books;
 
       // Use regex to match the components
-      //const regex = /^\((\d+),"([^"]+)",(\d+|NULL),([\d.]+),(\d+|NULL),([\d-]+|NULL),(\d)\)$/;
       const regex = /^\((\d+),(.+),(\d+)?,([\d.]+)?,(\d+)?,([\d-]+)?,(\d)\)$/;
       const match = regex.exec(bookString);
 
@@ -126,3 +124,76 @@ export async function deleteBook(book_id) {
   }
 }
 
+export async function getUsers() {
+  try {
+    const admin = dbadmin(get_current_server_port())
+    const users = await admin.query('select get_users();')
+
+    const result = users.rows.map(row => {
+      const user = row.get_users
+
+      const regex = /^\((\d+),(.+),(.+),(.+)\)$/;
+      const match = regex.exec(user);
+
+      if (match) {
+        return {
+          user_id: parseInt(match[1], 10),
+          user_name: match[2],
+          user_password: match[3],
+          user_role: match[4]
+        };
+      } else {
+        console.log(user)
+      }
+      return null; // In case of no match
+    }).filter(Boolean); // Filter out any null results
+
+    console.log(result.length)
+
+    return result
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function deleteUser(user_name) {
+  try {
+    const admin = dbadmin(get_current_server_port())
+    const result = await admin.query('select delete_user($1);', [user_name])
+    return result.rows
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getLoans() {
+  try {
+    const admin = dbadmin(get_current_server_port())
+    const loans = await admin.query('select get_loans();')
+
+    const result = loans.rows.map(row => {
+      const loan = row.get_loans
+
+      const regex = /^\((\d+),(.+),(\d+)\)$/;
+
+      const match = regex.exec(loan);
+
+      if (match) {
+        return {
+          user_id: parseInt(match[1], 10),
+          user_name: match[2],
+          book_id: parseInt(match[3], 10)
+        };
+      } else {
+        console.log(loan)
+      }
+      return null; // In case of no match
+    }).filter(Boolean); // Filter out any null results
+
+    console.log(result.length)
+
+    return result
+  } catch (error) {
+    console.error(error);
+  }
+}
