@@ -6,10 +6,9 @@ export async function checkLogin(userLogin) {
   try {
     const admin = dbadmin(get_current_server_port())
     const result = await admin.query('SELECT check_available_login($1);', [userLogin])
-    console.log(result.rows[0].check_available_login)
     return result.rows[0].check_available_login
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
@@ -17,10 +16,9 @@ export async function checkUser(userLogin, userPassword) {
   try {
     const admin = dbadmin(get_current_server_port())
     const result = await admin.query('SELECT check_user($1, $2);', [userLogin, userPassword])
-    console.log(result.rows[0].check_user)
     return result.rows[0].check_user
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
@@ -32,10 +30,9 @@ export async function createUser(userLogin, userPassword) {
       user_password: userPassword
     }
     const result = await admin.query('SELECT add_users($1);', [JSON.stringify(user)])
-    console.log(result.rows[0].add_users)
     return result.rows[0].add_users;
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
@@ -43,28 +40,24 @@ export async function borrowBook(user_name, book_id) {
   try {
     const user = dbuser(get_current_server_port())
     const result = await user.query('SELECT borrow_book($1, $2);', [user_name, book_id])
-    console.log(result.rows)
     return result.rows;
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
 export async function returnBook(book_id) {
   try {
     const user = dbuser(get_current_server_port())
-    console.log(`bookId: ${book_id}`)
     const result = await user.query('select return_book($1);', [book_id])
-    console.log(result.rows)
     return result.rows;
   } catch (err) {
-    console.error(err);
+    throw err
   }
 }
 
 export async function getBooks(user_name) {
   try {
-    console.log(`user: ${user_name}`)
     const user = dbuser(get_current_server_port())
     const res = await user.query('select get_books($1);', [user_name])
 
@@ -92,35 +85,29 @@ export async function getBooks(user_name) {
       return null; // In case of no match
     }).filter(Boolean); // Filter out any null results
 
-    console.log(books.length); // This will log the parsed book objects
-
     return books;
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
 export async function addBook(book) {
   try {
     const admin = dbadmin(get_current_server_port())
-    console.log(`book: ${book}`)
     const result = await admin.query('select add_book($1::json);', [JSON.stringify(book)])
-    console.log(`response: ${result.rows}`)
     return result.rows
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
 export async function deleteBook(book_id) {
   try {
     const admin = dbadmin(get_current_server_port())
-    console.log(`book_id: ${book_id}`)
     const result = await admin.query('select delete_book($1);', [book_id])
-    console.log(`response: ${result.rows}`)
     return result.rows
   } catch (err) {
-    console.error(err)
+    throw err
   }
 }
 
@@ -148,11 +135,9 @@ export async function getUsers() {
       return null; // In case of no match
     }).filter(Boolean); // Filter out any null results
 
-    console.log(result.length)
-
     return result
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    throw err
   }
 }
 
@@ -161,8 +146,8 @@ export async function deleteUser(user_name) {
     const admin = dbadmin(get_current_server_port())
     const result = await admin.query('select delete_user($1);', [user_name])
     return result.rows
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    throw err
   }
 }
 
@@ -190,10 +175,8 @@ export async function getLoans() {
       return null; // In case of no match
     }).filter(Boolean); // Filter out any null results
 
-    console.log(result.length)
-
     return result
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    throw err
   }
 }
