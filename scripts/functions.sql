@@ -74,19 +74,24 @@ $$ LANGUAGE plpgsql;
 create or replace function add_books(book JSON)
 returns boolean as $$ 
 declare
-	title VARCHAR(255) := book->>'title';
-  	total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
-  	rating DECIMAL(4, 2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4, 2);
-  	isbn VARCHAR(13) := book->>'isbn';
-  	published_date DATE := NULLIF(book->>'published_date', '')::DATE;
+    title VARCHAR(255) := book->>'title';
+    total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
+    rating DECIMAL(4, 2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4, 2);
+    isbn VARCHAR(13) := COALESCE(NULLIF(book->>'isbn', ''), NULL);
+    published_date DATE := NULLIF(book->>'published_date', '')::DATE;
 begin
-	INSERT INTO books (title, total_pages, rating, isbn, published_date)
-  	VALUES (title, total_pages, rating, isbn, published_date);
-  
-  	RETURN TRUE;  -- Возвращаем TRUE, если вставка прошла успешно
+    -- Вставка данных в таблицу books
+    INSERT INTO books (title, total_pages, rating, isbn, published_date)
+    VALUES (title, total_pages, rating, isbn, published_date);
+
+    -- Если вставка прошла успешно, возвращаем TRUE
+    RETURN TRUE;
 EXCEPTION
-  	WHEN OTHERS THEN
-    RETURN FALSE;  -- Возвращаем FALSE в случае ошибки
+    WHEN OTHERS THEN
+        -- Логирование ошибки
+        RAISE NOTICE 'Error: %', SQLERRM;
+        -- Возвращаем FALSE в случае ошибки
+        RETURN FALSE;
 end;
 $$ language plpgsql;
 
@@ -95,7 +100,6 @@ CREATE OR REPLACE FUNCTION borrow_book(p_user_name varchar, p_book_id INT)
 RETURNS INT AS $$
 DECLARE
     v_loan_date DATE := CURRENT_DATE;
-    v_return_date DATE := v_loan_date + INTERVAL '1 month';
     r_borrow_id INT;
 	p_user_id int;
 BEGIN
@@ -116,18 +120,18 @@ BEGIN
     END IF;
 
     -- Check if the book is already borrowed
-    IF EXISTS (SELECT 1 FROM book_loans WHERE book_id = p_book_id AND return_date IS NULL) THEN
+    IF EXISTS (SELECT 1 FROM book_loans WHERE book_id = p_book_id) THEN
         RAISE EXCEPTION 'Book with ID % is already borrowed', p_book_id;
     END IF;
 
     -- Check if the user has already borrowed this book
-    IF EXISTS (SELECT 1 FROM book_loans WHERE user_id = p_user_id AND book_id = p_book_id AND return_date IS NULL) THEN
+    IF EXISTS (SELECT 1 FROM book_loans WHERE user_id = p_user_id AND book_id = p_book_id) THEN
         RAISE EXCEPTION 'User with ID % has already borrowed book with ID %', p_user_id, p_book_id;
     END IF;
 
     -- Insert the loan record
-    INSERT INTO book_loans (user_id, book_id, loan_date, return_date)
-    VALUES (p_user_id, p_book_id, v_loan_date, v_return_date)
+    INSERT INTO book_loans (user_id, book_id, loan_date)
+    VALUES (p_user_id, p_book_id, v_loan_date)
     RETURNING loan_id INTO r_borrow_id;
 
     RETURN r_borrow_id;
@@ -174,13 +178,14 @@ begin
     END IF;
 
 	delete from books 
-	where book_id = book_id
+	where p_book_id = book_id
 	returning * into deleted_row;  
   
   	RETURN deleted_row is not null;
 EXCEPTION
-  	WHEN OTHERS THEN
-    RETURN FALSE;  -- Возвращаем FALSE в случае ошибки
+WHEN OTHERS THEN
+        RAISE NOTICE 'Error deleting book with id %: %', p_book_id, SQLERRM;
+        RETURN FALSE;
 end;
 $$ language plpgsql;
 
@@ -288,37 +293,40 @@ end;
 $$ language plpgsql;
 
 --	EDIT BOOK
-create or replace function edit_book(p_book JSON)
-returns boolean as $$
-declare
-	book_id INT := (p_book->>'book_id')::INT;
-    title VARCHAR := p_book->>'title';
-    total_pages INT := (p_book->>'total_pages')::INT;
-    rating DECIMAL(4, 2) := (p_book->>'rating')::DECIMAL;
-    isbn VARCHAR := p_book->>'isbn';
-    published_date DATE := (p_book->>'published_date')::DATE;
+CREATE OR REPLACE FUNCTION edit_book(p_book JSON)
+RETURNS BOOLEAN AS $$
+DECLARE
+    p_book_id INT := (p_book->>'book_id')::INT;
+    p_title VARCHAR(255) := p_book->>'title';
+    p_total_pages INT := COALESCE(NULLIF(p_book->>'total_pages', ''), NULL)::INT;
+    p_rating DECIMAL(4, 2) := COALESCE(NULLIF(p_book->>'rating', ''), NULL)::DECIMAL(4, 2);
+    p_isbn VARCHAR(13) := COALESCE(NULLIF(p_book->>'isbn', ''), NULL);
+    p_published_date DATE := NULLIF(p_book->>'published_date', '')::DATE;
     rows_updated INT;
-begin
-	if not exists(select 1 from books as b where book_id = b.book_id) then
-		return false;
-	end if;
-
-	update books as b
-	set b.title = title, 
-		b.total_pages = total_pages, 
-		b.rating = rating, 
-		b.isbn = isbn, 
-		b.published_date = published_date 
-	where b.book_id = book_id;
-
-	GET DIAGNOSTICS rows_updated = ROW_COUNT;
-
-	GET DIAGNOSTICS rows_updated = ROW_COUNT;
-
-    IF rows_updated > 0 THEN
-        RETURN TRUE;  -- Book was edited
-    ELSE
-        RETURN FALSE; -- No book was edited
+BEGIN
+    -- Check for the existence of the book
+    IF NOT EXISTS (SELECT 1 FROM books WHERE book_id = p_book_id) THEN
+        RETURN FALSE;  -- If the book does not exist, return FALSE
     END IF;
-end;
+
+    -- Update the book
+    UPDATE books
+    SET title = p_title, 
+        total_pages = p_total_pages, 
+        rating = p_rating, 
+        isbn = p_isbn, 
+        published_date = p_published_date 
+    WHERE book_id = p_book_id;
+
+    -- Get the number of updated rows
+    GET DIAGNOSTICS rows_updated = ROW_COUNT;
+
+    -- Return TRUE if rows were updated, otherwise FALSE
+    RETURN rows_updated > 0;
+EXCEPTION
+    WHEN OTHERS THEN
+        -- Log the error
+        RAISE NOTICE 'Error in edit_book: %', SQLERRM;
+        RETURN FALSE;  -- Return FALSE in case of an error
+END;
 $$ LANGUAGE plpgsql;

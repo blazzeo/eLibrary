@@ -29,7 +29,7 @@ export async function createUser(userLogin, userPassword) {
       user_name: userLogin,
       user_password: userPassword
     }
-    const result = await admin.query('SELECT add_users($1);', [JSON.stringify(user)])
+    const result = await admin.query('SELECT add_users($1::json);', [JSON.stringify(user)])
     return result.rows[0].add_users;
   } catch (err) {
     throw err
@@ -94,7 +94,17 @@ export async function getBooks(user_name) {
 export async function addBook(book) {
   try {
     const admin = dbadmin(get_current_server_port())
-    const result = await admin.query('select add_book($1::json);', [JSON.stringify(book)])
+    const result = await admin.query('select add_books($1::json);', [JSON.stringify(book)])
+    return result.rows
+  } catch (err) {
+    throw err
+  }
+}
+
+export async function deleteUser(user_name) {
+  try {
+    const admin = dbadmin(get_current_server_port())
+    const result = await admin.query('select delete_user($1);', [user_name])
     return result.rows
   } catch (err) {
     throw err
@@ -107,6 +117,7 @@ export async function deleteBook(book_id) {
     const result = await admin.query('select delete_book($1);', [book_id])
     return result.rows
   } catch (err) {
+    console.log(err)
     throw err
   }
 }
@@ -141,15 +152,6 @@ export async function getUsers() {
   }
 }
 
-export async function deleteUser(user_name) {
-  try {
-    const admin = dbadmin(get_current_server_port())
-    const result = await admin.query('select delete_user($1);', [user_name])
-    return result.rows
-  } catch (err) {
-    throw err
-  }
-}
 
 export async function getLoans() {
   try {
@@ -176,6 +178,16 @@ export async function getLoans() {
     }).filter(Boolean); // Filter out any null results
 
     return result
+  } catch (err) {
+    throw err
+  }
+}
+
+export async function editBook(book) {
+  try {
+    const admin = dbadmin(get_current_server_port())
+    const result = await admin.query('select edit_book($1::json);', [JSON.stringify(book)])
+    return result.rows
   } catch (err) {
     throw err
   }

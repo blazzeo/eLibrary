@@ -1,5 +1,5 @@
 import pkg from 'pg'
-import { log } from './server'
+import { log } from './server.js'
 
 const { Client } = pkg
 

@@ -1,21 +1,26 @@
 import { useState } from "react";
 import { BookData } from "../structs";
-import { addBook } from "../api/DatabaseAPI";
+import { editBook } from "../api/DatabaseAPI";
 
 interface Props {
+  book: BookData | null;
   updateBooks: () => void;
 }
 
-export function AddBookForm({ updateBooks }: Props) {
-  const [title, setTitle] = useState("");
-  const [totalPages, setTotalPages] = useState<number>(0); // Инициализируем значением 0
-  const [rating, setRating] = useState<number>(0); // Инициализируем значением 0
-  const [isbn, setIsbn] = useState("");
-  const [publishedDate, setPublishedDate] = useState<string>(""); // Используем string для даты
+export function EditBookForm({ book, updateBooks }: Props) {
+
+  if (!book) {
+    return <div>No book found</div>; // If no book found, render an error
+  }
+
+  const [title, setTitle] = useState(book.title);
+  const [totalPages, setTotalPages] = useState<number>(book.total_pages);
+  const [rating, setRating] = useState<number>(book.rating);
+  const [isbn, setIsbn] = useState(book.isbn);
+  const [publishedDate, setPublishedDate] = useState<Date | string>(new Date(book.published_date));
   const [error, setError] = useState<null | string>(null);
   const [success, setSuccess] = useState<null | string>(null);
 
-  // Валидация перед отправкой формы
   const validateForm = (): boolean => {
     if (!title || !totalPages || !rating || !publishedDate) {
       setError("All fields are required!");
@@ -26,51 +31,44 @@ export function AddBookForm({ updateBooks }: Props) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // Проверка перед отправкой
     if (!validateForm()) return;
 
-    // Reset error and success messages
     setError(null);
     setSuccess(null);
 
-    // Преобразуем опубликованную дату в объект Date
-    const book: BookData = {
-      book_id: 0,
+    const updatedBook: BookData = {
+      book_id: book.book_id,
       title: title,
       total_pages: totalPages,
       rating: rating,
       isbn: isbn,
-      published_date: new Date(publishedDate ? publishedDate : Date.now()), // Преобразуем строку в объект Date
-      loan_status: 0,
+      published_date: new Date(publishedDate || Date.now()),
+      loan_status: book.loan_status, // Keep the original loan status
     };
 
     try {
-      const response = await addBook(book)
-      if (response == false) {
-        throw new Error("Failed to add book");
+      const response = await editBook(updatedBook);
+      console.log(response);
+
+      if (!response || response[0].edit_book == false) {
+        throw new Error("Failed to update the book");
       }
 
-      // Clear the form and show success message
       setTitle("");
       setTotalPages(0);
       setRating(0);
       setIsbn("");
-      setPublishedDate(""); // Сбрасываем дату
-      setSuccess("Book added successfully!");
+      setPublishedDate(""); // Reset date
+      setSuccess("Book updated successfully!");
       updateBooks();
     } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("Unknown error occurred.");
-      }
+      setError(error instanceof Error ? error.message : "Unknown error occurred.");
     }
   };
 
   return (
     <div className="container mt-5">
-      <h2 className="mb-4">Add a New Book</h2>
+      <h2 className="mb-4">Edit Book</h2>
       <form onSubmit={handleSubmit} className="needs-validation" noValidate>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
@@ -94,7 +92,7 @@ export function AddBookForm({ updateBooks }: Props) {
             id="totalPages"
             className="form-control"
             value={totalPages}
-            onChange={(e) => setTotalPages(Number(e.target.value))} // Преобразуем строку в число
+            onChange={(e) => setTotalPages(Number(e.target.value))}
             required
           />
         </div>
@@ -108,7 +106,7 @@ export function AddBookForm({ updateBooks }: Props) {
             step="0.01"
             className="form-control"
             value={rating}
-            onChange={(e) => setRating(Number(e.target.value))} // Преобразуем строку в число
+            onChange={(e) => setRating(Number(e.target.value))}
             required
           />
         </div>
@@ -133,13 +131,13 @@ export function AddBookForm({ updateBooks }: Props) {
             type="date"
             id="publishedDate"
             className="form-control"
-            value={publishedDate}
-            onChange={(e) => setPublishedDate(e.target.value)} // Дата сохраняется как строка в формате YYYY-MM-DD
+            value={publishedDate.toLocaleString()}
+            onChange={(e) => setPublishedDate(e.target.value.toString())}
             required
           />
         </div>
         <button type="submit" className="btn btn-primary">
-          Add Book
+          Save Changes
         </button>
       </form>
 

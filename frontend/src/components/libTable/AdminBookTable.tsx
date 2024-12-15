@@ -1,19 +1,21 @@
 import { useEffect, useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from "material-react-table";
 import { BookData, UserData, BookLoan } from "../structs";
-import { getLoans, returnBook } from "../api/DatabaseAPI";
+import { deleteBook, getLoans, returnBook } from "../api/DatabaseAPI";
 
 interface Props {
   books: BookData[];
   users: UserData[];
   updateBooks: () => void;
+  editBook: (book: BookData) => void;
 }
 
-export function AdminBookTable({ books, users, updateBooks }: Props) {
+export function AdminBookTable({ books, users, updateBooks, editBook }: Props) {
   const [bookLoans, setBookLoans] = useState<BookLoan[]>([]); // Состояние для хранение данных о займах
 
   const fetchLoans = async () => {
@@ -108,12 +110,30 @@ export function AdminBookTable({ books, users, updateBooks }: Props) {
         size: 50,
         Cell: ({ row }) => {
           const handleEdit = () => {
-            console.log("Edit functionality is not yet implemented.");
-            // Реализуйте функциональность редактирования по мере необходимости
+            editBook(row.original);
+            //const navigate = useNavigate()
+            //navigate("/editbook")
           };
+
           return (
-            <button className="btn btn-success" onClick={handleEdit}>
+            <button className="btn btn-primary" onClick={handleEdit}>
               Edit
+            </button>
+          );
+        },
+      },
+      {
+        header: "Delete",
+        size: 50,
+        Cell: ({ row }) => {
+          const handleDelete = async () => {
+            await deleteBook(row.original.book_id!)
+            updateBooks()
+          };
+
+          return (
+            <button className="btn btn-danger" onClick={handleDelete}>
+              X
             </button>
           );
         },

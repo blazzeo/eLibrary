@@ -1,7 +1,9 @@
 [
   {
-    "user_id": 3,
-    "user_name": "test",
-    "user_password": "qwerty"
+    "title": "test_title",
+    "total_pages": 100,
+    "rating": 3.0,
+    "isbn": null,
+    "published_date": null 
   }
 ]

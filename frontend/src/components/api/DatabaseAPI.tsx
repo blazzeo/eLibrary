@@ -71,9 +71,13 @@ export async function getBooks(username: string | null) {
 
 export async function addBook(book: BookData) {
   try {
-    const response = await axios.post(SERVER + `/api/addbook`, book)
+    console.log("ADD BOOK");
+
+    const response = await axios.post(SERVER + `/api/addbook`, { book: book })
     return response.data
   } catch (error) {
+    console.log("failed add book");
+
     console.error(error)
     throw error
   }
@@ -129,6 +133,27 @@ export async function getLoans() {
     const response = await axios.get(SERVER + '/api/getloans')
     return response.data
   } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function editBook(book: BookData) {
+  try {
+    const response = await axios.post(SERVER + '/api/editbook', { book: book })
+    return response.data
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function deleteBook(book_id: number) {
+  try {
+    const response = await axios.post(SERVER + '/api/deletebook', { book_id: book_id })
+    return response.data
+  } catch (error) {
+    console.log("DELETE ERROR")
     console.error(error);
     throw error;
   }

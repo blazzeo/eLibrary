@@ -69,7 +69,6 @@ CREATE TABLE book_loans (
     user_id INT NOT NULL,
     book_id INT NOT NULL,
     loan_date DATE NOT NULL DEFAULT CURRENT_DATE,
-    return_date DATE NULL,
     PRIMARY KEY (loan_id),
     CONSTRAINT fk_user
         FOREIGN KEY (user_id)
