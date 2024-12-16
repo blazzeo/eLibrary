@@ -99,7 +99,7 @@ app.get('/api/getbooks', async (req, res) => {
     const user_name = req.query.username;
     const result = await db_request.getBooks(user_name);
     res.json(result);
-    log(`getBooks success:\tBook:\t{${user_name}}`)
+    log(`getBooks success:\tBookCount:\t{${result.length}}`)
   } catch (error) {
     res.status(500).json({ error: error.message });
     log(`getBooks failed:\t${error.message}`)

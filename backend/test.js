@@ -1,33 +1,45 @@
-import { export_json, import_json } from "./json_handler.js"
-console.log("TEST")
+import { error, log } from "console";
+import { dbadmin } from './db_roles.js';
+import { get_current_server_port } from './monitoring.js'
 
-const book = {
-  "title": "TestTEST",
-  "total_pages": 228,
-  "rating": 4.5,
-  "isbn": "1234567890123",
-  "published_date": new Date(Date.now()).toISOString()
+function random_rating() {
+  return Math.floor(Math.random() * 6); // Generates a rating between 0 and 5
 }
 
-fetch('http://localhost:3000/api/addbook/', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(book),
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(result => {
-    console.log('Success:', result);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+async function test_100k() {
+  const admin = dbadmin(get_current_server_port());
 
-//import_json('export.json', 'books')
-//import_json('export.json', 'books')
+  try {
+    await admin.query('BEGIN;');
+
+    const promises = [];
+
+    for (let i = 0; i < 20000; i++) {
+      const book = {
+        title: `book${i}`,
+        total_pages: i + 1,
+        rating: random_rating(),
+      };
+
+      promises.push(admin.query('SELECT add_books($1::json);', [JSON.stringify(book)]));
+    }
+
+    const results = await Promise.all(promises);
+
+    for (const result of results) {
+      if (!result || result == 'false') {
+        throw new Error(result);
+      }
+    }
+
+    await admin.query('COMMIT;');
+    log("SUCCESS");
+  } catch (error) {
+    await admin.query('ROLLBACK;');
+    error("ERROR OCCURRED: " + error.message);
+    log(err)
+    process.exit(1);
+  }
+}
+
+test_100k()

@@ -27,7 +27,6 @@ export default function UserDashboard() {
   return (
     <>
       <Header />
-      <h1>User</h1>
       <Routes>
         <Route path="/" element={
           <BookDataTable books={books} updateBooks={fetchBooks} />

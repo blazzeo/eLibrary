@@ -12,13 +12,13 @@ CREATE TABLE authors(
   PRIMARY KEY(author_id)
 );
 
-CREATE TABLE books(
+CREATE TABLE books (
   book_id        SERIAL NOT NULL, 
   title          VARCHAR(255) NOT NULL, 
   total_pages    INT NULL,
-  rating         DECIMAL(4, 2) NULL, 
+  rating         DECIMAL(4, 2) NULL CHECK (rating >= 0 AND rating <= 5),
   isbn           VARCHAR(13) NULL, 
-  published_date DATE, 
+  published_date DATE DEFAULT CURRENT_DATE,
   PRIMARY KEY(book_id)
 );
 

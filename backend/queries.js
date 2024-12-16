@@ -66,7 +66,7 @@ export async function getBooks(user_name) {
       const bookString = row.get_books;
 
       // Use regex to match the components
-      const regex = /^\((\d+),(.+),(\d+)?,([\d.]+)?,(\d+)?,([\d-]+)?,(\d)\)$/;
+      const regex = /^\((\d+),(.+),(\d+)?,([\d.]+)?,(.+)?,([\d-]+)?,(\d)\)$/;
       const match = regex.exec(bookString);
 
       if (match) {
@@ -95,6 +95,7 @@ export async function addBook(book) {
   try {
     const admin = dbadmin(get_current_server_port())
     const result = await admin.query('select add_books($1::json);', [JSON.stringify(book)])
+    console.log(result)
     return result.rows
   } catch (err) {
     throw err
