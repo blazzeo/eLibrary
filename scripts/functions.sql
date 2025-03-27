@@ -1,7 +1,7 @@
 --	CHECK USER
-create or replace function check_user(
-	p_user_name varchar,
-	p_user_password varchar
+create or replace function authentificate(
+	p_name varchar,
+	p_password varchar
 ) returns varchar as $$
 declare
 	r_user_role varchar;
@@ -10,7 +10,7 @@ begin
         SELECT user_role
 		into r_user_role
         FROM users
-        WHERE user_name = p_user_name AND user_password = p_user_password;
+        WHERE user_name = p_name AND user_password = p_password;
 
     RETURN r_user_role;
 end;
@@ -18,7 +18,7 @@ $$ LANGUAGE plpgsql;
 
 --	CHECK AVAILABLE LOGIN
 create or replace function check_available_login(
-	p_user_name varchar
+	p_name varchar
 ) returns BOOLEAN as $$
 declare
 	login_available boolean;
@@ -27,7 +27,7 @@ begin
     SELECT not EXISTS (
         SELECT 1
         FROM users
-        WHERE user_name = p_user_name
+        WHERE user_name = p_name
     ) INTO login_available;
 
     RETURN login_available;
