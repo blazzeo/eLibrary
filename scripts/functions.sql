@@ -189,15 +189,21 @@ WHEN OTHERS THEN
 end;
 $$ language plpgsql;
 
+
+drop function get_books(varchar);
 --  GET BOOKS + USER's BOOKSHELF
 CREATE OR REPLACE FUNCTION get_books(p_user_name VARCHAR)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
+    authors text[],
+    genres varchar[],
     total_pages INT,
     rating DECIMAL(4, 2),
     isbn VARCHAR,
     published_date DATE,
+    borrow_date DATE,
+    return_date DATE,
     loan_status INT  -- 0: not borrowed, 1: borrowed by user, 2: borrowed by another user
 ) AS $$
 DECLARE
@@ -213,10 +219,14 @@ BEGIN
     SELECT 
         b.book_id,
         b.title,
+		ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) as authors,
+		ARRAY_AGG(DISTINCT g.genre) as genres,
         b.total_pages,
         b.rating,
         b.isbn,
         b.published_date,
+		bl.borrow_date,
+		bl.return_date,
         CASE
             WHEN NOT EXISTS (
                 SELECT 1 
@@ -231,7 +241,19 @@ BEGIN
             ELSE 2  -- Book is borrowed by another user
         END AS loan_status
     FROM 
-        books b;
+        books b
+	JOIN
+		book_authors ba on b.book_id = ba.book_id
+	JOIN
+		authors a on a.author_id = ba.author_id
+	JOIN
+		book_genres bg on b.book_id = bg.book_id
+	JOIN
+		genres g on bg.genre_id = g.genre_id
+	LEFT JOIN
+		book_loans bl on bl.book_id = b.book_id
+	GROUP BY
+        b.book_id, b.title, b.total_pages, b.rating, b.isbn, b.published_date, bl.return_date, bl.borrow_date;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -328,5 +350,88 @@ EXCEPTION
         -- Log the error
         RAISE NOTICE 'Error in edit_book: %', SQLERRM;
         RETURN FALSE;  -- Return FALSE in case of an error
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- add wishlist
+CREATE OR REPLACE PROCEDURE add_wishlist (
+    p_user_name VARCHAR,
+    p_book_id INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_user_id INTEGER;
+    user_exists BOOLEAN;
+    book_exists BOOLEAN;
+    already_in_wishlist BOOLEAN;
+BEGIN
+    -- Проверка на NULL значения
+    IF p_user_name IS NULL THEN
+        RAISE EXCEPTION 'User name cannot be NULL';
+    END IF;
+    
+    IF p_book_id IS NULL THEN
+        RAISE EXCEPTION 'Book ID cannot be NULL';
+    END IF;
+    
+    -- Проверка существования пользователя
+    SELECT EXISTS(SELECT 1 FROM users WHERE user_name = p_user_name) INTO user_exists;
+    IF NOT user_exists THEN
+        RAISE EXCEPTION 'User with name % does not exist', p_user_name;
+    END IF;
+
+    SELECT u.user_id FROM users u WHERE u.user_name = p_user_name INTO v_user_id;
+
+    -- Проверка существования книги
+    SELECT EXISTS(SELECT 1 FROM books WHERE book_id = p_book_id) INTO book_exists;
+    IF NOT book_exists THEN
+        RAISE EXCEPTION 'Book with ID % does not exist', p_book_id;
+    END IF;
+
+    -- Проверка, нет ли уже этой книги в вишлисте пользователя
+    SELECT EXISTS(
+        SELECT 1 
+        FROM wishlist w 
+        WHERE w.user_id = v_user_id AND w.book_id = p_book_id
+    ) INTO already_in_wishlist;
+
+    IF already_in_wishlist THEN
+        RAISE NOTICE 'Book % is already in wishlist for user %', p_book_id, p_user_name;
+    ELSE
+        -- Добавление в вишлист
+        INSERT INTO wishlist (user_id, book_id)
+        VALUES (v_user_id, p_book_id);
+        
+        RAISE NOTICE 'Book % successfully added to wishlist for user %', p_book_id, p_user_name;
+    END IF;
+END;
+$$;
+
+-- GET WISHLIST user
+drop function get_user_wishlist(varchar);
+CREATE OR REPLACE FUNCTION get_user_wishlist(p_user_name VARCHAR)
+RETURNS TABLE(user_id INT, user_name varchar, book_id INT, book_title varchar, request_date DATE) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT w.user_id, u.user_name, w.book_id, b.title, w.request_date
+    FROM wishlist w
+    JOIN users u ON w.user_id = u.user_id
+	JOIN books b ON w.book_id = b.book_id
+    WHERE (p_user_name IS NULL OR u.user_name = p_user_name);
+END;
+$$ LANGUAGE plpgsql;
+
+-- get wishlist all
+drop function get_wishlists();
+CREATE OR REPLACE FUNCTION get_wishlists()
+RETURNS TABLE(user_id INT, user_name varchar, book_id INT, book_title varchar, request_date DATE) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT w.user_id, u.user_name, w.book_id, b.title, w.request_date
+    FROM wishlist w
+    JOIN users u ON w.user_id = u.user_id
+	JOIN books b ON w.book_id = b.book_id;
 END;
 $$ LANGUAGE plpgsql;

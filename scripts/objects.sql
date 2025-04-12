@@ -1,6 +1,6 @@
 -- Create admin, user roles
-create role moder;
-create role dbuser;
+CREATE ROLE moder LOGIN PASSWORD 'master_moder';
+CREATE ROLE dbuser LOGIN PASSWORD 'master_user';
 
 --	АВТОРЫ
 CREATE TABLE authors(
@@ -83,6 +83,19 @@ CREATE TABLE book_loans (
         FOREIGN KEY (book_id)
         REFERENCES books(book_id)
 );
+
+--	СПИСОК ЗАПРОСОВ
+create table wishlist (
+	book_id int not null,
+	user_id int not null,
+	request_date date not null default CURRENT_DATE,
+	CONSTRAINT fk_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(user_id),
+    CONSTRAINT fk_book
+        FOREIGN KEY (book_id)
+        REFERENCES books(book_id)
+)
 
 --	drop all objects
 drop table authors cascade;

@@ -40,7 +40,7 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 	};
 
 	return (
-		<div className="container-sm mt-5">
+		<div className="w-25 container-sm mt-5">
 			<h2 className="mb-4 text-center">Login</h2>
 			<form onSubmit={handleSubmit}>
 				<div className="mb-3">

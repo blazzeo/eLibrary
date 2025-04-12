@@ -7,8 +7,28 @@ grant update on book_loans to moder;
 --	USER
 grant connect on database elibrary to dbuser;
 grant select on books to dbuser;
-grant select on books to admin;
-
 grant select on users to dbuser;
-grant select on users to admin;
-grant select on check_user to dbuser;
+grant select on book_authors to dbuser;
+grant select on book_genres to dbuser;
+grant select on genres to dbuser;
+grant select on authors to dbuser;
+grant select on book_loans to dbuser;
+grant execute on function get_books(varchar) to dbuser;
+grant execute on function authentificate(varchar, varchar) to dbuser;
+
+
+
+
+
+revoke insert on book_loans from moder;
+revoke delete on book_loans from moder;
+revoke update on book_loans from moder;
+revoke connect on database elibrary from moder;
+revoke select on users from dbuser;
+revoke select on check_user from dbuser;
+revoke insert on book_loans from dbuser;
+revoke delete on book_loans from dbuser;
+revoke update on book_loans from dbuser;
+revoke select on books from dbuser;
+revoke execute on function get_books (VARCHAR) from dbuser;
+revoke connect on database elibrary from dbuser;

@@ -5,7 +5,7 @@ import {
 	type MRT_ColumnDef,
 } from "material-react-table";
 import { BookData } from "../structs";
-import { borrowBook } from "../api/DatabaseAPI";
+import { addWishlist } from "../api/DatabaseAPI";
 
 interface Props {
 	books: BookData[];
@@ -18,22 +18,48 @@ export default function BookDataTable({ books, updateBooks }: Props) {
 			{
 				accessorKey: "title",
 				header: "Название 📖",
-				size: 450,
+				size: 300,
+			},
+			{
+				accessorKey: "authors",
+				header: "Авторы",
+				size: 180,
+				grow: false,
+				// Parse array of authors into a comma-separated string
+				Cell: ({ cell }) => {
+					const authors = cell.getValue() as string[];
+					return authors?.join(", "); // "Author1, Author2, ..."
+				},
+			},
+			{
+				accessorKey: "genres",
+				header: "Жанры",
+				size: 50,
+				grow: false,
+				// Parse array of genres into a comma-separated string
+				Cell: ({ cell }) => {
+					const genres = cell.getValue() as string[];
+					return genres?.join(", "); // "Genre1, Genre2, ..."
+				},
 			},
 			{
 				accessorKey: "total_pages", //normal accessorKey
-				header: "Коль-во страниц 📗",
-				size: 20,
+				header: "Страниц 📗",
+
+				grow: false,
+				size: 50,
 			},
 			{
 				accessorKey: "rating",
 				header: "Рейтинг ⭐️",
-				size: 20,
+				grow: false,
+				size: 50,
 			},
 			{
 				accessorKey: "published_date",
-				header: "Дата публикации 📅",
-				size: 20,
+				header: "Опубликовано 📅",
+				size: 50,
+				grow: false,
 				Cell: ({ cell }) => {
 					// Format the date for display
 					const date = new Date(cell.getValue() as string);
@@ -43,21 +69,22 @@ export default function BookDataTable({ books, updateBooks }: Props) {
 			{
 				accessorKey: "loan_status",
 				header: "Статус 🔓",
-				size: 20,
+				size: 50,
+				grow: false,
 				Cell: ({ cell, row }) => {
 					const loanStatus = cell.getValue() as number; // Assuming your BookData has these properties
 
-					const handleBorrow = async () => {
+					const handleWishlist = async () => {
 						const userName = sessionStorage.getItem("userName")
 						const bookId = row.original.book_id;
-						await borrowBook(userName, bookId)
+						await addWishlist(userName!, bookId!)
 						console.log(`Book ID ${bookId} -> User ${userName}`);
 						updateBooks();
 					};
 
 					if (loanStatus === 0) {
 						return (
-							<button className="btn btn-success" onClick={handleBorrow}>
+							<button className="btn btn-success" onClick={handleWishlist}>
 								Borrow
 							</button>
 						);
