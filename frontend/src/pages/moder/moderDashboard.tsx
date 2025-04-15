@@ -6,7 +6,7 @@ import { getBooks } from "../../components/api/DatabaseAPI";
 import { Route, Routes } from "react-router";
 import { BookShelf } from "../../components/libTable/BookShelf";
 
-export default function UserDashboard() {
+export default function ModerDashboard() {
 	const [books, setBooks] = useState<BookData[]>([]);
 
 	const fetchBooks = async () => {

@@ -70,12 +70,25 @@ app.get('/api/createuser', async (req, res) => {
 
 app.post('/api/borrowbook', async (req, res) => {
 	try {
-		const borrow_data = req.body;
-		const user_name = borrow_data.user_name;
-		const book_id = borrow_data.book_id;
-		const result = await db_request.borrowBook(user_name, book_id);
+		const user_name = req.body.user_name;
+		const book_id = req.body.book_id;
+		const return_date = req.body.return_date;
+		const result = await db_request.borrowBook(user_name, book_id, return_date);
 		res.json({ result: result });
-		log(`borrowBook success:\tBook:\t{${user_name}, ${book_id}}`)
+		log(`borrowBook success:\tBook:\t{${user_name}, ${book_id}, ${return_date}}`)
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+		log(`borrowBook failed:\t${error.message}`)
+	}
+});
+
+app.put('/api/extentloan', async (req, res) => {
+	try {
+		const book_id = req.body.book_id;
+		const new_date = req.body.new_date;
+		const result = await db_request.extentLoan(book_id, new_date);
+		res.json({ result: result });
+		log(`borrowBook success:\tBook:\t{${user_name}, ${book_id}, ${return_date}}`)
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 		log(`borrowBook failed:\t${error.message}`)

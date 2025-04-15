@@ -83,11 +83,11 @@ export async function addBook(book: BookData) {
 	}
 }
 
-export async function borrowBook(username: string | null, bookId: number | null) {
+export async function borrowBook(username: string | null, bookId: number | null, date: Date) {
 	try {
 		if (username === null || bookId === null)
 			throw 'invalid username or bookid'
-		const response = await axios.post(SERVER + `/api/borrowbook`, { user_name: username, book_id: bookId })
+		const response = await axios.post(SERVER + `/api/borrowbook`, { user_name: username, book_id: bookId, borrowBook })
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -110,6 +110,16 @@ export async function returnBook(bookId: number | null) {
 export async function askExtension(bookId: number) {
 	try {
 		const response = await axios.post(SERVER + `/api/askextension`, { book_id: bookId })
+		return response.data
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function extentLoan(bookId: number, newDate: Date) {
+	try {
+		const response = await axios.put(SERVER + `/api/extentloan`, { book_id: bookId, new_date: newDate })
 		return response.data
 	} catch (error) {
 		console.error(error)

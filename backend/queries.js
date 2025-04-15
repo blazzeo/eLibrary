@@ -1,5 +1,5 @@
 import { response } from 'express'
-import { dbuser, dbadmin } from './db_roles.js'
+import { dbuser, dbadmin, dbmoder } from './db_roles.js'
 import { get_current_server_port } from './monitoring.js'
 import { log } from './server.js'
 
@@ -37,10 +37,10 @@ export async function createUser(userLogin, userPassword) {
 	}
 }
 
-export async function borrowBook(user_name, book_id) {
+export async function borrowBook(user_name, book_id, return_date) {
 	try {
 		const user = dbuser(5432)
-		const result = await user.query('SELECT borrow_book($1, $2);', [user_name, book_id])
+		const result = await user.query('SELECT borrow_book($1, $2, $3);', [user_name, book_id, return_date])
 		return result.rows;
 	} catch (err) {
 		throw err
@@ -139,5 +139,15 @@ export async function addWishlist(user_name, book_id) {
 		return result.rows
 	} catch (err) {
 		throw err
+	}
+}
+
+export async function extentLoan(book_id, new_date) {
+	try {
+		const moder = dbmoder(5432)
+		const result = await moder.query(`exec extent_loan($1,$2);`, [book_id, new_date])
+	} catch (error) {
+		console.error(error)
+		throw error
 	}
 }
