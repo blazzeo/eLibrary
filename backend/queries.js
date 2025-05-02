@@ -132,10 +132,10 @@ export async function editBook(book) {
 	}
 }
 
-export async function addWishlist(user_name, book_id) {
+export async function toggleWishlist(user_name, book_id) {
 	try {
 		const user = dbuser(5432)
-		const result = await user.query('exec add_wishlist($1,$2);', [user_name, book_id])
+		const result = await user.query('call toggle_wishlist($1,$2);', [user_name, book_id])
 		return result.rows
 	} catch (err) {
 		throw err

@@ -13,8 +13,12 @@ grant select on book_genres to dbuser;
 grant select on genres to dbuser;
 grant select on authors to dbuser;
 grant select on book_loans to dbuser;
+grant insert on wishlist to dbuser;
+grant select on wishlist to dbuser;
+grant delete on wishlist to dbuser;
 grant execute on function get_books(varchar) to dbuser;
 grant execute on function authentificate(varchar, varchar) to dbuser;
+grant execute on procedure add_wishlist(varchar, integer) to dbuser;
 
 
 

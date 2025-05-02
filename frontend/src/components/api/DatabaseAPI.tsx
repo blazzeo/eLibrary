@@ -58,6 +58,7 @@ export async function getBooks(username: string | null) {
 	try {
 		if (username === null)
 			throw "invalid username"
+
 		const response: AxiosResponse<BookData[]> = await axios.get(
 			SERVER + `/api/getbooks?username=${username}`
 		);
@@ -179,12 +180,12 @@ export async function deleteBook(book_id: number) {
 	}
 }
 
-export async function addWishlist(user_name: string, book_id: number) {
+export async function toggleWishlist(user_name: string, book_id: number) {
 	try {
-		const response = await axios.post(SERVER + '/api/addwishlist', { user_name: user_name, book_id: book_id })
+		const response = await axios.post(SERVER + '/api/togglewishlist', { user_name: user_name, book_id: book_id })
 		return response.data
 	} catch (error) {
-		console.log("DELETE ERROR")
+		console.log("toggle wishlist error: ", error)
 		console.error(error);
 		throw error;
 	}

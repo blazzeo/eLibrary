@@ -5,7 +5,7 @@ import {
 	type MRT_ColumnDef,
 } from "material-react-table";
 import { BookData } from "../structs";
-import { addWishlist } from "../api/DatabaseAPI";
+import { toggleWishlist } from "../api/DatabaseAPI";
 
 interface Props {
 	books: BookData[];
@@ -77,27 +77,28 @@ export default function BookDataTable({ books, updateBooks }: Props) {
 					const handleWishlist = async () => {
 						const userName = sessionStorage.getItem("userName")
 						const bookId = row.original.book_id;
-						await addWishlist(userName!, bookId!)
+						await toggleWishlist(userName!, bookId!)
 						console.log(`Book ID ${bookId} -> User ${userName}`);
 						updateBooks();
 					};
 
 					if (loanStatus === 0) {
 						return (
-							<button className="btn btn-success" onClick={handleWishlist}>
-								Borrow
+							<button className="btn btn-secondary" disabled >
+								Mine
 							</button>
 						);
 					} else if (loanStatus === 1) {
 						return (
-							<button className="btn btn-secondary" disabled>
-								Mine
+							<button className="btn btn-danger" onClick={handleWishlist}>
+								Remove from Wishlist
 							</button>
 						);
-					} else {
+					}
+					else {
 						return (
-							<button className="btn btn-danger" disabled>
-								Unavailable
+							<button className="btn btn-success" onClick={handleWishlist}>
+								Add to Wishlist
 							</button>
 						);
 					}

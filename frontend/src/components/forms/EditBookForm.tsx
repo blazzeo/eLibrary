@@ -65,7 +65,7 @@ export function EditBookForm({ book, updateBooks }: Props) {
 			setTotalPages(0);
 			setRating(0);
 			setIsbn("");
-			setPublishedDate(""); // Reset date
+			setPublishedDate("");
 			setSuccess("Book updated successfully!");
 			updateBooks();
 		} catch (error) {

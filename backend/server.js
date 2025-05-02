@@ -194,11 +194,12 @@ app.post('/api/editbook', async (req, res) => {
 	}
 })
 
-app.post('/api/addwishlist', async (req, res) => {
+app.post('/api/togglewishlist', async (req, res) => {
 	try {
 		const user_name = req.body.user_name
 		const book_id = req.body.book_id
-		const result = await db_request.addWishlist(user_name, book_id)
+		console.log(user_name, book_id)
+		const result = await db_request.toggleWishlist(user_name, book_id)
 		console.log(result)
 		// if (result[0].edit_book == false)
 		// 	throw new Error("Failed to edit book")

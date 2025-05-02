@@ -96,7 +96,7 @@ end;
 $$ language plpgsql;
 
 --	BORROW BOOK
-CREATE OR REPLACE FUNCTION borrow_book(p_user_name varchar, p_book_id INT)
+CREATE OR REPLACE FUNCTION borrow_book(p_user_name varchar, p_book_id INT, p_return_date DATE)
 RETURNS INT AS $$
 DECLARE
     v_loan_date DATE := CURRENT_DATE;
@@ -190,21 +190,24 @@ end;
 $$ language plpgsql;
 
 
-drop function get_books(varchar);
+--drop function get_books(varchar);
 --  GET BOOKS + USER's BOOKSHELF
 CREATE OR REPLACE FUNCTION get_books(p_user_name VARCHAR)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
     authors text[],
-    genres varchar[],
+    genres varchar[],	
     total_pages INT,
     rating DECIMAL(4, 2),
     isbn VARCHAR,
     published_date DATE,
     borrow_date DATE,
     return_date DATE,
-    loan_status INT  -- 0: not borrowed, 1: borrowed by user, 2: borrowed by another user
+    loan_status INT 
+    -- 0: mine 
+    -- 1: do wishlish,
+    -- 2: not wishlish
 ) AS $$
 DECLARE
     p_user_id INT;
@@ -216,7 +219,7 @@ BEGIN
     END IF;
 
     RETURN QUERY
-    SELECT 
+    SELECT
         b.book_id,
         b.title,
 		ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) as authors,
@@ -228,17 +231,17 @@ BEGIN
 		bl.borrow_date,
 		bl.return_date,
         CASE
-            WHEN NOT EXISTS (
-                SELECT 1 
-                FROM book_loans bl 
-                WHERE bl.book_id = b.book_id
-            ) THEN 0  -- Book is not borrowed by anyone
+            WHEN p_user_name IS NOT NULL AND EXISTS (
+                SELECT 1
+                FROM book_loans bl
+                WHERE bl.book_id = b.book_id and bl.user_id = p_user_id
+			) THEN 0  -- Book is mine
             WHEN p_user_name IS NOT NULL AND EXISTS (
                 SELECT 1 
-                FROM book_loans bl 
-                WHERE bl.book_id = b.book_id AND bl.user_id = p_user_id
-            ) THEN 1  -- Book is borrowed by the specified user
-            ELSE 2  -- Book is borrowed by another user
+                FROM wishlist w 
+                WHERE w.book_id = b.book_id AND w.user_id = p_user_id
+            ) THEN 1  -- book is in my wishlish
+            ELSE 2  -- book is not in my wishlist
         END AS loan_status
     FROM 
         books b
@@ -353,9 +356,8 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql;
 
-
--- add wishlist
-CREATE OR REPLACE PROCEDURE add_wishlist (
+-- toggle wishlist
+CREATE OR REPLACE PROCEDURE toggle_wishlist (
     p_user_name VARCHAR,
     p_book_id INTEGER
 )
@@ -398,10 +400,14 @@ BEGIN
     ) INTO already_in_wishlist;
 
     IF already_in_wishlist THEN
-        RAISE NOTICE 'Book % is already in wishlist for user %', p_book_id, p_user_name;
+		-- Удаление из списка
+        DELETE 
+		FROM wishlist 
+		WHERE user_id = v_user_id AND book_id = p_book_id; 
     ELSE
         -- Добавление в вишлист
-        INSERT INTO wishlist (user_id, book_id)
+        INSERT
+		INTO wishlist (user_id, book_id)
         VALUES (v_user_id, p_book_id);
         
         RAISE NOTICE 'Book % successfully added to wishlist for user %', p_book_id, p_user_name;
@@ -410,7 +416,7 @@ END;
 $$;
 
 -- GET WISHLIST user
-drop function get_user_wishlist(varchar);
+--drop function get_user_wishlist(varchar);
 CREATE OR REPLACE FUNCTION get_user_wishlist(p_user_name VARCHAR)
 RETURNS TABLE(user_id INT, user_name varchar, book_id INT, book_title varchar, request_date DATE) AS $$
 BEGIN
@@ -424,7 +430,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- get wishlist all
-drop function get_wishlists();
+--drop function get_wishlists();
 CREATE OR REPLACE FUNCTION get_wishlists()
 RETURNS TABLE(user_id INT, user_name varchar, book_id INT, book_title varchar, request_date DATE) AS $$
 BEGIN

@@ -8,6 +8,8 @@ interface Props {
 	noAccountCallback: () => void;
 }
 
+const user_roles = ['user', 'admin', 'moder']
+
 const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -23,7 +25,7 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 			const userData: UserData = { username, password };
 			const userRole = await checkUser(userData);
 			setLoading(false);
-			if (userRole.result == 'admin' || userRole.result == 'user') {
+			if (user_roles.includes(userRole.result)) {
 				authorizeCallback(userData, userRole.result);
 			} else {
 				setError("User not found. Please check your credentials.")

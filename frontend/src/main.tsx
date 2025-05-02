@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { AuthPage } from "./pages/AuthPage.tsx";
 import UserDashboard from "./pages/user/userDashboard.tsx";
 import AdminDashboard from "./pages/admin/adminDashboard.tsx";
-import ModerDashboard from "./pages/moder/ModerDashboard.tsx";
+import ModerDashboard from "./pages/moder/moderDashboard.tsx";
 
 function Main() {
 	const [userRole, setUserRole] = useState<string | null>(null);
