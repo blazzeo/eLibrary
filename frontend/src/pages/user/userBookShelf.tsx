@@ -4,8 +4,8 @@ import {
 	useMaterialReactTable,
 	type MRT_ColumnDef,
 } from "material-react-table";
-import { BookData } from "../structs";
-import { askExtension } from "../api/DatabaseAPI";
+import { BookData } from "../../components/structs";
+import { askExtension } from "../../components/api/DatabaseAPI";
 
 interface Props {
 	books: BookData[];

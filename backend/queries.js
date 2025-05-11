@@ -1,7 +1,4 @@
-import { response } from 'express'
 import { dbuser, dbadmin, dbmoder } from './db_roles.js'
-import { get_current_server_port } from './monitoring.js'
-import { log } from './server.js'
 
 export async function checkLogin(userLogin) {
 	try {
@@ -37,9 +34,9 @@ export async function createUser(userLogin, userPassword) {
 	}
 }
 
-export async function borrowBook(user_name, book_id, return_date) {
+export async function addLoan(user_name, book_id, return_date) {
 	try {
-		const user = dbuser(5432)
+		const user = dbmoder(5432)
 		const result = await user.query('SELECT borrow_book($1, $2, $3);', [user_name, book_id, return_date])
 		return result.rows;
 	} catch (err) {
@@ -49,7 +46,7 @@ export async function borrowBook(user_name, book_id, return_date) {
 
 export async function returnBook(book_id) {
 	try {
-		const user = dbuser(5432)
+		const user = dbmoder(5432)
 		const result = await user.query('select return_book($1);', [book_id])
 		return result.rows;
 	} catch (err) {
@@ -142,10 +139,55 @@ export async function toggleWishlist(user_name, book_id) {
 	}
 }
 
-export async function extentLoan(book_id, new_date) {
+export async function extentLoan(user_name, book_id) {
 	try {
 		const moder = dbmoder(5432)
-		const result = await moder.query(`exec extent_loan($1,$2);`, [book_id, new_date])
+		const result = await moder.query(`exec extent_loan($1,$2);`, [user_name, book_id])
+		return result
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function getModerBooks() {
+	try {
+		const moder = dbmoder(5432)
+		const result = await moder.query('select * from get_moder_books_json_table();')
+		return result.rows
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function requestExtent(user_name, book_id, request_date) {
+	try {
+		const user = dbuser(5432)
+		const result = await user.query(`call request_extent_loan($1, $2, $3);`, [user_name, book_id, request_date])
+		return result
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function confirmExtension(book_id, user_id, request_date) {
+	try {
+		const moder = dbmoder(5432)
+		const result = await moder.query(`call confirm_extension($1, $2, $3);`, [book_id, user_id, request_date])
+		return result;
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function rejectExtension(book_id, user_id, request_date) {
+	try {
+		const moder = dbmoder(5432)
+		const result = await moder.query(`call reject_extension($1, $2, $3);`, [book_id, user_id, request_date])
+		return result;
 	} catch (error) {
 		console.error(error)
 		throw error

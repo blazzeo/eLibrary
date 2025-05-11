@@ -3,6 +3,16 @@ grant connect on database elibrary to moder;
 grant insert on book_loans to moder;
 grant delete on book_loans to moder;
 grant update on book_loans to moder;
+grant select on books to moder;
+grant select on book_authors to moder;
+grant select on book_loans to moder;
+grant select on authors to moder;
+grant select on book_genres to moder;
+grant select on genres to moder;
+grant select on users to moder;
+grant select on extention_requests to moder;
+grant select on wishlist to moder;
+
 
 --	USER
 grant connect on database elibrary to dbuser;

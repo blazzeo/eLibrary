@@ -4,15 +4,15 @@ import {
 	useMaterialReactTable,
 	type MRT_ColumnDef,
 } from "material-react-table";
-import { BookData } from "../structs";
-import { toggleWishlist } from "../api/DatabaseAPI";
+import { BookData } from "../../components/structs";
+import { toggleWishlist } from "../../components/api/DatabaseAPI";
 
 interface Props {
 	books: BookData[];
 	updateBooks: () => void;
 }
 
-export default function BookDataTable({ books, updateBooks }: Props) {
+export default function UserBookTable({ books, updateBooks }: Props) {
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
 		() => [
 			{

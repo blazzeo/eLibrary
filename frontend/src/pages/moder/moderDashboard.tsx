@@ -1,27 +1,41 @@
 import Header from "../../components/header";
 import { useState, useEffect } from "react";
-import BookDataTable from "../../components/libTable/BookTable";
-import { BookData } from "../../components/structs";
-import { getBooks } from "../../components/api/DatabaseAPI";
+import { BookInfo, UserData } from "../../components/structs";
+import { getModerBooks, getUsers } from "../../components/api/DatabaseAPI";
 import { Route, Routes } from "react-router";
-import { BookShelf } from "../../components/libTable/BookShelf";
+import AddLoanForm from "../../components/forms/AddLoanForm";
+import ModerBookTable from "./moderBookTable";
+import RequestsList from "./requestsList";
 
 export default function ModerDashboard() {
-	const [books, setBooks] = useState<BookData[]>([]);
+	const [books, setBooks] = useState<BookInfo[]>([]);
+	const [users, setUsers] = useState<UserData[]>([]);
 
 	const fetchBooks = async () => {
 		try {
-			const userName = sessionStorage.getItem("userName")
-			const bookData = await getBooks(userName)
-			setBooks(bookData)
+			const result = await getModerBooks()
+			setBooks(result)
+		} catch (err) {
+			console.error(err)
+		}
+	};
+
+	const fetchUsers = async () => {
+		try {
+			const users = await getUsers()
+			setUsers(users)
 		} catch (err) {
 			console.error(err)
 		}
 	};
 
 	useEffect(() => {
-		fetchBooks()
-		console.log(books);
+		fetchBooks().then(() => {
+			console.log(books);
+		})
+		fetchUsers().then(() => {
+			console.log(users)
+		})
 	}, []);
 
 	return (
@@ -29,10 +43,13 @@ export default function ModerDashboard() {
 			<Header />
 			<Routes>
 				<Route path="/" element={
-					<BookDataTable books={books} updateBooks={fetchBooks} />
+					<ModerBookTable bookList={books} updateBooks={fetchBooks} />
 				} />
-				<Route path="/mybooks" element={
-					<BookShelf books={books.filter(x => x.loan_status === 1)} updateBooks={fetchBooks} />
+				<Route path="/createloan" element={
+					<AddLoanForm books={books} users={users} />
+				} />
+				<Route path="/requests" element={
+					<RequestsList bookList={books} updateBooks={fetchBooks} />
 				} />
 			</Routes>
 		</>

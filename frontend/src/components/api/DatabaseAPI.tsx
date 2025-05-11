@@ -70,6 +70,16 @@ export async function getBooks(username: string | null) {
 	}
 }
 
+export async function getModerBooks() {
+	try {
+		const response = await axios.get(SERVER + '/api/getmoderbooks')
+		console.log(response.data.result)
+		return response.data.result
+	} catch (error) {
+		console.error("Error on getting moder books: ", error)
+	}
+}
+
 export async function addBook(book: BookData) {
 	try {
 		console.log("ADD BOOK");
@@ -84,11 +94,11 @@ export async function addBook(book: BookData) {
 	}
 }
 
-export async function borrowBook(username: string | null, bookId: number | null, date: Date) {
+export async function addLoan(username: string | null, bookId: number | null, date: Date) {
 	try {
 		if (username === null || bookId === null)
 			throw 'invalid username or bookid'
-		const response = await axios.post(SERVER + `/api/borrowbook`, { user_name: username, book_id: bookId, borrowBook })
+		const response = await axios.post(SERVER + `/api/addloan`, { user_name: username, book_id: bookId, borrow_date: date })
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -121,6 +131,26 @@ export async function askExtension(bookId: number) {
 export async function extentLoan(bookId: number, newDate: Date) {
 	try {
 		const response = await axios.put(SERVER + `/api/extentloan`, { book_id: bookId, new_date: newDate })
+		return response.data
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function confirmExtension(bookId: number, userId: number, requestDate: Date) {
+	try {
+		const response = await axios.post(SERVER + '/api/confirmextension', { book_id: bookId, user_id: userId, request_date: requestDate })
+		return response.data
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function rejectExtension(bookId: number, userId: number, requestDate: Date) {
+	try {
+		const response = await axios.post(SERVER + '/api/confirmextension', { book_id: bookId, user_id: userId, request_date: requestDate })
 		return response.data
 	} catch (error) {
 		console.error(error)

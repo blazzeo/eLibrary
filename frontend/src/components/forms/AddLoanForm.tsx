@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BookData, UserData } from '../structs';
+import { BookInfo, UserData } from '../structs';
 
 interface Props {
-	books: BookData[]
+	books: BookInfo[]
 	users: UserData[]
 };
 
-export function AddLoanForm({ books, users }: Props) {
+export default function AddLoanForm({ books, users }: Props) {
 	// State
 	const [selectedUser, setSelectedUser] = useState('');
 	const [selectedBook, setSelectedBook] = useState('');
@@ -19,17 +19,17 @@ export function AddLoanForm({ books, users }: Props) {
 
 	// Filter books based on search input
 	const filteredBooks = books.filter(book =>
-		book.title.toLowerCase().includes(bookSearch.toLowerCase()) ||
-		book.authors.toLowerCase().includes(bookSearch.toLowerCase())
+		book.book.title.toLowerCase().includes(bookSearch.toLowerCase())
+		// book.authors.toLowerCase().includes(bookSearch.toLowerCase())
 	);
 
 	return (
 		<div className="container mt-4">
-			<h2>Library Form</h2>
+			<h2>Добавить новую бронь</h2>
 			<Form>
 				{/* User List */}
 				<Form.Group className="mb-3">
-					<Form.Label>Select User</Form.Label>
+					<Form.Label>Выберите пользователя: </Form.Label>
 					<Form.Control
 						list="users-list"
 						placeholder="Type or select a user"
@@ -37,15 +37,15 @@ export function AddLoanForm({ books, users }: Props) {
 						onChange={(e) => setSelectedUser(e.target.value)}
 					/>
 					<datalist id="users-list">
-						{users.map(user => (
-							<option key={user.id} value={user.username} />
+						{users.map((user, index) => (
+							<option key={index} value={user.username} />
 						))}
 					</datalist>
 				</Form.Group>
 
 				{/* Book Search */}
 				<Form.Group className="mb-3">
-					<Form.Label>Search and Select Book</Form.Label>
+					<Form.Label>Выберите книгу</Form.Label>
 					<Form.Control
 						type="text"
 						placeholder="Search for a book..."
@@ -55,9 +55,9 @@ export function AddLoanForm({ books, users }: Props) {
 					{bookSearch && (
 						<div className="mt-2">
 							<div className="list-group">
-								{filteredBooks.map(book => (
+								{filteredBooks.map((book, index) => (
 									<button
-										key={book.id}
+										key={index}
 										type="button"
 										className="list-group-item list-group-item-action"
 										onClick={() => {
@@ -76,14 +76,14 @@ export function AddLoanForm({ books, users }: Props) {
 					)}
 					{selectedBook && (
 						<div className="mt-2">
-							<strong>Selected:</strong> {selectedBook}
+							<strong>Выбрано:</strong> {selectedBook}
 						</div>
 					)}
 				</Form.Group>
 
 				{/* Date Picker */}
 				<Form.Group className="mb-3">
-					<Form.Label>Select Date</Form.Label>
+					<Form.Label>Дата возврата</Form.Label>
 					<div>
 						<DatePicker
 							selected={selectedDate}
@@ -95,11 +95,9 @@ export function AddLoanForm({ books, users }: Props) {
 				</Form.Group>
 
 				<button type="submit" className="btn btn-primary">
-					Submit
+					Добавить
 				</button>
 			</Form>
 		</div>
 	);
 };
-
-export default UserBookForm;

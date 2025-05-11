@@ -84,7 +84,7 @@ CREATE TABLE book_loans (
         REFERENCES books(book_id)
 );
 
---	СПИСОК ЗАПРОСОВ
+--	СПИСОК ЗАПРОСОВ НА БРОНЬ
 create table wishlist (
 	book_id int not null,
 	user_id int not null,
@@ -95,7 +95,20 @@ create table wishlist (
     CONSTRAINT fk_book
         FOREIGN KEY (book_id)
         REFERENCES books(book_id)
-)
+);
+
+--	СПИСОК ЗАПРОСОВ НА ПРОДЛЕНИЕ
+create table extention_requests(
+	book_id int not null,
+	user_id int not null,
+	request_date date,
+	CONSTRAINT fk_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(user_id),
+    CONSTRAINT fk_book
+        FOREIGN KEY (book_id)
+        REFERENCES books(book_id)
+);
 
 --	drop all objects
 drop table authors cascade;

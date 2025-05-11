@@ -189,8 +189,376 @@ WHEN OTHERS THEN
 end;
 $$ language plpgsql;
 
+--  GET LOANS
+CREATE OR REPLACE FUNCTION get_loans()
+RETURNS jsonb
+AS $$
+DECLARE
+    result jsonb;
+BEGIN
+    SELECT jsonb_agg(row_data)
+    INTO result
+    FROM (
+        SELECT jsonb_build_object(
+            'book', jsonb_build_object(
+                'book_id', bl.book_id,
+                'title', b.title,
+                'published_date', b.published_date,
+                'owner', jsonb_build_object(
+                    'user_id', u.user_id,
+                    'user_name', u.user_name,
+                    'borrow_date', bl.borrow_date,
+                    'return_date', bl.return_date
+                )
+            ),
+            'extension_request', er.request_date,
+            'wishlist', COALESCE(
+                jsonb_agg(DISTINCT jsonb_build_object(
+                    'user_id', w.user_id,
+                    'user_name', wu.user_name,
+                    'request_date', w.request_date
+                )) FILTER (WHERE w.user_id IS NOT NULL),
+                '[]'::jsonb
+            )
+        ) AS row_data
+        FROM book_loans bl
+        JOIN books b ON b.book_id = bl.book_id
+        JOIN book_authors ba ON ba.book_id = bl.book_id
+        LEFT JOIN users u ON u.user_id = bl.user_id
+        LEFT JOIN extention_requests er ON er.user_id = bl.user_id AND er.book_id = bl.book_id
+        LEFT JOIN wishlist w ON w.book_id = bl.book_id
+        LEFT JOIN users wu ON wu.user_id = w.user_id
+        GROUP BY
+            bl.book_id, bl.user_id,
+            b.title, b.published_date,
+            u.user_id, u.user_name,
+            bl.borrow_date, bl.return_date,
+            er.request_date
+    ) sub;
 
---drop function get_books(varchar);
+    RETURN result;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- 	GET BOOKS for moder
+CREATE OR REPLACE FUNCTION get_books_moder()
+RETURNS TABLE(
+    book_id INT,
+    title VARCHAR,
+    authors text[],
+    genres varchar[],
+    total_pages INT,
+    rating DECIMAL(4, 2),
+    isbn VARCHAR,
+    published_date DATE,
+    borrow_date DATE,
+    return_date DATE,
+    user_name VARCHAR,
+    user_id INT
+) AS $$
+DECLARE
+BEGIN
+    RETURN QUERY
+    SELECT
+        b.book_id,
+        b.title,
+		ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) as authors,
+		ARRAY_AGG(DISTINCT g.genre) as genres,
+        b.total_pages,
+        b.rating,
+        b.isbn,
+        b.published_date,
+		bl.borrow_date,
+		bl.return_date,
+        u.user_name,
+		u.user_id
+    FROM 
+        books b
+	JOIN
+		book_authors ba on b.book_id = ba.book_id
+	JOIN
+		authors a on a.author_id = ba.author_id
+	JOIN
+		book_genres bg on b.book_id = bg.book_id
+	JOIN
+		genres g on bg.genre_id = g.genre_id
+	LEFT JOIN
+		book_loans bl on bl.book_id = b.book_id
+	LEFT JOIN
+		users u on u.user_id = bl.user_id
+	GROUP BY
+        b.book_id, b.title, b.total_pages, b.rating, b.isbn, b.published_date, bl.return_date, bl.borrow_date, u.user_id, u.user_name;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_moder_books_json_table()
+RETURNS TABLE(book_info jsonb)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  RETURN QUERY
+  SELECT jsonb_build_object(
+    'book', jsonb_build_object(
+        'book_id', b.book_id,
+        'title', b.title,
+        'published_date', b.published_date,
+		'isbn', b.isbn,
+		'total_pages', b.total_pages,	
+        'authors', (
+          SELECT ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name)
+          FROM book_authors ba
+          JOIN authors a ON a.author_id = ba.author_id
+          WHERE ba.book_id = b.book_id
+        ),
+        'genres', (
+          SELECT ARRAY_AGG(DISTINCT g.genre)
+          FROM book_genres bg
+          JOIN genres g ON g.genre_id = bg.genre_id
+          WHERE bg.book_id = b.book_id
+        ),
+        'owner', (
+          SELECT jsonb_build_object(
+            'user_id', u.user_id,
+            'user_name', u.user_name,
+            'borrow_date', bl.borrow_date,
+            'return_date', bl.return_date
+          )
+          FROM book_loans bl
+          LEFT JOIN users u ON u.user_id = bl.user_id
+          WHERE bl.book_id = b.book_id
+          ORDER BY bl.borrow_date DESC
+          LIMIT 1
+        )
+    ),
+    'extension_request', (
+      SELECT er.request_date
+      FROM extention_requests er
+      WHERE er.book_id = b.book_id
+      ORDER BY er.request_date DESC
+      LIMIT 1
+    ),
+    'wishlist', COALESCE((
+      SELECT jsonb_agg(DISTINCT jsonb_build_object(
+          'user_id', w.user_id,
+          'user_name', wu.user_name,
+          'request_date', w.request_date
+      ))
+      FROM wishlist w
+      LEFT JOIN users wu ON wu.user_id = w.user_id
+      WHERE w.book_id = b.book_id
+    ), '[]'::jsonb)
+  ) as boooook_info
+  FROM books b;
+END;
+$$;
+
+
+create or replace function get_moder_books_json()
+returns json
+as $$
+begin
+  return (
+    SELECT jsonb_agg(book_info)
+    FROM (
+      SELECT jsonb_build_object(
+        'book', jsonb_build_object(
+            'book_id', bl.book_id,
+            'title', b.title,
+            'published_date', b.published_date,
+			'authors', ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name),
+			'genres', ARRAY_AGG(DISTINCT g.genre),
+            'owner', jsonb_build_object(
+                'user_id', u.user_id,
+                'user_name', u.user_name,
+                'borrow_date', bl.borrow_date,
+                'return_date', bl.return_date
+            )
+        ),
+        'extension_request', er.request_date,
+        'wishlist', COALESCE((
+          SELECT jsonb_agg(DISTINCT jsonb_build_object(
+              'user_id', w.user_id,
+              'user_name', wu.user_name,
+              'request_date', w.request_date
+          ))
+          FROM wishlist w
+          LEFT JOIN users wu ON wu.user_id = w.user_id
+          WHERE w.book_id = bl.book_id
+        ), '[]'::jsonb)
+      ) AS book_info
+      FROM books b
+      LEFT JOIN book_loans bl ON bl.book_id = b.book_id
+      JOIN book_authors ba ON ba.book_id = bl.book_id
+	  JOIN authors a on a.author_id = ba.author_id
+	  JOIN book_genres bg on b.book_id = bg.book_id
+	  JOIN genres g on bg.genre_id = g.genre_id
+      LEFT JOIN users u ON u.user_id = bl.user_id
+      LEFT JOIN extention_requests er ON er.user_id = bl.user_id AND er.book_id = bl.book_id
+      GROUP BY
+          bl.book_id, bl.user_id,
+          b.title, b.published_date,
+          u.user_id, u.user_name,
+          bl.borrow_date, bl.return_date,
+          er.request_date
+    ) subquery
+  )::json;
+end;
+$$ language plpgsql;
+
+-- 	CONFIRM EXNTENSION
+create or replace procedure confirm_extension(p_book_id INTEGER, p_user_id INTEGER, p_request_date date)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	update book_loans bl
+	set bl.return_date = p_request_date
+	where bl.book_id = p_book_id and
+			bl.user_id = p_user_id;
+
+	delete 
+	from extention_requests er
+	where er.book_id = p_book_id and
+			er.user_id = p_user_id and
+			er.request_date = p_request_date; 
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'Произошла ошибка: %', SQLERRM;
+END;
+$$;
+
+-- 	REJECT EXNTENSION
+create or replace procedure reject_extension(p_book_id INTEGER, p_user_id number, p_request_date date)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	delete 
+	from extention_requests er
+	where er.book_id = p_book_id and
+			er.user_id = p_user_id and
+			er.request_date = p_request_date; 
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'Произошла ошибка: %', SQLERRM;
+END;
+$$;
+
+
+-- 	EXTENT LOAN
+create or replace procedure extent_loan(p_user_name VARCHAR, p_book_id INTEGER)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_user_id INTEGER;
+    v_new_date DATE;
+	v_old_date DATE;
+    req_exists BOOLEAN;
+BEGIN
+	-- Get user ID
+    SELECT u.user_id
+    INTO v_user_id
+    FROM users u
+    WHERE u.user_name = p_user_name;
+
+	-- Check if there is already a request
+    SELECT EXISTS (
+        SELECT 1
+        FROM extention_requests er
+        WHERE er.book_id = p_book_id AND er.user_id = v_user_id
+    )
+    INTO req_exists;
+
+	if req_exists then
+			-- get old return_date
+			select return_date
+			from book_loans
+			into v_old_date
+			where book_id = p_book_id;
+
+			-- get new return_date
+			select er.request_date
+			from extention_requests er
+			into v_new_date
+			where er.book_id = p_book_id and er.user_id = v_user_id;
+
+			if v_new_date < v_old_date then
+				RAISE EXCEPTION 'INVALID DATE: new date is smaller than older one';
+			end if;
+			 
+			-- update loan row in book_loans
+			update book_loans
+			set return_date = v_new_date
+			where book_id = p_book_id;
+
+			-- delete request from queue
+			delete from extention_requests
+			where book_id = p_book_id and user_id = v_user_id;
+	else
+		RAISE EXCEPTION 'ERROR: NO REQUEST WAS MADE';
+	end if;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE NOTICE 'Пользователь "%" не найден или отсутствуют записи.', p_user_name;
+
+    WHEN OTHERS THEN
+        RAISE NOTICE 'Произошла ошибка: %', SQLERRM;
+END;
+$$;
+
+/*
+create or replace procedure add_loan(
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+
+END;
+$$;
+*/
+
+--	REQUEST LOAN EXTENTION
+CREATE OR REPLACE PROCEDURE request_extent_loan(
+    p_user_name VARCHAR,
+    p_book_id INTEGER,
+    p_request_date DATE
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_user_id INTEGER;
+    req_exists BOOLEAN;
+BEGIN
+    -- Get user ID
+    SELECT u.user_id
+    INTO v_user_id
+    FROM users u
+    WHERE u.user_name = p_user_name;
+
+    -- Check if there is already request
+    SELECT EXISTS (
+        SELECT 1
+        FROM extention_requests er
+        WHERE er.book_id = p_book_id AND er.user_id = v_user_id
+    )
+    INTO req_exists;
+
+    IF req_exists THEN
+        -- There IS request: update date
+        UPDATE extention_requests
+        SET request_date = p_request_date
+        WHERE book_id = p_book_id AND user_id = v_user_id;
+    ELSE
+        -- No request: insert new one
+        INSERT INTO extention_requests(user_id, book_id, request_date)
+        VALUES (v_user_id, p_book_id, p_request_date);
+    END IF;
+END;
+$$;
+
+
+
 --  GET BOOKS + USER's BOOKSHELF
 CREATE OR REPLACE FUNCTION get_books(p_user_name VARCHAR)
 RETURNS TABLE(
