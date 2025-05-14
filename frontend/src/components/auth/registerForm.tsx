@@ -33,7 +33,7 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 		}
 
 		setLoading(true);
-		const canCreate = await createUser({ username, password });
+		const canCreate = await createUser({ user_name: username, user_password: password });
 
 		if (!canCreate.result) {
 			setError("Creating account failed.");
@@ -47,11 +47,11 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 
 	return (
 		<div className="w-25 container-sm mt-5">
-			<h2 className="mb-4 text-center">Register</h2>
+			<h2 className="mb-4 text-center">Регистрация</h2>
 			<form onSubmit={handleSubmit}>
 				<div className="mb-3">
 					<label htmlFor="username" className="form-label">
-						Username
+						Логин
 					</label>
 					<input
 						type="text"
@@ -65,7 +65,7 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="password" className="form-label">
-						Password
+						Пароль
 					</label>
 					<input
 						type="password"
@@ -79,7 +79,7 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="confirmPassword" className="form-label">
-						Confirm Password
+						Подтвердите пароль
 					</label>
 					<input
 						type="password"
@@ -91,14 +91,14 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 						required
 					/>
 				</div>
-				<button type="submit" className="btn btn-primary">
-					Register
+				<button type="submit" className="btn btn-primary w-100">
+					Зарегистрироваться
 				</button>
 				{error && <div className="alert alert-danger">{error}</div>}
 			</form>
 			<div className="mt-3 text-center">
 				<button onClick={() => createAccountCallback()}>
-					Already have an account? Login here.
+					Уже есть аккаунт? Авторизоваться.
 				</button>
 			</div>
 			{isLoading ? (

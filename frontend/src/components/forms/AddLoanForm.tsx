@@ -19,7 +19,7 @@ export default function AddLoanForm({ books, users }: Props) {
 
 	// Filter books based on search input
 	const filteredBooks = books.filter(book =>
-		book.book.title.toLowerCase().includes(bookSearch.toLowerCase())
+		book.book_info.book.title.toLowerCase().includes(bookSearch.toLowerCase())
 		// book.authors.toLowerCase().includes(bookSearch.toLowerCase())
 	);
 
@@ -28,50 +28,102 @@ export default function AddLoanForm({ books, users }: Props) {
 			<h2>Добавить новую бронь</h2>
 			<Form>
 				{/* User List */}
-				<Form.Group className="mb-3">
-					<Form.Label>Выберите пользователя: </Form.Label>
+				<Form.Group className="mb-3" style={{ position: 'relative' }}>
+					<Form.Label>Выберите пользователя</Form.Label>
 					<Form.Control
-						list="users-list"
-						placeholder="Type or select a user"
+						type="text"
+						placeholder="Search for a user..."
 						value={selectedUser}
 						onChange={(e) => setSelectedUser(e.target.value)}
+						autoComplete="off"
 					/>
-					<datalist id="users-list">
-						{users.map((user, index) => (
-							<option key={index} value={user.username} />
-						))}
-					</datalist>
+					{selectedUser && (
+						<div
+							style={{
+								position: 'absolute',
+								zIndex: 1000,
+								width: '100%',
+								maxHeight: '200px',
+								overflowY: 'auto',
+								backgroundColor: 'white',
+								border: '1px solid #ccc',
+								borderTop: 'none',
+							}}
+							className="dropdown-menu show"
+						>
+							{users
+								.filter((user) => {
+									console.log(user)
+									user.user_name.toLowerCase().includes(selectedUser.toLowerCase())
+								})
+								.map((user, index) => (
+									<button
+										key={index}
+										type="button"
+										className="dropdown-item"
+										onClick={() => setSelectedUser(user.user_name)}
+									>
+										{user.user_name}
+									</button>
+								))}
+							{users.filter((user) =>
+								user.user_name.toLowerCase().includes(selectedUser.toLowerCase())
+							).length === 0 && (
+									<div className="dropdown-item">No users found</div>
+								)}
+						</div>
+					)}
 				</Form.Group>
 
 				{/* Book Search */}
-				<Form.Group className="mb-3">
+				<Form.Group className="mb-3" style={{ position: 'relative' }}>
 					<Form.Label>Выберите книгу</Form.Label>
 					<Form.Control
 						type="text"
 						placeholder="Search for a book..."
 						value={bookSearch}
 						onChange={(e) => setBookSearch(e.target.value)}
+						autoComplete="off"
 					/>
-					{bookSearch && (
-						<div className="mt-2">
-							<div className="list-group">
-								{filteredBooks.map((book, index) => (
+					{bookSearch && filteredBooks.length > 0 && (
+						<div
+							style={{
+								position: 'absolute',
+								zIndex: 1000,
+								width: '100%',
+								maxHeight: '200px',
+								overflowY: 'auto',
+								backgroundColor: 'white',
+								border: '1px solid #ccc',
+								borderTop: 'none',
+							}}
+							className="dropdown-menu show"
+						>
+							{filteredBooks.map((book, index) => {
+								const title = book.book_info.book.title;
+								const authors = Array.isArray(book.book_info.book.authors)
+									? book.book_info.book.authors.join(" ")
+									: "Unknown Author";
+
+								return (
 									<button
 										key={index}
 										type="button"
-										className="list-group-item list-group-item-action"
+										className="dropdown-item"
 										onClick={() => {
-											setSelectedBook(`${book.title} by ${book.authors.join(" ")}`);
+											setSelectedBook(`${title} by ${authors}`);
 											setBookSearch('');
 										}}
 									>
-										<strong>{book.title}</strong> by {book.authors.join(" ")}
+										<strong>{title}</strong> by {authors}
 									</button>
-								))}
-								{filteredBooks.length === 0 && (
-									<div className="list-group-item">No books found</div>
-								)}
-							</div>
+								);
+							})}
+						</div>
+					)}
+					{filteredBooks.length === 0 && bookSearch && (
+						<div className="dropdown-menu show">
+							<div className="dropdown-item">No books found</div>
 						</div>
 					)}
 					{selectedBook && (

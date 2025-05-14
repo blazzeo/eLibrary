@@ -3,14 +3,14 @@ import { BookData, UserData } from "../structs";
 
 const SERVER = 'http://localhost:3000'
 
-export async function checkUser({ username, password }: UserData) {
+export async function checkUser({ user_name, user_password }: UserData) {
 	try {
 		const response = await axios.get(
 			SERVER + `/api/checkuser`,
 			{
 				params: {
-					login: username,
-					password: password,
+					login: user_name,
+					password: user_password,
 				},
 			}
 		);
@@ -36,14 +36,14 @@ export async function checkAvailableLogin(userLogin: string) {
 	}
 }
 
-export async function createUser({ username, password }: UserData) {
+export async function createUser({ user_name, user_password }: UserData) {
 	try {
 		const response = await axios.get(
 			SERVER + `/api/createuser`,
 			{
 				params: {
-					login: username,
-					password: password,
+					login: user_name,
+					password: user_password,
 				},
 			}
 		);
