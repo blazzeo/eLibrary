@@ -13,10 +13,10 @@ export const dbadmin = (port) => {
 
 export const dbmoder = (port) => {
 	return new Pool({
-		user: '',
+		user: 'moder',
 		host: 'localhost',
 		database: 'elibrary',
-		password: 'admin',
+		password: 'master_moder',
 		port: port,
 	})
 }
@@ -26,7 +26,8 @@ export const dbuser = (port) => {
 		user: 'dbuser',
 		host: 'localhost',
 		database: 'elibrary',
-		password: 'masteruser',
+		password: 'master_user',
+		// masteruser
 		port: port,
 	})
 }

@@ -1,32 +1,29 @@
-import { UserData } from "../components/structs";
-import LoginForm from "../components/auth/LoginForm";
+import LoginForm from "../components/auth/loginForm";
+import RegisterForm from "../components/auth/registerForm";
 import { useState } from "react";
-import RegisterForm from "../components/auth/RegisterForm";
 
 interface Props {
-  setRole: (role: string) => void;
+	setRole: (role: string) => void;
 }
 
 export function AuthPage({ setRole }: Props) {
-  const [noAccount, setNoAccount] = useState(false);
+	const [noAccount, setNoAccount] = useState(false);
 
-  function authorize(authData: UserData, role: string) {
-    sessionStorage.setItem("userName", authData.username);
-    sessionStorage.setItem("password", authData.password);
+	function authorize(user_name: string, role: string) {
+		sessionStorage.setItem("userName", user_name);
+		setRole(role);
+	}
 
-    setRole(role);
-  }
-
-  return (
-    <>
-      {noAccount ? (
-        <RegisterForm createAccountCallback={() => setNoAccount(!noAccount)} />
-      ) : (
-        <LoginForm
-          authorizeCallback={authorize}
-          noAccountCallback={() => setNoAccount(!noAccount)}
-        />
-      )}
-    </>
-  );
+	return (
+		<>
+			{noAccount ? (
+				<RegisterForm createAccountCallback={() => setNoAccount(!noAccount)} />
+			) : (
+				<LoginForm
+					authorizeCallback={authorize}
+					noAccountCallback={() => setNoAccount(!noAccount)}
+				/>
+			)}
+		</>
+	);
 }

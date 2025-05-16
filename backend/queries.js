@@ -1,6 +1,5 @@
-import { response } from 'express'
-import { dbuser, dbadmin } from './db_roles.js'
-import { get_current_server_port } from './monitoring.js'
+import { dbuser, dbadmin, dbmoder } from './db_roles.js'
+import { verify_password, hash_password } from './auth.js'
 
 export async function checkLogin(userLogin) {
 	try {
@@ -12,11 +11,18 @@ export async function checkLogin(userLogin) {
 	}
 }
 
-export async function checkUser(userLogin, userPassword) {
+export async function authenticate(userLogin, userPassword) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('SELECT authentificate($1, $2);', [userLogin, userPassword])
-		return result.rows[0].authentificate
+		const res = await admin.query(`
+			SELECT user_password, user_role 
+			from users
+			where user_name = $1;`, [userLogin])
+
+		if (res.rowCount == 0)
+			throw "No such user found"
+		const result = await verify_password(userPassword, res.rows[0].user_password)
+		return result ? res.rows[0].user_role : result
 	} catch (err) {
 		throw err
 	}
@@ -25,9 +31,11 @@ export async function checkUser(userLogin, userPassword) {
 export async function createUser(userLogin, userPassword) {
 	try {
 		const admin = dbadmin(5432)
+		const hashed_password = await hash_password(userPassword)
+		console.log(hashed_password)
 		const user = {
 			user_name: userLogin,
-			user_password: userPassword
+			user_password: hashed_password
 		}
 		const result = await admin.query('SELECT add_users($1::json);', [JSON.stringify(user)])
 		return result.rows[0].add_users;
@@ -36,10 +44,10 @@ export async function createUser(userLogin, userPassword) {
 	}
 }
 
-export async function borrowBook(user_name, book_id) {
+export async function addLoan(user_name, book_id, return_date) {
 	try {
-		const user = dbuser(5432)
-		const result = await user.query('SELECT borrow_book($1, $2);', [user_name, book_id])
+		const user = dbmoder(5432)
+		const result = await user.query('SELECT borrow_book($1, $2, $3);', [user_name, book_id, return_date])
 		return result.rows;
 	} catch (err) {
 		throw err
@@ -48,7 +56,7 @@ export async function borrowBook(user_name, book_id) {
 
 export async function returnBook(book_id) {
 	try {
-		const user = dbuser(5432)
+		const user = dbmoder(5432)
 		const result = await user.query('select return_book($1);', [book_id])
 		return result.rows;
 	} catch (err) {
@@ -58,34 +66,10 @@ export async function returnBook(book_id) {
 
 export async function getBooks(user_name) {
 	try {
-		const user = dbadmin(5432)
-		const res = await user.query('select get_books($1);', [user_name])
+		const user = dbuser(5432)
+		const res = await user.query('select * from get_books($1);', [user_name])
 
-		const books = res.rows.map(row => {
-			// Extract the string
-			const bookString = row.get_books;
-
-			// Use regex to match the components
-			const regex = /^\((\d+),(.+),(\d+)?,([\d.]+)?,(.+)?,([\d-]+)?,(\d)\)$/;
-			const match = regex.exec(bookString);
-
-			if (match) {
-				return {
-					book_id: parseInt(match[1], 10),
-					title: match[2],
-					total_pages: match === 'NULL' ? null : parseInt(match[3], 10),
-					rating: parseFloat(match[4]),
-					isbn: match[5] === 'NULL' ? null : match[5],
-					published_date: match[6] === 'NULL' ? null : new Date(match[6]),
-					loan_status: parseInt(match[7], 10)
-				};
-			} else {
-				console.log(bookString)
-			}
-			return null; // In case of no match
-		}).filter(Boolean); // Filter out any null results
-
-		return books;
+		return res.rows;
 	} catch (err) {
 		throw err
 	}
@@ -105,7 +89,7 @@ export async function addBook(book) {
 export async function deleteUser(user_name) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('select delete_user($1);', [user_name])
+		const result = await admin.query('select * delete_user($1);', [user_name])
 		return result.rows
 	} catch (err) {
 		throw err
@@ -115,7 +99,7 @@ export async function deleteUser(user_name) {
 export async function deleteBook(book_id) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('select delete_book($1);', [book_id])
+		const result = await admin.query('select * from delete_book($1);', [book_id])
 		return result.rows
 	} catch (err) {
 		console.log(err)
@@ -126,59 +110,20 @@ export async function deleteBook(book_id) {
 export async function getUsers() {
 	try {
 		const admin = dbadmin(5432)
-		const users = await admin.query('select get_users();')
+		const users = await admin.query('select * from get_users();')
 
-		const result = users.rows.map(row => {
-			const user = row.get_users
-
-			const regex = /^\((\d+),(.+),(.+),(.+)\)$/;
-			const match = regex.exec(user);
-
-			if (match) {
-				return {
-					user_id: parseInt(match[1], 10),
-					user_name: match[2],
-					user_password: match[3],
-					user_role: match[4]
-				};
-			} else {
-				console.log(user)
-			}
-			return null; // In case of no match
-		}).filter(Boolean); // Filter out any null results
-
-		return result
+		return users.rows
 	} catch (err) {
 		throw err
 	}
 }
 
-
 export async function getLoans() {
 	try {
 		const admin = dbadmin(5432)
-		const loans = await admin.query('select get_loans();')
+		const loans = await admin.query('select * from get_loans();')
 
-		const result = loans.rows.map(row => {
-			const loan = row.get_loans
-
-			const regex = /^\((\d+),(.+),(\d+)\)$/;
-
-			const match = regex.exec(loan);
-
-			if (match) {
-				return {
-					user_id: parseInt(match[1], 10),
-					user_name: match[2],
-					book_id: parseInt(match[3], 10)
-				};
-			} else {
-				console.log(loan)
-			}
-			return null; // In case of no match
-		}).filter(Boolean); // Filter out any null results
-
-		return result
+		return loans.rows
 	} catch (err) {
 		throw err
 	}
@@ -191,5 +136,73 @@ export async function editBook(book) {
 		return result.rows
 	} catch (err) {
 		throw err
+	}
+}
+
+export async function toggleWishlist(user_name, book_id) {
+	try {
+		const user = dbuser(5432)
+		const result = await user.query('call toggle_wishlist($1,$2);', [user_name, book_id])
+		return result.rows
+	} catch (err) {
+		throw err
+	}
+}
+
+export async function extentLoan(user_name, book_id) {
+	try {
+		const moder = dbmoder(5432)
+		const result = await moder.query(`exec extent_loan($1,$2);`, [user_name, book_id])
+		return result
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function getModerBooks() {
+	try {
+		const moder = dbmoder(5432)
+		const result = await moder.query('select * from get_moder_books();')
+		// console.dir(result, { depth: null, colors: true });
+		return result.rows
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function requestExtent(user_name, book_id, request_date) {
+	try {
+		const user = dbuser(5432)
+		const result = await user.query(`call request_extent_loan($1, $2, $3);`, [user_name, book_id, request_date])
+		return result
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function confirmExtension(book_id, user_id, request_date) {
+	try {
+		const moder = dbmoder(5432)
+		const result = await moder.query(`call confirm_extension($1, $2, '2025-07-02');`, [book_id, user_id])
+		console.log(result)
+		return result;
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export async function rejectExtension(book_id, user_id, request_date) {
+	try {
+		const moder = dbmoder(5432)
+		const result = await moder.query(`call reject_extension($1, $2, $3);`, [book_id, user_id, request_date])
+		console.log(result)
+		return result;
+	} catch (error) {
+		console.error(error)
+		throw error
 	}
 }

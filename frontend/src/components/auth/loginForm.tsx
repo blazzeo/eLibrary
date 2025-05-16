@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { checkUser } from "../api/DatabaseAPI";
-import { UserData } from "../structs";
+import { authenticate } from "../api/DatabaseAPI";
 
 interface Props {
-	authorizeCallback: (authData: UserData, user_role: string) => void;
+	authorizeCallback: (user_name: string, user_role: string) => void;
 	noAccountCallback: () => void;
 }
+
+const user_roles = ['user', 'admin', 'moder']
 
 const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) => {
 	const [username, setUsername] = useState("");
@@ -20,12 +21,12 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 
 		try {
 			setLoading(true);
-			const userData: UserData = { username, password };
-			const userRole = await checkUser(userData);
+			const userRole = await authenticate(username, password);
 			setLoading(false);
-			if (userRole.result == 'admin' || userRole.result == 'user') {
-				authorizeCallback(userData, userRole.result);
+			if (user_roles.includes(userRole.result)) {
+				authorizeCallback(username, userRole.result);
 			} else {
+				console.error(userRole)
 				setError("User not found. Please check your credentials.")
 				throw "User not found."
 			}
@@ -40,12 +41,12 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 	};
 
 	return (
-		<div className="container-sm mt-5">
-			<h2 className="mb-4 text-center">Login</h2>
+		<div className="w-25 container-sm mt-5">
+			<h2 className="mb-4 text-center">Авторизация</h2>
 			<form onSubmit={handleSubmit}>
 				<div className="mb-3">
 					<label htmlFor="username" className="form-label">
-						Username
+						Логин
 					</label>
 					<input
 						type="text"
@@ -59,7 +60,7 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 				</div>
 				<div className="mb-3">
 					<label htmlFor="password" className="form-label">
-						Password
+						Пароль
 					</label>
 					<input
 						type="password"
@@ -73,12 +74,12 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 				</div>
 				{error && <div className="alert alert-danger">{error}</div>}
 				<button type="submit" className="btn btn-primary w-100">
-					Login
+					Войти
 				</button>
 			</form>
 			<div className="mt-3 text-center">
 				<button onClick={() => noAccountCallback()}>
-					Don't have an account? Register here.
+					Нет аккаунта? Создать аккаунт.
 				</button>
 			</div>
 			{isLoading ? (
