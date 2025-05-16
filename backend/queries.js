@@ -1,4 +1,5 @@
 import { dbuser, dbadmin, dbmoder } from './db_roles.js'
+import { verify_password, hash_password } from './auth.js'
 
 export async function checkLogin(userLogin) {
 	try {
@@ -10,11 +11,18 @@ export async function checkLogin(userLogin) {
 	}
 }
 
-export async function checkUser(userLogin, userPassword) {
+export async function authenticate(userLogin, userPassword) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('SELECT authentificate($1, $2);', [userLogin, userPassword])
-		return result.rows[0].authentificate
+		const res = await admin.query(`
+			SELECT user_password, user_role 
+			from users
+			where user_name = $1;`, [userLogin])
+
+		if (res.rowCount == 0)
+			throw "No such user found"
+		const result = await verify_password(userPassword, res.rows[0].user_password)
+		return result ? res.rows[0].user_role : result
 	} catch (err) {
 		throw err
 	}
@@ -23,9 +31,11 @@ export async function checkUser(userLogin, userPassword) {
 export async function createUser(userLogin, userPassword) {
 	try {
 		const admin = dbadmin(5432)
+		const hashed_password = await hash_password(userPassword)
+		console.log(hashed_password)
 		const user = {
 			user_name: userLogin,
-			user_password: userPassword
+			user_password: hashed_password
 		}
 		const result = await admin.query('SELECT add_users($1::json);', [JSON.stringify(user)])
 		return result.rows[0].add_users;
@@ -79,7 +89,7 @@ export async function addBook(book) {
 export async function deleteUser(user_name) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('select delete_user($1);', [user_name])
+		const result = await admin.query('select * delete_user($1);', [user_name])
 		return result.rows
 	} catch (err) {
 		throw err
@@ -89,7 +99,7 @@ export async function deleteUser(user_name) {
 export async function deleteBook(book_id) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('select delete_book($1);', [book_id])
+		const result = await admin.query('select * from delete_book($1);', [book_id])
 		return result.rows
 	} catch (err) {
 		console.log(err)
@@ -153,7 +163,8 @@ export async function extentLoan(user_name, book_id) {
 export async function getModerBooks() {
 	try {
 		const moder = dbmoder(5432)
-		const result = await moder.query('select * from get_moder_books_json_table();')
+		const result = await moder.query('select * from get_moder_books();')
+		// console.dir(result, { depth: null, colors: true });
 		return result.rows
 	} catch (error) {
 		console.error(error)
@@ -175,7 +186,8 @@ export async function requestExtent(user_name, book_id, request_date) {
 export async function confirmExtension(book_id, user_id, request_date) {
 	try {
 		const moder = dbmoder(5432)
-		const result = await moder.query(`call confirm_extension($1, $2, $3);`, [book_id, user_id, request_date])
+		const result = await moder.query(`call confirm_extension($1, $2, '2025-07-02');`, [book_id, user_id])
+		console.log(result)
 		return result;
 	} catch (error) {
 		console.error(error)
@@ -187,6 +199,7 @@ export async function rejectExtension(book_id, user_id, request_date) {
 	try {
 		const moder = dbmoder(5432)
 		const result = await moder.query(`call reject_extension($1, $2, $3);`, [book_id, user_id, request_date])
+		console.log(result)
 		return result;
 	} catch (error) {
 		console.error(error)

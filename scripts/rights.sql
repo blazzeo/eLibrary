@@ -12,6 +12,15 @@ grant select on genres to moder;
 grant select on users to moder;
 grant select on extention_requests to moder;
 grant select on wishlist to moder;
+GRANT USAGE, SELECT ON SEQUENCE book_loans_loan_id_seq TO moder;
+grant delete on wishlist to moder;
+GRANT EXECUTE ON PROCEDURE confirm_extension TO moder;
+GRANT EXECUTE ON PROCEDURE reject_extension TO moder;
+
+
+--  ADMIN
+grant select on users to admin;
+
 
 
 --	USER

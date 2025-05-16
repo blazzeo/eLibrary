@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { checkUser } from "../api/DatabaseAPI";
-import { UserData } from "../structs";
+import { authenticate } from "../api/DatabaseAPI";
 
 interface Props {
-	authorizeCallback: (authData: UserData, user_role: string) => void;
+	authorizeCallback: (user_name: string, user_role: string) => void;
 	noAccountCallback: () => void;
 }
 
@@ -22,11 +21,10 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 
 		try {
 			setLoading(true);
-			const userData: UserData = { user_name: username, user_password: password };
-			const userRole = await checkUser(userData);
+			const userRole = await authenticate(username, password);
 			setLoading(false);
 			if (user_roles.includes(userRole.result)) {
-				authorizeCallback(userData, userRole.result);
+				authorizeCallback(username, userRole.result);
 			} else {
 				console.error(userRole)
 				setError("User not found. Please check your credentials.")

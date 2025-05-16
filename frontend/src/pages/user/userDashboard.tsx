@@ -32,7 +32,7 @@ export default function UserDashboard() {
 					<UserBookTable books={books} updateBooks={fetchBooks} />
 				} />
 				<Route path="/mybooks" element={
-					<BookShelf books={books.filter(x => x.loan_status === 1)} updateBooks={fetchBooks} />
+					<BookShelf books={books.filter(x => x.loan_status === 1 || x.loan_status === 0)} updateBooks={fetchBooks} />
 				} />
 			</Routes>
 		</>

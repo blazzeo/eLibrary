@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
-import { BookData, UserData } from "../../components/structs";
-import { getBooks, getUsers } from "../../components/api/DatabaseAPI";
+import { BookInfo, UserData } from "../../components/structs";
+import { getModerBooks, getUsers } from "../../components/api/DatabaseAPI";
 import { Route, Routes } from "react-router";
 import { AddBookForm } from "../../components/forms/AddBookForm";
 import { EditBookForm } from "../../components/forms/EditBookForm";
 import Header from "../../components/header";
 import { AdminBookTable } from "./adminBookTable";
 import { UserTable } from "./userTable";
+import BookPageWrapper from "../../components/book_page_wrapper";
 
 export default function AdminDashboard() {
-	const [books, setBooks] = useState<BookData[]>([]);
+	const [books, setBooks] = useState<BookInfo[]>([]);
 	const [users, setUsers] = useState<UserData[]>([]);
-	const [editBook, setEditBook] = useState<BookData | null>(null); // To track if we need to show the overlay
+	const [editBook, setEditBook] = useState<BookInfo | null>(null); // To track if we need to show the overlay
 
 	const fetchUsers = async () => {
 		try {
@@ -24,15 +25,15 @@ export default function AdminDashboard() {
 
 	const fetchBooks = async () => {
 		try {
-			const userName = sessionStorage.getItem("userName");
-			const bookData = await getBooks(userName);
+			const bookData = await getModerBooks();
+			console.log(bookData)
 			setBooks(bookData);
 		} catch (err) {
 			console.error(err);
 		}
 	};
 
-	const editBookCallback = (book: BookData) => {
+	const editBookCallback = (book: BookInfo) => {
 		setEditBook(book); // Set the book to be edited
 	};
 
@@ -54,7 +55,6 @@ export default function AdminDashboard() {
 					element={
 						<AdminBookTable
 							books={books}
-							users={users}
 							updateBooks={fetchBooks}
 							editBook={editBookCallback}
 						/>
@@ -68,6 +68,7 @@ export default function AdminDashboard() {
 					path="/addbook"
 					element={<AddBookForm updateBooks={fetchBooks} />}
 				/>
+				<Route path="/book" element={<BookPageWrapper books={books} />} />
 			</Routes>
 
 			{/* Modal Overlay for EditBookForm */}

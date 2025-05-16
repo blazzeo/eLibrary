@@ -10,10 +10,14 @@ interface Props {
 export default function RequestsList({ bookList, updateBooks }: Props) {
 	const [books, _setBooks] = useState(bookList)
 
+	const update = async () => {
+		await updateBooks();
+	}
+
 	return (
-		books.map((book, index) => (
+		books.filter(book => book.book_info.owner || book.book_info.wishlist.length > 0).map((book, index) => (
 			<div>
-				<ExtensionCard key={index} bookInfo={book} updateBooks={updateBooks} />
+				<ExtensionCard key={index} bookInfo={book} updateBooks={update} />
 			</div>
 		))
 	)

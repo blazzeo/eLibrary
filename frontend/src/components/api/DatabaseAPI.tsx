@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from "axios";
-import { BookData, UserData } from "../structs";
+import { BookData } from "../structs";
 
 const SERVER = 'http://localhost:3000'
 
-export async function checkUser({ user_name, user_password }: UserData) {
+export async function authenticate(user_name: string, user_password: string) {
 	try {
 		const response = await axios.get(
-			SERVER + `/api/checkuser`,
+			SERVER + `/api/authenticate`,
 			{
 				params: {
 					login: user_name,
@@ -36,7 +36,7 @@ export async function checkAvailableLogin(userLogin: string) {
 	}
 }
 
-export async function createUser({ user_name, user_password }: UserData) {
+export async function createUser(user_name: string, user_password: string) {
 	try {
 		const response = await axios.get(
 			SERVER + `/api/createuser`,
@@ -73,7 +73,7 @@ export async function getBooks(username: string | null) {
 export async function getModerBooks() {
 	try {
 		const response = await axios.get(SERVER + '/api/getmoderbooks')
-		console.log(response.data.result)
+		// console.log(response.data.result)
 		return response.data.result
 	} catch (error) {
 		console.error("Error on getting moder books: ", error)
@@ -98,7 +98,7 @@ export async function addLoan(username: string | null, bookId: number | null, da
 	try {
 		if (username === null || bookId === null)
 			throw 'invalid username or bookid'
-		const response = await axios.post(SERVER + `/api/addloan`, { user_name: username, book_id: bookId, borrow_date: date })
+		const response = await axios.post(SERVER + `/api/addloan`, { user_name: username, book_id: bookId, return_date: date })
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -118,9 +118,9 @@ export async function returnBook(bookId: number | null) {
 	}
 }
 
-export async function askExtension(bookId: number) {
+export async function askExtension(bookId: number, request_date: Date) {
 	try {
-		const response = await axios.post(SERVER + `/api/askextension`, { book_id: bookId })
+		const response = await axios.post(SERVER + `/api/askextension`, { book_id: bookId, request_date: request_date })
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -141,6 +141,7 @@ export async function extentLoan(bookId: number, newDate: Date) {
 export async function confirmExtension(bookId: number, userId: number, requestDate: Date) {
 	try {
 		const response = await axios.post(SERVER + '/api/confirmextension', { book_id: bookId, user_id: userId, request_date: requestDate })
+		console.log(response)
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -150,7 +151,8 @@ export async function confirmExtension(bookId: number, userId: number, requestDa
 
 export async function rejectExtension(bookId: number, userId: number, requestDate: Date) {
 	try {
-		const response = await axios.post(SERVER + '/api/confirmextension', { book_id: bookId, user_id: userId, request_date: requestDate })
+		const response = await axios.post(SERVER + '/api/rejectextension', { book_id: bookId, user_id: userId, request_date: requestDate })
+		console.log(response)
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -165,7 +167,6 @@ export async function getUsers() {
 	} catch (error) {
 		console.error(error);
 		throw error;
-
 	}
 }
 

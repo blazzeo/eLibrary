@@ -63,8 +63,9 @@ CREATE TYPE user_role AS ENUM ('admin', 'moder', 'user');
 create TABLE users(
   user_id SERIAL NOT NULL,
   user_name VARCHAR(50) NOT NULL UNIQUE,
-  user_password VARCHAR(255) NOT NULL,
+  user_password TEXT NOT NULL,
   user_role user_role not null default 'user',
+  registration_date date not null default CURRENT_DATE,
   PRIMARY KEY(user_id)
 );
 

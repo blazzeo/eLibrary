@@ -68,6 +68,7 @@ app.get('/api/getloans', async (_req, res) => {
 app.get('/api/getusers', async (_req, res) => {
 	try {
 		const result = await db_request.getUsers()
+		console.log(result)
 		res.json(result)
 		const printUser = (user) => {
 			return `${user.user_id}, ${user.user_name}, ${user.user_password}, ${user.user_role}`
@@ -170,8 +171,9 @@ app.post('/api/addloan', async (req, res) => {
 	try {
 		const user_name = req.body.user_name;
 		const book_id = req.body.book_id;
-		const return_date = req.body.return_date;
+		const return_date = new Date(req.body.return_date);
 		const result = await db_request.addLoan(user_name, book_id, return_date);
+		console.log(result)
 		res.json({ result: result });
 		log(`borrowBook success:\tBook:\t{${user_name}, ${book_id}, ${return_date}}`)
 	} catch (error) {
@@ -222,11 +224,11 @@ app.post('/api/togglewishlist', async (req, res) => {
 	}
 })
 
-app.get('/api/checkuser', async (req, res) => {
+app.get('/api/authenticate', async (req, res) => {
 	try {
 		const userLogin = req.query.login;
 		const userPassword = req.query.password;
-		const result = await db_request.checkUser(userLogin, userPassword);
+		const result = await db_request.authenticate(userLogin, userPassword);
 		res.json({ result: result });
 		log(`checkUser success:\tUser:\t{${userLogin}, ${userPassword}}`)
 	} catch (error) {

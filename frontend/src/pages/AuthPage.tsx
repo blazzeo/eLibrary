@@ -1,6 +1,5 @@
 import LoginForm from "../components/auth/loginForm";
 import RegisterForm from "../components/auth/registerForm";
-import { UserData } from "../components/structs";
 import { useState } from "react";
 
 interface Props {
@@ -10,10 +9,8 @@ interface Props {
 export function AuthPage({ setRole }: Props) {
 	const [noAccount, setNoAccount] = useState(false);
 
-	function authorize(authData: UserData, role: string) {
-		sessionStorage.setItem("userName", authData.user_name);
-		sessionStorage.setItem("password", authData.user_password);
-
+	function authorize(user_name: string, role: string) {
+		sessionStorage.setItem("userName", user_name);
 		setRole(role);
 	}
 

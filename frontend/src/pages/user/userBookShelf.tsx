@@ -1,11 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
 	MaterialReactTable,
 	useMaterialReactTable,
 	type MRT_ColumnDef,
 } from "material-react-table";
 import { BookData } from "../../components/structs";
-import { askExtension } from "../../components/api/DatabaseAPI";
+import { askExtension, toggleWishlist } from "../../components/api/DatabaseAPI";
+import { Modal, Button, Form } from "react-bootstrap";
 
 interface Props {
 	books: BookData[];
@@ -13,61 +14,71 @@ interface Props {
 }
 
 export function BookShelf({ books, updateBooks }: Props) {
+	const [showModal, setShowModal] = useState(false);
+	const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
+	const [newDate, setNewDate] = useState(new Date);
+
+	const handleOpenModal = (bookId: number) => {
+		setSelectedBookId(bookId);
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setShowModal(false);
+		setNewDate(new Date);
+		setSelectedBookId(null);
+	};
+
+	const handleSubmit = async () => {
+		if (selectedBookId && newDate) {
+			await askExtension(selectedBookId, newDate);
+			updateBooks();
+			handleCloseModal();
+		}
+	};
+
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
 		() => [
-			{
-				accessorKey: "title",
-				header: "Название",
-				size: 250,
-			},
-			{
-				accessorKey: "total_pages", //normal accessorKey
-				header: "Страниц",
-				size: 50,
-			},
+			{ accessorKey: "title", header: "Название", size: 250 },
+			{ accessorKey: "total_pages", header: "Страниц", size: 50 },
 			{
 				accessorKey: "borrow_date",
 				header: "Дата получения",
 				size: 50,
-				Cell: ({ cell }) => {
-					// Format the date for display
-					const date = new Date(cell.getValue() as string);
-					return date.toLocaleDateString(); // Adjust format as needed },
-				},
+				Cell: ({ cell }) => new Date(cell.getValue() as string).toLocaleDateString(),
 			},
 			{
 				accessorKey: "return_date",
 				header: "Дата возврата",
 				size: 50,
-				Cell: ({ cell }) => {
-					// Format the date for display
-					const date = new Date(cell.getValue() as string);
-					return date.toLocaleDateString(); // Adjust format as needed },
-				},
+				Cell: ({ cell }) => new Date(cell.getValue() as string).toLocaleDateString(),
 			},
 			{
 				accessorKey: "published_date",
 				header: "Дата публикации",
 				size: 50,
-				Cell: ({ cell }) => {
-					// Format the date for display
-					const date = new Date(cell.getValue() as string);
-					return date.toLocaleDateString(); // Adjust format as needed },
-				},
+				Cell: ({ cell }) => new Date(cell.getValue() as string).toLocaleDateString(),
 			},
 			{
 				accessorKey: "loan_status",
 				header: "Действие",
 				size: 50,
 				Cell: ({ row }) => {
-					const handleRequest = async () => {
-						const bookId = row.original.book_id
-						await askExtension(bookId!);
-						updateBooks()
-					}
-					return <button className="btn btn-success" onClick={handleRequest}>
-						Продлить
-					</button>
+					const handleRemove = async () => {
+						const userName = sessionStorage.getItem("userName");
+						await toggleWishlist(userName!, row.original.book_id!);
+						updateBooks();
+					};
+
+					return row.original.loan_status == 0 ? (
+						<button className="btn btn-primary" onClick={() => handleOpenModal(row.original.book_id!)}>
+							Продлить
+						</button>
+					) : (
+						<button className="btn btn-danger" onClick={handleRemove}>
+							Убрать из желаемого
+						</button>
+					);
 				},
 			},
 		],
@@ -79,5 +90,33 @@ export function BookShelf({ books, updateBooks }: Props) {
 		data: books,
 	});
 
-	return <MaterialReactTable table={table} />;
+	return (
+		<>
+			<MaterialReactTable table={table} />
+
+			<Modal show={showModal} onHide={handleCloseModal} centered>
+				<Modal.Header closeButton>
+					<Modal.Title>Выберите новую дату возврата</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form.Group>
+						<Form.Label>Новая дата:</Form.Label>
+						<Form.Control
+							type="date"
+							value={newDate.toString()}
+							onChange={(e) => setNewDate(new Date(e.target.value))}
+						/>
+					</Form.Group>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleCloseModal}>
+						Отмена
+					</Button>
+					<Button variant="primary" onClick={handleSubmit} disabled={!newDate}>
+						OK
+					</Button>
+				</Modal.Footer>
+			</Modal>
+		</>
+	);
 }

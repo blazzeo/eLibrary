@@ -43,7 +43,7 @@ export default function ModerDashboard() {
 			<Header />
 			<Routes>
 				<Route path="/" element={
-					<ModerBookTable bookList={books} updateBooks={fetchBooks} />
+					<ModerBookTable books={books} users={users} updateBooks={fetchBooks} />
 				} />
 				<Route path="/createloan" element={
 					<AddLoanForm books={books} users={users} />

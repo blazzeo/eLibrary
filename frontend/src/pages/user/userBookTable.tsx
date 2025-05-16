@@ -85,20 +85,20 @@ export default function UserBookTable({ books, updateBooks }: Props) {
 					if (loanStatus === 0) {
 						return (
 							<button className="btn btn-secondary" disabled >
-								Mine
+								Моя
 							</button>
 						);
 					} else if (loanStatus === 1) {
 						return (
 							<button className="btn btn-danger" onClick={handleWishlist}>
-								Remove from Wishlist
+								Убрать из желаемого
 							</button>
 						);
 					}
 					else {
 						return (
 							<button className="btn btn-success" onClick={handleWishlist}>
-								Add to Wishlist
+								Добавить в желаемое
 							</button>
 						);
 					}
