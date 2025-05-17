@@ -86,6 +86,17 @@ export async function addBook(book) {
 	}
 }
 
+export async function getGenres() {
+	try {
+		const admin = dbadmin(5432)
+		const res = await admin.query('select * from get_genres();', [])
+
+		return res.rows;
+	} catch (err) {
+		throw err
+	}
+}
+
 export async function deleteUser(user_name) {
 	try {
 		const admin = dbadmin(5432)
@@ -186,7 +197,7 @@ export async function requestExtent(user_name, book_id, request_date) {
 export async function confirmExtension(book_id, user_id, request_date) {
 	try {
 		const moder = dbmoder(5432)
-		const result = await moder.query(`call confirm_extension($1, $2, '2025-07-02');`, [book_id, user_id])
+		const result = await moder.query(`call confirm_extension($1, $2, $3);`, [book_id, user_id, request_date])
 		console.log(result)
 		return result;
 	} catch (error) {

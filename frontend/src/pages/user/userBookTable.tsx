@@ -85,7 +85,7 @@ export default function UserBookTable({ books, updateBooks }: Props) {
 					if (loanStatus === 0) {
 						return (
 							<button className="btn btn-secondary" disabled >
-								Моя
+								На книжной полке
 							</button>
 						);
 					} else if (loanStatus === 1) {

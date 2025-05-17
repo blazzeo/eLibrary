@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
-import { UserData, BookLoan } from '../../components/structs';
-import { deleteUser, getLoans, returnBook } from '../../components/api/DatabaseAPI';
+import { useNavigate } from 'react-router-dom';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { UserData } from '../../components/structs';
 
 interface Props {
 	users: UserData[];
@@ -9,12 +8,7 @@ interface Props {
 }
 
 export function UserTable({ users, updateUsers }: Props) {
-	const [bookLoans, setBookLoans] = useState<BookLoan[]>([]);
-
-	const fetchLoans = async () => {
-		const loans = await getLoans();
-		setBookLoans(loans);
-	};
+	const navigate = useNavigate();
 
 	return (
 		<TableContainer component={Paper}>
@@ -30,17 +24,25 @@ export function UserTable({ users, updateUsers }: Props) {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{users.filter(user => user.user_name != sessionStorage.getItem('userName')).map((user) => (
-						<TableRow key={user.user_id}>
-							<TableCell>{user.user_id}</TableCell>
-							<TableCell>{user.user_name}</TableCell>
-							<TableCell>{user.registration_date?.toString()}</TableCell>
-							<TableCell>{user.user_role}</TableCell>
-							<TableCell>{user.user_role}</TableCell>
-						</TableRow>
-					))}
+					{users
+						.filter(user => user.user_name !== sessionStorage.getItem('userName'))
+						.map((user) => (
+							<TableRow
+								key={user.user_id}
+								hover
+								style={{ cursor: 'pointer' }}
+								onClick={() => navigate(`/user?id=${user.user_id}`)}
+							>
+								<TableCell>{user.user_id}</TableCell>
+								<TableCell>{user.user_name}</TableCell>
+								<TableCell>{new Date(user.registration_date).toLocaleDateString()}</TableCell>
+								<TableCell>{user.user_role}</TableCell>
+								<TableCell>{user.loans?.length ?? 0}</TableCell>
+								<TableCell>{user.wishlist?.length ?? 0}</TableCell>
+							</TableRow>
+						))}
 				</TableBody>
 			</Table>
 		</TableContainer>
 	);
-};
+}

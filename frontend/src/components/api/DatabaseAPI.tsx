@@ -118,9 +118,9 @@ export async function returnBook(bookId: number | null) {
 	}
 }
 
-export async function askExtension(bookId: number, request_date: Date) {
+export async function askExtension(userName: string, bookId: number, request_date: Date) {
 	try {
-		const response = await axios.post(SERVER + `/api/askextension`, { book_id: bookId, request_date: request_date })
+		const response = await axios.post(SERVER + `/api/askextension`, { user_name: userName, book_id: bookId, request_date: request_date })
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -163,6 +163,7 @@ export async function rejectExtension(bookId: number, userId: number, requestDat
 export async function getUsers() {
 	try {
 		const response = await axios.get(SERVER + `/api/getusers`);
+		console.log(response)
 		return response.data;
 	} catch (error) {
 		console.error(error);

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
-import { BookInfo } from "./structs";
-import { addLoan, confirmExtension, rejectExtension } from "./api/DatabaseAPI";
-import { Toast, ToastContainer } from "react-bootstrap";
+import { BookInfo } from "../structs";
+import { addLoan, confirmExtension, rejectExtension } from "../api/DatabaseAPI";
+import { toast } from "react-toastify";
 
 interface Props {
 	bookInfo: BookInfo;
@@ -10,30 +10,23 @@ interface Props {
 }
 
 export default function BookPage({ bookInfo, updateBooks }: Props) {
-	const book = bookInfo.book_info.book;
-	const owner = bookInfo.book_info.owner;
-	const extension_request = bookInfo.book_info.extension_request;
-	const wishlist = bookInfo.book_info.wishlist;
-	console.log(wishlist)
+	const book = bookInfo.book;
+	const owner = bookInfo.owner;
+	const extension_request = bookInfo.extension_request;
+	const wishlist = bookInfo.wishlist;
 
-	const [toast, setToast] = useState({ show: false, message: '', variant: 'success' as 'success' | 'danger' });
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [showLoanModal, setShowLoanModal] = useState(false);
 	const [selectedUser, setSelectedUser] = useState('');
 	const [returnDate, setReturnDate] = useState('');
 
-	const showToast = (message: string, variant: 'success' | 'danger') => {
-		setToast({ show: true, message, variant });
-		setTimeout(() => setToast({ ...toast, show: false }), 5000);
-	};
-
 	const confirm_request = async () => {
 		try {
 			await confirmExtension(book.book_id, owner.user_id, extension_request);
 			updateBooks();
-			showToast('Продление подтверждено', 'success');
+			toast.success('Продление подтверждено');
 		} catch (err: any) {
-			showToast(err?.response?.data?.error || 'Ошибка при подтверждении продления', 'danger');
+			toast.error(err?.response?.data?.error || 'Ошибка при подтверждении продления');
 		}
 	};
 
@@ -41,9 +34,9 @@ export default function BookPage({ bookInfo, updateBooks }: Props) {
 		try {
 			await rejectExtension(book.book_id, owner.user_id, extension_request);
 			updateBooks();
-			showToast('Продление отклонено', 'success');
+			toast.success('Продление отклонено');
 		} catch (err: any) {
-			showToast(err?.response?.data?.error || 'Ошибка при отклонении продления', 'danger');
+			toast.error(err?.response?.data?.error || 'Ошибка при отклонении продления');
 		}
 	};
 
@@ -52,9 +45,9 @@ export default function BookPage({ bookInfo, updateBooks }: Props) {
 			await addLoan(selectedUser, book.book_id, new Date(returnDate));
 			updateBooks();
 			setShowLoanModal(false);
-			showToast(`Книга выдана пользователю ${selectedUser}`, 'success');
+			toast.success(`Книга выдана пользователю ${selectedUser}`);
 		} catch (err: any) {
-			showToast(err?.response?.data?.error || 'Ошибка при выдаче книги', 'danger');
+			toast.error(err?.response?.data?.error || 'Ошибка при выдаче книги');
 		}
 	};
 
@@ -103,7 +96,6 @@ export default function BookPage({ bookInfo, updateBooks }: Props) {
 					<Modal.Title>Редактировать книгу</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					{/* TODO: Реализовать форму редактирования */}
 					<p>Форма редактирования книги</p>
 				</Modal.Body>
 				<Modal.Footer>
@@ -139,12 +131,6 @@ export default function BookPage({ bookInfo, updateBooks }: Props) {
 					<Button variant="success" onClick={handle_borrow} disabled={!selectedUser || !returnDate}>Выдать</Button>
 				</Modal.Footer>
 			</Modal>
-
-			<ToastContainer position="bottom-end" className="p-3">
-				<Toast show={toast.show} bg={toast.variant} onClose={() => setToast({ ...toast, show: false })}>
-					<Toast.Body>{toast.message}</Toast.Body>
-				</Toast>
-			</ToastContainer>
 		</div>
 	);
 }

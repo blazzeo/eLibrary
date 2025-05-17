@@ -1,11 +1,13 @@
 import ReactDOM from "react-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import UserDashboard from "./pages/user/userDashboard.tsx";
 import AdminDashboard from "./pages/admin/adminDashboard.tsx";
 import ModerDashboard from "./pages/moder/moderDashboard.tsx";
-import { AuthPage } from "./pages/authPage.tsx";
+import { AuthPage } from "./pages/AuthPage.tsx";
 
 function Main() {
 	const [userRole, setUserRole] = useState<string | null>(null);
@@ -33,12 +35,15 @@ function Main() {
 	}
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="*" element={userRole ? getDashboard() : <Navigate to="/login" />} />
-				<Route path="/login" element={userRole ? <Navigate to="/" /> : <AuthPage setRole={setRole} />} />
-			</Routes>
-		</BrowserRouter>
+		<>
+			<BrowserRouter>
+				<Routes>
+					<Route path="*" element={userRole ? getDashboard() : <Navigate to="/login" />} />
+					<Route path="/login" element={userRole ? <Navigate to="/" /> : <AuthPage setRole={setRole} />} />
+				</Routes>
+			</BrowserRouter>
+			<ToastContainer position="bottom-right" autoClose={3000} hideProgressBar />
+		</>
 	);
 }
 

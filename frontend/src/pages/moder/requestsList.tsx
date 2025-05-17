@@ -15,7 +15,7 @@ export default function RequestsList({ bookList, updateBooks }: Props) {
 	}
 
 	return (
-		books.filter(book => book.book_info.owner || book.book_info.wishlist.length > 0).map((book, index) => (
+		books.filter(book => book.owner || book.wishlist.length > 0).map((book, index) => (
 			<div>
 				<ExtensionCard key={index} bookInfo={book} updateBooks={update} />
 			</div>

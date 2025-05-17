@@ -20,6 +20,8 @@ GRANT EXECUTE ON PROCEDURE reject_extension TO moder;
 
 --  ADMIN
 grant select on users to admin;
+grant select on genres to admin;
+grant execute on function get_genres to admin;
 
 
 
@@ -38,6 +40,9 @@ grant delete on wishlist to dbuser;
 grant execute on function get_books(varchar) to dbuser;
 grant execute on function authentificate(varchar, varchar) to dbuser;
 grant execute on procedure toggle_wishlist(varchar, integer) to dbuser;
+grant insert on extention_requests to dbuser;
+grant select on extention_requests to dbuser;
+grant update on extention_requests to dbuser;
 
 
 

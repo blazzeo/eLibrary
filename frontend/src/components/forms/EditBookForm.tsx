@@ -14,12 +14,12 @@ export function EditBookForm({ book, updateBooks }: Props) {
 		return <div>No book found</div>; // If no book found, render an error
 	}
 
-	const [book_id,] = useState(book.book_info.book.book_id);
-	const [title, setTitle] = useState(book.book_info.book.title);
-	const [totalPages, setTotalPages] = useState<number>(book.book_info.book.total_pages);
-	const [rating, setRating] = useState<number>(book.book_info.book.rating);
-	const [isbn, setIsbn] = useState<number>(book.book_info.book.isbn);
-	const [publishedDate, setPublishedDate] = useState<Date | string>(new Date(book.book_info.book.published_date));
+	const [book_id,] = useState(book.book.book_id);
+	const [title, setTitle] = useState(book.book.title);
+	const [totalPages, setTotalPages] = useState<number>(book.book.total_pages);
+	const [rating, setRating] = useState<number>(book.book.rating);
+	const [isbn, setIsbn] = useState<number>(book.book.isbn);
+	const [publishedDate, setPublishedDate] = useState<Date | string>(new Date(book.book.published_date));
 	const [error, setError] = useState<null | string>(null);
 	const [success, setSuccess] = useState<null | string>(null);
 
@@ -45,7 +45,7 @@ export function EditBookForm({ book, updateBooks }: Props) {
 
 		// TODO add genres and authors section
 		const updatedBook: BookData = {
-			book_id: book.book_info.book.book_id,
+			book_id: book.book.book_id,
 			title: title,
 			total_pages: totalPages,
 			rating: rating,

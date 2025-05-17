@@ -5,8 +5,10 @@ import {
 	type MRT_ColumnDef,
 } from "material-react-table";
 import { BookData } from "../../components/structs";
-import { askExtension, toggleWishlist } from "../../components/api/DatabaseAPI";
+import { askExtension } from "../../components/api/DatabaseAPI";
 import { Modal, Button, Form } from "react-bootstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
 	books: BookData[];
@@ -16,24 +18,40 @@ interface Props {
 export function BookShelf({ books, updateBooks }: Props) {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
-	const [newDate, setNewDate] = useState(new Date);
+	const [newDate, setNewDate] = useState<string>("");
 
+	// Открытие модального окна
 	const handleOpenModal = (bookId: number) => {
-		setSelectedBookId(bookId);
-		setShowModal(true);
+		const book = books.find((b) => b.book_id === bookId);
+		if (book && book.return_date) {
+			const formatted = new Date(book.return_date).toISOString().split("T")[0];
+			setNewDate(formatted);
+			setSelectedBookId(bookId);
+			setShowModal(true);
+		} else {
+			toast.error("Не удалось получить дату возврата.");
+		}
 	};
 
 	const handleCloseModal = () => {
 		setShowModal(false);
-		setNewDate(new Date);
+		setNewDate("");
 		setSelectedBookId(null);
 	};
 
 	const handleSubmit = async () => {
 		if (selectedBookId && newDate) {
-			await askExtension(selectedBookId, newDate);
-			updateBooks();
-			handleCloseModal();
+			try {
+				let user_name = sessionStorage.getItem("userName")!
+				await askExtension(user_name, selectedBookId, new Date(newDate));
+				updateBooks();
+				toast.success("Дата возврата успешно обновлена");
+			} catch (error) {
+				console.error(error);
+				toast.error("Ошибка при продлении книги");
+			} finally {
+				handleCloseModal();
+			}
 		}
 	};
 
@@ -63,26 +81,17 @@ export function BookShelf({ books, updateBooks }: Props) {
 				accessorKey: "loan_status",
 				header: "Действие",
 				size: 50,
-				Cell: ({ row }) => {
-					const handleRemove = async () => {
-						const userName = sessionStorage.getItem("userName");
-						await toggleWishlist(userName!, row.original.book_id!);
-						updateBooks();
-					};
-
-					return row.original.loan_status == 0 ? (
-						<button className="btn btn-primary" onClick={() => handleOpenModal(row.original.book_id!)}>
-							Продлить
-						</button>
-					) : (
-						<button className="btn btn-danger" onClick={handleRemove}>
-							Убрать из желаемого
-						</button>
-					);
-				},
+				Cell: ({ row }) => (
+					<button
+						className="btn btn-primary"
+						onClick={() => handleOpenModal(row.original.book_id!)}
+					>
+						Продлить
+					</button>
+				),
 			},
 		],
-		[]
+		[books]
 	);
 
 	const table = useMaterialReactTable<BookData>({
@@ -103,8 +112,9 @@ export function BookShelf({ books, updateBooks }: Props) {
 						<Form.Label>Новая дата:</Form.Label>
 						<Form.Control
 							type="date"
-							value={newDate.toString()}
-							onChange={(e) => setNewDate(new Date(e.target.value))}
+							value={newDate}
+							onChange={(e) => setNewDate(e.target.value)}
+							required
 						/>
 					</Form.Group>
 				</Modal.Body>

@@ -33,6 +33,7 @@ export function log(message) {
 app.post('/api/addbook', async (req, res) => {
 	try {
 		const book = req.body.book
+		console.log(book)
 		const result = await db_request.addBook(book)
 		res.json(result)
 		log(`addBook success:\tBook:\t{${book}}`)
@@ -68,7 +69,7 @@ app.get('/api/getloans', async (_req, res) => {
 app.get('/api/getusers', async (_req, res) => {
 	try {
 		const result = await db_request.getUsers()
-		res.json(result)
+		res.json(result.map(u => u.get_users))
 		const printUser = (user) => {
 			return `${user.user_id}, ${user.user_name}, ${user.user_password}, ${user.user_role}`
 		}
@@ -159,7 +160,8 @@ app.post('/api/extentloan', async (req, res) => {
 app.get('/api/getmoderbooks', async (_req, res) => {
 	try {
 		const result = await db_request.getModerBooks()
-		res.json({ result: result })
+		console.log(result.map(b => b.book_info))
+		res.json({ result: result.map(b => b.book_info) })
 	} catch (error) {
 		res.status(500).json({ error: error })
 		log(`moderBooks failed:\t${error.message}`)
@@ -236,6 +238,7 @@ app.get('/api/authenticate', async (req, res) => {
 	}
 });
 
+
 app.get('/api/getbooks', async (req, res) => {
 	try {
 		const user_name = req.query.username;
@@ -248,7 +251,7 @@ app.get('/api/getbooks', async (req, res) => {
 	}
 });
 
-app.post('/api/requestextent', async (req, res) => {
+app.post('/api/askextension', async (req, res) => {
 	try {
 		const user_name = req.body.user_name
 		const book_id = req.body.book_id

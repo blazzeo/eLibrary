@@ -664,6 +664,16 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql;
 
+-- get genres
+create or replace function get_genres()
+RETURNS TABLE(genre_id INT, genre varchar) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT genre_id, genre
+    FROM genres;
+END;
+$$ LANGUAGE plpgsql;
+
 -- toggle wishlist
 CREATE OR REPLACE PROCEDURE toggle_wishlist (
     p_user_name VARCHAR,

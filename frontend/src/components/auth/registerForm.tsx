@@ -33,7 +33,7 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 		}
 
 		setLoading(true);
-		const canCreate = await createUser({ user_name: username, user_password: password });
+		const canCreate = await createUser(username, password);
 
 		if (!canCreate.result) {
 			setError("Creating account failed.");

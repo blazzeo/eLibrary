@@ -32,27 +32,27 @@ export function AdminBookTable({ books, updateBooks, editBook }: Props) {
 	const columns = useMemo<MRT_ColumnDef<BookInfo>[]>(
 		() => [
 			{
-				accessorFn: (row) => row.book_info.book.book_id,
+				accessorFn: (row) => row.book.book_id,
 				header: "ID",
 				size: 10,
 			},
 			{
-				accessorFn: (row) => row.book_info.book.title,
+				accessorFn: (row) => row.book.title,
 				header: "Название",
 				size: 150,
 			},
 			{
-				accessorFn: (row) => row.book_info.book.total_pages,
+				accessorFn: (row) => row.book.total_pages,
 				header: "Страниц",
 				size: 50,
 			},
 			{
-				accessorFn: (row) => row.book_info.book.rating,
+				accessorFn: (row) => row.book.rating,
 				header: "Рейтинг",
 				size: 50,
 			},
 			{
-				accessorFn: (row) => row.book_info.book.published_date,
+				accessorFn: (row) => row.book.published_date,
 				header: "Дата публикации",
 				size: 50,
 				Cell: ({ cell }) => {
@@ -64,9 +64,9 @@ export function AdminBookTable({ books, updateBooks, editBook }: Props) {
 				header: "Владелец",
 				size: 50,
 				Cell: ({ row }) => {
-					return (row.original.book_info.owner) ?
+					return (row.original.owner) ?
 						<strong className="text-primary">
-							{row.original.book_info.owner.user_name}
+							{row.original.owner.user_name}
 						</strong> :
 						<p className="text-secondary fg-muted">
 							Доступна
@@ -82,7 +82,7 @@ export function AdminBookTable({ books, updateBooks, editBook }: Props) {
 		data: books,
 		muiTableBodyRowProps: ({ row }) => ({
 			onClick: () => {
-				const bookId = row.original.book_info.book.book_id;
+				const bookId = row.original.book.book_id;
 				navigate(`/book?id=${bookId}`);
 			},
 			sx: {

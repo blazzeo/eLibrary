@@ -8,7 +8,6 @@ export default function Header() {
 	function logout() {
 		sessionStorage.clear()
 		navigate("/")
-		console.log("cleck");
 	}
 
 	return (
@@ -22,9 +21,14 @@ export default function Header() {
 					<div className="collapse navbar-collapse">
 						<ul className="navbar-nav me-auto mb-2 mb-md-0">
 							{userRole === 'user' && (
-								<li className="nav-item">
-									<Link className="nav-link text-white" to="/mybooks">Мои книги</Link>
-								</li>
+								<>
+									<li className="nav-item">
+										<Link className="nav-link text-white" to="/bookshelf">Мои книги</Link>
+									</li>
+									<li className="nav-item">
+										<Link className="nav-link text-white" to="/wishlist">Мои избранные</Link>
+									</li>
+								</>
 							)}
 							{userRole === 'admin' && (
 								<>

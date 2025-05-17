@@ -5,6 +5,7 @@ import { getBooks } from "../../components/api/DatabaseAPI";
 import { Route, Routes } from "react-router";
 import { BookShelf } from "./userBookShelf";
 import UserBookTable from "./userBookTable";
+import { WishList } from "./userWishlist";
 
 export default function UserDashboard() {
 	const [books, setBooks] = useState<BookData[]>([]);
@@ -31,8 +32,11 @@ export default function UserDashboard() {
 				<Route path="/" element={
 					<UserBookTable books={books} updateBooks={fetchBooks} />
 				} />
-				<Route path="/mybooks" element={
-					<BookShelf books={books.filter(x => x.loan_status === 1 || x.loan_status === 0)} updateBooks={fetchBooks} />
+				<Route path="/bookshelf" element={
+					<BookShelf books={books.filter(x => x.loan_status === 0)} updateBooks={fetchBooks} />
+				} />
+				<Route path="/wishlist" element={
+					<WishList books={books.filter(x => x.loan_status === 1)} updateBooks={fetchBooks} />
 				} />
 			</Routes>
 		</>

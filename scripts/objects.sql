@@ -112,13 +112,13 @@ create table extention_requests(
 );
 
 --	drop all objects
-drop table authors cascade;
-drop table books cascade;
-drop table book_authors cascade;
-drop table genres cascade;
-drop table book_genres cascade;
-drop table users cascade;
-drop table book_loans;
-drop role admin;
-drop role moder;
-drop role user;
+--drop table authors cascade;
+--drop table books cascade;
+--drop table book_authors cascade;
+--drop table genres cascade;
+--drop table book_genres cascade;
+--drop table users cascade;
+--drop table book_loans;
+--drop role admin;
+--drop role moder;
+--drop role user;
