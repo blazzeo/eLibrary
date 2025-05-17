@@ -1,11 +1,6 @@
 -- Create admin, user roles
-<<<<<<< HEAD
-create role moder;
-create role dbuser;
-=======
 CREATE ROLE moder LOGIN PASSWORD 'master_moder';
 CREATE ROLE dbuser LOGIN PASSWORD 'master_user';
->>>>>>> dev
 
 --	АВТОРЫ
 CREATE TABLE authors(
@@ -68,14 +63,9 @@ CREATE TYPE user_role AS ENUM ('admin', 'moder', 'user');
 create TABLE users(
   user_id SERIAL NOT NULL,
   user_name VARCHAR(50) NOT NULL UNIQUE,
-<<<<<<< HEAD
-  user_password VARCHAR(255) NOT NULL,
-  user_role user_role not null default 'user',
-=======
   user_password TEXT NOT NULL,
   user_role user_role not null default 'user',
   registration_date date not null default CURRENT_DATE,
->>>>>>> dev
   PRIMARY KEY(user_id)
 );
 
@@ -95,8 +85,6 @@ CREATE TABLE book_loans (
         REFERENCES books(book_id)
 );
 
-<<<<<<< HEAD
-=======
 --	СПИСОК ЗАПРОСОВ НА БРОНЬ
 create table wishlist (
 	book_id int not null,
@@ -123,7 +111,6 @@ create table extention_requests(
         REFERENCES books(book_id)
 );
 
->>>>>>> dev
 --	drop all objects
 drop table authors cascade;
 drop table books cascade;

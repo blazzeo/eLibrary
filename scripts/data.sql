@@ -1454,13 +1454,7 @@ INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES
  (1388,'Seth',null,'Lloyd');
 
 -- books
-select * from books;
-<<<<<<< HEAD
-
-TRUNCATE TABLE books RESTART identity CASCADE;
-=======
 --TRUNCATE TABLE books RESTART identity CASCADE;
->>>>>>> dev
 insert into books (title,total_pages,rating,isbn,published_date) values 
 	 ('Lean Software Development: An Agile Toolkit',240,4.17,'9780320000000','2003-05-18'),
 	 ('Facing the Intelligence Explosion',91,3.87,null,'2013-02-01'),
@@ -2552,13 +2546,7 @@ insert into books (title,total_pages,rating,isbn,published_date) values
 	 ('Growing Object-Oriented Software, Guided by Tests',345,4.17,'9780320000000','2009-10-01'),
 	 ('Advanced Programming in the UNIX Environment',768,4.31,'9780200000000','1992-06-30'),
 	 ('Algorithms',320,4.21,'9780070000000','2006-09-13');
-<<<<<<< HEAD
-	
-delete from book_authors;
-=======
 
---delete from book_authors;
->>>>>>> dev
 INSERT INTO book_authors (book_id, author_id) values 
  (1,176),
  (1,533),

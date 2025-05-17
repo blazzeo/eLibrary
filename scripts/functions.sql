@@ -625,23 +625,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
---	GET LOANS
-create or replace function get_loans()
-returns table(
-	user_id int,
-	user_name varchar,
-	book_id int
-) as $$ 
-begin
-	return query
-	select bl.user_id, u.user_name, bl.book_id 
-	from book_loans as bl 
-	inner join users as u 
-	on bl.user_id = u.user_id;
-end;
-$$ language plpgsql;
-
 --	EDIT BOOK
 CREATE OR REPLACE FUNCTION edit_book(p_book JSON)
 RETURNS BOOLEAN AS $$
