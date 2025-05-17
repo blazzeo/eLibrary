@@ -7,9 +7,10 @@ import { Spinner } from "react-bootstrap";
 interface Props {
 	users: UserData[];
 	books: BookInfo[];
+	updateUsers: () => void;
 }
 
-export default function UserPageWrapper({ users, books }: Props) {
+export default function UserPageWrapper({ users, books, updateUsers }: Props) {
 	const [searchParams] = useSearchParams();
 	const id = searchParams.get("id");
 
@@ -26,8 +27,8 @@ export default function UserPageWrapper({ users, books }: Props) {
 			setUser(user);
 
 			const user_books = books.filter(b => {
-				const ownerMatches = b.book_info.owner?.user_id === user.user_id;
-				const inWishlist = b.book_info.wishlist.some(w => w.user_id === user.user_id);
+				const ownerMatches = b.owner?.user_id === user.user_id;
+				const inWishlist = b.wishlist.some(w => w.user_id === user.user_id);
 				return ownerMatches || inWishlist;
 			});
 
@@ -49,5 +50,5 @@ export default function UserPageWrapper({ users, books }: Props) {
 	if (error) return <p>{error}</p>;
 	if (!user) return <p>Пользователь не найден</p>;
 
-	return <UserPage user={user} books={userBooks || []} />;
+	return <UserPage user={user} books={userBooks || []} updateUsers={updateUsers} />;
 }

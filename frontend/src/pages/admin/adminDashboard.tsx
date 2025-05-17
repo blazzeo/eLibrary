@@ -26,7 +26,6 @@ export default function AdminDashboard() {
 				]);
 				setBooks(fetchedBooks);
 				setUsers(fetchedUsers);
-				console.log(users)
 			} catch (error) {
 				console.error("Ошибка при загрузке данных:", error);
 			}
@@ -82,7 +81,7 @@ export default function AdminDashboard() {
 					element={<AddBookForm updateBooks={updateBooks} />}
 				/>
 				<Route path="/book" element={<BookPageWrapper books={books} />} />
-				<Route path="/user" element={<UserPageWrapper users={users} books={books} />} />
+				<Route path="/user" element={<UserPageWrapper users={users} books={books} updateUsers={updateUsers} />} />
 			</Routes>
 		</>
 	);

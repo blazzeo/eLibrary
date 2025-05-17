@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import BookPage from "./book_page";
-import { BookInfo } from "./structs";
+import { BookInfo } from "../structs";
 import { Spinner } from "react-bootstrap";
 
 interface Props {
@@ -20,7 +20,7 @@ export default function BookPageWrapper({ books }: Props) {
 	const updateBooks = async () => {
 		if (!id) return;
 		try {
-			const book = books.find(b => b.book_info.book.book_id == Number(id))
+			const book = books.find(b => b.book.book_id == Number(id))
 			setBookInfo(book!);
 			setError(null);
 		} catch (err: any) {

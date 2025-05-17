@@ -163,7 +163,6 @@ export async function rejectExtension(bookId: number, userId: number, requestDat
 export async function getUsers() {
 	try {
 		const response = await axios.get(SERVER + `/api/getusers`);
-		console.log(response)
 		return response.data;
 	} catch (error) {
 		console.error(error);
