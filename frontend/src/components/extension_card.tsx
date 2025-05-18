@@ -1,3 +1,4 @@
+import { useLibrary } from "../libraryContext";
 import { addLoan, confirmExtension, rejectExtension } from "./api/DatabaseAPI";
 import { BookInfo } from "./structs";
 import WishCard from "./wish_card";
@@ -6,16 +7,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
 	bookInfo: BookInfo;
-	updateBooks: () => void;
 }
 
-export default function ExtensionCard({ bookInfo, updateBooks }: Props) {
+export default function ExtensionCard({ bookInfo }: Props) {
+	const { refreshModerBooks } = useLibrary()
 	const book = bookInfo;
 
 	const confirm_request = async () => {
 		try {
 			await confirmExtension(book.book.book_id, book.owner.user_id, book.extension_request);
-			updateBooks();
+			await refreshModerBooks();
 			toast.success("Продление подтверждено");
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при подтверждении продления");
@@ -25,7 +26,7 @@ export default function ExtensionCard({ bookInfo, updateBooks }: Props) {
 	const reject_request = async () => {
 		try {
 			await rejectExtension(book.book.book_id, book.owner.user_id, book.extension_request);
-			updateBooks();
+			await refreshModerBooks();
 			toast.success("Продление отклонено");
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при отклонении продления");
@@ -35,7 +36,7 @@ export default function ExtensionCard({ bookInfo, updateBooks }: Props) {
 	const handle_borrow = async (user_name: string, return_date: Date) => {
 		try {
 			await addLoan(user_name, book.book.book_id, return_date);
-			updateBooks();
+			refreshModerBooks();
 			toast.success(`Книга выдана пользователю ${user_name}`);
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при выдаче книги");

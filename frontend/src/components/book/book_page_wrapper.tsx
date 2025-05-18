@@ -3,28 +3,37 @@ import { useSearchParams } from "react-router-dom";
 import BookPage from "./book_page";
 import { BookInfo } from "../structs";
 import { Spinner } from "react-bootstrap";
+import { useLibrary } from "../../libraryContext";
 
-interface Props {
-	books: BookInfo[];
-}
+export default function BookPageWrapper() {
+	const { moderBooks } = useLibrary();
 
-export default function BookPageWrapper({ books }: Props) {
 	const [searchParams] = useSearchParams();
 	const id = searchParams.get("id");
-
 
 	const [bookInfo, setBookInfo] = useState<BookInfo | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
-	const updateBooks = async () => {
-		if (!id) return;
+	const updateBooks = () => {
+		if (!id || !moderBooks) {
+			setBookInfo(null);
+			setLoading(false);
+			return;
+		}
+		setLoading(true);
 		try {
-			const book = books.find(b => b.book.book_id == Number(id))
-			setBookInfo(book!);
-			setError(null);
-		} catch (err: any) {
+			const book = moderBooks.find(b => b.book.book_id === Number(id));
+			if (!book) {
+				setError("Книга не найдена");
+				setBookInfo(null);
+			} else {
+				setBookInfo(book);
+				setError(null);
+			}
+		} catch {
 			setError("Ошибка при загрузке книги");
+			setBookInfo(null);
 		} finally {
 			setLoading(false);
 		}
@@ -32,11 +41,12 @@ export default function BookPageWrapper({ books }: Props) {
 
 	useEffect(() => {
 		updateBooks();
-	}, [id]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [id, moderBooks]);
 
 	if (loading) return <Spinner animation="border" />;
 	if (error) return <p>{error}</p>;
 	if (!bookInfo) return <p>Книга не найдена</p>;
 
-	return <BookPage bookInfo={bookInfo} updateBooks={updateBooks} />;
+	return <BookPage bookInfo={bookInfo} />;
 }

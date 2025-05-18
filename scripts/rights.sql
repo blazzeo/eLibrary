@@ -16,6 +16,7 @@ GRANT USAGE, SELECT ON SEQUENCE book_loans_loan_id_seq TO moder;
 grant delete on wishlist to moder;
 GRANT EXECUTE ON PROCEDURE confirm_extension TO moder;
 GRANT EXECUTE ON PROCEDURE reject_extension TO moder;
+grant delete on extention_requests to moder;
 
 
 --  ADMIN

@@ -1,29 +1,16 @@
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import {
 	MaterialReactTable,
 	useMaterialReactTable,
 	type MRT_ColumnDef,
 } from "material-react-table";
-import { UserData, BookLoan, BookInfo } from "../../components/structs";
-import { getLoans } from "../../components/api/DatabaseAPI";
+import { BookInfo } from "../../components/structs";
+import { useLibrary } from "../../libraryContext";
+import { useNavigate } from "react-router-dom";
 
-interface Props {
-	books: BookInfo[];
-	users: UserData[];
-	updateBooks: () => void;
-}
-
-export default function ModerBookTable({ books, users, updateBooks }: Props) {
-	const [bookLoans, setBookLoans] = useState<BookLoan[]>([]); // Состояние для хранение данных о займах
-
-	const fetchLoans = async () => {
-		const loans = await getLoans();
-		setBookLoans(loans);
-	};
-
-	useEffect(() => {
-		fetchLoans();
-	}, []); // Загружаем данные только один раз при монтировании компонента
+export default function ModerBookTable() {
+	const { moderBooks } = useLibrary();
+	const navigate = useNavigate();
 
 	const columns = useMemo<MRT_ColumnDef<BookInfo>[]>(
 		() => [
@@ -60,18 +47,34 @@ export default function ModerBookTable({ books, users, updateBooks }: Props) {
 				header: "Владелец",
 				size: 50,
 				Cell: ({ row }) => {
-					return (row.original.owner) ?
-						<strong className="text-primary fw-bold">{row.original.owner.user_name}</strong> :
-						<p className="all-unset m-0 p-0 text-secondary">Доступна</p>;
+					return row.original.owner ? (
+						<strong className="text-primary fw-bold">
+							{row.original.owner.user_name}
+						</strong>
+					) : (
+						<p className="all-unset m-0 p-0 text-secondary">Доступна</p>
+					);
 				},
 			},
 		],
-		[bookLoans, users] // Пересчитываем столбцы при изменении данных о книгах и пользователях
+		[moderBooks]
 	);
 
 	const table = useMaterialReactTable<BookInfo>({
 		columns,
-		data: books,
+		data: moderBooks!,
+		muiTableBodyRowProps: ({ row }) => ({
+			onClick: () => {
+				const bookId = row.original.book.book_id;
+				navigate(`/book?id=${bookId}`);
+			},
+			sx: {
+				cursor: "pointer",
+				"&:hover": {
+					backgroundColor: "#f0f0f0",
+				},
+			},
+		}),
 	});
 
 	return <MaterialReactTable table={table} />;

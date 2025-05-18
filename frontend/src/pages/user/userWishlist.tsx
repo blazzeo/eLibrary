@@ -6,13 +6,15 @@ import {
 } from "material-react-table";
 import { BookData } from "../../components/structs";
 import { toggleWishlist } from "../../components/api/DatabaseAPI";
+import { useLibrary } from "../../libraryContext";
 
 interface Props {
-	books: BookData[];
-	updateBooks: () => void;
+	books: BookData[] | undefined;
 }
 
-export function WishList({ books, updateBooks }: Props) {
+export function WishList({ books }: Props) {
+	const { refreshBooks } = useLibrary()
+
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
 		() => [
 			{ accessorKey: "title", header: "Название", size: 250 },
@@ -53,7 +55,7 @@ export function WishList({ books, updateBooks }: Props) {
 					const handleRemove = async () => {
 						const userName = sessionStorage.getItem("userName");
 						await toggleWishlist(userName!, row.original.book_id!);
-						updateBooks();
+						refreshBooks();
 					};
 
 					return (

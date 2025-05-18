@@ -32,7 +32,6 @@ export async function createUser(userLogin, userPassword) {
 	try {
 		const admin = dbadmin(5432)
 		const hashed_password = await hash_password(userPassword)
-		console.log(hashed_password)
 		const user = {
 			user_name: userLogin,
 			user_password: hashed_password
@@ -47,6 +46,7 @@ export async function createUser(userLogin, userPassword) {
 export async function addLoan(user_name, book_id, return_date) {
 	try {
 		const user = dbmoder(5432)
+		console.log(user_name, book_id, return_date)
 		const result = await user.query('SELECT borrow_book($1, $2, $3);', [user_name, book_id, return_date])
 		return result.rows;
 	} catch (err) {
@@ -78,7 +78,8 @@ export async function getBooks(user_name) {
 export async function addBook(book) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('select add_books($1::json);', [JSON.stringify(book)])
+		const normalizedBook = normalizeAuthors(book)
+		const result = await admin.query('select add_full_book($1::json);', [JSON.stringify(normalizedBook)])
 		console.log(result)
 		return result.rows
 	} catch (err) {
@@ -140,9 +141,28 @@ export async function getLoans() {
 	}
 }
 
+function normalizeAuthors(book) {
+	const parseAuthor = (fullName) => {
+		const parts = fullName.trim().split(/\s+/); // разделить по пробелам
+
+		return {
+			first_name: parts[0] || '',
+			middle_name: parts.length === 3 ? parts[1] : '',
+			last_name: parts.length === 3 ? parts[2] : parts[1] || '',
+		};
+	};
+
+	return {
+		...book,
+		authors: book.authors.map(parseAuthor),
+	};
+}
+
 export async function editBook(book) {
 	try {
 		const admin = dbadmin(5432)
+		const normalizedBook = normalizeAuthors(book)
+		console.log(normalizedBook)
 		const result = await admin.query('select edit_book($1::json);', [JSON.stringify(book)])
 		return result.rows
 	} catch (err) {
@@ -160,10 +180,10 @@ export async function toggleWishlist(user_name, book_id) {
 	}
 }
 
-export async function extentLoan(user_name, book_id) {
+export async function extentLoan(user_name, book_id, new_date) {
 	try {
 		const moder = dbmoder(5432)
-		const result = await moder.query(`exec extent_loan($1,$2);`, [user_name, book_id])
+		const result = await moder.query(`call extent_loan($1,$2,$3);`, [user_name, book_id, new_date])
 		return result
 	} catch (error) {
 		console.error(error)
@@ -186,7 +206,9 @@ export async function getModerBooks() {
 export async function requestExtent(user_name, book_id, request_date) {
 	try {
 		const user = dbuser(5432)
+		console.log(user_name, book_id, request_date)
 		const result = await user.query(`call request_extent_loan($1, $2, $3);`, [user_name, book_id, request_date])
+		console.log(result)
 		return result
 	} catch (error) {
 		console.error(error)
@@ -197,7 +219,7 @@ export async function requestExtent(user_name, book_id, request_date) {
 export async function confirmExtension(book_id, user_id, request_date) {
 	try {
 		const moder = dbmoder(5432)
-		const result = await moder.query(`call confirm_extension($1, $2, $3);`, [book_id, user_id, request_date])
+		const result = await moder.query(`select confirm_extension($1, $2, $3);`, [book_id, user_id, request_date])
 		console.log(result)
 		return result;
 	} catch (error) {
@@ -209,7 +231,7 @@ export async function confirmExtension(book_id, user_id, request_date) {
 export async function rejectExtension(book_id, user_id, request_date) {
 	try {
 		const moder = dbmoder(5432)
-		const result = await moder.query(`call reject_extension($1, $2, $3);`, [book_id, user_id, request_date])
+		const result = await moder.query(`select reject_extension($1, $2, $3);`, [book_id, user_id, request_date])
 		console.log(result)
 		return result;
 	} catch (error) {

@@ -1,14 +1,20 @@
-import { useNavigate } from 'react-router-dom';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { UserData } from '../../components/structs';
+import { useNavigate } from "react-router-dom";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+	Paper,
+} from "@mui/material";
+import { useLibrary } from "../../libraryContext";
 
-interface Props {
-	users: UserData[];
-	updateUsers: () => void;
-}
-
-export function UserTable({ users, updateUsers }: Props) {
+export function UserTable() {
 	const navigate = useNavigate();
+	const { users } = useLibrary();
+
+	if (!users) return <p>Загрузка пользователей...</p>;
 
 	return (
 		<TableContainer component={Paper}>
@@ -25,12 +31,12 @@ export function UserTable({ users, updateUsers }: Props) {
 				</TableHead>
 				<TableBody>
 					{users
-						.filter(user => user.user_name !== sessionStorage.getItem('userName'))
+						.filter((user) => user.user_name !== sessionStorage.getItem("userName"))
 						.map((user) => (
 							<TableRow
 								key={user.user_id}
 								hover
-								style={{ cursor: 'pointer' }}
+								style={{ cursor: "pointer" }}
 								onClick={() => navigate(`/user?id=${user.user_id}`)}
 							>
 								<TableCell>{user.user_id}</TableCell>

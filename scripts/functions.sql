@@ -71,29 +71,159 @@ END;
 $$ LANGUAGE plpgsql;
 
 --	ADD BOOK - json
-create or replace function add_books(book JSON)
-returns boolean as $$ 
-declare
-    title VARCHAR(255) := book->>'title';
-    total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
-    rating DECIMAL(4, 2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4, 2);
-    isbn VARCHAR(13) := COALESCE(NULLIF(book->>'isbn', ''), NULL);
-    published_date DATE := NULLIF(book->>'published_date', '')::DATE;
-begin
-    -- Вставка данных в таблицу books
-    INSERT INTO books (title, total_pages, rating, isbn, published_date)
-    VALUES (title, total_pages, rating, isbn, published_date);
+CREATE OR REPLACE FUNCTION add_full_book(book JSON)
+RETURNS BOOLEAN AS $$
+DECLARE
+    -- Основные поля книги
+    v_title VARCHAR := book->>'title';
+    v_total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
+    v_rating DECIMAL(4,2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4,2);
+    v_isbn VARCHAR := NULLIF(book->>'isbn', '');
+    v_published_date DATE := NULLIF(book->>'published_date', '')::DATE;
 
-    -- Если вставка прошла успешно, возвращаем TRUE
+    v_book_id INT;
+
+    author JSON;
+    genre_name TEXT;
+    v_author_id INT;
+    v_genre_id INT;
+BEGIN
+    -- Вставка книги
+    INSERT INTO books (title, total_pages, rating, isbn, published_date)
+    VALUES (v_title, v_total_pages, v_rating, v_isbn, v_published_date)
+    RETURNING book_id INTO v_book_id;
+
+    -- Обработка авторов
+    FOR author IN SELECT * FROM json_array_elements(book->'authors')
+    LOOP
+        SELECT author_id INTO v_author_id
+        FROM authors
+        WHERE first_name = author->>'first_name'
+          AND COALESCE(middle_name, '') = COALESCE(author->>'middle_name', '')
+          AND COALESCE(last_name, '') = COALESCE(author->>'last_name', '')
+        LIMIT 1;
+
+        IF v_author_id IS NULL THEN
+            INSERT INTO authors (first_name, middle_name, last_name)
+            VALUES (
+                author->>'first_name',
+                NULLIF(author->>'middle_name', ''),
+                NULLIF(author->>'last_name', '')
+            )
+            RETURNING author_id INTO v_author_id;
+        END IF;
+
+        -- Добавление связи книга-автор
+        INSERT INTO book_authors (book_id, author_id)
+        VALUES (v_book_id, v_author_id)
+        ON CONFLICT DO NOTHING;
+    END LOOP;
+
+    -- Обработка жанров
+    FOR genre_name IN SELECT json_array_elements_text(book->'genres')
+    LOOP
+        SELECT genre_id INTO v_genre_id
+        FROM genres
+        WHERE genre = genre_name
+        LIMIT 1;
+
+        IF v_genre_id IS NULL THEN
+            INSERT INTO genres (genre)
+            VALUES (genre_name)
+            RETURNING genre_id INTO v_genre_id;
+        END IF;
+
+        -- Добавление связи книга-жанр
+        INSERT INTO book_genres (book_id, genre_id)
+        VALUES (v_book_id, v_genre_id)
+        ON CONFLICT DO NOTHING;
+    END LOOP;
+
     RETURN TRUE;
 EXCEPTION
     WHEN OTHERS THEN
-        -- Логирование ошибки
-        RAISE NOTICE 'Error: %', SQLERRM;
-        -- Возвращаем FALSE в случае ошибки
+        RAISE NOTICE 'Ошибка: %', SQLERRM;
         RETURN FALSE;
-end;
-$$ language plpgsql;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- 	ADD_BOOK_FULL JSON
+CREATE OR REPLACE PROCEDURE add_full_book(book JSON)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    -- Книга
+    v_book_id INT;
+    v_title TEXT := book->>'title';
+    v_total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
+    v_rating DECIMAL(4,2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4,2);
+    v_isbn TEXT := NULLIF(book->>'isbn', '');
+    v_published_date DATE := NULLIF(book->>'published_date', '')::DATE;
+
+    -- Автор / Жанр
+    author JSON;
+    genre_name TEXT;
+    v_author_id INT;
+    v_genre_id INT;
+BEGIN
+    -- Добавление книги
+    INSERT INTO books (title, total_pages, rating, isbn, published_date)
+    VALUES (v_title, v_total_pages, v_rating, v_isbn, v_published_date)
+    RETURNING book_id INTO v_book_id;
+
+    -- Обработка авторов
+    FOR author IN SELECT * FROM json_array_elements(book->'authors')
+    LOOP
+        SELECT author_id INTO v_author_id
+        FROM authors
+        WHERE first_name = author->>'first_name'
+          AND COALESCE(middle_name, '') = COALESCE(author->>'middle_name', '')
+          AND COALESCE(last_name, '') = COALESCE(author->>'last_name', '')
+        LIMIT 1;
+
+        -- Если нет такого автора — добавляем
+        IF v_author_id IS NULL THEN
+            INSERT INTO authors (first_name, middle_name, last_name)
+            VALUES (
+                author->>'first_name',
+                NULLIF(author->>'middle_name', ''),
+                NULLIF(author->>'last_name', '')
+            )
+            RETURNING author_id INTO v_author_id;
+        END IF;
+
+        -- Добавляем связь
+        INSERT INTO book_authors (book_id, author_id)
+        VALUES (v_book_id, v_author_id)
+        ON CONFLICT DO NOTHING;
+    END LOOP;
+
+    -- Обработка жанров
+    FOR genre_name IN SELECT json_array_elements_text(book->'genres')
+    LOOP
+        SELECT genre_id INTO v_genre_id
+        FROM genres
+        WHERE genre = genre_name
+        LIMIT 1;
+
+        IF v_genre_id IS NULL THEN
+            INSERT INTO genres (genre)
+            VALUES (genre_name)
+            RETURNING genre_id INTO v_genre_id;
+        END IF;
+
+        -- Добавляем связь
+        INSERT INTO book_genres (book_id, genre_id)
+        VALUES (v_book_id, v_genre_id)
+        ON CONFLICT DO NOTHING;
+    END LOOP;
+
+    RAISE NOTICE 'Книга успешно добавлена (id = %)', v_book_id;
+END;
+$$;
+
+
 
 --	BORROW BOOK
 CREATE OR REPLACE FUNCTION borrow_book(p_user_name varchar, p_book_id INT, p_return_date DATE)
@@ -159,6 +289,10 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM book_loans WHERE book_id = p_book_id) THEN
         RAISE EXCEPTION 'No active loan for book ID %', p_book_id;
     END IF;
+
+	--	Delete from extensions
+	delete from extention_requests
+	where book_id = p_book_id;
 
     -- Attempt to delete the book loan and count the affected rows
     DELETE FROM book_loans
@@ -320,117 +454,192 @@ $$;
 
 
 -- 	CONFIRM EXNTENSION
-CREATE OR REPLACE PROCEDURE confirm_extension(
+drop procedure confirm_extension(integer, integer, date);
+CREATE OR REPLACE FUNCTION confirm_extension(
     p_book_id INTEGER,
     p_user_id INTEGER,
     p_request_date DATE
-)
+) 
+RETURNS TEXT
 LANGUAGE plpgsql
 AS $$
+DECLARE
+    updated BOOLEAN := FALSE;
+    deleted BOOLEAN := FALSE;
 BEGIN
-	RAISE NOTICE 'CALL confirm_extension: book_id=%, user_id=%, date=%', p_book_id, p_user_id, p_request_date;
-
     -- Обновление даты возврата
     UPDATE book_loans
     SET return_date = p_request_date
     WHERE book_id = p_book_id AND user_id = p_user_id;
 
-    IF NOT FOUND THEN
-        RAISE NOTICE 'Не найдено ни одной записи для обновления по book_id=%, user_id=%', p_book_id, p_user_id;
+    IF FOUND THEN
+        updated := TRUE;
+    ELSE
+        RETURN format('⚠️ Не найдена запись в book_loans для book_id=%s, user_id=%s', p_book_id, p_user_id);
     END IF;
 
     -- Удаление запроса на продление
     DELETE FROM extention_requests
     WHERE book_id = p_book_id AND user_id = p_user_id AND request_date::date = p_request_date;
 
-    IF NOT FOUND THEN
-        RAISE NOTICE 'Запрос на продление не найден и не был удалён.';
+    IF FOUND THEN
+        deleted := TRUE;
+    END IF;
+
+    IF updated THEN
+        IF deleted THEN
+            RETURN '✅ Дата возврата обновлена, запрос на продление удалён';
+        ELSE
+            RETURN '✅ Дата возврата обновлена, но запрос на продление не найден';
+        END IF;
+    END IF;
+
+    RETURN '❌ Неожиданная ситуация — ни одно действие не выполнено';
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN format('❌ Ошибка: %s', SQLERRM);
+END;
+$$;
+
+
+-- 	REJECT EXNTENSION
+drop procedure reject_extension(integer, integer,date);
+CREATE OR REPLACE FUNCTION reject_extension(
+    p_book_id INTEGER,
+    p_user_id INTEGER,
+    p_request_date DATE
+)
+RETURNS TEXT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    rows_deleted INTEGER;
+BEGIN
+    DELETE FROM extention_requests
+    WHERE book_id = p_book_id
+      AND user_id = p_user_id
+      AND request_date = p_request_date;
+
+    GET DIAGNOSTICS rows_deleted = ROW_COUNT;
+
+    IF rows_deleted = 0 THEN
+        RETURN '❌ Запись для удаления не найдена.';
+    ELSE
+        RETURN format('✅ Успешно удалено %s запись(ей).', rows_deleted);
     END IF;
 
 EXCEPTION
     WHEN OTHERS THEN
-        RAISE NOTICE 'Произошла ошибка: %', SQLERRM;
+        RETURN format('❗ Ошибка: %s', SQLERRM);
 END;
 $$;
 
--- 	REJECT EXNTENSION
-create or replace procedure reject_extension(p_book_id INTEGER, p_user_id INTEGER, p_request_date date)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-	delete 
-	from extention_requests er
-	where er.book_id = p_book_id and
-			er.user_id = p_user_id and
-			er.request_date = p_request_date; 
-EXCEPTION
-    WHEN OTHERS THEN
-        RAISE NOTICE 'Произошла ошибка: %', SQLERRM;
-END;
-$$;
-
+crea
 
 -- 	EXTENT LOAN
-create or replace procedure extent_loan(p_user_name VARCHAR, p_book_id INTEGER)
+drop procedure extent_loan(varchar, integer);
+CREATE OR REPLACE PROCEDURE extent_loan(
+    p_user_name VARCHAR,
+    p_book_id INTEGER,
+    p_new_return_date DATE
+)
 LANGUAGE plpgsql
 AS $$
 DECLARE
     v_user_id INTEGER;
-    v_new_date DATE;
-	v_old_date DATE;
-    req_exists BOOLEAN;
+    v_old_return_date DATE;
 BEGIN
-	-- Get user ID
+    -- Получаем user_id по имени пользователя
     SELECT u.user_id
     INTO v_user_id
     FROM users u
     WHERE u.user_name = p_user_name;
 
-	-- Check if there is already a request
-    SELECT EXISTS (
-        SELECT 1
-        FROM extention_requests er
-        WHERE er.book_id = p_book_id AND er.user_id = v_user_id
-    )
-    INTO req_exists;
+    -- Получаем текущую дату возврата
+    SELECT bl.return_date
+    INTO v_old_return_date
+    FROM book_loans bl
+    WHERE bl.book_id = p_book_id AND bl.user_id = v_user_id;
 
-	if req_exists then
-			-- get old return_date
-			select return_date
-			from book_loans
-			into v_old_date
-			where book_id = p_book_id;
+    -- Проверка корректности новой даты возврата
+    IF p_new_return_date <= v_old_return_date THEN
+        RAISE EXCEPTION 'Новая дата возврата должна быть позже текущей: % <= %', p_new_return_date, v_old_return_date;
+    END IF;
 
-			-- get new return_date
-			select er.request_date
-			from extention_requests er
-			into v_new_date
-			where er.book_id = p_book_id and er.user_id = v_user_id;
+    -- Обновление даты возврата
+    UPDATE book_loans
+    SET return_date = p_new_return_date
+    WHERE book_id = p_book_id AND user_id = v_user_id;
 
-			if v_new_date < v_old_date then
-				RAISE EXCEPTION 'INVALID DATE: new date is smaller than older one';
-			end if;
-			 
-			-- update loan row in book_loans
-			update book_loans
-			set return_date = v_new_date
-			where book_id = p_book_id;
+    -- Удаление запроса на продление, если он есть
+    DELETE FROM extention_requests
+    WHERE book_id = p_book_id AND user_id = v_user_id;
 
-			-- delete request from queue
-			delete from extention_requests
-			where book_id = p_book_id and user_id = v_user_id;
-	else
-		RAISE EXCEPTION 'ERROR: NO REQUEST WAS MADE';
-	end if;
+    RAISE NOTICE 'Дата возврата успешно обновлена для пользователя % и книги %', p_user_name, p_book_id;
 
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        RAISE NOTICE 'Пользователь "%" не найден или отсутствуют записи.', p_user_name;
+        RAISE EXCEPTION 'Пользователь "%" или запись займа не найдены.', p_user_name;
 
     WHEN OTHERS THEN
         RAISE NOTICE 'Произошла ошибка: %', SQLERRM;
 END;
 $$;
+
+
+create or replace procedure extent_loan_manual(
+    p_user_name VARCHAR,
+    p_book_id INTEGER,
+    p_new_return_date DATE
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_user_id INTEGER;
+    v_old_date DATE;
+BEGIN
+    -- Получаем user_id по user_name
+    SELECT u.user_id
+    INTO v_user_id
+    FROM users u
+    WHERE u.user_name = p_user_name;
+
+    -- Получаем старую дату возврата
+    SELECT return_date
+    INTO v_old_date
+    FROM book_loans
+    WHERE book_id = p_book_id AND user_id = v_user_id;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Заем для пользователя "%" и книги с id % не найден.', p_user_name, p_book_id;
+    END IF;
+
+    -- Проверка: новая дата не может быть раньше старой
+    IF p_new_return_date < v_old_date THEN
+        RAISE EXCEPTION 'Новая дата возврата (%), меньше текущей (%).', p_new_return_date, v_old_date;
+    END IF;
+
+    -- Обновляем дату возврата
+    UPDATE book_loans
+    SET return_date = p_new_return_date
+    WHERE book_id = p_book_id AND user_id = v_user_id;
+
+    -- Удаляем все запросы на продление от пользователя (по всем книгам)
+    DELETE FROM extention_requests
+    WHERE user_id = v_user_id;
+
+    RAISE NOTICE 'Заем продлен до % и запросы удалены.', p_new_return_date;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE EXCEPTION 'Пользователь "%" не найден.', p_user_name;
+
+    WHEN OTHERS THEN
+        RAISE NOTICE 'Произошла ошибка: %', SQLERRM;
+END;
+$$;
+
 
 /*
 create or replace procedure add_loan(
@@ -626,43 +835,100 @@ END;
 $$ LANGUAGE plpgsql;
 
 --	EDIT BOOK
+drop function edit_book(json);
 CREATE OR REPLACE FUNCTION edit_book(p_book JSON)
 RETURNS BOOLEAN AS $$
 DECLARE
+    -- Основные поля книги
     p_book_id INT := (p_book->>'book_id')::INT;
     p_title VARCHAR(255) := p_book->>'title';
     p_total_pages INT := COALESCE(NULLIF(p_book->>'total_pages', ''), NULL)::INT;
     p_rating DECIMAL(4, 2) := COALESCE(NULLIF(p_book->>'rating', ''), NULL)::DECIMAL(4, 2);
     p_isbn VARCHAR(13) := COALESCE(NULLIF(p_book->>'isbn', ''), NULL);
     p_published_date DATE := NULLIF(p_book->>'published_date', '')::DATE;
+
+    -- Вспомогательные переменные
+    author JSON;
+    genre_name TEXT;
+    v_author_id INT;
+    v_genre_id INT;
     rows_updated INT;
 BEGIN
-    -- Check for the existence of the book
+    -- Проверка наличия книги
     IF NOT EXISTS (SELECT 1 FROM books WHERE book_id = p_book_id) THEN
-        RETURN FALSE;  -- If the book does not exist, return FALSE
+        RETURN FALSE;
     END IF;
 
-    -- Update the book
+    -- Обновление записи в books
     UPDATE books
-    SET title = p_title, 
-        total_pages = p_total_pages, 
-        rating = p_rating, 
-        isbn = p_isbn, 
-        published_date = p_published_date 
+    SET title = p_title,
+        total_pages = p_total_pages,
+        rating = p_rating,
+        isbn = p_isbn,
+        published_date = p_published_date
     WHERE book_id = p_book_id;
 
-    -- Get the number of updated rows
     GET DIAGNOSTICS rows_updated = ROW_COUNT;
 
-    -- Return TRUE if rows were updated, otherwise FALSE
+    -- Удаляем старые связи авторов
+    DELETE FROM book_authors WHERE book_id = p_book_id;
+
+    -- Обработка авторов
+    FOR author IN SELECT * FROM json_array_elements(p_book->'authors')
+    LOOP
+        SELECT author_id INTO v_author_id
+        FROM authors
+        WHERE first_name = author->>'first_name'
+          AND COALESCE(middle_name, '') = COALESCE(author->>'middle_name', '')
+          AND COALESCE(last_name, '') = COALESCE(author->>'last_name', '')
+        LIMIT 1;
+
+        IF v_author_id IS NULL THEN
+            INSERT INTO authors (first_name, middle_name, last_name)
+            VALUES (
+                author->>'first_name',
+                NULLIF(author->>'middle_name', ''),
+                NULLIF(author->>'last_name', '')
+            )
+            RETURNING author_id INTO v_author_id;
+        END IF;
+
+        INSERT INTO book_authors (book_id, author_id)
+        VALUES (p_book_id, v_author_id)
+        ON CONFLICT DO NOTHING;
+    END LOOP;
+
+    -- Удаляем старые связи жанров
+    DELETE FROM book_genres WHERE book_id = p_book_id;
+
+    -- Обработка жанров
+    FOR genre_name IN SELECT json_array_elements_text(p_book->'genres')
+    LOOP
+        SELECT genre_id INTO v_genre_id
+        FROM genres
+        WHERE genre = genre_name
+        LIMIT 1;
+
+        IF v_genre_id IS NULL THEN
+            INSERT INTO genres (genre)
+            VALUES (genre_name)
+            RETURNING genre_id INTO v_genre_id;
+        END IF;
+
+        INSERT INTO book_genres (book_id, genre_id)
+        VALUES (p_book_id, v_genre_id)
+        ON CONFLICT DO NOTHING;
+    END LOOP;
+
     RETURN rows_updated > 0;
+
 EXCEPTION
     WHEN OTHERS THEN
-        -- Log the error
         RAISE NOTICE 'Error in edit_book: %', SQLERRM;
-        RETURN FALSE;  -- Return FALSE in case of an error
+        RETURN FALSE;
 END;
 $$ LANGUAGE plpgsql;
+
 
 -- get genres
 create or replace function get_genres()

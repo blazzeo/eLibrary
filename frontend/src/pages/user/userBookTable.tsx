@@ -6,13 +6,11 @@ import {
 } from "material-react-table";
 import { BookData } from "../../components/structs";
 import { toggleWishlist } from "../../components/api/DatabaseAPI";
+import { useLibrary } from "../../libraryContext";
 
-interface Props {
-	books: BookData[];
-	updateBooks: () => void;
-}
+export default function UserBookTable() {
+	const { books, refreshBooks } = useLibrary()
 
-export default function UserBookTable({ books, updateBooks }: Props) {
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
 		() => [
 			{
@@ -79,7 +77,7 @@ export default function UserBookTable({ books, updateBooks }: Props) {
 						const bookId = row.original.book_id;
 						await toggleWishlist(userName!, bookId!)
 						console.log(`Book ID ${bookId} -> User ${userName}`);
-						updateBooks();
+						refreshBooks();
 					};
 
 					if (loanStatus === 0) {
@@ -110,7 +108,7 @@ export default function UserBookTable({ books, updateBooks }: Props) {
 
 	const table = useMaterialReactTable<BookData>({
 		columns,
-		data: books,
+		data: books!,
 	});
 
 	return <MaterialReactTable table={table} />;

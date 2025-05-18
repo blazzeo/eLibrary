@@ -128,9 +128,9 @@ export async function askExtension(userName: string, bookId: number, request_dat
 	}
 }
 
-export async function extentLoan(bookId: number, newDate: Date) {
+export async function extentLoan(userName: string, bookId: number, newDate: Date) {
 	try {
-		const response = await axios.put(SERVER + `/api/extentloan`, { book_id: bookId, new_date: newDate })
+		const response = await axios.put(SERVER + `/api/extentloan`, { user_name: userName, book_id: bookId, new_date: newDate })
 		return response.data
 	} catch (error) {
 		console.error(error)

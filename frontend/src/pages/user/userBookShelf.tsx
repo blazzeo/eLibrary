@@ -9,20 +9,22 @@ import { askExtension } from "../../components/api/DatabaseAPI";
 import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useLibrary } from "../../libraryContext";
 
 interface Props {
-	books: BookData[];
-	updateBooks: () => void;
+	books: BookData[] | undefined
 }
 
-export function BookShelf({ books, updateBooks }: Props) {
+export function BookShelf({ books }: Props) {
+	const { refreshBooks } = useLibrary()
+
 	const [showModal, setShowModal] = useState(false);
 	const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
 	const [newDate, setNewDate] = useState<string>("");
 
 	// Открытие модального окна
 	const handleOpenModal = (bookId: number) => {
-		const book = books.find((b) => b.book_id === bookId);
+		const book = books!.find((b) => b.book_id === bookId);
 		if (book && book.return_date) {
 			const formatted = new Date(book.return_date).toISOString().split("T")[0];
 			setNewDate(formatted);
@@ -44,7 +46,7 @@ export function BookShelf({ books, updateBooks }: Props) {
 			try {
 				let user_name = sessionStorage.getItem("userName")!
 				await askExtension(user_name, selectedBookId, new Date(newDate));
-				updateBooks();
+				await refreshBooks();
 				toast.success("Дата возврата успешно обновлена");
 			} catch (error) {
 				console.error(error);
@@ -96,7 +98,7 @@ export function BookShelf({ books, updateBooks }: Props) {
 
 	const table = useMaterialReactTable<BookData>({
 		columns,
-		data: books,
+		data: books!,
 	});
 
 	return (

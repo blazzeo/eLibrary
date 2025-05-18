@@ -3,16 +3,14 @@ import Form from 'react-bootstrap/Form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BookInfo, UserData } from '../structs';
 import { addLoan } from '../api/DatabaseAPI';
 import { Toast, ToastContainer } from 'react-bootstrap';
+import { useLibrary } from '../../libraryContext';
 
-interface Props {
-	books: BookInfo[]
-	users: UserData[]
-};
+export default function AddLoanForm() {
+	const { users, moderBooks } = useLibrary()
+	let usersOnly = users?.filter(u => u.user_role != 'admin' && u.user_role != 'moder')
 
-export default function AddLoanForm({ books, users }: Props) {
 	// State
 	const [selectedUser, setSelectedUser] = useState('');
 	const [selectedBook, setSelectedBook] = useState({ id: -1, name: '' });
@@ -26,8 +24,8 @@ export default function AddLoanForm({ books, users }: Props) {
 	const [successMessage, setSuccessMessage] = useState('');
 
 	// Filter books based on search input
-	const filteredBooks = books.filter(book =>
-		book.book_info.book.title.toLowerCase().includes(bookSearch.toLowerCase())
+	const filteredBooks = moderBooks!.filter(book =>
+		book.book.title.toLowerCase().includes(bookSearch.toLowerCase())
 	);
 
 	const handle_form = async (event: React.FormEvent) => {
@@ -102,7 +100,7 @@ export default function AddLoanForm({ books, users }: Props) {
 							}}
 							className="dropdown-menu show"
 						>
-							{users
+							{usersOnly!
 								.filter((user) =>
 									user.user_name.toLowerCase().includes(userSearch.toLowerCase())
 								)
@@ -121,7 +119,7 @@ export default function AddLoanForm({ books, users }: Props) {
 										</button>
 									)
 								})}
-							{users.filter((user) =>
+							{usersOnly!.filter((user) =>
 								user.user_name.toLowerCase().includes(selectedUser.toLowerCase())
 							).length === 0 && (
 									<div className="dropdown-item">No users found</div>
@@ -160,10 +158,10 @@ export default function AddLoanForm({ books, users }: Props) {
 							className="dropdown-menu show"
 						>
 							{filteredBooks.map((book, index) => {
-								const title = book.book_info.book.title;
-								const id = book.book_info.book.book_id;
-								const authors = Array.isArray(book.book_info.book.authors)
-									? book.book_info.book.authors.join(" ")
+								const title = book.book.title;
+								const id = book.book.book_id;
+								const authors = Array.isArray(book.book.authors)
+									? book.book.authors.join(" ")
 									: "Unknown Author";
 
 								return (

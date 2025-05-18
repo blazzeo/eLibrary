@@ -1,14 +1,14 @@
 import { useState } from "react";
+import { Card, Button, Form, Row, Col, Container } from "react-bootstrap";
 import { BookData } from "../structs";
 import { addBook } from "../api/DatabaseAPI";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { useLibrary } from "../../libraryContext";
 import 'react-toastify/dist/ReactToastify.css';
 
-interface Props {
-	updateBooks: () => void;
-}
+export function AddBookForm() {
+	const { refreshModerBooks } = useLibrary();
 
-export function AddBookForm({ updateBooks }: Props) {
 	const [title, setTitle] = useState("");
 	const [totalPages, setTotalPages] = useState<number | null>(null);
 	const [rating, setRating] = useState<number | null>(null);
@@ -54,16 +54,14 @@ export function AddBookForm({ updateBooks }: Props) {
 			isbn: isbn ? Number(isbn) : 0,
 			published_date: new Date(publishedDate),
 			loan_status: 0,
-			// @ts-ignore — если BookData поддерживает authors/genres, убрать ts-ignore
+			// @ts-ignore
 			authors,
 			// @ts-ignore
 			genres
 		};
 
 		try {
-			const response = await addBook(book);
-			if (!response) throw new Error("Не удалось добавить книгу");
-
+			await addBook(book);
 			setTitle("");
 			setTotalPages(null);
 			setRating(null);
@@ -72,65 +70,107 @@ export function AddBookForm({ updateBooks }: Props) {
 			setAuthors([]);
 			setGenres([]);
 			toast.success("Книга успешно добавлена!");
-			updateBooks();
+			refreshModerBooks();
 		} catch (error) {
 			toast.error(error instanceof Error ? error.message : "Произошла неизвестная ошибка.");
 		}
 	};
 
 	return (
-		<div className="container mt-5">
-			<h2 className="mb-4">Добавить новую книгу</h2>
-			<form onSubmit={handleSubmit} className="needs-validation" noValidate>
-				<div className="mb-3">
-					<label htmlFor="title" className="form-label">Название</label>
-					<input type="text" id="title" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} required />
-				</div>
-				<div className="mb-3">
-					<label htmlFor="totalPages" className="form-label">Количество страниц</label>
-					<input type="number" id="totalPages" className="form-control" value={totalPages ?? ""} onChange={(e) => setTotalPages(Number(e.target.value))} required />
-				</div>
-				<div className="mb-3">
-					<label htmlFor="rating" className="form-label">Рейтинг</label>
-					<input type="number" id="rating" step="0.01" className="form-control" value={rating ?? ""} onChange={(e) => setRating(Number(e.target.value))} required />
-				</div>
-				<div className="mb-3">
-					<label htmlFor="isbn" className="form-label">ISBN</label>
-					<input type="number" id="isbn" className="form-control" value={isbn ?? ""} onChange={(e) => setIsbn(Number(e.target.value))} />
-				</div>
-				<div className="mb-3">
-					<label htmlFor="publishedDate" className="form-label">Год публикации</label>
-					<input type="date" id="publishedDate" className="form-control" value={publishedDate} onChange={(e) => setPublishedDate(e.target.value)} required />
-				</div>
+		<Container className="mt-5">
+			<h2 className="mb-4 text-center">Добавить книгу</h2>
+			<Card className="p-4 shadow-sm">
+				<Form onSubmit={handleSubmit}>
+					<Row className="mb-3">
+						<Col md={6}>
+							<Form.Group>
+								<Form.Label>Название</Form.Label>
+								<Form.Control value={title} onChange={(e) => setTitle(e.target.value)} required />
+							</Form.Group>
+						</Col>
+						<Col md={3}>
+							<Form.Group>
+								<Form.Label>Страниц</Form.Label>
+								<Form.Control type="number" value={totalPages ?? ""}
+									onChange={(e) => {
+										const value = e.target.value;
+										setTotalPages(value === "" ? null : Number(value));
+									}}
+									required />
+							</Form.Group>
+						</Col>
+						<Col md={3}>
+							<Form.Group>
+								<Form.Label>Рейтинг</Form.Label>
+								<Form.Control
+									type="number"
+									step="0.01"
+									min="0"
+									max="5"
+									value={rating ?? ""}
+									onChange={(e) => {
+										const value = e.target.value;
+										const num = value === "" ? null : Number(value);
+										if (num === null || (num >= 0 && num <= 5)) {
+											setRating(num);
+										}
+									}}
+									required
+								/>
+								<Form.Text className="text-muted">Допустимое значение от 0 до 5</Form.Text>
+							</Form.Group>
+						</Col>
+					</Row>
 
-				{/* Authors Input */}
-				<div className="mb-3">
-					<label className="form-label">Авторы</label>
-					<div className="d-flex">
-						<input type="text" className="form-control me-2" value={authorInput} onChange={(e) => setAuthorInput(e.target.value)} />
-						<button type="button" className="btn btn-secondary" onClick={addAuthor}>Добавить</button>
+					<Row className="mb-3">
+						<Col md={6}>
+							<Form.Group>
+								<Form.Label>ISBN</Form.Label>
+								<Form.Control type="number" value={isbn ?? ""} onChange={(e) => setIsbn(Number(e.target.value))} />
+								<Form.Text className="text-muted">13-ти значный номер</Form.Text>
+							</Form.Group>
+						</Col>
+						<Col md={6}>
+							<Form.Group>
+								<Form.Label>Дата публикации</Form.Label>
+								<Form.Control type="date" value={publishedDate} onChange={(e) => setPublishedDate(e.target.value)} required />
+							</Form.Group>
+						</Col>
+					</Row>
+
+					<hr />
+
+					<Row className="mb-3">
+						<Col md={6}>
+							<Form.Group>
+								<Form.Label>Добавить автора</Form.Label>
+								<div className="d-flex">
+									<Form.Control value={authorInput} onChange={(e) => setAuthorInput(e.target.value)} />
+									<Button variant="secondary" className="ms-2" onClick={addAuthor}>+</Button>
+								</div>
+								<ul className="mt-2">{authors.map((a, i) => <li key={i}>{a}</li>)}</ul>
+							</Form.Group>
+						</Col>
+
+						<Col md={6}>
+							<Form.Group>
+								<Form.Label>Добавить жанр</Form.Label>
+								<div className="d-flex">
+									<Form.Control value={genreInput} onChange={(e) => setGenreInput(e.target.value)} />
+									<Button variant="secondary" className="ms-2" onClick={addGenre}>+</Button>
+								</div>
+								<ul className="mt-2">{genres.map((g, i) => <li key={i}>{g}</li>)}</ul>
+							</Form.Group>
+						</Col>
+					</Row>
+
+					<div className="text-end">
+						<Button type="submit" variant="primary">Добавить книгу</Button>
 					</div>
-					<ul className="mt-2">
-						{authors.map((a, i) => <li key={i}>{a}</li>)}
-					</ul>
-				</div>
+				</Form>
+			</Card>
 
-				{/* Genres Input */}
-				<div className="mb-3">
-					<label className="form-label">Жанры</label>
-					<div className="d-flex">
-						<input type="text" className="form-control me-2" value={genreInput} onChange={(e) => setGenreInput(e.target.value)} />
-						<button type="button" className="btn btn-secondary" onClick={addGenre}>Добавить</button>
-					</div>
-					<ul className="mt-2">
-						{genres.map((g, i) => <li key={i}>{g}</li>)}
-					</ul>
-				</div>
-
-				<button type="submit" className="btn btn-primary">Добавить книгу</button>
-			</form>
-
-			<ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick pauseOnFocusLoss draggable pauseOnHover />
-		</div>
+			<ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} pauseOnHover />
+		</Container>
 	);
 }

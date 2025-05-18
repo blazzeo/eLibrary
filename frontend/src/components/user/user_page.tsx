@@ -1,176 +1,176 @@
-import { UserData, BookInfo } from "../structs";
+import { UserData } from "../structs";
 import { LoanListItem } from "./loanListItem";
 import { WishlistItem } from "./wishListItem";
 import { ExtensionRequestItem } from "./extensionRequestItem";
 import { deleteUser } from "../api/DatabaseAPI";
+import { Button, Card, Badge, Alert, Row, Col, ListGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useLibrary } from "../../libraryContext";
 
 interface Props {
 	user: UserData;
-	books: BookInfo[] | null;
-	updateUsers: () => void;
 }
 
-const formatDate = (date: Date | string) =>
-	new Date(date).toLocaleDateString("ru-RU");
+export default function UserPage({ user }: Props) {
+	const { moderBooks, refreshUsers } = useLibrary()
+	const navigate = useNavigate();
 
-export default function UserPage({ user, books }: Props) {
-	if (!user) return <div className="alert alert-danger mt-3">Пользователь не найден</div>;
-
-	const wishlist = user.wishlist || [];
-	const extensions = user.extension_requests || [];
-
-	const currentLoans = books?.filter(b =>
-		user.loans?.some(l => l.book_id === b.book.book_id)
-	) || [];
-
-	const wishedBooks = books?.filter(b =>
-		b.wishlist?.some(w => w.user_id === user.user_id)
-	) || [];
-
-	// Обработчики (заглушки)
-	const handleCancelLoan = (bookId: number) => {
-		console.log("Аннулировать", bookId);
-	};
+	if (!user) return <Alert variant="danger" className="mt-3">Пользователь не найден</Alert>;
 
 	const handleDelete = async () => {
-		const user_name = user.user_name
-		await deleteUser(user_name)
-		// TODO update users and redirect to '/'
-	}
-
-	const handleExtendLoan = (bookId: number) => {
-		console.log("Продлить", bookId);
-	};
-
-	const handleRemoveWishlist = (bookId: number) => {
-		console.log("Убрать из желаемого", bookId);
-	};
-
-	const handleIssueBook = (bookId: number) => {
-		console.log("Выдать книгу", bookId);
-	};
-
-	const handleApproveExtension = (bookId: number) => {
-		console.log("Одобрить продление", bookId);
-	};
-
-	const handleRejectExtension = (bookId: number) => {
-		console.log("Отклонить продление", bookId);
+		try {
+			await deleteUser(user.user_name);
+			toast.success(`Пользователь ${user.user_name} удален`);
+			refreshUsers();
+			navigate('/');
+		} catch (error) {
+			toast.error('Ошибка при удалении пользователя');
+		}
 	};
 
 	return (
-		<div className="container py-3">
+		<div className="container py-4">
 			{/* Шапка профиля */}
-			<div className="card mb-4 border-2 border-primary shadow-sm">
-				<div className="card-body">
-					<div className="d-flex align-items-center justify-content-between gap-3 flex-wrap">
-						<div>
-							<h1 className="h3 mb-1">{user.user_name}</h1>
-							<div className="d-flex gap-3 text-muted small">
-								<span>ID: {user.user_id}</span>
-								<span>Роль: {user.user_role}</span>
-								<span>Регистрация: {formatDate(user.registration_date)}</span>
+			<Card className="mb-4 shadow-sm border-primary">
+				<Card.Body>
+					<Row className="align-items-center">
+						<Col md={12}>
+							<div className="d-flex justify-content-between align-items-start">
+								<div>
+									<h2 className="mb-2 fs-2">{user.user_name}</h2>
+									<div className="d-flex flex-wrap gap-3 mb-4">
+										<Badge bg="secondary" className="fs-6 px-3 py-2">ID: {user.user_id}</Badge>
+										<Badge bg={user.user_role === 'admin' ? 'danger' : 'primary'} className="fs-6 px-3 py-2">
+											{user.user_role === 'admin' || user.user_name === 'moder' ? 'Администратор' : 'Пользователь'}
+										</Badge>
+										<Badge bg="info" className="fs-6 px-3 py-2">
+											<i className="bi bi-calendar me-2"></i>
+											Регистрация: {user.registration_date}
+										</Badge>
+									</div>
+								</div>
+								<Button
+									variant="outline-danger"
+									onClick={handleDelete}
+									className="d-flex align-items-center gap-1"
+								>
+									<i className="bi bi-trash"></i> Удалить
+								</Button>
 							</div>
-						</div>
-						<button className="btn btn-danger" onClick={handleDelete}>Удалить пользователя</button>
-					</div>
-				</div>
-			</div>
+						</Col>
+					</Row>
+				</Card.Body>
+			</Card>
 
 			{/* Основные блоки */}
-			<div className="row g-4">
-
+			<Row className="g-4">
 				{/* Текущие займы */}
-				<div className="col-lg-4">
-					<div className="card h-100 border-success border-2 shadow-sm">
-						<div className="card-header bg-success bg-opacity-10 text-success border-bottom border-success border-1">
-							<strong>На руках</strong>
-						</div>
-						<div className="card-body p-0">
-							{currentLoans.length === 0 ? (
-								<div className="text-center py-4 text-muted">Нет книг на руках</div>
+				<Col lg={4}>
+					<Card className="h-100 border-success shadow-sm">
+						<Card.Header className="bg-success bg-opacity-10 text-success border-success">
+							<div className="d-flex justify-content-between align-items-center">
+								<span><i className="bi bi-book me-2"></i>На руках</span>
+								<Badge bg="success" pill>{moderBooks?.filter(b =>
+									user.loans?.some(l => l.book_id === b.book.book_id)
+								).length}</Badge>
+							</div>
+						</Card.Header>
+						<Card.Body className="p-0">
+							{moderBooks?.filter(b =>
+								user.loans?.some(l => l.book_id === b.book.book_id)
+							).length === 0 ? (
+								<Alert variant="light" className="text-center m-3">
+									Нет книг на руках
+								</Alert>
 							) : (
-								<ul className="list-group list-group-flush">
-									{currentLoans.map(book => {
-										const loan = user.loans?.find(l => l.book_id === book.book.book_id);
+								<ListGroup variant="flush">
+									{moderBooks?.filter(b =>
+										user.loans?.some(l => l.book_id === b.book.book_id)
+									).map(book => {
 										return (
 											<LoanListItem
 												key={book.book.book_id}
 												book={book}
-												loanDate={formatDate(loan?.return_date || "")}
-												onCancel={() => handleCancelLoan(book.book.book_id)}
-												onExtend={() => handleExtendLoan(book.book.book_id)}
 											/>
 										);
 									})}
-								</ul>
+								</ListGroup>
 							)}
-						</div>
-					</div>
-				</div>
+						</Card.Body>
+					</Card>
+				</Col>
 
 				{/* Желаемые книги */}
-				<div className="col-lg-4">
-					<div className="card h-100 border-warning border-2 shadow-sm">
-						<div className="card-header bg-warning bg-opacity-10 text-warning border-bottom border-warning border-1">
-							<strong>Желаемые</strong>
-						</div>
-						<div className="card-body p-0">
-							{wishlist.length === 0 && wishedBooks.length === 0 ? (
-								<div className="text-center py-4 text-muted">Нет желаемых книг</div>
+				<Col lg={4}>
+					<Card className="h-100 border-warning shadow-sm">
+						<Card.Header className="bg-warning bg-opacity-10 text-warning border-warning">
+							<div className="d-flex justify-content-between align-items-center">
+								<span><i className="bi bi-heart me-2"></i>Желаемые</span>
+								<Badge bg="warning" pill>{moderBooks?.filter(b =>
+									b.wishlist?.some(w => w.user_id === user.user_id)
+								).length}</Badge>
+							</div>
+						</Card.Header>
+						<Card.Body className="p-0">
+							{!user.wishlist ? (
+								<Alert variant="light" className="text-center m-3">
+									Нет желаемых книг
+								</Alert>
 							) : (
-								<ul className="list-group list-group-flush">
-									{wishlist.map(item => {
-										const book = books?.find(b => b.book.book_id === item.book_id);
+								<ListGroup variant="flush">
+									{user.wishlist!.map(item => {
+										const book = moderBooks?.find(b => b.book.book_id === item.book_id);
 										if (!book) return null;
 										return (
 											<WishlistItem
 												key={`wish-${item.book_id}`}
+												user_name={user.user_name}
 												book={book}
-												requestDate={formatDate(item.request_date)}
-												canIssue={!book.wishlist?.length}
-												onRemove={() => handleRemoveWishlist(book.book.book_id)}
-												onIssue={() => handleIssueBook(book.book.book_id)}
+												requestDate={item.request_date!}
+												isTaken={book.owner}
 											/>
 										);
 									})}
-								</ul>
+								</ListGroup>
 							)}
-						</div>
-					</div>
-				</div>
+						</Card.Body>
+					</Card>
+				</Col>
 
 				{/* Запросы продления */}
-				<div className="col-lg-4">
-					<div className="card h-100 border-info border-2 shadow-sm">
-						<div className="card-header bg-info bg-opacity-10 text-info border-bottom border-info border-1">
-							<strong>Продления</strong>
-						</div>
-						<div className="card-body p-0">
-							{extensions.length === 0 ? (
-								<div className="text-center py-4 text-muted">Нет запросов</div>
+				<Col lg={4}>
+					<Card className="h-100 border-info shadow-sm">
+						<Card.Header className="bg-info bg-opacity-10 text-info border-info">
+							<div className="d-flex justify-content-between align-items-center">
+								<span><i className="bi bi-clock me-2"></i>Продления</span>
+								<Badge bg="info" pill>{(user.extension_requests) ? user.extension_requests!.length : 0}</Badge>
+							</div>
+						</Card.Header>
+						<Card.Body className="p-0">
+							{!user.extension_requests ? (
+								<Alert variant="light" className="text-center m-3">
+									Нет запросов на продление
+								</Alert>
 							) : (
-								<ul className="list-group list-group-flush">
-									{extensions.map(ext => {
-										const book = books?.find(b => b.book.book_id === ext.book_id);
+								<ListGroup variant="flush">
+									{user.extension_requests!.map(ext => {
+										const book = moderBooks?.find(b => b.book.book_id === ext.book_id);
 										if (!book) return null;
 										return (
 											<ExtensionRequestItem
 												key={`ext-${ext.book_id}`}
 												book={book}
-												requestDate={formatDate(ext.request_date)}
-												onApprove={() => handleApproveExtension(ext.book_id)}
-												onReject={() => handleRejectExtension(ext.book_id)}
+												requestDate={ext.request_date}
 											/>
 										);
 									})}
-								</ul>
+								</ListGroup>
 							)}
-						</div>
-					</div>
-				</div>
-
-			</div>
+						</Card.Body>
+					</Card>
+				</Col>
+			</Row>
 		</div>
 	);
 }

@@ -1,33 +1,17 @@
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import {
 	MaterialReactTable,
 	useMaterialReactTable,
 	type MRT_ColumnDef,
 } from "material-react-table";
-import { BookInfo, BookLoan } from "../../components/structs";
-import { getLoans } from "../../components/api/DatabaseAPI";
+import { BookInfo } from "../../components/structs";
 import { useNavigate } from "react-router-dom";
+import { useLibrary } from "../../libraryContext";
 
-interface Props {
-	books: BookInfo[];
-	updateBooks: () => void;
-	editBook: (book: BookInfo) => void;
-}
-
-export function AdminBookTable({ books, updateBooks, editBook }: Props) {
-	const [bookLoans, setBookLoans] = useState<BookLoan[]>([]); // Состояние для хранение данных о займах
-
-	const fetchLoans = async () => {
-		const loans = await getLoans();
-		setBookLoans(loans);
-	};
-
-	useEffect(() => {
-		fetchLoans();
-	}, []);
-
-	// внутри компонента
+export function AdminBookTable() {
+	const { moderBooks } = useLibrary(); // Используем moderBooks из контекста
 	const navigate = useNavigate();
+
 
 	const columns = useMemo<MRT_ColumnDef<BookInfo>[]>(
 		() => [
@@ -64,22 +48,22 @@ export function AdminBookTable({ books, updateBooks, editBook }: Props) {
 				header: "Владелец",
 				size: 50,
 				Cell: ({ row }) => {
-					return (row.original.owner) ?
+					return row.original.owner ? (
 						<strong className="text-primary">
 							{row.original.owner.user_name}
-						</strong> :
-						<p className="text-secondary fg-muted">
-							Доступна
-						</p>;
+						</strong>
+					) : (
+						<p className="text-secondary fg-muted">Доступна</p>
+					);
 				},
 			},
 		],
-		[bookLoans] // Пересчитываем столбцы при изменении данных о книгах и пользователях
+		[moderBooks]
 	);
 
 	const table = useMaterialReactTable<BookInfo>({
 		columns,
-		data: books,
+		data: moderBooks ?? [],
 		muiTableBodyRowProps: ({ row }) => ({
 			onClick: () => {
 				const bookId = row.original.book.book_id;

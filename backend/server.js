@@ -70,10 +70,7 @@ app.get('/api/getusers', async (_req, res) => {
 	try {
 		const result = await db_request.getUsers()
 		res.json(result.map(u => u.get_users))
-		const printUser = (user) => {
-			return `${user.user_id}, ${user.user_name}, ${user.user_password}, ${user.user_role}`
-		}
-		log(`getUsers success:\tUsers:\t[${result.map(user => `{${printUser(user)}}`)}]`)
+		log(`getUsers success`)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 		log(`getUsers failed:\t${error.message}`)
@@ -108,6 +105,7 @@ app.get('/api/createuser', async (req, res) => {
 app.post('/api/editbook', async (req, res) => {
 	try {
 		const book = req.body.book
+		console.log(book)
 		const result = await db_request.editBook(book)
 		if (result[0].edit_book == false)
 			throw new Error("Failed to edit book")
@@ -144,13 +142,15 @@ app.post('/api/returnbook', async (req, res) => {
 	}
 });
 
-app.post('/api/extentloan', async (req, res) => {
+app.put('/api/extentloan', async (req, res) => {
 	try {
 		const user_name = req.body.user_name;
 		const book_id = req.body.book_id;
-		const result = await db_request.extentLoan(user_name, book_id);
+		const new_date = req.body.new_date;
+		console.log(user_name, book_id, new_date)
+		const result = await db_request.extentLoan(user_name, book_id, new_date);
 		res.json({ result: result });
-		log(`extentLoan success:\tBook:\t{${user_name}, ${book_id}, ${return_date}}`)
+		log(`extentLoan success:\tBook:\t{${user_name}, ${book_id}, ${new_date}}`)
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 		log(`extentLoan failed:\t${error.message}`)
@@ -160,7 +160,6 @@ app.post('/api/extentloan', async (req, res) => {
 app.get('/api/getmoderbooks', async (_req, res) => {
 	try {
 		const result = await db_request.getModerBooks()
-		console.log(result.map(b => b.book_info))
 		res.json({ result: result.map(b => b.book_info) })
 	} catch (error) {
 		res.status(500).json({ error: error })
@@ -174,7 +173,6 @@ app.post('/api/addloan', async (req, res) => {
 		const book_id = req.body.book_id;
 		const return_date = new Date(req.body.return_date);
 		const result = await db_request.addLoan(user_name, book_id, return_date);
-		console.log(result)
 		res.json({ result: result });
 		log(`borrowBook success:\tBook:\t{${user_name}, ${book_id}, ${return_date}}`)
 	} catch (error) {
@@ -190,10 +188,10 @@ app.post('/api/confirmextension', async (req, res) => {
 		const request_date = req.body.request_date
 		const result = await db_request.confirmExtension(book_id, user_id, request_date)
 		res.json({ result: result })
-		console.log('confirm exntension success')
+		log('confirm extension success', result)
 	} catch (error) {
 		res.status(500).json({ error: error })
-		console.log('confirm extension failed: ', error)
+		log('confirm extension failed: ', error)
 	}
 })
 
@@ -204,7 +202,7 @@ app.post('/api/rejectextension', async (req, res) => {
 		const request_date = req.body.request_date
 		const result = await db_request.rejectExtension(book_id, user_id, request_date)
 		res.json({ result: result })
-		console.log('rejecg exntension success')
+		console.log('reject exntension success')
 	} catch (error) {
 		res.status(500).json({ error: error })
 		console.log('reject extension failed: ', error)

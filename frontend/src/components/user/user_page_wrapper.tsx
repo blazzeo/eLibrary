@@ -3,14 +3,10 @@ import { useSearchParams } from "react-router-dom";
 import UserPage from "./user_page";
 import { BookInfo, UserData } from "../structs";
 import { Spinner } from "react-bootstrap";
+import { useLibrary } from "../../libraryContext";
 
-interface Props {
-	users: UserData[];
-	books: BookInfo[];
-	updateUsers: () => void;
-}
-
-export default function UserPageWrapper({ users, books, updateUsers }: Props) {
+export default function UserPageWrapper() {
+	const { moderBooks, users } = useLibrary()
 	const [searchParams] = useSearchParams();
 	const id = searchParams.get("id");
 
@@ -22,11 +18,11 @@ export default function UserPageWrapper({ users, books, updateUsers }: Props) {
 	const updateUser = () => {
 		if (!id) return;
 
-		const user = users.find(u => u.user_id === Number(id));
+		const user = users!.find(u => u.user_id === Number(id));
 		if (user) {
 			setUser(user);
 
-			const user_books = books.filter(b => {
+			const user_books = moderBooks!.filter(b => {
 				const ownerMatches = b.owner?.user_id === user.user_id;
 				const inWishlist = b.wishlist.some(w => w.user_id === user.user_id);
 				return ownerMatches || inWishlist;
@@ -44,11 +40,11 @@ export default function UserPageWrapper({ users, books, updateUsers }: Props) {
 	useEffect(() => {
 		setLoading(true);
 		updateUser();
-	}, [id, users, books]);
+	}, [id, users, moderBooks]);
 
 	if (loading) return <Spinner animation="border" />;
 	if (error) return <p>{error}</p>;
 	if (!user) return <p>Пользователь не найден</p>;
 
-	return <UserPage user={user} books={userBooks || []} updateUsers={updateUsers} />;
+	return <UserPage user={user} books={userBooks} />;
 }
