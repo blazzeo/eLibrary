@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	Button,
 	Modal,
@@ -13,7 +13,7 @@ import {
 	Col
 } from "react-bootstrap";
 import { BookData, BookInfo } from "../structs";
-import { addLoan, confirmExtension, deleteBook, editBook, rejectExtension } from "../api/DatabaseAPI";
+import { addLoan, confirmExtension, deleteBook, editBook, rejectExtension, toggleWishlist } from "../api/DatabaseAPI";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../libraryContext";
 import { useNavigate } from "react-router";
@@ -25,7 +25,7 @@ interface Props {
 export default function BookPage({ bookInfo }: Props) {
 	const navigate = useNavigate()
 	const user_role = sessionStorage.getItem('userName')
-	const { refreshModerBooks } = useLibrary();
+	const { refreshModerBooks, users } = useLibrary();
 	const { book, owner, extension_request, wishlist } = bookInfo;
 
 	const [showEditModal, setShowEditModal] = useState(false);
@@ -34,6 +34,27 @@ export default function BookPage({ bookInfo }: Props) {
 	const [selectedUser, setSelectedUser] = useState('');
 	const [returnDate, setReturnDate] = useState('');
 
+	const [searchTerm, setSearchTerm] = useState("");
+	const [filteredUsers, setFilteredUsers] = useState([]);
+	const [dropdownVisible, setDropdownVisible] = useState(false);
+
+	useEffect(() => {
+		if (searchTerm.trim() === "") {
+			setFilteredUsers([]);
+			return;
+		}
+
+		const results = users?.filter((user) =>
+			user.user_name.toLowerCase().includes(searchTerm.toLowerCase())
+		);
+		setFilteredUsers(results);
+	}, [searchTerm, users]);
+
+	const handleSelectUser = (name) => {
+		setSelectedUser(name);
+		setSearchTerm(name);
+		setDropdownVisible(false);
+	};
 
 	const [title, setTitle] = useState(book.title);
 	const [authors, setAuthors] = useState(book.authors);
@@ -123,6 +144,18 @@ export default function BookPage({ bookInfo }: Props) {
 			refreshModerBooks();
 		}
 	};
+
+	const delete_wish = async (user_name: string) => {
+		try {
+			await toggleWishlist(user_name, book.book_id)
+			toast.success('Пользователь удален из списка')
+		} catch (error) {
+			console.error(error)
+			toast.success('Пользователь не был удален из списка')
+		} finally {
+			refreshModerBooks()
+		}
+	}
 
 	return (
 		<div className="container py-4">
@@ -266,7 +299,7 @@ export default function BookPage({ bookInfo }: Props) {
 													</small>
 												</div>
 												{/* Button here */}
-												<button className="btn btn-outline-danger" >Снять</button>
+												<button className="btn btn-outline-danger" onClick={() => delete_wish(user.user_name)}>Снять</button>
 											</div>
 										</ListGroup.Item>
 									))}
@@ -391,28 +424,42 @@ export default function BookPage({ bookInfo }: Props) {
 				</Modal.Header>
 				<Modal.Body>
 					<Form>
-						<Form.Group className="mb-3">
+						<Form.Group className="mb-3 position-relative">
 							<Form.Label>Выберите пользователя</Form.Label>
-							<Form.Select
-								value={selectedUser}
-								onChange={(e) => setSelectedUser(e.target.value)}
-								className="mb-3"
-							>
-								<option value="">Выберите пользователя</option>
-								{wishlist.map(user => (
-									<option key={user.user_id} value={user.user_id}>
-										{user.user_name} (запрос от {user.request_date})
-									</option>
-								))}
-							</Form.Select>
+							<Form.Control
+								type="text"
+								placeholder="Начните вводить имя пользователя..."
+								value={searchTerm}
+								onChange={(e) => {
+									setSearchTerm(e.target.value);
+									setDropdownVisible(true);
+								}}
+								onFocus={() => setDropdownVisible(true)}
+								autoComplete="off"
+							/>
+							{dropdownVisible && filteredUsers.length > 0 && (
+								<div className="position-absolute w-100 bg-white border rounded mt-1 shadow-sm z-3" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+									{filteredUsers.map((user) => (
+										<div
+											key={user.user_id}
+											className="px-3 py-2 dropdown-item"
+											style={{ cursor: "pointer" }}
+											onClick={() => handleSelectUser(user.user_name)}
+										>
+											{user.user_name}
+										</div>
+									))}
+								</div>
+							)}
 						</Form.Group>
+
 						<Form.Group>
 							<Form.Label>Дата возврата</Form.Label>
 							<Form.Control
 								type="date"
 								value={returnDate}
 								onChange={(e) => setReturnDate(e.target.value)}
-								min={new Date().toISOString().split('T')[0]}
+								min={new Date().toISOString().split("T")[0]}
 							/>
 						</Form.Group>
 					</Form>

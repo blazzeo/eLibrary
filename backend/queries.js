@@ -43,6 +43,20 @@ export async function createUser(userLogin, userPassword) {
 	}
 }
 
+export async function createModer(login, password) {
+	try {
+		const admin = dbadmin(5432)
+		const hashed_password = await hash_password(password)
+		console.log(login, password)
+		const result = await admin.query('SELECT * from create_moder($1, $2);', [login, hashed_password])
+		console.log(result.rows[0])
+
+		return result.rows[0];
+	} catch (err) {
+		throw err
+	}
+}
+
 export async function addLoan(user_name, book_id, return_date) {
 	try {
 		const user = dbmoder(5432)

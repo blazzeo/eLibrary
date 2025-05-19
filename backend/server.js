@@ -93,10 +93,10 @@ app.delete('/api/deleteuser/:user_id', async (req, res) => {
 	}
 })
 
-app.get('/api/createuser', async (req, res) => {
+app.post('/api/createuser', async (req, res) => {
 	try {
-		const userLogin = req.query.login;
-		const userPassword = req.query.password;
+		const userLogin = req.body.login;
+		const userPassword = req.body.password;
 		const result = await db_request.createUser(userLogin, userPassword);
 		res.json({ result: result });
 		log(`createUser success:\tUser:\t{${userLogin}, ${userPassword}}`)
@@ -121,17 +121,48 @@ app.post('/api/editbook', async (req, res) => {
 	}
 })
 
+app.post('/api/createmoder', async (req, res) => {
+	try {
+		const login = req.body.login;
+		const password = req.body.password;
+		const userLogin = req.body.login;
+		const result = await db_request.createModer(login, password);
+		console.log(result)
+		res.json({ result: result });
+		log(`createmoder success:\tLogin:\t{${userLogin}}`)
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+		log(`createmoder failed:\t${error.message}`)
+	}
+});
+
 app.get('/api/checklogin', async (req, res) => {
 	try {
-		const userLogin = req.query.login;
-		const result = await db_request.checkLogin(userLogin);
+		const login = req.query.login;
+		const result = await db_request.checkLogin(login);
+		console.log(result)
 		res.json({ result: result });
-		log(`checkLogin success:\tLogin:\t{${userLogin}}`)
+		log(`checkLogin success:\tLogin:\t{${login}}`)
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 		log(`checkLogin failed:\t${error.message}`)
 	}
 });
+
+app.post('/api/editbook', async (req, res) => {
+	try {
+		const book = req.body.book
+		console.log(book)
+		const result = await db_request.editBook(book)
+		if (result[0].edit_book == false)
+			throw new Error("Failed to edit book")
+		res.json(result)
+		log(`editBook success:\tBook:\t[${book}]`)
+	} catch (error) {
+		res.status(500).json({ error: error.message })
+		log(`editBook failed:\t${error.message}`)
+	}
+})
 
 // moder
 app.post('/api/returnbook', async (req, res) => {

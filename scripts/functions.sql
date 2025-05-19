@@ -70,6 +70,60 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql;
 
+-- 	CREATE MODER
+CREATE OR REPLACE FUNCTION create_moder(
+    p_login VARCHAR,
+    p_password TEXT
+)
+RETURNS TABLE(success BOOLEAN, message TEXT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    -- Проверка: логин пуст
+    IF trim(p_login) IS NULL OR trim(p_login) = '' THEN
+        RETURN QUERY SELECT false, 'Логин не может быть пустым.';
+        RETURN;
+    END IF;
+
+    -- Проверка: длина логина
+    IF length(p_login) < 3 OR length(p_login) > 50 THEN
+        RETURN QUERY SELECT false, 'Логин должен содержать от 3 до 50 символов.';
+        RETURN;
+    END IF;
+
+    -- Проверка: допустимые символы в логине
+    IF p_login !~ '^[a-zA-Z0-9_]+$' THEN
+        RETURN QUERY SELECT false, 'Логин может содержать только латинские буквы, цифры и нижнее подчеркивание.';
+        RETURN;
+    END IF;
+
+    -- Проверка: пароль пуст
+    IF trim(p_password) IS NULL OR trim(p_password) = '' THEN
+        RETURN QUERY SELECT false, 'Пароль не может быть пустым.';
+        RETURN;
+    END IF;
+
+    -- Проверка: длина пароля
+    IF length(p_password) < 6 THEN
+        RETURN QUERY SELECT false, 'Пароль должен содержать не менее 6 символов.';
+        RETURN;
+    END IF;
+
+    -- Проверка: существует ли уже пользователь с таким логином
+    IF EXISTS (SELECT 1 FROM users WHERE user_name = p_login) THEN
+        RETURN QUERY SELECT false, 'Пользователь с таким логином уже существует.';
+        RETURN;
+    END IF;
+
+    -- Создание модератора
+    INSERT INTO users(user_name, user_password, user_role)
+    VALUES (p_login, p_password, 'moder');
+
+    RETURN QUERY SELECT true, 'Модератор успешно создан.';
+END;
+$$;
+
+
 --	ADD BOOK - json
 CREATE OR REPLACE FUNCTION add_full_book(book JSON)
 RETURNS BOOLEAN AS $$

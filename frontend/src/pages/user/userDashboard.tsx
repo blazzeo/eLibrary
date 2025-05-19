@@ -16,17 +16,19 @@ export default function UserDashboard() {
 	return (
 		<>
 			<Header />
-			<Routes>
-				<Route path="/" element={
-					<UserBookTable />
-				} />
-				<Route path="/bookshelf" element={
-					<BookShelf books={books?.filter(x => x.loan_status === 0)} />
-				} />
-				<Route path="/wishlist" element={
-					<WishList books={books?.filter(x => x.loan_status === 1)} />
-				} />
-			</Routes>
+			<div className="container my-4">
+				<Routes>
+					<Route path="/" element={
+						<UserBookTable />
+					} />
+					<Route path="/bookshelf" element={
+						<BookShelf books={books?.filter(x => x.loan_status === 0)} />
+					} />
+					<Route path="/wishlist" element={
+						<WishList books={books?.filter(x => x.loan_status === 1)} />
+					} />
+				</Routes>
+			</div>
 		</>
 	)
 }

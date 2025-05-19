@@ -38,19 +38,23 @@ export async function checkAvailableLogin(userLogin: string) {
 
 export async function createUser(user_name: string, user_password: string) {
 	try {
-		const response = await axios.get(
-			SERVER + `/api/createuser`,
-			{
-				params: {
-					login: user_name,
-					password: user_password,
-				},
-			}
+		const response = await axios.post(
+			SERVER + `/api/createuser`, { login: user_name, password: user_password }
 		);
 		return response.data;
 	} catch (error) {
 		console.error(`Error creating user: ${error}`);
 		throw error;
+	}
+}
+
+export async function createModer(name: string, password: string) {
+	try {
+		const response = await axios.post(SERVER + `/api/createmoder`, { login: name, password: password })
+		return response
+	} catch (error) {
+		console.error("Error creating moder: ", error)
+		throw error
 	}
 }
 

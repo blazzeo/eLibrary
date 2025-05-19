@@ -20,32 +20,35 @@ export default function ModerDashboard() {
 	return (
 		<>
 			<Header />
-			<Routes>
-				<Route
-					path="/"
-					element={<ModerBookTable />}
-				/>
-				<Route
-					path="/usercontrol"
-					element={<UserTable />}
-				/>
-				<Route
-					path="/createloan"
-					element={<AddLoanForm />}
-				/>
-				<Route
-					path="/requests"
-					element={<RequestsList />}
-				/>
-				<Route
-					path="/book"
-					element={<BookPageWrapper />}
-				/>
-				<Route
-					path="/user"
-					element={<UserPageWrapper />}
-				/>
-			</Routes>
+
+			<div className="container my-4">
+				<Routes>
+					<Route
+						path="/"
+						element={<ModerBookTable />}
+					/>
+					<Route
+						path="/usercontrol"
+						element={<UserTable />}
+					/>
+					<Route
+						path="/createloan"
+						element={<AddLoanForm />}
+					/>
+					<Route
+						path="/requests"
+						element={<RequestsList />}
+					/>
+					<Route
+						path="/book"
+						element={<BookPageWrapper />}
+					/>
+					<Route
+						path="/user"
+						element={<UserPageWrapper />}
+					/>
+				</Routes>
+			</div>
 		</>
 	)
 }

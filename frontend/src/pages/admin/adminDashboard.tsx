@@ -7,40 +7,31 @@ import BookPageWrapper from "../../components/book/book_page_wrapper";
 import UserPageWrapper from "../../components/user/user_page_wrapper";
 import { useEffect } from "react";
 import { useLibrary } from "../../libraryContext";
+import AddModerForm from "../../components/forms/AddModerForm";
 
 export default function AdminDashboard() {
-	const { refreshUsers, refreshModerBooks } = useLibrary()
+	const { refreshUsers, refreshModerBooks } = useLibrary();
 
 	useEffect(() => {
-		refreshModerBooks()
-		refreshUsers()
-	}, [])
+		refreshModerBooks();
+		refreshUsers();
+	}, []);
 
 	return (
 		<>
 			<Header />
-			<Routes>
-				<Route
-					path="/"
-					element={<AdminBookTable />}
-				/>
-				<Route
-					path="/usercontrol"
-					element={<UserTable />}
-				/>
-				<Route
-					path="/addbook"
-					element={<AddBookForm />}
-				/>
-				<Route
-					path="/book"
-					element={<BookPageWrapper />}
-				/>
-				<Route
-					path="/user"
-					element={<UserPageWrapper />}
-				/>
-			</Routes>
+
+			{/* Ограничиваем ширину и центрируем */}
+			<div className="container my-4">
+				<Routes>
+					<Route path="/" element={<AdminBookTable />} />
+					<Route path="/usercontrol" element={<UserTable />} />
+					<Route path="/addbook" element={<AddBookForm />} />
+					<Route path="/book" element={<BookPageWrapper />} />
+					<Route path="/user" element={<UserPageWrapper />} />
+					<Route path="/createmoder" element={<AddModerForm />} />
+				</Routes>
+			</div>
 		</>
 	);
 }
