@@ -10,26 +10,30 @@ interface Props {
 }
 
 export default function ExtensionCard({ bookInfo }: Props) {
-	const { refreshModerBooks } = useLibrary()
+	const { refreshModerBooks, refreshUsers } = useLibrary()
 	const book = bookInfo;
 
 	const confirm_request = async () => {
 		try {
 			await confirmExtension(book.book.book_id, book.owner.user_id, book.extension_request);
-			await refreshModerBooks();
 			toast.success("Продление подтверждено");
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при подтверждении продления");
+		} finally {
+			refreshModerBooks();
+			refreshUsers();
 		}
 	};
 
 	const reject_request = async () => {
 		try {
 			await rejectExtension(book.book.book_id, book.owner.user_id, book.extension_request);
-			await refreshModerBooks();
 			toast.success("Продление отклонено");
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при отклонении продления");
+		} finally {
+			refreshModerBooks();
+			refreshUsers();
 		}
 	};
 
@@ -40,6 +44,9 @@ export default function ExtensionCard({ bookInfo }: Props) {
 			toast.success(`Книга выдана пользователю ${user_name}`);
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при выдаче книги");
+		} finally {
+			refreshModerBooks();
+			refreshUsers();
 		}
 	};
 
@@ -100,7 +107,7 @@ export default function ExtensionCard({ bookInfo }: Props) {
 
 				{book.wishlist.length > 0 && (
 					<div className="card-body border-top">
-						<h5 className="card-title">Users in Wishlist</h5>
+						<h5 className="card-title">Пользователи ожидают</h5>
 						<div className="row">
 							{book.wishlist.map((wish, index) => (
 								<div key={index} className="col-md-6 mb-3">

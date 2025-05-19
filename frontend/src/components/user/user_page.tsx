@@ -15,18 +15,21 @@ interface Props {
 export default function UserPage({ user }: Props) {
 	const { moderBooks, refreshUsers } = useLibrary()
 	const navigate = useNavigate();
+	const user_role = sessionStorage.getItem('userName')
 
 	if (!user) return <Alert variant="danger" className="mt-3">Пользователь не найден</Alert>;
 
 	const handleDelete = async () => {
 		try {
-			await deleteUser(user.user_name);
+			await deleteUser(user.user_id);
 			toast.success(`Пользователь ${user.user_name} удален`);
-			refreshUsers();
 			navigate('/');
 		} catch (error) {
 			toast.error('Ошибка при удалении пользователя');
+		} finally {
+			refreshUsers();
 		}
+
 	};
 
 	return (
@@ -50,13 +53,13 @@ export default function UserPage({ user }: Props) {
 										</Badge>
 									</div>
 								</div>
-								<Button
+								{user_role == 'admin' && <Button
 									variant="outline-danger"
 									onClick={handleDelete}
 									className="d-flex align-items-center gap-1"
 								>
 									<i className="bi bi-trash"></i> Удалить
-								</Button>
+								</Button>}
 							</div>
 						</Col>
 					</Row>

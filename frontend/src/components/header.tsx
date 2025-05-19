@@ -43,6 +43,9 @@ export default function Header() {
 							{userRole === 'moder' && (
 								<>
 									<li className="nav-item">
+										<Link className="nav-link text-white" to="/usercontrol">Пользователи</Link>
+									</li>
+									<li className="nav-item">
 										<Link className="nav-link text-white" to="/requests">Запросы</Link>
 									</li>
 									<li className="nav-item">

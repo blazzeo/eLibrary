@@ -46,12 +46,12 @@ export function BookShelf({ books }: Props) {
 			try {
 				let user_name = sessionStorage.getItem("userName")!
 				await askExtension(user_name, selectedBookId, new Date(newDate));
-				await refreshBooks();
-				toast.success("Дата возврата успешно обновлена");
+				toast.success("Запрос успешно отправлен");
 			} catch (error) {
 				console.error(error);
-				toast.error("Ошибка при продлении книги");
+				toast.error("Ошибка при отправке запроса");
 			} finally {
+				await refreshBooks();
 				handleCloseModal();
 			}
 		}
@@ -61,6 +61,12 @@ export function BookShelf({ books }: Props) {
 		() => [
 			{ accessorKey: "title", header: "Название", size: 250 },
 			{ accessorKey: "total_pages", header: "Страниц", size: 50 },
+			{
+				accessorKey: "published_date",
+				header: "Дата публикации",
+				size: 50,
+				Cell: ({ cell }) => new Date(cell.getValue() as string).toLocaleDateString(),
+			},
 			{
 				accessorKey: "borrow_date",
 				header: "Дата получения",
@@ -74,12 +80,6 @@ export function BookShelf({ books }: Props) {
 				Cell: ({ cell }) => new Date(cell.getValue() as string).toLocaleDateString(),
 			},
 			{
-				accessorKey: "published_date",
-				header: "Дата публикации",
-				size: 50,
-				Cell: ({ cell }) => new Date(cell.getValue() as string).toLocaleDateString(),
-			},
-			{
 				accessorKey: "loan_status",
 				header: "Действие",
 				size: 50,
@@ -88,7 +88,7 @@ export function BookShelf({ books }: Props) {
 						className="btn btn-primary"
 						onClick={() => handleOpenModal(row.original.book_id!)}
 					>
-						Продлить
+						Запрос на продление
 					</button>
 				),
 			},

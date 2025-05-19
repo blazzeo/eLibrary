@@ -13,21 +13,24 @@ import {
 	Col
 } from "react-bootstrap";
 import { BookData, BookInfo } from "../structs";
-import { addLoan, confirmExtension, editBook, rejectExtension } from "../api/DatabaseAPI";
+import { addLoan, confirmExtension, deleteBook, editBook, rejectExtension } from "../api/DatabaseAPI";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../libraryContext";
-// import { format } from 'date-fns';
+import { useNavigate } from "react-router";
 
 interface Props {
 	bookInfo: BookInfo;
 }
 
 export default function BookPage({ bookInfo }: Props) {
+	const navigate = useNavigate()
+	const user_role = sessionStorage.getItem('userName')
 	const { refreshModerBooks } = useLibrary();
 	const { book, owner, extension_request, wishlist } = bookInfo;
 
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [showLoanModal, setShowLoanModal] = useState(false);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [selectedUser, setSelectedUser] = useState('');
 	const [returnDate, setReturnDate] = useState('');
 
@@ -73,34 +76,51 @@ export default function BookPage({ bookInfo }: Props) {
 		setShowEditModal(false);
 	};
 
+	const handle_delete = async () => {
+		try {
+			await deleteBook(book.book_id)
+			toast.success('Книга успешно удалена')
+			setShowDeleteModal(false);
+			navigate('/')
+		} catch (error) {
+			toast.error('Ошибка при удалении книги')
+		} finally {
+			refreshModerBooks()
+		}
+	}
+
 	const confirm_request = async () => {
 		try {
 			await confirmExtension(book.book_id, owner.user_id, extension_request);
-			refreshModerBooks();
 			toast.success('Продление подтверждено');
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || 'Ошибка при подтверждении продления');
+		} finally {
+			refreshModerBooks();
 		}
+
 	};
 
 	const reject_request = async () => {
 		try {
 			await rejectExtension(book.book_id, owner.user_id, extension_request);
-			refreshModerBooks();
 			toast.success('Продление отклонено');
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || 'Ошибка при отклонении продления');
+		} finally {
+			refreshModerBooks();
 		}
 	};
 
 	const handle_borrow = async () => {
 		try {
 			await addLoan(selectedUser, book.book_id, new Date(returnDate));
-			refreshModerBooks();
-			setShowLoanModal(false);
 			toast.success(`Книга выдана пользователю ${selectedUser}`);
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || 'Ошибка при выдаче книги');
+		} finally {
+			setShowLoanModal(false);
+			refreshModerBooks();
 		}
 	};
 
@@ -135,13 +155,23 @@ export default function BookPage({ bookInfo }: Props) {
 									</div>
 								</div>
 
-								<Button
-									variant="outline-primary"
-									size="sm"
-									onClick={() => setShowEditModal(true)}
-								>
-									<i className="bi bi-pencil"></i> Редактировать
-								</Button>
+								{user_role == 'admin' && <div>
+									<Button
+										variant="outline-danger"
+										size="sm"
+										onClick={() => setShowDeleteModal(true)}
+									>
+										<i className="bi bi-trash"></i> Удалить
+									</Button>
+
+									<Button
+										variant="outline-primary"
+										size="sm"
+										onClick={() => setShowEditModal(true)}
+									>
+										<i className="bi bi-pencil"></i> Редактировать
+									</Button>
+								</div>}
 							</div>
 
 							<Row className="g-3 mb-3">
@@ -400,6 +430,24 @@ export default function BookPage({ bookInfo }: Props) {
 					</Button>
 				</Modal.Footer>
 			</Modal>
+
+			<Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+				<Modal.Header closeButton>
+					<Modal.Title>Подтверждение удаления</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					Вы уверены, что хотите удалить книгу <strong>{book.title}</strong>?
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+						Отмена
+					</Button>
+					<Button variant="danger" onClick={handle_delete}>
+						Удалить
+					</Button>
+				</Modal.Footer>
+			</Modal>
+
 		</div>
 	);
 }

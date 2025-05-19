@@ -4,9 +4,14 @@ import { BookShelf } from "./userBookShelf";
 import UserBookTable from "./userBookTable";
 import { WishList } from "./userWishlist";
 import { useLibrary } from "../../libraryContext";
+import { useEffect } from "react";
 
 export default function UserDashboard() {
-	const { books } = useLibrary()
+	const { books, refreshBooks } = useLibrary()
+
+	useEffect(() => {
+		refreshBooks()
+	}, [])
 
 	return (
 		<>

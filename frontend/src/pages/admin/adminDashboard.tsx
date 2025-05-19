@@ -32,7 +32,10 @@ export default function AdminDashboard() {
 					path="/addbook"
 					element={<AddBookForm />}
 				/>
-				<Route path="/book" element={<BookPageWrapper />} />
+				<Route
+					path="/book"
+					element={<BookPageWrapper />}
+				/>
 				<Route
 					path="/user"
 					element={<UserPageWrapper />}

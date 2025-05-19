@@ -98,10 +98,10 @@ export async function getGenres() {
 	}
 }
 
-export async function deleteUser(user_name) {
+export async function deleteUser(user_id) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('select * delete_user($1);', [user_name])
+		const result = await admin.query('select delete_user($1);', [user_id])
 		return result.rows
 	} catch (err) {
 		throw err
@@ -111,7 +111,7 @@ export async function deleteUser(user_name) {
 export async function deleteBook(book_id) {
 	try {
 		const admin = dbadmin(5432)
-		const result = await admin.query('select * from delete_book($1);', [book_id])
+		const result = await admin.query('select delete_book($1);', [book_id])
 		return result.rows
 	} catch (err) {
 		console.log(err)

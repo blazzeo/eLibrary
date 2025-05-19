@@ -170,9 +170,9 @@ export async function getUsers() {
 	}
 }
 
-export async function deleteUser(userName: string) {
+export async function deleteUser(user_id: number) {
 	try {
-		const response = await axios.post(SERVER + `/api/deleteuser`, { user_name: userName })
+		const response = await axios.delete(SERVER + `/api/deleteuser/${user_id}`)
 		return response.data
 	} catch (error) {
 		console.error(error);
@@ -202,7 +202,7 @@ export async function editBook(book: BookData) {
 
 export async function deleteBook(book_id: number) {
 	try {
-		const response = await axios.post(SERVER + '/api/deletebook', { book_id: book_id })
+		const response = await axios.delete(SERVER + `/api/deletebook/${book_id}`)
 		return response.data
 	} catch (error) {
 		console.log("DELETE ERROR")

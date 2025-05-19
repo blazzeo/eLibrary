@@ -43,10 +43,12 @@ app.post('/api/addbook', async (req, res) => {
 	}
 })
 
-app.post('/api/deletebook', async (req, res) => {
+app.delete('/api/deletebook/:book_id', async (req, res) => {
 	try {
-		const book_id = req.body.book_id
-		const result = await db_request.deleteBook(Number(book_id))
+		const book_id = parseInt(req.params.book_id, 10)
+		console.log(book_id)
+		const result = await db_request.deleteBook(book_id)
+
 		res.json(result)
 		log(`deleteBook success:\tBook:\t{${book_id}}`)
 	} catch (error) {
@@ -77,12 +79,14 @@ app.get('/api/getusers', async (_req, res) => {
 	}
 })
 
-app.post('/api/deleteuser', async (req, res) => {
+app.delete('/api/deleteuser/:user_id', async (req, res) => {
 	try {
-		const user_name = req.body.user_name
-		const result = await db_request.deleteUser(user_name)
+		const user_id = req.params.user_id
+		console.log(user_id)
+		const result = await db_request.deleteUser(user_id)
+
 		res.json(result)
-		log(`deleteUser success:\tUser:\t{${user_name}}`)
+		log(`deleteUser success:\tUser:\t{${user_id}}`)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 		log(`deleteUser failed:\t${error.message}`)
