@@ -746,6 +746,81 @@ BEGIN
 END;
 $$;
 
+create or replace function get_user(p_user_name varchar)
+RETURNS TABLE(
+    user_id INT,
+    user_name VARCHAR,
+    user_role varchar,
+    registration_date date,
+    loans json_agg,
+    wishlist json_agg,
+    extension_request json_agg
+) AS $$
+BEGIN
+SELECT
+    u.user_id,
+    u.user_name,
+    u.user_role,
+    u.registration_date,
+    (
+        SELECT json_agg(json_build_object(
+            'book_id', bl.book_id,
+            'borrow_date', bl.borrow_date,
+            'return_date', bl.return_date
+        )) FROM book_loans bl
+        WHERE bl.user_id = u.user_id
+    ) AS loans,
+    (
+        SELECT json_agg(json_build_object(
+            'book_id', wl.book_id,
+            'request_date', wl.request_date
+        )) FROM wishlist wl
+        WHERE wl.user_id = u.user_id
+    ) AS wishlist,
+    (
+        SELECT json_agg(json_build_object(
+            'book_id', er.book_id,
+            'request_date', er.request_date
+        )) FROM extention_requests er
+        WHERE er.user_id = u.user_id
+    ) AS extension_requests
+FROM users u
+where u.user_name = ;
+END;
+$$ LANGUAGE plpgsql;
+
+create or replace procedure update_password(p_user_name varchar, p_new_password text)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_user_id INTEGER;
+BEGIN
+    -- Get user ID
+    SELECT u.user_id
+    INTO v_user_id
+    FROM users u
+    WHERE u.user_name = p_user_name;
+
+    -- Check if there is already request
+    SELECT EXISTS (
+        SELECT 1
+        FROM extention_requests er
+        WHERE er.book_id = p_book_id AND er.user_id = v_user_id
+    )
+    INTO req_exists;
+
+    IF req_exists THEN
+        -- There IS request: update date
+        UPDATE extention_requests
+        SET request_date = p_request_date
+        WHERE book_id = p_book_id AND user_id = v_user_id;
+    ELSE
+        -- No request: insert new one
+        INSERT INTO extention_requests(user_id, book_id, request_date)
+        VALUES (v_user_id, p_book_id, p_request_date);
+    END IF;
+END;
+$$;
 
 
 --  GET BOOKS + USER's BOOKSHELF

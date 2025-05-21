@@ -7,8 +7,10 @@ import {
 import { BookData } from "../../components/structs";
 import { toggleWishlist } from "../../components/api/DatabaseAPI";
 import { useLibrary } from "../../libraryContext";
+import { useNavigate } from "react-router";
 
 export default function UserBookTable() {
+	const navigate = useNavigate()
 	const { books, refreshBooks } = useLibrary()
 
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
@@ -88,14 +90,26 @@ export default function UserBookTable() {
 						);
 					} else if (loanStatus === 1) {
 						return (
-							<button className="btn btn-danger" onClick={handleWishlist}>
-								Убрать из желаемого
+							<button
+								className="btn btn-danger"
+								onClick={(e) => {
+									e.stopPropagation(); // предотвращает клик по строке
+									handleWishlist();
+								}}
+							>
+								Удалить из желаемое
 							</button>
 						);
 					}
 					else {
 						return (
-							<button className="btn btn-success" onClick={handleWishlist}>
+							<button
+								className="btn btn-success"
+								onClick={(e) => {
+									e.stopPropagation(); // предотвращает клик по строке
+									handleWishlist();
+								}}
+							>
 								Добавить в желаемое
 							</button>
 						);
@@ -109,6 +123,20 @@ export default function UserBookTable() {
 	const table = useMaterialReactTable<BookData>({
 		columns,
 		data: books!,
+
+		// 👇 Добавляем поведение клика по строке
+		muiTableBodyRowProps: ({ row }) => ({
+			onClick: () => {
+				const bookId = row.original.book_id;
+				navigate(`/book?id=${bookId}`);
+			},
+			sx: {
+				cursor: "pointer",
+				'&:hover': {
+					backgroundColor: '#f0f0f0',
+				},
+			},
+		}),
 	});
 
 	return <MaterialReactTable table={table} />;

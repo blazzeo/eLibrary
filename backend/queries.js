@@ -11,6 +11,16 @@ export async function checkLogin(userLogin) {
 	}
 }
 
+export async function getUser(user_id) {
+	try {
+		const admin = dbadmin(5432)
+		const result = await admin.query('SELECT get_user($1);', [user_id])
+		return result.rows[0]
+	} catch (error) {
+		throw err
+	}
+}
+
 export async function authenticate(userLogin, userPassword) {
 	try {
 		const admin = dbadmin(5432)

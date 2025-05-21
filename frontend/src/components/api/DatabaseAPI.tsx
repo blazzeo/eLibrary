@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { BookData } from "../structs";
+import { BookData, UserData } from "../structs";
 
 const SERVER = 'http://localhost:3000'
 
@@ -18,6 +18,30 @@ export async function authenticate(user_name: string, user_password: string) {
 	} catch (error) {
 		console.error(`Error checking user: ${error}`);
 		throw error;
+	}
+}
+
+export async function getUser(user_name: string) {
+	try {
+		const response = await axios.get(SERVER + `/api/users/user=${user_name}`)
+		return response.data
+	} catch (error) {
+		console.error("Error get user: ", error)
+		throw error
+	}
+}
+
+export async function updateUser(user_name: string, user: UserData) {
+	try {
+		const response = await axios.put(SERVER + `/api/users/user=${user_name}`, user, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		return response.data
+	} catch (error) {
+		console.error("Error updating user: ", error)
+		throw error
 	}
 }
 

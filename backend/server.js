@@ -43,10 +43,9 @@ app.post('/api/addbook', async (req, res) => {
 	}
 })
 
-app.delete('/api/deletebook/:book_id', async (req, res) => {
+app.delete('/api/books/:book_id', async (req, res) => {
 	try {
 		const book_id = parseInt(req.params.book_id, 10)
-		console.log(book_id)
 		const result = await db_request.deleteBook(book_id)
 
 		res.json(result)
@@ -54,6 +53,19 @@ app.delete('/api/deletebook/:book_id', async (req, res) => {
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 		log(`deleteBook failed:\t${error.message}`)
+	}
+})
+
+app.get('/api/users/:user_id', async (req, res) => {
+	try {
+		const user_id = parseInt(req.params.user_id, 10)
+		const result = await db_request.getUser(user_id)
+
+		res.json(result)
+		log('/users/ get-method success')
+	} catch (error) {
+		res.status(500).statusMessage(error.message)
+		log(`/users/ get-method failed:\t${error.message}`)
 	}
 })
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { authenticate } from "../api/DatabaseAPI";
+import { toast } from "react-toastify";
 
 interface Props {
 	authorizeCallback: (user_name: string, user_role: string) => void;
@@ -12,31 +13,23 @@ const user_roles = ['user', 'admin', 'moder']
 const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [isLoading, setLoading] = useState(false);
-	const [error, setError] = useState<string | null>(null);
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
-		setError(null); // Clear any previous error messages
 
 		try {
-			setLoading(true);
 			const userRole = await authenticate(username, password);
-			setLoading(false);
-			if (user_roles.includes(userRole.result)) {
+			if (user_roles.includes(userRole.result))
 				authorizeCallback(username, userRole.result);
-			} else {
-				console.error(userRole)
-				setError("User not found. Please check your credentials.")
-				throw "User not found."
-			}
+			else
+				throw "User not found"
+
+			toast.success("Вход выполнен успешно")
 		} catch (err) {
 			console.error("Error checking user:", err);
-			setError("User not found.");
+			toast.error("Пользователь не был найден. Пожалуйста, проверьте учетные данные.")
 		}
 		setTimeout(() => {
-			setError(null);
-			setLoading(false);
 		}, 3000);
 	};
 
@@ -72,23 +65,15 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 						required
 					/>
 				</div>
-				{error && <div className="alert alert-danger">{error}</div>}
 				<button type="submit" className="btn btn-primary w-100">
 					Войти
 				</button>
 			</form>
 			<div className="mt-3 text-center">
-				<button onClick={() => noAccountCallback()}>
+				<button className="btn btn-secondary" onClick={() => noAccountCallback()}>
 					Нет аккаунта? Создать аккаунт.
 				</button>
 			</div>
-			{isLoading ? (
-				<div className="d-flex justify-content-center absolute">
-					<div className="spinner-border" role="status">
-						<span className="visually-hidden">Loading...</span>
-					</div>
-				</div>
-			) : null}
 		</div>
 	);
 };

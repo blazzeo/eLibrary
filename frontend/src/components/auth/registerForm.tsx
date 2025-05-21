@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { checkAvailableLogin, createUser } from "../api/DatabaseAPI";
+import { toast } from "react-toastify";
 
 interface Props {
 	createAccountCallback: () => void;
 }
 
 const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
-	const [isLoading, setLoading] = useState(false);
-	const [error, setError] = useState<string | null>(null);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -16,33 +15,25 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 
-		setLoading(true);
-		setError(null)
-		const loginAvailable = await checkAvailableLogin(username);
+		try {
+			const loginAvailable = await checkAvailableLogin(username);
 
-		if (!loginAvailable.result) {
-			setError("Username isn't available.");
-			setLoading(false)
-			return;
+			if (!loginAvailable.result)
+				throw "Логин уже занят"
+
+			if (password !== confirmPassword)
+				throw "Пароли должны совпадать"
+
+			const canCreate = await createUser(username, password);
+
+			if (!canCreate.result)
+				throw "Пользователь не может быть создан"
+
+			createAccountCallback();
+		} catch (error) {
+			console.error(error)
+			toast.error(`Ошибка при регистрации пользователя:\n ${error}.`)
 		}
-		setLoading(false);
-
-		if (password !== confirmPassword) {
-			setError("Passwords don't match.");
-			return;
-		}
-
-		setLoading(true);
-		const canCreate = await createUser(username, password);
-
-		if (!canCreate.result) {
-			setError("Creating account failed.");
-			setLoading(false)
-			return;
-		}
-		setLoading(false);
-
-		createAccountCallback();
 	};
 
 	return (
@@ -94,20 +85,12 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 				<button type="submit" className="btn btn-primary w-100">
 					Зарегистрироваться
 				</button>
-				{error && <div className="alert alert-danger">{error}</div>}
 			</form>
 			<div className="mt-3 text-center">
-				<button onClick={() => createAccountCallback()}>
+				<button className="btn btn-secondary" onClick={() => createAccountCallback()}>
 					Уже есть аккаунт? Авторизоваться.
 				</button>
 			</div>
-			{isLoading ? (
-				<div className="d-flex justify-content-center absolute">
-					<div className="spinner-border" role="status">
-						<span className="visually-hidden">Loading...</span>
-					</div>
-				</div>
-			) : null}
 		</div>
 	);
 };
