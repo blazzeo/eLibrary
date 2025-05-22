@@ -1,29 +1,28 @@
-import axios, { AxiosResponse } from "axios";
+import type { AxiosResponse } from "axios";
+import axios from '../auth/axiosInstanse'
 import { BookData, UserData } from "../structs";
 
 const SERVER = 'http://localhost:3000'
 
 export async function authenticate(user_name: string, user_password: string) {
 	try {
-		const response = await axios.get(
-			SERVER + `/api/authenticate`,
-			{
-				params: {
-					login: user_name,
-					password: user_password,
-				},
-			}
-		);
-		return response.data;
+		const response = await axios.post(`${SERVER}/api/authenticate`, {
+			login: user_name,
+			password: user_password,
+		});
+
+		const { token } = response.data;
+		localStorage.setItem("token", token); // или cookie
+		return token;
 	} catch (error) {
-		console.error(`Error checking user: ${error}`);
+		console.error("Auth failed:", error);
 		throw error;
 	}
 }
 
 export async function getUser(user_name: string) {
 	try {
-		const response = await axios.get(SERVER + `/api/users/user=${user_name}`)
+		const response = await axios.get(SERVER + `/api/users/${user_name}`)
 		return response.data
 	} catch (error) {
 		console.error("Error get user: ", error)
@@ -33,7 +32,7 @@ export async function getUser(user_name: string) {
 
 export async function updateUser(user_name: string, user: UserData) {
 	try {
-		const response = await axios.put(SERVER + `/api/users/user=${user_name}`, user, {
+		const response = await axios.put(SERVER + `/api/users/${user_name}`, user, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -63,7 +62,7 @@ export async function checkAvailableLogin(userLogin: string) {
 export async function createUser(user_name: string, user_password: string) {
 	try {
 		const response = await axios.post(
-			SERVER + `/api/createuser`, { login: user_name, password: user_password }
+			SERVER + `/api/register`, { login: user_name, password: user_password }
 		);
 		return response.data;
 	} catch (error) {
@@ -82,14 +81,12 @@ export async function createModer(name: string, password: string) {
 	}
 }
 
-export async function getBooks(username: string | null) {
+export async function getBooks(username: string | null): Promise<BookData[]> {
 	try {
-		if (username === null)
-			throw "invalid username"
+		if (!username)
+			throw new Error("Invalid username");
 
-		const response: AxiosResponse<BookData[]> = await axios.get(
-			SERVER + `/api/getbooks?username=${username}`
-		);
+		const response: AxiosResponse<BookData[]> = await axios.get(`/api/books/${encodeURIComponent(username)}`);
 
 		return response.data;
 	} catch (error) {
@@ -100,23 +97,19 @@ export async function getBooks(username: string | null) {
 
 export async function getModerBooks() {
 	try {
-		const response = await axios.get(SERVER + '/api/getmoderbooks')
-		// console.log(response.data.result)
+		const response = await axios.get(SERVER + '/api/moderbooks')
 		return response.data.result
 	} catch (error) {
 		console.error("Error on getting moder books: ", error)
+		throw error;
 	}
 }
 
 export async function addBook(book: BookData) {
 	try {
-		console.log("ADD BOOK");
-
-		const response = await axios.post(SERVER + `/api/addbook`, { book: book })
+		const response = await axios.post(SERVER + `/api/books`, { book: book })
 		return response.data
 	} catch (error) {
-		console.log("failed add book");
-
 		console.error(error)
 		throw error
 	}
@@ -126,7 +119,7 @@ export async function addLoan(username: string | null, bookId: number | null, da
 	try {
 		if (username === null || bookId === null)
 			throw 'invalid username or bookid'
-		const response = await axios.post(SERVER + `/api/addloan`, { user_name: username, book_id: bookId, return_date: date })
+		const response = await axios.post(SERVER + `/api/loans`, { user_name: username, book_id: bookId, return_date: date })
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -158,7 +151,7 @@ export async function askExtension(userName: string, bookId: number, request_dat
 
 export async function extentLoan(userName: string, bookId: number, newDate: Date) {
 	try {
-		const response = await axios.put(SERVER + `/api/extentloan`, { user_name: userName, book_id: bookId, new_date: newDate })
+		const response = await axios.put(SERVER + `/api/loans`, { user_name: userName, book_id: bookId, new_date: newDate })
 		return response.data
 	} catch (error) {
 		console.error(error)
@@ -190,7 +183,7 @@ export async function rejectExtension(bookId: number, userId: number, requestDat
 
 export async function getUsers() {
 	try {
-		const response = await axios.get(SERVER + `/api/getusers`);
+		const response = await axios.get(SERVER + `/api/users`);
 		return response.data;
 	} catch (error) {
 		console.error(error);
@@ -200,7 +193,7 @@ export async function getUsers() {
 
 export async function deleteUser(user_id: number) {
 	try {
-		const response = await axios.delete(SERVER + `/api/deleteuser/${user_id}`)
+		const response = await axios.delete(SERVER + `/api/users/${user_id}`)
 		return response.data
 	} catch (error) {
 		console.error(error);
@@ -210,7 +203,7 @@ export async function deleteUser(user_id: number) {
 
 export async function getLoans() {
 	try {
-		const response = await axios.get(SERVER + '/api/getloans')
+		const response = await axios.get(SERVER + '/api/loans')
 		return response.data
 	} catch (error) {
 		console.error(error);
@@ -220,7 +213,7 @@ export async function getLoans() {
 
 export async function editBook(book: BookData) {
 	try {
-		const response = await axios.post(SERVER + '/api/editbook', { book: book })
+		const response = await axios.put(SERVER + '/api/books', { book: book })
 		return response.data
 	} catch (error) {
 		console.error(error);
@@ -233,7 +226,6 @@ export async function deleteBook(book_id: number) {
 		const response = await axios.delete(SERVER + `/api/deletebook/${book_id}`)
 		return response.data
 	} catch (error) {
-		console.log("DELETE ERROR")
 		console.error(error);
 		throw error;
 	}
@@ -244,10 +236,7 @@ export async function toggleWishlist(user_name: string, book_id: number) {
 		const response = await axios.post(SERVER + '/api/togglewishlist', { user_name: user_name, book_id: book_id })
 		return response.data
 	} catch (error) {
-		console.log("toggle wishlist error: ", error)
 		console.error(error);
 		throw error;
 	}
 }
-
-

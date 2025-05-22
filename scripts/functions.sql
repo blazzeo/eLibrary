@@ -746,6 +746,7 @@ BEGIN
 END;
 $$;
 
+--	GET USER
 create or replace function get_user(p_user_name varchar)
 RETURNS TABLE(
     user_id INT,

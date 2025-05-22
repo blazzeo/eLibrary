@@ -2,36 +2,29 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { authenticate } from "../api/DatabaseAPI";
 import { toast } from "react-toastify";
+import { parseJwt } from "./authContext";
+import { useLibrary } from "../../libraryContext";
 
 interface Props {
-	authorizeCallback: (user_name: string, user_role: string) => void;
 	noAccountCallback: () => void;
 }
 
-const user_roles = ['user', 'admin', 'moder']
-
-const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) => {
+const LoginForm: React.FC<Props> = ({ noAccountCallback }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const { setAuthToken } = useLibrary();
 
-	const handleSubmit = async (event: React.FormEvent) => {
-		event.preventDefault();
-
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 		try {
-			const userRole = await authenticate(username, password);
-			if (user_roles.includes(userRole.result))
-				authorizeCallback(username, userRole.result);
-			else
-				throw "User not found"
-
-			toast.success("Вход выполнен успешно")
+			const response = await authenticate(username, password);
+			const token = response;
+			setAuthToken(token);
+			toast.success("Вход выполнен успешно");
 		} catch (err) {
-			console.error("Error checking user:", err);
-			toast.error("Пользователь не был найден. Пожалуйста, проверьте учетные данные.")
+			toast.error("Ошибка входа");
 		}
-		setTimeout(() => {
-		}, 3000);
-	};
+	}
 
 	return (
 		<div className="w-25 container-sm mt-5">
@@ -44,7 +37,7 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 					<input
 						type="text"
 						className="form-control"
-						placeholder="Enter your username"
+						placeholder="Введите логин"
 						id="username"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
@@ -58,7 +51,7 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 					<input
 						type="password"
 						className="form-control"
-						placeholder="Enter your password"
+						placeholder="Введите пароль"
 						id="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
@@ -70,7 +63,7 @@ const LoginForm: React.FC<Props> = ({ authorizeCallback, noAccountCallback }) =>
 				</button>
 			</form>
 			<div className="mt-3 text-center">
-				<button className="btn btn-secondary" onClick={() => noAccountCallback()}>
+				<button className="btn btn-secondary" onClick={noAccountCallback}>
 					Нет аккаунта? Создать аккаунт.
 				</button>
 			</div>

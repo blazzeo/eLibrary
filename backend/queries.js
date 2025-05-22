@@ -1,5 +1,6 @@
 import { dbuser, dbadmin, dbmoder } from './db_roles.js'
 import { verify_password, hash_password } from './auth.js'
+import bcrypt from 'bcrypt'
 
 export async function checkLogin(userLogin) {
 	try {
@@ -23,18 +24,22 @@ export async function getUser(user_id) {
 
 export async function authenticate(userLogin, userPassword) {
 	try {
-		const admin = dbadmin(5432)
-		const res = await admin.query(`
-			SELECT user_password, user_role 
-			from users
-			where user_name = $1;`, [userLogin])
+		const db = dbadmin(5432);
+		const res = await db.query(`
+			SELECT user_id, user_password, user_role 
+			FROM users
+			WHERE user_name = $1
+		`, [userLogin]);
 
-		if (res.rowCount == 0)
-			throw "No such user found"
-		const result = await verify_password(userPassword, res.rows[0].user_password)
-		return result ? res.rows[0].user_role : result
+		if (res.rowCount === 0) return false;
+
+		const isPasswordValid = await bcrypt.compare(userPassword, res.rows[0].user_password);
+		return isPasswordValid ? {
+			id: res.rows[0].user_id,
+			role: res.rows[0].user_role
+		} : false;
 	} catch (err) {
-		throw err
+		throw err;
 	}
 }
 

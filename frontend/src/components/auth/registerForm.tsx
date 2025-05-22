@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { checkAvailableLogin, createUser } from "../api/DatabaseAPI";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
-interface Props {
-	createAccountCallback: () => void;
-}
-
-const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
+const RegisterForm = () => {
+	const navigate = useNavigate()
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,8 +26,6 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 
 			if (!canCreate.result)
 				throw "Пользователь не может быть создан"
-
-			createAccountCallback();
 		} catch (error) {
 			console.error(error)
 			toast.error(`Ошибка при регистрации пользователя:\n ${error}.`)
@@ -87,7 +83,7 @@ const RegisterForm: React.FC<Props> = ({ createAccountCallback }: Props) => {
 				</button>
 			</form>
 			<div className="mt-3 text-center">
-				<button className="btn btn-secondary" onClick={() => createAccountCallback()}>
+				<button className="btn btn-secondary" onClick={() => navigate('/login')}>
 					Уже есть аккаунт? Авторизоваться.
 				</button>
 			</div>

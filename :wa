@@ -1,0 +1,12 @@
+import LoginForm from "../components/auth/loginForm";
+import RegisterForm from "../components/auth/registerForm";
+import { useState } from "react";
+
+export function LoginPage() {
+	return (
+		<LoginForm
+			authorizeCallback={authorize}
+			noAccountCallback={() => setNoAccount(!noAccount)}
+		/>
+	);
+}

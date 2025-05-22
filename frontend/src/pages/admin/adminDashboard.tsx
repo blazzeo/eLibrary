@@ -10,11 +10,10 @@ import { useLibrary } from "../../libraryContext";
 import AddModerForm from "../../components/forms/AddModerForm";
 
 export default function AdminDashboard() {
-	const { refreshUsers, refreshModerBooks } = useLibrary();
+	const { refreshAll } = useLibrary();
 
 	useEffect(() => {
-		refreshModerBooks();
-		refreshUsers();
+		refreshAll()
 	}, []);
 
 	return (

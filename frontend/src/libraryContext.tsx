@@ -1,25 +1,21 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import {
 	getBooks,
 	getUsers,
-	addBook,
-	deleteBook,
 	getModerBooks,
-} from "./components/api/DatabaseAPI"; // поправь путь при необходимости
+	getUser,
+} from "./components/api/DatabaseAPI";
 import { BookData, BookInfo, UserData } from "./components/structs";
+import { parseJwt } from "./components/auth/authContext";
 
 interface LibraryContextType {
 	books: BookData[] | null;
 	users: UserData[] | null;
+	user: UserData | null;
+	user_role: string | null;
 	moderBooks: BookInfo[] | null;
-	refreshBooks: () => Promise<void>;
-	refreshUsers: () => Promise<void>;
-	refreshModerBooks: () => Promise<void>;
-
-	// Обновление с перезапросом
-	addBookAndRefresh: (book: BookData) => Promise<void>;
-	deleteBookAndRefresh: (bookId: number) => Promise<void>;
-	// и другие
+	refreshAll: () => Promise<void>;
+	setAuthToken: (token: string | null) => void;
 }
 
 const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
@@ -33,65 +29,80 @@ export const useLibrary = () => {
 export const LibraryProvider = ({ children }: { children: React.ReactNode }) => {
 	const [books, setBooks] = useState<BookData[] | null>(null);
 	const [users, setUsers] = useState<UserData[] | null>(null);
+	const [user, setUser] = useState<UserData | null>(null);
+	const [user_role, setRole] = useState<string | null>(null);
 	const [moderBooks, setModerBooks] = useState<BookInfo[] | null>(null);
+	const [token, setToken] = useState<string | null>(() => sessionStorage.getItem("token"));
 
-	const refreshBooks = async () => {
+	const refreshAll = useCallback(async () => {
+		if (!token) {
+			// Сброс данных
+			setBooks(null);
+			setUsers(null);
+			setUser(null);
+			setRole(null);
+			setModerBooks(null);
+			return;
+		}
+
 		try {
-			const user_name = sessionStorage.getItem("userName")
-			const fetchedBooks = await getBooks(user_name); // или текущий username
+			const payload = parseJwt(token);
+			setRole(payload.role);
+
+			// Для всех грузим книги и текущего пользователя
+			const fetchedBooks = await getBooks(payload.user_name);
+			const fetchedUser = await getUser(payload.user_name);
 			setBooks(fetchedBooks);
-		} catch (err) {
-			console.error("Ошибка загрузки книг", err);
-		}
-	};
+			setUser(fetchedUser);
 
-	const refreshUsers = async () => {
-		try {
-			const fetchedUsers = await getUsers();
-			setUsers(fetchedUsers);
-		} catch (err) {
-			console.error("Ошибка загрузки пользователей", err);
+			if (payload.role === "admin" || payload.role === "moder") {
+				// Дополнительные данные для модераторов и админов
+				const [fetchedUsers, fetchedModerBooks] = await Promise.all([
+					getUsers(),
+					getModerBooks(),
+				]);
+				setUsers(fetchedUsers);
+				setModerBooks(fetchedModerBooks);
+			} else {
+				// Для обычных пользователей очищаем эти данные
+				setUsers(null);
+				setModerBooks(null);
+			}
+		} catch (error) {
+			console.error("Ошибка при обновлении данных", error);
+			setToken(null);
+			sessionStorage.removeItem("token");
 		}
-	};
+	}, [token]);
 
-	const refreshModerBooks = async () => {
-		try {
-			const fetchedModerBooks = await getModerBooks();
-			setModerBooks(fetchedModerBooks);
-		} catch (err) {
-			console.error("Ошибка загрузки книг модератора", err);
-		}
-	}
-
+	// При изменении токена — обновляем данные
 	useEffect(() => {
-		refreshBooks();
-		refreshUsers();
-		refreshModerBooks();
-	}, []);
+		refreshAll();
+	}, [refreshAll]);
 
-	// Обертки с обновлением
-	const addBookAndRefresh = async (book: BookData) => {
-		await addBook(book);
-		await refreshModerBooks();
+	// Функция установки токена и сохранения в sessionStorage
+	const setAuthToken = (newToken: string | null) => {
+		if (newToken) {
+			sessionStorage.setItem("token", newToken);
+			let parsed_token = parseJwt(newToken)
+			console.log(parsed_token)
+			setRole(parsed_token.role)
+		} else {
+			sessionStorage.removeItem("token");
+		}
+		setToken(newToken);
 	};
-
-	const deleteBookAndRefresh = async (bookId: number) => {
-		await deleteBook(bookId);
-		await refreshModerBooks();
-	};
-
 
 	return (
 		<LibraryContext.Provider
 			value={{
 				books,
+				user_role,
+				user,
 				users,
 				moderBooks,
-				refreshBooks,
-				refreshUsers,
-				refreshModerBooks,
-				addBookAndRefresh,
-				deleteBookAndRefresh,
+				refreshAll,
+				setAuthToken,
 			}}
 		>
 			{children}
