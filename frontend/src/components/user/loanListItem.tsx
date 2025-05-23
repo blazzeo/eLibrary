@@ -10,7 +10,7 @@ interface LoanListItemProps {
 }
 
 export const LoanListItem = ({ book }: LoanListItemProps) => {
-	const { refreshModerBooks, refreshUsers } = useLibrary();
+	const { refreshAll } = useLibrary();
 	const [showModal, setShowModal] = useState(false);
 	const [newDate, setNewDate] = useState(
 		book.owner?.return_date || new Date().toISOString().slice(0, 10)
@@ -20,8 +20,7 @@ export const LoanListItem = ({ book }: LoanListItemProps) => {
 		try {
 			await extentLoan(book.owner.user_name, book.book.book_id, newDate);
 			console.log()
-			await refreshModerBooks();
-			await refreshUsers()
+			await refreshAll()
 			toast.success('Бронь успешно обновлена')
 			setShowModal(false);
 		} catch (err) {
@@ -35,8 +34,7 @@ export const LoanListItem = ({ book }: LoanListItemProps) => {
 		try {
 			await returnBook(book.book.book_id);
 			console.log('returnBook done');
-			await refreshModerBooks();
-			await refreshUsers()
+			await refreshAll();
 			toast.success('Бронь успешно аннулирована')
 			console.log('refreshModerBooks done');
 		} catch (err) {

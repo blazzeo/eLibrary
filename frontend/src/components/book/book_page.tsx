@@ -24,8 +24,7 @@ interface Props {
 
 export default function BookPage({ bookInfo }: Props) {
 	const navigate = useNavigate()
-	const user_role = sessionStorage.getItem('userName')
-	const { refreshModerBooks, users } = useLibrary();
+	const { refreshAll, users, user_role } = useLibrary();
 	const { book, owner, extension_request, wishlist } = bookInfo;
 
 	const [showEditModal, setShowEditModal] = useState(false);
@@ -44,13 +43,13 @@ export default function BookPage({ bookInfo }: Props) {
 			return;
 		}
 
-		const results = users?.filter((user) =>
-			user.user_name.toLowerCase().includes(searchTerm.toLowerCase())
+		const results = users?.filter((u) =>
+			u.user_name.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 		setFilteredUsers(results);
 	}, [searchTerm, users]);
 
-	const handleSelectUser = (name) => {
+	const handleSelectUser = (name: string) => {
 		setSelectedUser(name);
 		setSearchTerm(name);
 		setDropdownVisible(false);
@@ -106,7 +105,7 @@ export default function BookPage({ bookInfo }: Props) {
 		} catch (error) {
 			toast.error('Ошибка при удалении книги')
 		} finally {
-			refreshModerBooks()
+			refreshAll()
 		}
 	}
 
@@ -117,7 +116,7 @@ export default function BookPage({ bookInfo }: Props) {
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || 'Ошибка при подтверждении продления');
 		} finally {
-			refreshModerBooks();
+			refreshAll();
 		}
 
 	};
@@ -129,7 +128,7 @@ export default function BookPage({ bookInfo }: Props) {
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || 'Ошибка при отклонении продления');
 		} finally {
-			refreshModerBooks();
+			refreshAll();
 		}
 	};
 
@@ -141,7 +140,7 @@ export default function BookPage({ bookInfo }: Props) {
 			toast.error(err?.response?.data?.error || 'Ошибка при выдаче книги');
 		} finally {
 			setShowLoanModal(false);
-			refreshModerBooks();
+			refreshAll();
 		}
 	};
 
@@ -153,7 +152,7 @@ export default function BookPage({ bookInfo }: Props) {
 			console.error(error)
 			toast.success('Пользователь не был удален из списка')
 		} finally {
-			refreshModerBooks()
+			refreshAll()
 		}
 	}
 
@@ -439,14 +438,14 @@ export default function BookPage({ bookInfo }: Props) {
 							/>
 							{dropdownVisible && filteredUsers.length > 0 && (
 								<div className="position-absolute w-100 bg-white border rounded mt-1 shadow-sm z-3" style={{ maxHeight: '200px', overflowY: 'auto' }}>
-									{filteredUsers.map((user) => (
+									{filteredUsers.map((u) => (
 										<div
-											key={user.user_id}
+											key={u.user_id}
 											className="px-3 py-2 dropdown-item"
 											style={{ cursor: "pointer" }}
 											onClick={() => handleSelectUser(user.user_name)}
 										>
-											{user.user_name}
+											{u.user_name}
 										</div>
 									))}
 								</div>

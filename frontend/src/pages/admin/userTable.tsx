@@ -16,7 +16,7 @@ import { useLibrary } from "../../libraryContext";
 
 export function UserTable() {
 	const navigate = useNavigate();
-	const { users } = useLibrary();
+	const { users, user } = useLibrary();
 
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -24,7 +24,7 @@ export function UserTable() {
 	if (!users) return <p>Загрузка пользователей...</p>;
 
 	const visibleUsers = users.filter(
-		(user) => user.user_name !== sessionStorage.getItem("userName")
+		(u) => u.user_name !== user?.user_name
 	);
 	const paginatedUsers = visibleUsers.slice(
 		page * rowsPerPage,

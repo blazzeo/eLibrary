@@ -5,10 +5,11 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
 const RegisterForm = () => {
-	const navigate = useNavigate()
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const navigate = useNavigate()
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
@@ -22,10 +23,9 @@ const RegisterForm = () => {
 			if (password !== confirmPassword)
 				throw "Пароли должны совпадать"
 
-			const canCreate = await createUser(username, password);
-
-			if (!canCreate.result)
-				throw "Пользователь не может быть создан"
+			await createUser(username, password);
+			toast.success('Регистрация прошла успешно')
+			navigate('/login')
 		} catch (error) {
 			console.error(error)
 			toast.error(`Ошибка при регистрации пользователя:\n ${error}.`)

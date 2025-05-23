@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function ExtensionCard({ bookInfo }: Props) {
-	const { refreshModerBooks, refreshUsers } = useLibrary()
+	const { refreshAll } = useLibrary()
 	const book = bookInfo;
 
 	const confirm_request = async () => {
@@ -20,8 +20,7 @@ export default function ExtensionCard({ bookInfo }: Props) {
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при подтверждении продления");
 		} finally {
-			refreshModerBooks();
-			refreshUsers();
+			refreshAll()
 		}
 	};
 
@@ -32,21 +31,19 @@ export default function ExtensionCard({ bookInfo }: Props) {
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при отклонении продления");
 		} finally {
-			refreshModerBooks();
-			refreshUsers();
+			refreshAll();
 		}
 	};
 
 	const handle_borrow = async (user_name: string, return_date: Date) => {
 		try {
 			await addLoan(user_name, book.book.book_id, return_date);
-			refreshModerBooks();
+			refreshAll();
 			toast.success(`Книга выдана пользователю ${user_name}`);
 		} catch (err: any) {
 			toast.error(err?.response?.data?.error || "Ошибка при выдаче книги");
 		} finally {
-			refreshModerBooks();
-			refreshUsers();
+			refreshAll();
 		}
 	};
 

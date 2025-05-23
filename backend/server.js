@@ -1,14 +1,15 @@
 import express from 'express'
 import cors from 'cors'
+import dotenv from 'dotenv'
 import * as db_request from './queries.js'
 import { fileURLToPath } from 'url';
 import fs from 'fs'
 import path from 'path'
-import { requireRole, verifyToken } from './auth.js';
-import jwt from 'jsonwebtoken'
+import { generateToken, requireRole, verifyToken } from './auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+dotenv.config()
 
 const PORT = 3000;
 const app = express();
@@ -59,7 +60,7 @@ app.delete('/api/books/:book_id', verifyToken, requireRole(['admin']), async (re
 	}
 })
 
-app.get('/api/users/:user_id', verifyToken, requireRole(['admin', 'moder']), async (req, res) => {
+app.get('/api/users/:user_id', verifyToken, requireRole(['admin', 'user', 'moder']), async (req, res) => {
 	try {
 		const user_id = parseInt(req.params.user_id, 10)
 		const result = await db_request.getUser(user_id)
@@ -113,17 +114,7 @@ app.post('/api/register', async (req, res) => {
 		const { login, password, role } = req.body;
 		if (!login || !password) return res.status(400).json({ error: "Missing fields" });
 
-		const hashedPassword = await bcrypt.hash(password, 10);
-
-		const db = dbadmin(5432);
-		const existingUser = await db.query(`SELECT * FROM users WHERE user_name = $1`, [login]);
-		if (existingUser.rowCount > 0)
-			return res.status(409).json({ error: "User already exists" });
-
-		await db.query(`
-			INSERT INTO users (user_name, user_password, user_role, registration_date)
-			VALUES ($1, $2, $3, NOW())
-		`, [login, hashedPassword, role || "user"]);
+		await db_request.register(login, password, role)
 
 		res.status(201).json({ message: "User registered successfully" });
 	} catch (error) {
@@ -269,22 +260,16 @@ app.post('/api/togglewishlist', verifyToken, requireRole(['admin', 'moder', 'use
 	}
 })
 
-app.post('/api/authenticate', async (req, res) => {
+app.post('/api/login', async (req, res) => {
 	try {
 		const { login, password } = req.body;
 
-		const result = await db_request.authenticate(login, password);
+		const result = await db_request.login(login, password);
 		if (!result) {
 			return res.status(401).json({ error: "Invalid credentials" });
 		}
 
-		console.log(result)
-
-		const token = jwt.sign(
-			{ user_id: result.id, user_name: login, role: result.role }, // payload
-			JWT_SECRET,
-			{ expiresIn: "1h" }
-		);
+		const token = generateToken({ user_id: result.id, user_name: login, role: result.role }, "1h")
 
 		res.json({ token });
 		log(`Auth success: \t${login}`);
@@ -295,10 +280,10 @@ app.post('/api/authenticate', async (req, res) => {
 });
 
 
-app.get('/api/books/:username', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
+app.get('/api/books/:user_id', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
 	try {
-		const user_name = req.params.username
-		const result = await db_request.getBooks(user_name);
+		const user_id = req.params.user_id
+		const result = await db_request.getBooks(user_id);
 		res.json(result);
 		log(`getBooks success: \tBookCount: \t{ ${result.length}}`)
 	} catch (error) {
@@ -321,5 +306,7 @@ app.post('/api/askextension', verifyToken, requireRole(['admin', 'moder', 'user'
 })
 
 app.listen(PORT, () => {
+	console.log('JWT_SECRET length:', JWT_SECRET.length);
+	console.log('JWT_SECRET raw:', JSON.stringify(JWT_SECRET));
 	console.log(`Server running at http://localhost:${PORT}`);
 });

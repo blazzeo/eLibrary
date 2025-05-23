@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function UserBookPage({ book }: Props) {
-	const { refreshBooks } = useLibrary();
+	const { refreshAll, user } = useLibrary();
 
 	// 0 - mine
 	// 1 - in my wishlist
@@ -23,7 +23,7 @@ export default function UserBookPage({ book }: Props) {
 	const handle_wish = async () => {
 		let init_state = book.loan_status;
 		try {
-			const user_name = sessionStorage.getItem("userName")
+			const user_name = user?.user_name
 			if (user_name === null || user_name === undefined)
 				throw Error("Имя пользователя не было получено")
 			await toggleWishlist(user_name!, book.book_id!)
@@ -38,7 +38,7 @@ export default function UserBookPage({ book }: Props) {
 			else
 				toast.error("Ошибка: книга не была удалена из ожидаемого")
 		} finally {
-			refreshBooks()
+			refreshAll()
 		}
 	}
 

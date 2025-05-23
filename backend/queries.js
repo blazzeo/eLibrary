@@ -1,5 +1,5 @@
 import { dbuser, dbadmin, dbmoder } from './db_roles.js'
-import { verify_password, hash_password } from './auth.js'
+import { hashPassword } from './auth.js'
 import bcrypt from 'bcrypt'
 
 export async function checkLogin(userLogin) {
@@ -16,13 +16,14 @@ export async function getUser(user_id) {
 	try {
 		const admin = dbadmin(5432)
 		const result = await admin.query('SELECT get_user($1);', [user_id])
-		return result.rows[0]
+		let user = result.rows[0].get_user
+		return user
 	} catch (error) {
 		throw err
 	}
 }
 
-export async function authenticate(userLogin, userPassword) {
+export async function login(userLogin, userPassword) {
 	try {
 		const db = dbadmin(5432);
 		const res = await db.query(`
@@ -43,16 +44,19 @@ export async function authenticate(userLogin, userPassword) {
 	}
 }
 
-export async function createUser(userLogin, userPassword) {
+export async function register(userLogin, userPassword, role) {
 	try {
-		const admin = dbadmin(5432)
-		const hashed_password = await hash_password(userPassword)
-		const user = {
-			user_name: userLogin,
-			user_password: hashed_password
-		}
-		const result = await admin.query('SELECT add_users($1::json);', [JSON.stringify(user)])
-		return result.rows[0].add_users;
+		const db = dbadmin(5432);
+		const hashedPassword = await hashPassword(userPassword);
+
+		const existingUser = await db.query(`SELECT * FROM users WHERE user_name = $1`, [userLogin]);
+		if (existingUser.rowCount > 0)
+			throw "User already exists"
+
+		await db.query(`
+			INSERT INTO users (user_name, user_password, user_role, registration_date)
+			VALUES ($1, $2, $3, NOW())
+		`, [userLogin, hashedPassword, role || "user"]);
 	} catch (err) {
 		throw err
 	}
@@ -61,7 +65,7 @@ export async function createUser(userLogin, userPassword) {
 export async function createModer(login, password) {
 	try {
 		const admin = dbadmin(5432)
-		const hashed_password = await hash_password(password)
+		const hashed_password = await hashPassword(password)
 		console.log(login, password)
 		const result = await admin.query('SELECT * from create_moder($1, $2);', [login, hashed_password])
 		console.log(result.rows[0])
@@ -93,10 +97,10 @@ export async function returnBook(book_id) {
 	}
 }
 
-export async function getBooks(user_name) {
+export async function getBooks(user_id) {
 	try {
 		const user = dbuser(5432)
-		const res = await user.query('select * from get_books($1);', [user_name])
+		const res = await user.query('select * from get_books($1);', [user_id])
 
 		return res.rows;
 	} catch (err) {

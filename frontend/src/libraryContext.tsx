@@ -36,7 +36,6 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 
 	const refreshAll = useCallback(async () => {
 		if (!token) {
-			// Сброс данных
 			setBooks(null);
 			setUsers(null);
 			setUser(null);
@@ -49,24 +48,37 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 			const payload = parseJwt(token);
 			setRole(payload.role);
 
-			// Для всех грузим книги и текущего пользователя
-			const fetchedBooks = await getBooks(payload.user_name);
-			const fetchedUser = await getUser(payload.user_name);
-			setBooks(fetchedBooks);
+			const fetchedUser = await getUser(payload.user_id);
 			setUser(fetchedUser);
 
-			if (payload.role === "admin" || payload.role === "moder") {
-				// Дополнительные данные для модераторов и админов
-				const [fetchedUsers, fetchedModerBooks] = await Promise.all([
-					getUsers(),
-					getModerBooks(),
-				]);
-				setUsers(fetchedUsers);
-				setModerBooks(fetchedModerBooks);
-			} else {
-				// Для обычных пользователей очищаем эти данные
-				setUsers(null);
-				setModerBooks(null);
+			switch (user_role) {
+				case 'user': {
+					const fetchedBooks = await getBooks(payload.user_id);
+					console.log(fetchedUser)
+					setBooks(fetchedBooks);
+					break;
+				}
+				case 'moder': {
+					const [fetchedUsers, fetchedModerBooks] = await Promise.all([
+						getUsers(),
+						getModerBooks(),
+					]);
+					setUsers(fetchedUsers);
+					setModerBooks(fetchedModerBooks);
+					break;
+				}
+				case 'admin': {
+					const [fetchedUsers, fetchedModerBooks] = await Promise.all([
+						getUsers(),
+						getModerBooks(),
+					]);
+					setUsers(fetchedUsers);
+					setModerBooks(fetchedModerBooks);
+					break;
+				}
+				default:
+					setUsers(null);
+					setModerBooks(null);
 			}
 		} catch (error) {
 			console.error("Ошибка при обновлении данных", error);
@@ -85,7 +97,6 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 		if (newToken) {
 			sessionStorage.setItem("token", newToken);
 			let parsed_token = parseJwt(newToken)
-			console.log(parsed_token)
 			setRole(parsed_token.role)
 		} else {
 			sessionStorage.removeItem("token");

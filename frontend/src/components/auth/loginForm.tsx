@@ -4,20 +4,21 @@ import { authenticate } from "../api/DatabaseAPI";
 import { toast } from "react-toastify";
 import { parseJwt } from "./authContext";
 import { useLibrary } from "../../libraryContext";
+import { useNavigate } from "react-router";
 
-interface Props {
-	noAccountCallback: () => void;
-}
-
-const LoginForm: React.FC<Props> = ({ noAccountCallback }) => {
+const LoginForm: React.FC = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const { setAuthToken } = useLibrary();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const navigate = useNavigate()
+
+	const handleSubmit = async (event: React.FormEvent) => {
+		event.preventDefault();
 		try {
 			const response = await authenticate(username, password);
+			console.log(response)
+
 			const token = response;
 			setAuthToken(token);
 			toast.success("Вход выполнен успешно");
@@ -63,7 +64,7 @@ const LoginForm: React.FC<Props> = ({ noAccountCallback }) => {
 				</button>
 			</form>
 			<div className="mt-3 text-center">
-				<button className="btn btn-secondary" onClick={noAccountCallback}>
+				<button className="btn btn-secondary" onClick={() => navigate('/register')}>
 					Нет аккаунта? Создать аккаунт.
 				</button>
 			</div>

@@ -747,46 +747,42 @@ END;
 $$;
 
 --	GET USER
-create or replace function get_user(p_user_name varchar)
-RETURNS TABLE(
-    user_id INT,
-    user_name VARCHAR,
-    user_role varchar,
-    registration_date date,
-    loans json_agg,
-    wishlist json_agg,
-    extension_request json_agg
-) AS $$
+drop function get_user(integer);
+CREATE OR REPLACE FUNCTION get_user(p_user_id INTEGER)
+RETURNS JSON AS $$
+DECLARE
+    result JSON;
 BEGIN
-SELECT
-    u.user_id,
-    u.user_name,
-    u.user_role,
-    u.registration_date,
-    (
-        SELECT json_agg(json_build_object(
-            'book_id', bl.book_id,
-            'borrow_date', bl.borrow_date,
-            'return_date', bl.return_date
-        )) FROM book_loans bl
-        WHERE bl.user_id = u.user_id
-    ) AS loans,
-    (
-        SELECT json_agg(json_build_object(
-            'book_id', wl.book_id,
-            'request_date', wl.request_date
-        )) FROM wishlist wl
-        WHERE wl.user_id = u.user_id
-    ) AS wishlist,
-    (
-        SELECT json_agg(json_build_object(
-            'book_id', er.book_id,
-            'request_date', er.request_date
-        )) FROM extention_requests er
-        WHERE er.user_id = u.user_id
-    ) AS extension_requests
-FROM users u
-where u.user_name = ;
+    SELECT json_build_object(
+        'user_id', u.user_id,
+        'user_name', u.user_name,
+        'user_role', u.user_role,
+        'registration_date', u.registration_date,
+        'loans', COALESCE((
+            SELECT json_agg(json_build_object(
+                'book_id', bl.book_id,
+                'borrow_date', bl.borrow_date,
+                'return_date', bl.return_date
+            )) FROM book_loans bl WHERE bl.user_id = u.user_id
+        ), '[]'::json),
+        'wishlist', COALESCE((
+            SELECT json_agg(json_build_object(
+                'book_id', wl.book_id,
+                'request_date', wl.request_date
+            )) FROM wishlist wl WHERE wl.user_id = u.user_id
+        ), '[]'::json),
+        'extension_requests', COALESCE((
+            SELECT json_agg(json_build_object(
+                'book_id', er.book_id,
+                'request_date', er.request_date
+            )) FROM extention_requests er WHERE er.user_id = u.user_id
+        ), '[]'::json)
+    )
+    INTO result
+    FROM users u
+    WHERE u.user_id = p_user_id;
+
+    RETURN result;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -825,7 +821,7 @@ $$;
 
 
 --  GET BOOKS + USER's BOOKSHELF
-CREATE OR REPLACE FUNCTION get_books(p_user_name VARCHAR)
+CREATE OR REPLACE FUNCTION get_books(p_user_id INTEGER)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
@@ -845,12 +841,6 @@ RETURNS TABLE(
 DECLARE
     p_user_id INT;
 BEGIN
-    -- Check if p_user_name is provided
-    IF p_user_name IS NOT NULL THEN
-        -- Get user_id for the provided user_name
-        SELECT user_id INTO p_user_id FROM users WHERE user_name = p_user_name;
-    END IF;
-
     RETURN QUERY
     SELECT
         b.book_id,
@@ -864,12 +854,12 @@ BEGIN
 		bl.borrow_date,
 		bl.return_date,
         CASE
-            WHEN p_user_name IS NOT NULL AND EXISTS (
+            WHEN p_user_id IS NOT NULL AND EXISTS (
                 SELECT 1
                 FROM book_loans bl
                 WHERE bl.book_id = b.book_id and bl.user_id = p_user_id
 			) THEN 0  -- Book is mine
-            WHEN p_user_name IS NOT NULL AND EXISTS (
+            WHEN p_user_id IS NOT NULL AND EXISTS (
                 SELECT 1 
                 FROM wishlist w 
                 WHERE w.book_id = b.book_id AND w.user_id = p_user_id

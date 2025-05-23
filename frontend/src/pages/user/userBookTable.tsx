@@ -10,8 +10,9 @@ import { useLibrary } from "../../libraryContext";
 import { useNavigate } from "react-router";
 
 export default function UserBookTable() {
+	const { books, refreshAll, user } = useLibrary()
+
 	const navigate = useNavigate()
-	const { books, refreshBooks } = useLibrary()
 
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
 		() => [
@@ -75,11 +76,11 @@ export default function UserBookTable() {
 					const loanStatus = cell.getValue() as number; // Assuming your BookData has these properties
 
 					const handleWishlist = async () => {
-						const userName = sessionStorage.getItem("userName")
 						const bookId = row.original.book_id;
-						await toggleWishlist(userName!, bookId!)
-						console.log(`Book ID ${bookId} -> User ${userName}`);
-						refreshBooks();
+						console.log(user)
+						console.log(loanStatus)
+						await toggleWishlist(user?.user_name!, bookId!)
+						await refreshAll();
 					};
 
 					if (loanStatus === 0) {
@@ -124,11 +125,10 @@ export default function UserBookTable() {
 		columns,
 		data: books!,
 
-		// 👇 Добавляем поведение клика по строке
 		muiTableBodyRowProps: ({ row }) => ({
 			onClick: () => {
 				const bookId = row.original.book_id;
-				navigate(`/book?id=${bookId}`);
+				navigate(`/ book ? id = ${bookId} `);
 			},
 			sx: {
 				cursor: "pointer",
@@ -139,5 +139,5 @@ export default function UserBookTable() {
 		}),
 	});
 
-	return <MaterialReactTable table={table} />;
+	return (books) ? <MaterialReactTable table={table} /> : <h1>Nothing here...</h1>;
 }

@@ -16,7 +16,7 @@ interface Props {
 }
 
 export function BookShelf({ books }: Props) {
-	const { refreshBooks } = useLibrary()
+	const { refreshAll, user } = useLibrary()
 
 	const [showModal, setShowModal] = useState(false);
 	const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
@@ -44,14 +44,14 @@ export function BookShelf({ books }: Props) {
 	const handleSubmit = async () => {
 		if (selectedBookId && newDate) {
 			try {
-				let user_name = sessionStorage.getItem("userName")!
-				await askExtension(user_name, selectedBookId, new Date(newDate));
+				let user_name = user?.user_name
+				await askExtension(user_name!, selectedBookId, new Date(newDate));
 				toast.success("Запрос успешно отправлен");
 			} catch (error) {
 				console.error(error);
 				toast.error("Ошибка при отправке запроса");
 			} finally {
-				await refreshBooks();
+				await refreshAll();
 				handleCloseModal();
 			}
 		}

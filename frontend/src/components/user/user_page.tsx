@@ -13,9 +13,8 @@ interface Props {
 }
 
 export default function UserPage({ user }: Props) {
-	const { moderBooks, refreshUsers } = useLibrary()
+	const { moderBooks, refreshAll, user_role } = useLibrary()
 	const navigate = useNavigate();
-	const user_role = sessionStorage.getItem('userName')
 
 	if (!user) return <Alert variant="danger" className="mt-3">Пользователь не найден</Alert>;
 
@@ -27,7 +26,7 @@ export default function UserPage({ user }: Props) {
 		} catch (error) {
 			toast.error('Ошибка при удалении пользователя');
 		} finally {
-			refreshUsers();
+			refreshAll();
 		}
 
 	};

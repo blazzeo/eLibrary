@@ -9,11 +9,13 @@ import BookPageUserWrapper from "../../components/book/book_page_user_wrapper";
 import UserProfile from "../../components/user_profile";
 
 export default function UserDashboard() {
-	const { books, refreshBooks, user } = useLibrary()
+	const { books, refreshAll, user } = useLibrary()
 
 	useEffect(() => {
-		refreshBooks()
+		refreshAll()
 	}, [])
+
+	if (!books) return <h1>Загрузка...</h1>;
 
 	return (
 		<>

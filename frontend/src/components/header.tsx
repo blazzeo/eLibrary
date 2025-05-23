@@ -1,15 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useLibrary } from "../libraryContext";
 
 export default function Header() {
-	const userName = sessionStorage.getItem("userName");
-	const userRole = sessionStorage.getItem("userRole");
+	const { user_role, user, refreshAll } = useLibrary()
+
 	const navigate = useNavigate();
 	const [isOpen, setIsOpen] = useState(false);
 
 	function logout() {
 		sessionStorage.clear();
 		navigate("/");
+		refreshAll()
 	}
 
 	return (
@@ -32,7 +34,7 @@ export default function Header() {
 					{/* Collapsible menu */}
 					<div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}>
 						<ul className="navbar-nav me-auto mb-2 mb-md-0">
-							{userRole === "user" && (
+							{user_role === "user" && (
 								<>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/bookshelf">
@@ -46,7 +48,7 @@ export default function Header() {
 									</li>
 								</>
 							)}
-							{userRole === "admin" && (
+							{user_role === "admin" && (
 								<>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/usercontrol">
@@ -65,7 +67,7 @@ export default function Header() {
 									</li>
 								</>
 							)}
-							{userRole === "moder" && (
+							{user_role === "moder" && (
 								<>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/usercontrol">
@@ -87,12 +89,12 @@ export default function Header() {
 						</ul>
 						<div className="d-flex align-items-center">
 							<span className="me-3 text-white">
-								{userName}
+								{user?.user_name}
 								<span
 									className="text-dark"
 									style={{ fontFamily: "'Courier New', monospace", fontWeight: "bold" }}
 								>
-									:{userRole}
+									:{user_role}
 								</span>
 							</span>
 							<button className="btn btn-outline-light" onClick={logout} title="Выйти">

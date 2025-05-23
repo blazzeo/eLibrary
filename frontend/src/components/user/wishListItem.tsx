@@ -11,17 +11,17 @@ interface WishlistItemProps {
 }
 
 export const WishlistItem = ({ book, user_name, requestDate, isTaken }: WishlistItemProps) => {
-	const { refreshModerBooks, refreshUsers } = useLibrary();
+	const { refreshAll } = useLibrary();
 	const [newDate, setNewDate] = useState<string>("");
 	const [showModal, setShowModal] = useState(false);
 
 	const onRemove = async () => {
 		try {
 			await toggleWishlist(user_name, book.book.book_id);
-			await refreshModerBooks();
-			await refreshUsers();
 		} catch (err) {
 			console.error(err);
+		} finally {
+			await refreshAll();
 		}
 	};
 
@@ -32,11 +32,11 @@ export const WishlistItem = ({ book, user_name, requestDate, isTaken }: Wishlist
 	const onConfirmIssue = async () => {
 		try {
 			await addLoan(user_name, book.book.book_id, new Date(newDate));
-			await refreshModerBooks();
-			await refreshUsers();
 			setShowModal(false);
 		} catch (err) {
 			console.error(err);
+		} finally {
+			await refreshAll();
 		}
 	};
 

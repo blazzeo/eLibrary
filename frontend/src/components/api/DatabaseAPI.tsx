@@ -6,12 +6,13 @@ const SERVER = 'http://localhost:3000'
 
 export async function authenticate(user_name: string, user_password: string) {
 	try {
-		const response = await axios.post(`${SERVER}/api/authenticate`, {
+		const response = await axios.post(`${SERVER}/api/login`, {
 			login: user_name,
 			password: user_password,
 		});
 
 		const { token } = response.data;
+		console.log(token)
 		localStorage.setItem("token", token); // или cookie
 		return token;
 	} catch (error) {
@@ -64,6 +65,7 @@ export async function createUser(user_name: string, user_password: string) {
 		const response = await axios.post(
 			SERVER + `/api/register`, { login: user_name, password: user_password }
 		);
+		console.log(response.data)
 		return response.data;
 	} catch (error) {
 		console.error(`Error creating user: ${error}`);
@@ -81,12 +83,12 @@ export async function createModer(name: string, password: string) {
 	}
 }
 
-export async function getBooks(username: string | null): Promise<BookData[]> {
+export async function getBooks(user_id: number | null): Promise<BookData[]> {
 	try {
-		if (!username)
-			throw new Error("Invalid username");
+		if (!user_id)
+			throw new Error("Invalid user_id");
 
-		const response: AxiosResponse<BookData[]> = await axios.get(`/api/books/${encodeURIComponent(username)}`);
+		const response: AxiosResponse<BookData[]> = await axios.get(`/api/books/${user_id}`);
 
 		return response.data;
 	} catch (error) {
@@ -223,7 +225,7 @@ export async function editBook(book: BookData) {
 
 export async function deleteBook(book_id: number) {
 	try {
-		const response = await axios.delete(SERVER + `/api/deletebook/${book_id}`)
+		const response = await axios.delete(SERVER + `/api/deletebook/${book_id} `)
 		return response.data
 	} catch (error) {
 		console.error(error);

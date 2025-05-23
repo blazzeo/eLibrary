@@ -6,10 +6,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import UserDashboard from "./pages/user/userDashboard.tsx";
 import AdminDashboard from "./pages/admin/adminDashboard.tsx";
 import ModerDashboard from "./pages/moder/moderDashboard.tsx";
-import { AuthPage } from "./pages/AuthPage.tsx";
 import { LibraryProvider, useLibrary } from "./libraryContext";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AuthProvider } from "./components/auth/authContext.tsx";
+import LoginForm from "./components/auth/loginForm.tsx";
+import RegisterForm from "./components/auth/registerForm.tsx";
 
 function Main() {
 	return (
@@ -41,8 +42,8 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="*" element={user_role ? getDashboard() : <Navigate to="/login" />} />
-				<Route path="/login" element={user_role ? <Navigate to="/" /> : <AuthPage />} />
-				<Route path="/register" element={user_role ? <Navigate to="/" /> : <AuthPage />}
+				<Route path="/login" element={user_role ? <Navigate to="/" /> : <LoginForm />} />
+				<Route path="/register" element={user_role ? <Navigate to="/" /> : <RegisterForm />} />
 			</Routes>
 			<ToastContainer position="bottom-right" autoClose={3000} hideProgressBar />
 		</BrowserRouter>

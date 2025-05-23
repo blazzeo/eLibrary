@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useLibrary } from '../../libraryContext';
 
 export default function AddModerForm() {
-	const { refreshModerBooks, refreshUsers } = useLibrary()
+	const { refreshAll } = useLibrary()
 	const [login, setLogin] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -20,8 +20,7 @@ export default function AddModerForm() {
 			console.error(error)
 			toast.error((error as Error).message);
 		} finally {
-			refreshModerBooks()
-			refreshUsers()
+			refreshAll()
 		}
 	};
 

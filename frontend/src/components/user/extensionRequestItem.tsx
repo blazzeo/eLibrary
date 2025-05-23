@@ -9,28 +9,27 @@ interface ExtensionRequestItemProps {
 }
 
 export const ExtensionRequestItem = ({ book, requestDate }: ExtensionRequestItemProps) => {
-	const { refreshModerBooks, refreshUsers } = useLibrary()
+	const { refreshAll } = useLibrary()
 
 	const onApprove = async () => {
 		try {
 			await confirmExtension(book.book.book_id, book.owner.user_id, requestDate)
 			toast.success("Бронь успешно продлена")
-			await refreshModerBooks()
-			await refreshUsers()
 		} catch (err) {
 			console.error(err)
 			toast.success("Ошибка при продлении брони")
-			await refreshModerBooks()
-			await refreshUsers()
+		} finally {
+			await refreshAll()
 		}
 	}
 
 	const onReject = async () => {
 		try {
 			await rejectExtension(book.book.book_id, book.owner.user_id, requestDate)
-			await refreshModerBooks()
 		} catch (err) {
 			console.error(err)
+		} finally {
+			await refreshAll()
 		}
 	}
 

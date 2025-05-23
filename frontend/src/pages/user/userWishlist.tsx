@@ -13,7 +13,7 @@ interface Props {
 }
 
 export function WishList({ books }: Props) {
-	const { refreshBooks } = useLibrary()
+	const { refreshAll, user } = useLibrary()
 
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
 		() => [
@@ -53,9 +53,9 @@ export function WishList({ books }: Props) {
 				size: 50,
 				Cell: ({ row }) => {
 					const handleRemove = async () => {
-						const userName = sessionStorage.getItem("userName");
+						const userName = user?.user_name
 						await toggleWishlist(userName!, row.original.book_id!);
-						refreshBooks();
+						refreshAll();
 					};
 
 					return (

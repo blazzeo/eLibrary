@@ -10,11 +10,10 @@ import { useEffect } from "react";
 import { useLibrary } from "../../libraryContext";
 
 export default function ModerDashboard() {
-	const { refreshUsers, refreshModerBooks } = useLibrary()
+	const { refreshAll } = useLibrary()
 
 	useEffect(() => {
-		refreshModerBooks()
-		refreshUsers()
+		refreshAll()
 	}, [])
 
 	return (

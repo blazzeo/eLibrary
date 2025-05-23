@@ -7,7 +7,7 @@ import { useLibrary } from "../../libraryContext";
 import 'react-toastify/dist/ReactToastify.css';
 
 export function AddBookForm() {
-	const { refreshModerBooks } = useLibrary();
+	const { refreshAll } = useLibrary();
 
 	const [title, setTitle] = useState("");
 	const [totalPages, setTotalPages] = useState<number | null>(null);
@@ -70,7 +70,7 @@ export function AddBookForm() {
 			setAuthors([]);
 			setGenres([]);
 			toast.success("Книга успешно добавлена!");
-			refreshModerBooks();
+			refreshAll();
 		} catch (error) {
 			toast.error(error instanceof Error ? error.message : "Произошла неизвестная ошибка.");
 		}
