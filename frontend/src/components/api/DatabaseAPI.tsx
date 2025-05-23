@@ -4,21 +4,22 @@ import { BookData, UserData } from "../structs";
 
 const SERVER = 'http://localhost:3000'
 
-export async function authenticate(user_name: string, user_password: string) {
-	try {
-		const response = await axios.post(`${SERVER}/api/login`, {
-			login: user_name,
-			password: user_password,
-		});
+export async function authenticate(username: string, password: string) {
+	const response = await fetch(SERVER + "/api/login", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ login: username, password }),
+	});
 
-		const { token } = response.data;
-		console.log(token)
-		localStorage.setItem("token", token); // или cookie
-		return token;
-	} catch (error) {
-		console.error("Auth failed:", error);
-		throw error;
+	if (!response.ok) {
+		throw new Error("Authentication failed");
 	}
+
+	let response_json = await response.json()
+
+	return response_json.token;
 }
 
 export async function getUser(user_name: string) {

@@ -23,7 +23,7 @@ function Main() {
 }
 
 function App() {
-	const { user_role } = useLibrary();
+	const { user_role, token } = useLibrary();
 
 	const getDashboard = () => {
 		switch (user_role) {
@@ -41,13 +41,23 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="*" element={user_role ? getDashboard() : <Navigate to="/login" />} />
-				<Route path="/login" element={user_role ? <Navigate to="/" /> : <LoginForm />} />
-				<Route path="/register" element={user_role ? <Navigate to="/" /> : <RegisterForm />} />
+				{!token ? (
+					<>
+						<Route path="*" element={<Navigate to="/login" />} />
+						<Route path="/login" element={<LoginForm />} />
+						<Route path="/register" element={<RegisterForm />} />
+					</>
+				) : (
+					<>
+						<Route path="/" element={getDashboard()} />
+						<Route path="/request/*" element={getDashboard()} />
+						<Route path="/books/*" element={getDashboard()} />
+						<Route path="/users/*" element={getDashboard()} />
+						<Route path="*" element={<Navigate to="/" />} />
+					</>
+				)}
 			</Routes>
 			<ToastContainer position="bottom-right" autoClose={3000} hideProgressBar />
 		</BrowserRouter>
 	);
 }
-
-ReactDOM.render(<Main />, document.getElementById('root'));

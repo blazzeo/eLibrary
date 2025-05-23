@@ -4,11 +4,11 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { addLoan } from '../api/DatabaseAPI';
-import { Toast, ToastContainer } from 'react-bootstrap';
 import { useLibrary } from '../../libraryContext';
+import { toast } from 'react-toastify';
 
 export default function AddLoanForm() {
-	const { users, moderBooks } = useLibrary()
+	const { users, refreshAll, moderBooks } = useLibrary()
 	let usersOnly = users?.filter(u => u.user_role != 'admin' && u.user_role != 'moder')
 
 	// State
@@ -17,11 +17,6 @@ export default function AddLoanForm() {
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 	const [bookSearch, setBookSearch] = useState('');
 	const [userSearch, setUserSearch] = useState('');
-	const [showErrorToast, setShowErrorToast] = useState(false);
-	const [errorMessage, setErrorMessage] = useState('');
-
-	const [showSuccessToast, setShowSuccessToast] = useState(false);
-	const [successMessage, setSuccessMessage] = useState('');
 
 	// Filter books based on search input
 	const filteredBooks = moderBooks!.filter(book =>
@@ -31,49 +26,18 @@ export default function AddLoanForm() {
 	const handle_form = async (event: React.FormEvent) => {
 		event.preventDefault();
 		try {
-			const res = await addLoan(selectedUser, selectedBook.id, selectedDate);
-			console.log(res);
-
-			// success toast
-			setSuccessMessage('Бронь успешно добавлена');
-			setShowSuccessToast(true);
-			setTimeout(() => setShowSuccessToast(false), 5000);
+			await addLoan(selectedUser, selectedBook.id, selectedDate);
+			toast.success('Бронь успешно добавлена');
 		} catch (err: any) {
-			setErrorMessage(err.response?.data?.error || 'Неизвестная ошибка');
-			setShowErrorToast(true);
-			setTimeout(() => setShowErrorToast(false), 5000);
+			console.log(err)
+			toast.success('Ошибка при создании брони');
+		} finally {
+			refreshAll()
 		}
 	};
 
 	return (
 		<div className="container mt-4">
-			<ToastContainer position="top-end" className="p-3" style={{ zIndex: 9999 }}>
-				<Toast
-					onClose={() => setShowErrorToast(false)}
-					show={showErrorToast}
-					bg="danger"
-					delay={5000}
-					autohide
-				>
-					<Toast.Header>
-						<strong className="me-auto">Ошибка</strong>
-					</Toast.Header>
-					<Toast.Body className="text-white">{errorMessage}</Toast.Body>
-				</Toast>
-
-				<Toast
-					onClose={() => setShowSuccessToast(false)}
-					show={showSuccessToast}
-					bg="success"
-					delay={5000}
-					autohide
-				>
-					<Toast.Header>
-						<strong className="me-auto">Успешно</strong>
-					</Toast.Header>
-					<Toast.Body className="text-white">{successMessage}</Toast.Body>
-				</Toast>
-			</ToastContainer>
 			<h2>Добавить новую бронь</h2>
 			<Form>
 				{/* User List */}

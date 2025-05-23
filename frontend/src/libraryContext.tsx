@@ -14,6 +14,7 @@ interface LibraryContextType {
 	user: UserData | null;
 	user_role: string | null;
 	moderBooks: BookInfo[] | null;
+	token: string | null;
 	refreshAll: () => Promise<void>;
 	setAuthToken: (token: string | null) => void;
 }
@@ -30,7 +31,14 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 	const [books, setBooks] = useState<BookData[] | null>(null);
 	const [users, setUsers] = useState<UserData[] | null>(null);
 	const [user, setUser] = useState<UserData | null>(null);
-	const [user_role, setRole] = useState<string | null>(null);
+	const [user_role, setRole] = useState<string | null>(() => {
+		const storedToken = sessionStorage.getItem("token");
+		if (storedToken) {
+			const payload = parseJwt(storedToken);
+			return payload.role;
+		}
+		return null;
+	});
 	const [moderBooks, setModerBooks] = useState<BookInfo[] | null>(null);
 	const [token, setToken] = useState<string | null>(() => sessionStorage.getItem("token"));
 
@@ -51,10 +59,9 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 			const fetchedUser = await getUser(payload.user_id);
 			setUser(fetchedUser);
 
-			switch (user_role) {
+			switch (payload.role) {
 				case 'user': {
 					const fetchedBooks = await getBooks(payload.user_id);
-					console.log(fetchedUser)
 					setBooks(fetchedBooks);
 					break;
 				}
@@ -83,6 +90,7 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 		} catch (error) {
 			console.error("Ошибка при обновлении данных", error);
 			setToken(null);
+			setRole(null);
 			sessionStorage.removeItem("token");
 		}
 	}, [token]);
@@ -96,10 +104,11 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 	const setAuthToken = (newToken: string | null) => {
 		if (newToken) {
 			sessionStorage.setItem("token", newToken);
-			let parsed_token = parseJwt(newToken)
-			setRole(parsed_token.role)
+			const parsed_token = parseJwt(newToken);
+			setRole(parsed_token.role);
 		} else {
 			sessionStorage.removeItem("token");
+			setRole(null);
 		}
 		setToken(newToken);
 	};
@@ -109,6 +118,7 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 			value={{
 				books,
 				user_role,
+				token,
 				user,
 				users,
 				moderBooks,

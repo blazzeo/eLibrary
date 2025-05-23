@@ -16,7 +16,7 @@ import { useLibrary } from "../../libraryContext";
 
 export function UserTable() {
 	const navigate = useNavigate();
-	const { users, user } = useLibrary();
+	const { users, user, user_role } = useLibrary();
 
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -43,7 +43,7 @@ export function UserTable() {
 	return (
 		<Box>
 			{/* Кнопка по центру */}
-			<Box sx={{ display: "flex", justifyContent: "center", my: 3 }}>
+			{user_role == 'admin' && < Box sx={{ display: "flex", justifyContent: "center", my: 3 }}>
 				<Button
 					variant="contained"
 					color="primary"
@@ -52,7 +52,7 @@ export function UserTable() {
 				>
 					Создать модератора
 				</Button>
-			</Box>
+			</Box>}
 
 			{/* Заголовок */}
 			<Box sx={{ textAlign: "center", mb: 3 }}>
@@ -106,6 +106,6 @@ export function UserTable() {
 					labelRowsPerPage="Пользователей на странице:"
 				/>
 			</TableContainer>
-		</Box>
+		</Box >
 	);
 }

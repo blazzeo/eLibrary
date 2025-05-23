@@ -62,7 +62,7 @@ export default function ModerBookTable() {
 
 	const table = useMaterialReactTable<BookInfo>({
 		columns,
-		data: moderBooks!,
+		data: moderBooks ?? [],
 		muiTableBodyRowProps: ({ row }) => ({
 			onClick: () => {
 				const bookId = row.original.book.book_id;
