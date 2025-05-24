@@ -19,7 +19,7 @@ export async function getUser(user_id) {
 		let user = result.rows[0].get_user
 		return user
 	} catch (error) {
-		throw err
+		throw error
 	}
 }
 
@@ -203,12 +203,55 @@ export async function editBook(book) {
 	}
 }
 
-export async function toggleWishlist(user_name, book_id) {
+export async function toggleWishlist(user_id, book_id) {
 	try {
 		const user = dbuser(5432)
-		const result = await user.query('call toggle_wishlist($1,$2);', [user_name, book_id])
-		return result.rows
+		console.log('Connecting to database...')
+
+		// Начинаем транзакцию
+		await user.query('BEGIN');
+
+		try {
+			// Проверяем текущий статус wishlist
+			console.log('Checking current wishlist status...')
+			const wishlistResult = await user.query(
+				'SELECT EXISTS(SELECT 1 FROM wishlist WHERE user_id = $1 AND book_id = $2)',
+				[user_id, book_id]
+			)
+			console.log('Current wishlist status:', wishlistResult.rows[0].exists)
+
+			// Переключаем wishlist
+			console.log('Toggling wishlist...')
+			await user.query('call toggle_wishlist($1,$2);', [user_id, book_id])
+			console.log('Wishlist toggled')
+
+			// Получаем обновленные данные пользователя
+			console.log('Getting updated user data...')
+			const userResult = await user.query('SELECT get_user($1);', [user_id])
+			console.log('Raw user result:', userResult.rows)
+			
+			if (!userResult.rows || userResult.rows.length === 0) {
+				throw new Error('Failed to get updated user data after toggle')
+			}
+			
+			const userData = userResult.rows[0].get_user
+			if (!userData) {
+				throw new Error('get_user returned null or undefined')
+			}
+			
+			console.log('Processed user data:', userData)
+
+			// Фиксируем транзакцию
+			await user.query('COMMIT');
+			
+			return userData
+		} catch (err) {
+			// В случае ошибки откатываем транзакцию
+			await user.query('ROLLBACK');
+			throw err;
+		}
 	} catch (err) {
+		console.error('Error in toggleWishlist:', err)
 		throw err
 	}
 }

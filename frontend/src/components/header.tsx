@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLibrary } from "../libraryContext";
 
 export default function Header() {
-	const { user_role, user, refreshAll } = useLibrary()
+	const { user, refreshAll } = useLibrary()
 
 	const navigate = useNavigate();
 	const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +34,7 @@ export default function Header() {
 					{/* Collapsible menu */}
 					<div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}>
 						<ul className="navbar-nav me-auto mb-2 mb-md-0">
-							{user_role === "user" && (
+							{user?.user_role === "user" && (
 								<>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/bookshelf">
@@ -43,12 +43,12 @@ export default function Header() {
 									</li>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/wishlist">
-											Мои избранные
+											Мои отложенные
 										</Link>
 									</li>
 								</>
 							)}
-							{user_role === "admin" && (
+							{user?.user_role === "admin" && (
 								<>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/usercontrol">
@@ -67,7 +67,7 @@ export default function Header() {
 									</li>
 								</>
 							)}
-							{user_role === "moder" && (
+							{user?.user_role === "moder" && (
 								<>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/usercontrol">
@@ -94,7 +94,7 @@ export default function Header() {
 									className="text-dark"
 									style={{ fontFamily: "'Courier New', monospace", fontWeight: "bold" }}
 								>
-									:{user_role}
+									:{user?.user_role}
 								</span>
 							</span>
 							<button className="btn btn-outline-light" onClick={logout} title="Выйти">

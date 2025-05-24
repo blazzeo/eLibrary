@@ -53,14 +53,14 @@ export function WishList({ books }: Props) {
 				size: 50,
 				Cell: ({ row }) => {
 					const handleRemove = async () => {
-						const userName = user?.user_name
-						await toggleWishlist(userName!, row.original.book_id!);
+						const userId = user?.user_id
+						await toggleWishlist(userId!, row.original.book_id!);
 						refreshAll();
 					};
 
 					return (
 						<button className="btn btn-danger" onClick={handleRemove}>
-							Убрать из желаемого
+							Удалить из отложенных
 						</button>
 					)
 				},

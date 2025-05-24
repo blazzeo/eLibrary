@@ -4,9 +4,10 @@ import UserPage from "./user_page";
 import { BookInfo, UserData } from "../structs";
 import { Spinner } from "react-bootstrap";
 import { useLibrary } from "../../libraryContext";
+import { getUser } from "../api/DatabaseAPI";
 
 export default function UserPageWrapper() {
-	const { moderBooks, users } = useLibrary()
+	const { moderBooks } = useLibrary()
 	const { id } = useParams();
 
 	const [user, setUser] = useState<UserData | null>(null);
@@ -14,23 +15,26 @@ export default function UserPageWrapper() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
-	const updateUser = () => {
+	const updateUser = async () => {
 		if (!id) return;
 
-		const user = users!.find(u => u.user_id === Number(id));
-		if (user) {
-			setUser(user);
+		try {
+			const userData = await getUser(id);
+			setUser(userData);
 
-			const user_books = moderBooks!.filter(b => {
-				const ownerMatches = b.owner?.user_id === user.user_id;
-				const inWishlist = b.wishlist.some(w => w.user_id === user.user_id);
-				return ownerMatches || inWishlist;
-			});
+			if (moderBooks) {
+				const user_books = moderBooks.filter(b => {
+					const ownerMatches = b.owner?.user_id === userData.user_id;
+					const inWishlist = b.wishlist.some(w => w.user_id === userData.user_id);
+					return ownerMatches || inWishlist;
+				});
+				setUserBooks(user_books);
+			}
 
-			setUserBooks(user_books);
 			setError(null);
-		} else {
-			setError("Пользователь не найден");
+		} catch (err) {
+			console.error('Error fetching user data:', err);
+			setError("Ошибка при загрузке данных пользователя");
 			setUserBooks(null);
 		}
 		setLoading(false);
@@ -39,7 +43,7 @@ export default function UserPageWrapper() {
 	useEffect(() => {
 		setLoading(true);
 		updateUser();
-	}, [id, users, moderBooks]);
+	}, [id, moderBooks]);
 
 	if (loading) return <Spinner animation="border" />;
 	if (error) return <p>{error}</p>;

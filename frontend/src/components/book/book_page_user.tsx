@@ -26,7 +26,7 @@ export default function UserBookPage({ book }: Props) {
 			const user_name = user?.user_name
 			if (user_name === null || user_name === undefined)
 				throw Error("Имя пользователя не было получено")
-			await toggleWishlist(user_name!, book.book_id!)
+			await toggleWishlist(user?.user_id!, book.book_id!);
 			if (init_state === 1)
 				toast.success('Книга удалена')
 			else

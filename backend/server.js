@@ -249,14 +249,18 @@ app.post('/api/rejectextension', verifyToken, requireRole(['admin', 'moder']), a
 // user
 app.post('/api/togglewishlist', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
 	try {
-		const user_name = req.body.user_name
-		const book_id = req.body.book_id
-		const result = await db_request.toggleWishlist(user_name, book_id)
-		res.json(result)
-		log(`toggleWishlist success: \tBook: \t[]`)
+		const book_id = req.body.book_id;
+		const user_id = req.body.user_id;
+		if (!user_id) {
+			throw new Error('User ID cannot be NULL');
+		}
+		const userData = await db_request.toggleWishlist(user_id, book_id);
+		res.json(userData);
+		log(`toggleWishlist success:\tUser:\t{${user_id}}, Book:\t{${book_id}}`);
 	} catch (error) {
-		res.status(500).json({ error: error.message })
-		log(`toggleWishlist failed: \t${error.message}`)
+		console.error('toggleWishlist error:', error);
+		res.status(500).json({ error: error.message });
+		log(`toggleWishlist failed:\t${error.message}`);
 	}
 })
 

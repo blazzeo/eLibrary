@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 import { Spinner } from "react-bootstrap";
 
 const LoginForm: React.FC = () => {
-	console.log('LoginForm rendering');
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
@@ -20,20 +19,17 @@ const LoginForm: React.FC = () => {
 
 		setIsLoading(true);
 		try {
-			console.log('Attempting to authenticate...');
 			const token = await authenticate(username, password);
-			console.log('Authentication successful, got token');
-			
+
 			// Очищаем форму
 			setUsername("");
 			setPassword("");
-			
+
 			// Устанавливаем токен
 			setAuthToken(token);
-			
-			console.log('Token set, showing success message');
+
 			toast.success("Вход выполнен успешно");
-			
+
 			// Перенаправляем на главную
 			navigate("/");
 		} catch (err) {
@@ -75,8 +71,8 @@ const LoginForm: React.FC = () => {
 						required
 					/>
 				</div>
-				<button 
-					type="submit" 
+				<button
+					type="submit"
 					className="btn btn-primary w-100"
 					disabled={isLoading || !username || !password}
 				>
@@ -98,8 +94,8 @@ const LoginForm: React.FC = () => {
 				</button>
 			</form>
 			<div className="mt-3 text-center">
-				<button 
-					className="btn btn-secondary" 
+				<button
+					className="btn btn-secondary"
 					onClick={() => navigate('/register')}
 					disabled={isLoading}
 				>

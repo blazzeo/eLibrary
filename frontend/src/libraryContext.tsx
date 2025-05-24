@@ -13,11 +13,9 @@ interface LibraryContextType {
 	books: BookData[] | null;
 	users: UserData[] | null;
 	user: UserData | null;
-	user_role: string | null;
 	moderBooks: BookInfo[] | null;
 	token: string | null;
 	refreshAll: () => Promise<void>;
-	updateBookStatus: (bookId: number, newStatus: number) => void;
 	setAuthToken: (token: string | null) => void;
 }
 
@@ -34,17 +32,7 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 	const [users, setUsers] = useState<UserData[] | null>(null);
 	const [user, setUser] = useState<UserData | null>(null);
 	const [token, setToken] = useState<string | null>(() => sessionStorage.getItem("token"));
-	const [user_role, setRole] = useState<string | null>(() => {
-		const storedToken = sessionStorage.getItem("token");
-		if (storedToken) {
-			const payload = parseJwt(storedToken);
-			return payload?.role || null;
-		}
-		return null;
-	});
 	const [moderBooks, setModerBooks] = useState<BookInfo[] | null>(null);
-	const [isRefreshing, setIsRefreshing] = useState(false);
-	const [lastRefreshTime, setLastRefreshTime] = useState(0);
 
 	const setAuthToken = useCallback((newToken: string | null) => {
 		console.log('setAuthToken called with:', newToken);
@@ -53,55 +41,25 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 		setUsers(null);
 		setUser(null);
 		setModerBooks(null);
-		
+
 		if (newToken) {
 			const parsed_token = parseJwt(newToken);
 			if (parsed_token) {
 				sessionStorage.setItem("token", newToken);
-				setRole(parsed_token.role);
 				setToken(newToken);
 			} else {
 				console.error('Invalid token provided to setAuthToken');
 				sessionStorage.removeItem("token");
-				setRole(null);
 				setToken(null);
 			}
 		} else {
 			sessionStorage.removeItem("token");
-			setRole(null);
 			setToken(null);
 		}
 	}, []);
 
-	// Функция для локального обновления статуса книги
-	const updateBookStatus = useCallback((bookId: number, newStatus: number) => {
-		console.log('Updating book status locally:', { bookId, newStatus });
-		setBooks(prevBooks => {
-			if (!prevBooks) return null;
-			
-			// Находим книгу и обновляем её статус
-			const updatedBooks = prevBooks.map(book => 
-				book.book_id === bookId 
-					? { ...book, loan_status: newStatus } 
-					: book
-			);
-			
-			console.log('Updated books:', updatedBooks);
-			return updatedBooks;
-		});
-	}, []);
-
 	const refreshAll = useCallback(async () => {
-		const now = Date.now();
-		// Предотвращаем слишком частые обновления (минимум 1 секунда между обновлениями)
-		if (isRefreshing || (now - lastRefreshTime < 1000)) {
-			console.log('Skipping refresh - too soon or already refreshing');
-			return;
-		}
-
 		console.log('Starting refreshAll with token:', token);
-		setIsRefreshing(true);
-		setLastRefreshTime(now);
 
 		try {
 			if (!token) {
@@ -109,76 +67,73 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 				setBooks(null);
 				setUsers(null);
 				setUser(null);
-				setRole(null);
 				setModerBooks(null);
-				return;
+				return; // Выходим без показа ошибки, так как это нормальная ситуация при логауте
 			}
 
 			const payload = parseJwt(token);
 			if (!payload) {
-				console.error('Invalid token');
+				console.log('Invalid token, clearing data');
 				setAuthToken(null);
-				return;
+				return; // Также выходим без ошибки
 			}
 
 			console.log('Fetching data for role:', payload.role);
-			setRole(payload.role);
 
+			// Сначала получаем обновленные данные пользователя
+			console.log('Fetching user data for ID:', payload.user_id);
 			const fetchedUser = await getUser(payload.user_id);
-			console.log('Fetched user:', fetchedUser);
+			console.log('Fetched user data:', fetchedUser);
 			setUser(fetchedUser);
 
-			switch (payload.role) {
-				case 'user': {
-					console.log('Fetching books for user:', payload.user_id);
-					const fetchedBooks = await getBooks(payload.user_id);
-					console.log('Fetched books:', fetchedBooks);
-					setBooks(fetchedBooks);
-					break;
-				}
-				case 'moder':
-				case 'admin': {
-					console.log('Fetching admin/moder data');
-					const [fetchedUsers, fetchedModerBooks] = await Promise.all([
-						getUsers(),
-						getModerBooks(),
-					]);
-					console.log('Fetched data:', { users: fetchedUsers, books: fetchedModerBooks });
-					setUsers(fetchedUsers);
-					setModerBooks(fetchedModerBooks);
-					break;
-				}
-				default:
-					console.log('Unknown role:', payload.role);
-					setUsers(null);
-					setModerBooks(null);
+			// Затем получаем книги для текущего пользователя
+			console.log('Fetching books for user:', payload.user_id);
+			const fetchedBooks = await getBooks(payload.user_id);
+			console.log('Fetched books:', fetchedBooks);
+			setBooks(fetchedBooks);
+
+			// Если пользователь админ или модератор, получаем дополнительные данные
+			if (fetchedUser.user_role === 'admin' || fetchedUser.user_role === 'moder') {
+				console.log('Fetching admin/moder data');
+				const [fetchedUsers, fetchedModerBooks] = await Promise.all([
+					getUsers(),
+					getModerBooks(),
+				]);
+				console.log('Fetched admin data:', {
+					users: fetchedUsers,
+					moderBooks: fetchedModerBooks
+				});
+				setUsers(fetchedUsers);
+				setModerBooks(fetchedModerBooks);
+			} else {
+				console.log('Regular user, clearing admin data');
+				setUsers(null);
+				setModerBooks(null);
 			}
 		} catch (error) {
 			console.error("Ошибка при обновлении данных:", error);
-			toast.error("Ошибка при обновлении данных");
-		} finally {
-			setIsRefreshing(false);
+			// Показываем ошибку только если есть токен и это не ошибка авторизации
+			if (token && (error as any)?.response?.status !== 401 && (error as any)?.response?.status !== 403) {
+				toast.error("Ошибка при обновлении данных");
+			}
 		}
-	}, [token, isRefreshing, lastRefreshTime, setAuthToken]);
+	}, [token, setAuthToken]);
 
 	useEffect(() => {
-		console.log('Token changed, current token:', token);
 		if (token) {
 			refreshAll();
 		}
-	}, [token, refreshAll]);
+	}, [token]);
 
 	const contextValue = useMemo(() => ({
 		books,
-		user_role,
 		token,
 		user,
 		users,
 		moderBooks,
 		refreshAll,
-		updateBookStatus,
 		setAuthToken,
-	}), [books, user_role, token, user, users, moderBooks, refreshAll, updateBookStatus, setAuthToken]);
+	}), [books, token, user, users, moderBooks, setAuthToken]);
 
 	return (
 		<LibraryContext.Provider value={contextValue}>

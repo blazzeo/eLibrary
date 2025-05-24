@@ -752,7 +752,17 @@ CREATE OR REPLACE FUNCTION get_user(p_user_id INTEGER)
 RETURNS JSON AS $$
 DECLARE
     result JSON;
+    user_exists BOOLEAN;
 BEGIN
+    -- Проверяем существование пользователя
+    SELECT EXISTS (
+        SELECT 1 FROM users WHERE user_id = p_user_id
+    ) INTO user_exists;
+
+    IF NOT user_exists THEN
+        RAISE EXCEPTION 'User with ID % not found', p_user_id;
+    END IF;
+
     SELECT json_build_object(
         'user_id', u.user_id,
         'user_name', u.user_name,
@@ -821,12 +831,13 @@ $$;
 
 
 --  GET BOOKS + USER's BOOKSHELF
+--drop function get_books(integer);
 CREATE OR REPLACE FUNCTION get_books(p_user_id INTEGER)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
     authors text[],
-    genres varchar[],	
+    genres varchar[],    
     total_pages INT,
     rating DECIMAL(4, 2),
     isbn VARCHAR,
@@ -835,49 +846,66 @@ RETURNS TABLE(
     return_date DATE,
     loan_status INT 
     -- 0: mine 
-    -- 1: do wishlish,
-    -- 2: not wishlish
+    -- 1: in wishlist,
+    -- 2: not in wishlist
 ) AS $$
 BEGIN
     RETURN QUERY
+    WITH book_status AS (
+        SELECT
+            b.book_id,
+            b.title,
+            b.total_pages,
+            b.rating,
+            b.isbn,
+            b.published_date,
+            bl.borrow_date,
+            bl.return_date,
+            CASE
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM book_loans bl2
+                    WHERE bl2.book_id = b.book_id 
+                    AND bl2.user_id = p_user_id
+                ) THEN 0  -- Book is mine
+                WHEN EXISTS (
+                    SELECT 1 
+                    FROM wishlist w 
+                    WHERE w.book_id = b.book_id 
+                    AND w.user_id = p_user_id
+                ) THEN 1  -- book is in my wishlist
+                ELSE 2  -- book is not in my wishlist
+            END AS loan_status
+        FROM 
+            books b
+        LEFT JOIN
+            book_loans bl ON bl.book_id = b.book_id
+    )
     SELECT
-        b.book_id,
-        b.title,
-		ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) as authors,
-		ARRAY_AGG(DISTINCT g.genre) as genres,
-        b.total_pages,
-        b.rating,
-        b.isbn,
-        b.published_date,
-		bl.borrow_date,
-		bl.return_date,
-        CASE
-            WHEN p_user_id IS NOT NULL AND EXISTS (
-                SELECT 1
-                FROM book_loans bl
-                WHERE bl.book_id = b.book_id and bl.user_id = p_user_id
-			) THEN 0  -- Book is mine
-            WHEN p_user_id IS NOT NULL AND EXISTS (
-                SELECT 1 
-                FROM wishlist w 
-                WHERE w.book_id = b.book_id AND w.user_id = p_user_id
-            ) THEN 1  -- book is in my wishlish
-            ELSE 2  -- book is not in my wishlist
-        END AS loan_status
+        bs.book_id,
+        bs.title,
+        ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) as authors,
+        ARRAY_AGG(DISTINCT g.genre) as genres,
+        bs.total_pages,
+        bs.rating,
+        bs.isbn,
+        bs.published_date,
+        bs.borrow_date,
+        bs.return_date,
+        bs.loan_status
     FROM 
-        books b
-	JOIN
-		book_authors ba on b.book_id = ba.book_id
-	JOIN
-		authors a on a.author_id = ba.author_id
-	JOIN
-		book_genres bg on b.book_id = bg.book_id
-	JOIN
-		genres g on bg.genre_id = g.genre_id
-	LEFT JOIN
-		book_loans bl on bl.book_id = b.book_id
-	GROUP BY
-        b.book_id, b.title, b.total_pages, b.rating, b.isbn, b.published_date, bl.return_date, bl.borrow_date;
+        book_status bs
+    JOIN
+        book_authors ba ON bs.book_id = ba.book_id
+    JOIN
+        authors a ON a.author_id = ba.author_id
+    JOIN
+        book_genres bg ON bs.book_id = bg.book_id
+    JOIN
+        genres g ON bg.genre_id = g.genre_id
+    GROUP BY
+        bs.book_id, bs.title, bs.total_pages, bs.rating, bs.isbn, bs.published_date, 
+        bs.borrow_date, bs.return_date, bs.loan_status;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -1059,21 +1087,23 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- toggle wishlist
+drop procedure toggle_wishlist(integer, integer);
 CREATE OR REPLACE PROCEDURE toggle_wishlist (
-    p_user_name VARCHAR,
+    p_user_id INTEGER,
     p_book_id INTEGER
 )
 LANGUAGE plpgsql
 AS $$
 DECLARE
-    v_user_id INTEGER;
     user_exists BOOLEAN;
     book_exists BOOLEAN;
     already_in_wishlist BOOLEAN;
+    affected_rows INTEGER;
+    operation_result BOOLEAN;
 BEGIN
     -- Проверка на NULL значения
-    IF p_user_name IS NULL THEN
-        RAISE EXCEPTION 'User name cannot be NULL';
+    IF p_user_id IS NULL THEN
+        RAISE EXCEPTION 'User ID cannot be NULL';
     END IF;
     
     IF p_book_id IS NULL THEN
@@ -1081,12 +1111,10 @@ BEGIN
     END IF;
     
     -- Проверка существования пользователя
-    SELECT EXISTS(SELECT 1 FROM users WHERE user_name = p_user_name) INTO user_exists;
+    SELECT EXISTS(SELECT 1 FROM users WHERE user_id = p_user_id) INTO user_exists;
     IF NOT user_exists THEN
-        RAISE EXCEPTION 'User with name % does not exist', p_user_name;
+        RAISE EXCEPTION 'User with ID % does not exist', p_user_id;
     END IF;
-
-    SELECT u.user_id FROM users u WHERE u.user_name = p_user_name INTO v_user_id;
 
     -- Проверка существования книги
     SELECT EXISTS(SELECT 1 FROM books WHERE book_id = p_book_id) INTO book_exists;
@@ -1098,21 +1126,52 @@ BEGIN
     SELECT EXISTS(
         SELECT 1 
         FROM wishlist w 
-        WHERE w.user_id = v_user_id AND w.book_id = p_book_id
+        WHERE w.user_id = p_user_id AND w.book_id = p_book_id
     ) INTO already_in_wishlist;
+    RAISE NOTICE 'Already in wishlist: %', already_in_wishlist;
 
     IF already_in_wishlist THEN
-		-- Удаление из списка
+        -- Удаление из списка
         DELETE 
-		FROM wishlist 
-		WHERE user_id = v_user_id AND book_id = p_book_id; 
+        FROM wishlist 
+        WHERE user_id = p_user_id AND book_id = p_book_id;
+        GET DIAGNOSTICS affected_rows = ROW_COUNT;
+        RAISE NOTICE 'Deleted % rows from wishlist', affected_rows;
+        
+        IF affected_rows = 0 THEN
+            RAISE EXCEPTION 'Failed to delete from wishlist';
+        END IF;
+        operation_result := false;
     ELSE
         -- Добавление в вишлист
         INSERT
-		INTO wishlist (user_id, book_id)
-        VALUES (v_user_id, p_book_id);
+        INTO wishlist (user_id, book_id, request_date)
+        VALUES (p_user_id, p_book_id, CURRENT_DATE);
+        GET DIAGNOSTICS affected_rows = ROW_COUNT;
+        RAISE NOTICE 'Inserted % rows into wishlist', affected_rows;
         
-        RAISE NOTICE 'Book % successfully added to wishlist for user %', p_book_id, p_user_name;
+        IF affected_rows = 0 THEN
+            RAISE EXCEPTION 'Failed to insert into wishlist';
+        END IF;
+        operation_result := true;
+    END IF;
+
+    -- Проверяем результат
+    SELECT EXISTS(
+        SELECT 1 
+        FROM wishlist w 
+        WHERE w.user_id = p_user_id AND w.book_id = p_book_id
+    ) INTO already_in_wishlist;
+    RAISE NOTICE 'After operation in wishlist: %', already_in_wishlist;
+
+    -- Проверяем общее количество записей в вишлисте для пользователя
+    RAISE NOTICE 'Total wishlist items for user %: %', 
+        p_user_id, 
+        (SELECT COUNT(*) FROM wishlist WHERE user_id = p_user_id);
+        
+    -- Финальная проверка
+    IF already_in_wishlist = (NOT operation_result) THEN
+        RAISE EXCEPTION 'Operation failed: wishlist status did not change as expected';
     END IF;
 END;
 $$;

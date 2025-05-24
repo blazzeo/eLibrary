@@ -37,12 +37,21 @@ function Main() {
 }
 
 function App() {
-	const { user_role, token } = useLibrary();
-	console.log('App rendering with token:', token, 'and role:', user_role);
+	const { user, token } = useLibrary();
 
 	const getDashboard = () => {
-		console.log('getDashboard called with role:', user_role);
-		switch (user_role) {
+		// Если токен есть, но пользователь еще не загружен, показываем загрузку
+		if (token && !user) {
+			return (
+				<div className="d-flex justify-content-center align-items-center" style={{ height: "80vh" }}>
+					<div className="spinner-border text-primary" role="status">
+						<span className="visually-hidden">Загрузка...</span>
+					</div>
+				</div>
+			);
+		}
+
+		switch (user?.user_role) {
 			case 'user':
 				return <UserDashboard />;
 			case 'admin':

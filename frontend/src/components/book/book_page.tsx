@@ -24,7 +24,7 @@ interface Props {
 
 export default function BookPage({ bookInfo }: Props) {
 	const navigate = useNavigate()
-	const { refreshAll, users, user_role } = useLibrary();
+	const { refreshAll, users, user } = useLibrary();
 	const { book, owner, extension_request, wishlist } = bookInfo;
 
 	const [showEditModal, setShowEditModal] = useState(false);
@@ -144,9 +144,9 @@ export default function BookPage({ bookInfo }: Props) {
 		}
 	};
 
-	const delete_wish = async (user_name: string) => {
+	const delete_wish = async (user_id: number) => {
 		try {
-			await toggleWishlist(user_name, book.book_id)
+			await toggleWishlist(user_id, book.book_id);
 			toast.success('Пользователь удален из списка')
 		} catch (error) {
 			console.error(error)
@@ -155,6 +155,10 @@ export default function BookPage({ bookInfo }: Props) {
 			refreshAll()
 		}
 	}
+
+	const formatDate = (date: string | Date) => {
+		return new Date(date).toLocaleDateString();
+	};
 
 	return (
 		<div className="container py-4">
@@ -187,7 +191,7 @@ export default function BookPage({ bookInfo }: Props) {
 									</div>
 								</div>
 
-								{user_role == 'admin' && <div>
+								{user?.user_role == 'admin' && <div>
 									<Button
 										variant="outline-danger"
 										size="sm"
@@ -282,34 +286,35 @@ export default function BookPage({ bookInfo }: Props) {
 					)}
 				</Tab>
 
-				<Tab eventKey="wishlist" title="Отложенные">
-					<Card>
-						<Card.Body>
-							<Card.Title>Пользователи, ожидающие книгу</Card.Title>
-							{wishlist.length > 0 ? (
-								<ListGroup variant="flush">
-									{wishlist.map(user => (
-										<ListGroup.Item key={user.user_id}>
-											<div className="d-flex justify-content-between align-items-center">
-												<div>
-													<h5>{user.user_name}</h5>
-													<small className="text-muted">
-														Запрос от {user.request_date}
-													</small>
+				<Tab eventKey="wishlist" title="Отложили">
+					<div className="p-3">
+						{wishlist && wishlist.length > 0 ? (
+							<div className="list-group">
+								{wishlist.map(user => (
+									<div key={user.user_id} className="list-group-item">
+										<div className="d-flex justify-content-between align-items-center">
+											<div>
+												<strong>{user.user_name}</strong>
+												<div className="small text-muted">
+													Отложил(а): {formatDate(user.request_date)}
 												</div>
-												{/* Button here */}
-												<button className="btn btn-outline-danger" onClick={() => delete_wish(user.user_name)}>Снять</button>
 											</div>
-										</ListGroup.Item>
-									))}
-								</ListGroup>
-							) : (
-								<Alert variant="info">
-									Нет пользователей, ожидающих эту книгу
-								</Alert>
-							)}
-						</Card.Body>
-					</Card>
+											<button
+												className="btn btn-outline-danger btn-sm"
+												onClick={() => delete_wish(user.user_id)}
+											>
+												Снять
+											</button>
+										</div>
+									</div>
+								))}
+							</div>
+						) : (
+							<Alert variant="info">
+								Нет пользователей, отложивших эту книгу
+							</Alert>
+						)}
+					</div>
 				</Tab>
 			</Tabs>
 
@@ -443,7 +448,7 @@ export default function BookPage({ bookInfo }: Props) {
 											key={u.user_id}
 											className="px-3 py-2 dropdown-item"
 											style={{ cursor: "pointer" }}
-											onClick={() => handleSelectUser(user.user_name)}
+											onClick={() => handleSelectUser(u.user_name)}
 										>
 											{u.user_name}
 										</div>

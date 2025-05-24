@@ -16,7 +16,7 @@ import { useLibrary } from "../../libraryContext";
 
 export function UserTable() {
 	const navigate = useNavigate();
-	const { users, user, user_role } = useLibrary();
+	const { users, user } = useLibrary();
 
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -43,7 +43,7 @@ export function UserTable() {
 	return (
 		<Box>
 			{/* Кнопка по центру */}
-			{user_role == 'admin' && < Box sx={{ display: "flex", justifyContent: "center", my: 3 }}>
+			{user?.user_role == 'admin' && < Box sx={{ display: "flex", justifyContent: "center", my: 3 }}>
 				<Button
 					variant="contained"
 					color="primary"
@@ -69,7 +69,7 @@ export function UserTable() {
 							<TableCell sx={{ fontWeight: "bold" }}>Дата регистрации</TableCell>
 							<TableCell sx={{ fontWeight: "bold" }}>Роль</TableCell>
 							<TableCell sx={{ fontWeight: "bold" }}>Книг взято</TableCell>
-							<TableCell sx={{ fontWeight: "bold" }}>В желаемом</TableCell>
+							<TableCell sx={{ fontWeight: "bold" }}>Отложенные книги</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>

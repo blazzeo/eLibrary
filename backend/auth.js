@@ -40,7 +40,6 @@ export function verifyToken(req, res, next) {
 	try {
 		const decoded = jwt.verify(token, JWT_SECRET);
 		req.user = decoded; // Прокидываем payload в запрос
-		// console.log('authN: Token verified', decoded);
 		next();
 	} catch (err) {
 		console.error("authN: Invalid token", err.message);
@@ -58,7 +57,6 @@ export function requireRole(roles = []) {
 			return res.status(403).json({ error: "Access denied" });
 		}
 
-		console.log(`authZ: Access granted (${userRole})`);
 		next();
 	};
 }

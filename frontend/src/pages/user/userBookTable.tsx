@@ -11,11 +11,12 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 export default function UserBookTable() {
-	const { books, refreshAll, user, updateBookStatus } = useLibrary();
+	const { books, refreshAll, user } = useLibrary();
 	const navigate = useNavigate();
 	const [loadingBookId, setLoadingBookId] = useState<number | null>(null);
 
 	const handleWishlist = useCallback(async (bookId: number, currentStatus: number) => {
+		console.log("Handling wishlist for book:", bookId, "current status:", currentStatus);
 		if (!user?.user_name || loadingBookId === bookId) return;
 
 		// Нельзя добавить в желаемое книгу, которая уже на руках
@@ -26,35 +27,27 @@ export default function UserBookTable() {
 
 		try {
 			setLoadingBookId(bookId);
-			
-			// Оптимистичное обновление UI только для статусов 1 и 2
-			if (currentStatus === 1 || currentStatus === 2) {
-				const newStatus = currentStatus === 1 ? 2 : 1;
-				updateBookStatus(bookId, newStatus);
-			}
-			
+
+			const user_id = user.user_id;
 			// Отправляем запрос на сервер
-			await toggleWishlist(user.user_name, bookId);
-			
+			await toggleWishlist(user_id, bookId);
+
 			// Показываем уведомление
 			toast.success(
-				currentStatus === 1 
-					? "Книга удалена из списка желаемого" 
-					: "Книга добавлена в список желаемого"
+				currentStatus === 1
+					? "Книга удалена из списка отложенных"
+					: "Книга добавлена в список отложенных"
 			);
+
+			// Принудительно обновляем данные
+			await refreshAll();
 		} catch (error) {
-			console.error("Ошибка при обновлении списка желаемого:", error);
-			// Возвращаем предыдущее состояние в случае ошибки
-			if (currentStatus === 1 || currentStatus === 2) {
-				updateBookStatus(bookId, currentStatus);
-			}
-			toast.error("Не удалось обновить список желаемого");
+			console.error("Ошибка при обновлении списка отложенных:", error);
+			toast.error("Не удалось обновить список отложенных");
 		} finally {
 			setLoadingBookId(null);
-			// Обновляем данные с сервера
-			refreshAll();
 		}
-	}, [user, loadingBookId, updateBookStatus, refreshAll]);
+	}, [user, loadingBookId, refreshAll]);
 
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
 		() => [
@@ -133,18 +126,16 @@ export default function UserBookTable() {
 							disabled={isLoading}
 						>
 							{isLoading ? (
-								<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-							) : loanStatus === 1 ? (
-								"Удалить из желаемого"
+								"Загрузка..."
 							) : (
-								"Добавить в желаемое"
+								loanStatus === 1 ? "Удалить из отложенных" : "Отложить книгу"
 							)}
 						</button>
 					);
 				},
 			},
 		],
-		[loadingBookId, handleWishlist]
+		[handleWishlist, loadingBookId]
 	);
 
 	const table = useMaterialReactTable<BookData>({

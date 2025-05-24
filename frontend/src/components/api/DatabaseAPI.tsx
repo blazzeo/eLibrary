@@ -22,13 +22,15 @@ export async function authenticate(username: string, password: string) {
 	return response_json.token;
 }
 
-export async function getUser(user_name: string) {
+export async function getUser(user_id: string) {
 	try {
-		const response = await axios.get(SERVER + `/api/users/${user_name}`)
-		return response.data
+		console.log('getUser: Fetching data for user_id:', user_id);
+		const response = await axios.get(SERVER + `/api/users/${user_id}`);
+		console.log('getUser: Received response:', response.data);
+		return response.data;
 	} catch (error) {
-		console.error("Error get user: ", error)
-		throw error
+		console.error("Error get user: ", error);
+		throw error;
 	}
 }
 
@@ -234,12 +236,14 @@ export async function deleteBook(book_id: number) {
 	}
 }
 
-export async function toggleWishlist(user_name: string, book_id: number) {
+export async function toggleWishlist(user_id: number, book_id: number) {
 	try {
-		const response = await axios.post(SERVER + '/api/togglewishlist', { user_name: user_name, book_id: book_id })
-		return response.data
+		console.log('toggleWishlist: Sending request for book_id:', book_id);
+		const response = await axios.post(SERVER + '/api/togglewishlist', { user_id: user_id, book_id: book_id });
+		console.log('toggleWishlist: Received response:', response.data);
+		return response.data; // Теперь сервер возвращает обновленные данные пользователя напрямую
 	} catch (error) {
-		console.error(error);
+		console.error('toggleWishlist error:', error);
 		throw error;
 	}
 }
