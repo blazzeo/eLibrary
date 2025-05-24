@@ -37,13 +37,42 @@ export function log(message) {
 app.post('/api/books', verifyToken, requireRole(['admin']), async (req, res) => {
 	try {
 		const book = req.body.book
-		console.log(book)
+		console.log('Adding book:', book)
 		const result = await db_request.addBook(book)
-		res.json(result)
-		log(`addBook success:\tBook:\t{${book}}`)
+
+		console.log('Server received result:', result)
+
+		// Проверяем, что результат существует и имеет нужное поле
+		if (!result || !result[0] || !result[0].add_full_book) {
+			res.status(500).json({ error: 'Неожиданный формат ответа от базы данных' });
+			log(`addBook failed: unexpected response format`);
+			return;
+		}
+
+		// Парсим строку ответа, которая приходит в формате '(success,"message")'
+		const responseStr = result[0].add_full_book;
+		const match = responseStr.match(/\((.*?),(.*?)\)/);
+		
+		if (!match) {
+			res.status(500).json({ error: 'Не удалось разобрать ответ от базы данных' });
+			log(`addBook failed: cannot parse response ${responseStr}`);
+			return;
+		}
+
+		const success = match[1].trim() === 't';
+		const message = match[2].replace(/"/g, '');
+
+		if (!success) {
+			res.status(400).json({ error: message });
+			log(`addBook failed: ${message}`);
+			return;
+		}
+
+		res.json({ message: message });
+		log(`addBook success: Book: ${JSON.stringify(book)}`);
 	} catch (error) {
 		res.status(500).json({ error: error.message });
-		log(`addBook failed:\t${error.message}`)
+		log(`addBook failed: ${error.message}`);
 	}
 })
 

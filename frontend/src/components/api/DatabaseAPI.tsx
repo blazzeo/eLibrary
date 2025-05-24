@@ -112,23 +112,39 @@ export async function getModerBooks() {
 
 export async function addBook(book: BookData) {
 	try {
-		const response = await axios.post(SERVER + `/api/books`, { book: book })
-		return response.data
-	} catch (error) {
-		console.error(error)
-		throw error
+		const response = await axios.post(SERVER + `/api/books`, { book: book });
+		console.log(response)
+		if (response.data.error) {
+			throw new Error(response.data.error);
+		}
+		return response.data;
+	} catch (error: any) {
+		if (error.response?.data?.error) {
+			throw new Error(error.response.data.error);
+		}
+		throw error;
 	}
 }
 
 export async function addLoan(username: string | null, bookId: number | null, date: Date) {
 	try {
-		if (username === null || bookId === null)
-			throw 'invalid username or bookid'
-		const response = await axios.post(SERVER + `/api/loans`, { user_name: username, book_id: bookId, return_date: date })
-		return response.data
-	} catch (error) {
-		console.error(error)
-		throw error
+		if (!username || !bookId) {
+			throw new Error('Необходимо указать пользователя и книгу');
+		}
+		const response = await axios.post(SERVER + `/api/loans`, {
+			user_name: username,
+			book_id: bookId,
+			return_date: date
+		});
+		if (response.data.error) {
+			throw new Error(response.data.error);
+		}
+		return response.data;
+	} catch (error: any) {
+		if (error.response?.data?.error) {
+			throw new Error(error.response.data.error);
+		}
+		throw error;
 	}
 }
 
@@ -228,7 +244,7 @@ export async function editBook(book: BookData) {
 
 export async function deleteBook(book_id: number) {
 	try {
-		const response = await axios.delete(SERVER + `/api/deletebook/${book_id} `)
+		const response = await axios.delete(SERVER + `/api/books/${book_id} `)
 		return response.data
 	} catch (error) {
 		console.error(error);

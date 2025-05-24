@@ -134,13 +134,27 @@ export default function BookPage({ bookInfo }: Props) {
 
 	const handle_borrow = async () => {
 		try {
-			await addLoan(selectedUser, book.book_id, new Date(returnDate));
+			if (!selectedUser || !returnDate) {
+				toast.error('Необходимо выбрать пользователя и дату возврата');
+				return;
+			}
+			const response = await addLoan(selectedUser, book.book_id, new Date(returnDate));
+			if (response.error) {
+				toast.error(response.error);
+				return;
+			}
 			toast.success(`Книга выдана пользователю ${selectedUser}`);
-		} catch (err: any) {
-			toast.error(err?.response?.data?.error || 'Ошибка при выдаче книги');
-		} finally {
 			setShowLoanModal(false);
 			refreshAll();
+		} catch (err: any) {
+			if (err.response?.data?.error) {
+				toast.error(err.response.data.error);
+			} else if (err.message) {
+				toast.error(err.message);
+			} else {
+				toast.error('Произошла неизвестная ошибка при выдаче книги');
+			}
+			console.error('Ошибка при выдаче книги:', err);
 		}
 	};
 

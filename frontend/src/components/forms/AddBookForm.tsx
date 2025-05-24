@@ -259,6 +259,17 @@ export function AddBookForm() {
 			toast.error("Добавьте хотя бы один жанр!");
 			return false;
 		}
+
+		// Валидация даты публикации
+		const publishedYear = new Date(publishedDate).getFullYear();
+		const currentYear = new Date().getFullYear();
+		const minYear = 1800;
+
+		if (publishedYear < minYear || publishedYear > currentYear) {
+			toast.error(`Год публикации должен быть между ${minYear} и ${currentYear}`);
+			return false;
+		}
+
 		return true;
 	};
 
@@ -281,7 +292,13 @@ export function AddBookForm() {
 		};
 
 		try {
-			await addBook(book);
+			const response = await addBook(book);
+			if (response.error) {
+				toast.error(response.error);
+				return;
+			}
+			
+			// Очищаем форму только при успешном добавлении
 			setTitle("");
 			setTotalPages(null);
 			setRating(null);
@@ -289,10 +306,21 @@ export function AddBookForm() {
 			setPublishedDate("");
 			setSelectedAuthors([]);
 			setSelectedGenres([]);
-			toast.success("Книга успешно добавлена!");
+			toast.success(response.message || "Книга успешно добавлена!");
 			refreshAll();
-		} catch (error) {
-			toast.error(error instanceof Error ? error.message : "Произошла неизвестная ошибка.");
+		} catch (error: any) {
+			// Обработка различных типов ошибок
+			if (error.response?.data?.error) {
+				// Ошибка с сервера с конкретным сообщением
+				toast.error(error.response.data.error);
+			} else if (error.message) {
+				// Ошибка с сообщением
+				toast.error(error.message);
+			} else {
+				// Неизвестная ошибка
+				toast.error("Произошла неизвестная ошибка при добавлении книги");
+			}
+			console.error("Ошибка при добавлении книги:", error);
 		}
 	};
 
@@ -363,7 +391,17 @@ export function AddBookForm() {
 						<Col md={6}>
 							<Form.Group>
 								<Form.Label>Дата публикации</Form.Label>
-								<Form.Control type="date" value={publishedDate} onChange={(e) => setPublishedDate(e.target.value)} required />
+								<Form.Control 
+									type="date" 
+									value={publishedDate} 
+									onChange={(e) => setPublishedDate(e.target.value)} 
+									min="1800-01-01"
+									max={new Date().toISOString().split('T')[0]}
+									required 
+								/>
+								<Form.Text className="text-muted">
+									Дата должна быть между 1800 годом и текущей датой
+								</Form.Text>
 							</Form.Group>
 						</Col>
 					</Row>

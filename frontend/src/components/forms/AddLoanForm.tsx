@@ -26,13 +26,32 @@ export default function AddLoanForm() {
 	const handle_form = async (event: React.FormEvent) => {
 		event.preventDefault();
 		try {
-			await addLoan(selectedUser, selectedBook.id, selectedDate);
+			if (!selectedUser || selectedBook.id === -1) {
+				toast.error('Необходимо выбрать пользователя и книгу');
+				return;
+			}
+			const response = await addLoan(selectedUser, selectedBook.id, selectedDate);
+			if (response.error) {
+				toast.error(response.error);
+				return;
+			}
 			toast.success('Бронь успешно добавлена');
+			// Очищаем форму
+			setSelectedUser('');
+			setSelectedBook({ id: -1, name: '' });
+			setSelectedDate(new Date());
+			setBookSearch('');
+			setUserSearch('');
+			refreshAll();
 		} catch (err: any) {
-			console.log(err)
-			toast.success('Ошибка при создании брони');
-		} finally {
-			refreshAll()
+			console.error('Ошибка при создании брони:', err);
+			if (err.response?.data?.error) {
+				toast.error(err.response.data.error);
+			} else if (err.message) {
+				toast.error(err.message);
+			} else {
+				toast.error('Произошла неизвестная ошибка при создании брони');
+			}
 		}
 	};
 

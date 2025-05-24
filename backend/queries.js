@@ -236,21 +236,21 @@ export async function toggleWishlist(user_id, book_id) {
 			console.log('Getting updated user data...')
 			const userResult = await user.query('SELECT get_user($1);', [user_id])
 			console.log('Raw user result:', userResult.rows)
-			
+
 			if (!userResult.rows || userResult.rows.length === 0) {
 				throw new Error('Failed to get updated user data after toggle')
 			}
-			
+
 			const userData = userResult.rows[0].get_user
 			if (!userData) {
 				throw new Error('get_user returned null or undefined')
 			}
-			
+
 			console.log('Processed user data:', userData)
 
 			// Фиксируем транзакцию
 			await user.query('COMMIT');
-			
+
 			return userData
 		} catch (err) {
 			// В случае ошибки откатываем транзакцию

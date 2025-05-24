@@ -125,10 +125,10 @@ $$;
 
 
 --	ADD BOOK - json
-DROP PROCEDURE IF EXISTS add_full_book(json);
+DROP function IF EXISTS add_full_book(json);
 
 CREATE OR REPLACE FUNCTION add_full_book(book JSON)
-RETURNS BOOLEAN AS $$
+RETURNS TABLE(success BOOLEAN, message TEXT) AS $$
 DECLARE
     v_title VARCHAR := book->>'title';
     v_total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
@@ -141,60 +141,85 @@ DECLARE
     v_author_id INT;
     v_genre_id INT;
 BEGIN
-    RAISE NOTICE 'Starting add_full_book with title: %', v_title;
+    -- Валидация входных данных
+    IF v_title IS NULL OR trim(v_title) = '' THEN
+        RETURN QUERY SELECT false, 'Название книги не может быть пустым';
+        RETURN;
+    END IF;
+
+    IF v_rating IS NOT NULL AND (v_rating < 0 OR v_rating > 5) THEN
+        RETURN QUERY SELECT false, 'Рейтинг должен быть между 0 и 5';
+        RETURN;
+    END IF;
+
+    IF v_isbn IS NOT NULL AND length(v_isbn) > 13 THEN
+        RETURN QUERY SELECT false, 'ISBN не может быть длиннее 13 символов';
+        RETURN;
+    END IF;
 
     -- Создаем книгу
-    INSERT INTO books (title, total_pages, rating, isbn, published_date)
-    VALUES (v_title, v_total_pages, v_rating, v_isbn, v_published_date)
-    RETURNING book_id INTO v_book_id;
-    
-    RAISE NOTICE 'Created book with ID: %', v_book_id;
+    BEGIN
+        INSERT INTO books (title, total_pages, rating, isbn, published_date)
+        VALUES (v_title, v_total_pages, v_rating, v_isbn, v_published_date)
+        RETURNING book_id INTO v_book_id;
+        
+        RAISE NOTICE 'Created book with ID: %', v_book_id;
+    EXCEPTION WHEN OTHERS THEN
+        RETURN QUERY SELECT false, 'Ошибка при создании книги: ' || SQLERRM;
+        RETURN;
+    END;
 
     -- Добавляем авторов
-    FOR author IN SELECT * FROM json_array_elements(book->'authors')
-    LOOP
-        RAISE NOTICE 'Processing author: %', author;
-        
-        SELECT create_or_get_author(
-            author->>'first_name',
-            author->>'middle_name',
-            author->>'last_name'
-        ) INTO v_author_id;
-        
-        RAISE NOTICE 'Got author ID: %', v_author_id;
+    IF book->'authors' IS NULL OR json_array_length(book->'authors') = 0 THEN
+        RETURN QUERY SELECT false, 'Необходимо указать хотя бы одного автора';
+        RETURN;
+    END IF;
 
-        INSERT INTO book_authors (book_id, author_id)
-        VALUES (v_book_id, v_author_id);
-        
-        RAISE NOTICE 'Added book-author relation: % - %', v_book_id, v_author_id;
-    END LOOP;
+    BEGIN
+        FOR author IN SELECT * FROM json_array_elements(book->'authors')
+        LOOP
+            RAISE NOTICE 'Processing author: %', author;
+            
+            SELECT create_or_get_author(
+                author->>'first_name',
+                author->>'middle_name',
+                author->>'last_name'
+            ) INTO v_author_id;
+            
+            INSERT INTO book_authors (book_id, author_id)
+            VALUES (v_book_id, v_author_id);
+        END LOOP;
+    EXCEPTION WHEN OTHERS THEN
+        -- Удаляем созданную книгу в случае ошибки
+        DELETE FROM books WHERE book_id = v_book_id;
+        RETURN QUERY SELECT false, 'Ошибка при добавлении авторов: ' || SQLERRM;
+        RETURN;
+    END;
 
     -- Добавляем жанры
-    FOR genre_name IN SELECT json_array_elements_text(book->'genres')
-    LOOP
-        RAISE NOTICE 'Processing genre: %', genre_name;
-        
-        SELECT create_or_get_genre(genre_name) INTO v_genre_id;
-        
-        RAISE NOTICE 'Got genre ID: %', v_genre_id;
-
-        INSERT INTO book_genres (book_id, genre_id)
-        VALUES (v_book_id, v_genre_id);
-        
-        RAISE NOTICE 'Added book-genre relation: % - %', v_book_id, v_genre_id;
-    END LOOP;
-
-    RETURN TRUE;
-
-EXCEPTION WHEN OTHERS THEN
-    RAISE NOTICE 'Error in add_full_book: %, SQLSTATE: %', SQLERRM, SQLSTATE;
-    
-    -- Если книга была создана, удаляем её
-    IF v_book_id IS NOT NULL THEN
-        DELETE FROM books WHERE book_id = v_book_id;
+    IF book->'genres' IS NULL OR json_array_length(book->'genres') = 0 THEN
+        RETURN QUERY SELECT false, 'Необходимо указать хотя бы один жанр';
+        RETURN;
     END IF;
-    
-    RETURN FALSE;
+
+    BEGIN
+        FOR genre_name IN SELECT json_array_elements_text(book->'genres')
+        LOOP
+            RAISE NOTICE 'Processing genre: %', genre_name;
+            
+            SELECT create_or_get_genre(genre_name) INTO v_genre_id;
+            
+            INSERT INTO book_genres (book_id, genre_id)
+            VALUES (v_book_id, v_genre_id);
+        END LOOP;
+    EXCEPTION WHEN OTHERS THEN
+        -- Удаляем созданную книгу в случае ошибки
+        DELETE FROM books WHERE book_id = v_book_id;
+        RETURN QUERY SELECT false, 'Ошибка при добавлении жанров: ' || SQLERRM;
+        RETURN;
+    END;
+
+    RETURN QUERY SELECT true, 'Книга успешно добавлена';
 END;
 $$ LANGUAGE plpgsql;
 
