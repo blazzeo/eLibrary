@@ -17,6 +17,7 @@ interface LibraryContextType {
 	token: string | null;
 	refreshAll: () => Promise<void>;
 	setAuthToken: (token: string | null) => void;
+	clearLibraryState: () => void;
 }
 
 const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
@@ -34,13 +35,17 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 	const [token, setToken] = useState<string | null>(() => sessionStorage.getItem("token"));
 	const [moderBooks, setModerBooks] = useState<BookInfo[] | null>(null);
 
-	const setAuthToken = useCallback((newToken: string | null) => {
-		console.log('setAuthToken called with:', newToken);
-		// Очищаем все данные перед установкой нового токена
+	const clearLibraryState = useCallback(() => {
 		setBooks(null);
 		setUsers(null);
 		setUser(null);
 		setModerBooks(null);
+		setToken(null);
+	}, []);
+
+	const setAuthToken = useCallback((newToken: string | null) => {
+		console.log('setAuthToken called with:', newToken);
+		clearLibraryState();
 
 		if (newToken) {
 			const parsed_token = parseJwt(newToken);
@@ -50,13 +55,11 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 			} else {
 				console.error('Invalid token provided to setAuthToken');
 				sessionStorage.removeItem("token");
-				setToken(null);
 			}
 		} else {
 			sessionStorage.removeItem("token");
-			setToken(null);
 		}
-	}, []);
+	}, [clearLibraryState]);
 
 	const refreshAll = useCallback(async () => {
 		console.log('Starting refreshAll with token:', token);
@@ -64,18 +67,15 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 		try {
 			if (!token) {
 				console.log('No token, clearing data');
-				setBooks(null);
-				setUsers(null);
-				setUser(null);
-				setModerBooks(null);
-				return; // Выходим без показа ошибки, так как это нормальная ситуация при логауте
+				clearLibraryState();
+				return;
 			}
 
 			const payload = parseJwt(token);
 			if (!payload) {
 				console.log('Invalid token, clearing data');
 				setAuthToken(null);
-				return; // Также выходим без ошибки
+				return;
 			}
 
 			console.log('Fetching data for role:', payload.role);
@@ -112,12 +112,11 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 			}
 		} catch (error) {
 			console.error("Ошибка при обновлении данных:", error);
-			// Показываем ошибку только если есть токен и это не ошибка авторизации
 			if (token && (error as any)?.response?.status !== 401 && (error as any)?.response?.status !== 403) {
 				toast.error("Ошибка при обновлении данных");
 			}
 		}
-	}, [token, setAuthToken]);
+	}, [token, setAuthToken, clearLibraryState]);
 
 	useEffect(() => {
 		if (token) {
@@ -133,7 +132,8 @@ export const LibraryProvider = ({ children }: { children: React.ReactNode }) => 
 		moderBooks,
 		refreshAll,
 		setAuthToken,
-	}), [books, token, user, users, moderBooks, setAuthToken]);
+		clearLibraryState,
+	}), [books, token, user, users, moderBooks, setAuthToken, clearLibraryState]);
 
 	return (
 		<LibraryContext.Provider value={contextValue}>

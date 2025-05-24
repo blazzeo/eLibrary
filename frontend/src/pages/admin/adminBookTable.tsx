@@ -17,8 +17,10 @@ export function AdminBookTable() {
 		() => [
 			{
 				accessorFn: (row) => row.book.book_id,
+				id: "book_id",
 				header: "ID",
 				size: 10,
+				enableSorting: true,
 			},
 			{
 				accessorFn: (row) => row.book.title,
@@ -64,6 +66,11 @@ export function AdminBookTable() {
 	const table = useMaterialReactTable<BookInfo>({
 		columns,
 		data: moderBooks ?? [],
+		initialState: {
+			sorting: [{ id: 'book_id', desc: false }],
+		},
+		
+		enableSorting: true,
 		muiTableBodyRowProps: ({ row }) => ({
 			onClick: () => {
 				const bookId = row.original.book.book_id;

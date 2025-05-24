@@ -155,17 +155,44 @@ app.post('/api/register', async (req, res) => {
 app.put('/api/books', verifyToken, requireRole(['admin', 'moder']), async (req, res) => {
 	try {
 		const book = req.body.book
-		console.log(book)
+		console.log('Editing book:', book)
 		const result = await db_request.editBook(book)
-		if (result[0].edit_book == false)
-			throw new Error("Failed to edit book")
-		res.json(result)
-		log(`editBook success:\tBook:\t[${book}]`)
+		
+		console.log('Server received result:', result)
+
+		// Проверяем, что результат существует и имеет нужное поле
+		if (!result || !result[0] || !result[0].edit_book) {
+			res.status(500).json({ error: 'Неожиданный формат ответа от базы данных' });
+			log(`editBook failed: unexpected response format`);
+			return;
+		}
+
+		// Парсим строку ответа, которая приходит в формате '(success,"message")'
+		const responseStr = result[0].edit_book;
+		const match = responseStr.match(/\((.*?),(.*?)\)/);
+		
+		if (!match) {
+			res.status(500).json({ error: 'Не удалось разобрать ответ от базы данных' });
+			log(`editBook failed: cannot parse response ${responseStr}`);
+			return;
+		}
+
+		const success = match[1].trim() === 't';
+		const message = match[2].replace(/"/g, '');
+
+		if (!success) {
+			res.status(400).json({ error: message });
+			log(`editBook failed: ${message}`);
+			return;
+		}
+
+		res.json({ message: message });
+		log(`editBook success: Book: ${JSON.stringify(book)}`);
 	} catch (error) {
-		res.status(500).json({ error: error.message })
-		log(`editBook failed:\t${error.message}`)
+		res.status(500).json({ error: error.message });
+		log(`editBook failed: ${error.message}`);
 	}
-})
+});
 
 app.post('/api/createmoder', verifyToken, requireRole(['admin']), async (req, res) => {
 	try {

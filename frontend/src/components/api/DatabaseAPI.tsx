@@ -1,6 +1,6 @@
 import type { AxiosResponse } from "axios";
-import axios from '../auth/axiosInstanse'
-import { BookData, UserData } from "../structs";
+import axios from '../auth/axiosInstanse';
+import type { BookData, UserData, Author } from "../structs";
 
 const SERVER = 'http://localhost:3000'
 
@@ -113,7 +113,7 @@ export async function getModerBooks() {
 export async function addBook(book: BookData) {
 	try {
 		const response = await axios.post(SERVER + `/api/books`, { book: book });
-		console.log(response)
+		console.log(response);
 		if (response.data.error) {
 			throw new Error(response.data.error);
 		}
@@ -234,8 +234,8 @@ export async function getLoans() {
 
 export async function editBook(book: BookData) {
 	try {
-		const response = await axios.put(SERVER + '/api/books', { book: book })
-		return response.data
+		const response = await axios.put(SERVER + '/api/books', { book: book });
+		return response.data;
 	} catch (error) {
 		console.error(error);
 		throw error;
@@ -264,19 +264,12 @@ export async function toggleWishlist(user_id: number, book_id: number) {
 	}
 }
 
-export async function searchAuthors(searchTerm: string) {
+export async function searchAuthors(searchTerm: string): Promise<Author[]> {
 	try {
-		console.log('API searchAuthors: отправка запроса с термином:', searchTerm);
-		const response = await axios.get(`${SERVER}/api/authors/search`, {
-			params: { term: searchTerm },
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		});
-		console.log('API searchAuthors: получен ответ:', response.data);
+		const response = await axios.get(SERVER + `/api/authors/search?term=${searchTerm}`);
 		return response.data;
 	} catch (error) {
-		console.error("API searchAuthors: ошибка:", error);
+		console.error("Error searching authors:", error);
 		throw error;
 	}
 }

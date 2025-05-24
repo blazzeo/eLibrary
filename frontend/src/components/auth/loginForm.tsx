@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { authenticate } from "../api/DatabaseAPI.tsx";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../libraryContext";
+import { useAuth } from "./authContext";
 import { useNavigate } from "react-router";
 import { Spinner } from "react-bootstrap";
 
@@ -11,6 +12,7 @@ const LoginForm: React.FC = () => {
 	const [password, setPassword] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const { setAuthToken } = useLibrary();
+	const { login } = useAuth();
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event: React.FormEvent) => {
@@ -25,8 +27,9 @@ const LoginForm: React.FC = () => {
 			setUsername("");
 			setPassword("");
 
-			// Устанавливаем токен
+			// Устанавливаем токен в оба контекста
 			setAuthToken(token);
+			login(token);
 
 			toast.success("Вход выполнен успешно");
 

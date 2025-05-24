@@ -446,7 +446,8 @@ BEGIN
       WHERE w.book_id = b.book_id
     ), '[]'::jsonb)
   )
-  FROM books b;
+  FROM books b
+  ORDER BY b.book_id ASC;
 END;
 $$;
 
@@ -850,7 +851,8 @@ BEGIN
         genres g ON bg.genre_id = g.genre_id
     GROUP BY
         bs.book_id, bs.title, bs.total_pages, bs.rating, bs.isbn, bs.published_date, 
-        bs.borrow_date, bs.return_date, bs.loan_status;
+        bs.borrow_date, bs.return_date, bs.loan_status
+    ORDER BY bs.book_id ASC;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -926,9 +928,9 @@ END;
 $$ LANGUAGE plpgsql;
 
 --	EDIT BOOK
-drop function edit_book(json);
+DROP FUNCTION IF EXISTS edit_book(json);
 CREATE OR REPLACE FUNCTION edit_book(p_book JSON)
-RETURNS BOOLEAN AS $$
+RETURNS TABLE(success BOOLEAN, message TEXT) AS $$
 DECLARE
     -- Основные поля книги
     p_book_id INT := (p_book->>'book_id')::INT;
@@ -943,80 +945,129 @@ DECLARE
     genre_name TEXT;
     v_author_id INT;
     v_genre_id INT;
-    rows_updated INT;
+    v_existing_authors INT[];
+    v_existing_genres INT[];
 BEGIN
-    -- Проверка наличия книги
-    IF NOT EXISTS (SELECT 1 FROM books WHERE book_id = p_book_id) THEN
-        RETURN FALSE;
+    -- Валидация входных данных
+    IF p_title IS NULL OR trim(p_title) = '' THEN
+        RETURN QUERY SELECT false, 'Название книги не может быть пустым';
+        RETURN;
     END IF;
 
-    -- Обновление записи в books
-    UPDATE books
-    SET title = p_title,
-        total_pages = p_total_pages,
-        rating = p_rating,
-        isbn = p_isbn,
-        published_date = p_published_date
-    WHERE book_id = p_book_id;
+    IF p_rating IS NOT NULL AND (p_rating < 0 OR p_rating > 5) THEN
+        RETURN QUERY SELECT false, 'Рейтинг должен быть между 0 и 5';
+        RETURN;
+    END IF;
 
-    GET DIAGNOSTICS rows_updated = ROW_COUNT;
+    IF p_isbn IS NOT NULL AND length(p_isbn) > 13 THEN
+        RETURN QUERY SELECT false, 'ISBN не может быть длиннее 13 символов';
+        RETURN;
+    END IF;
 
-    -- Удаляем старые связи авторов
-    DELETE FROM book_authors WHERE book_id = p_book_id;
+    -- Проверка существования книги
+    IF NOT EXISTS (SELECT 1 FROM books WHERE book_id = p_book_id) THEN
+        RETURN QUERY SELECT false, 'Книга не найдена';
+        RETURN;
+    END IF;
 
-    -- Обработка авторов
-    FOR author IN SELECT * FROM json_array_elements(p_book->'authors')
-    LOOP
-        SELECT author_id INTO v_author_id
-        FROM authors
-        WHERE first_name = author->>'first_name'
-          AND COALESCE(middle_name, '') = COALESCE(author->>'middle_name', '')
-          AND COALESCE(last_name, '') = COALESCE(author->>'last_name', '')
-        LIMIT 1;
+    -- Начинаем транзакцию
+    BEGIN
+        -- Обновление основной информации о книге
+        UPDATE books
+        SET title = p_title,
+            total_pages = p_total_pages,
+            rating = p_rating,
+            isbn = p_isbn,
+            published_date = p_published_date
+        WHERE book_id = p_book_id;
 
-        IF v_author_id IS NULL THEN
-            INSERT INTO authors (first_name, middle_name, last_name)
-            VALUES (
+        -- Сохраняем существующие связи с авторами
+        SELECT array_agg(author_id) INTO v_existing_authors
+        FROM book_authors
+        WHERE book_id = p_book_id;
+
+        -- Проверяем наличие авторов
+        IF p_book->'authors' IS NULL OR json_array_length(p_book->'authors') = 0 THEN
+            RETURN QUERY SELECT false, 'Необходимо указать хотя бы одного автора';
+            RETURN;
+        END IF;
+
+        -- Добавляем новых авторов
+        FOR author IN SELECT * FROM json_array_elements(p_book->'authors')
+        LOOP
+            RAISE NOTICE 'Processing author: %', author;
+            
+            SELECT create_or_get_author(
                 author->>'first_name',
-                NULLIF(author->>'middle_name', ''),
-                NULLIF(author->>'last_name', '')
+                author->>'middle_name',
+                author->>'last_name'
+            ) INTO v_author_id;
+            
+            -- Проверяем, существует ли уже такая связь
+            IF NOT EXISTS (
+                SELECT 1 FROM book_authors 
+                WHERE book_id = p_book_id AND author_id = v_author_id
+            ) THEN
+                INSERT INTO book_authors (book_id, author_id)
+                VALUES (p_book_id, v_author_id);
+            END IF;
+        END LOOP;
+
+        -- Удаляем связи с авторами, которых больше нет в списке
+        DELETE FROM book_authors 
+        WHERE book_id = p_book_id 
+        AND author_id NOT IN (
+            SELECT create_or_get_author(
+                author->>'first_name',
+                author->>'middle_name',
+                author->>'last_name'
             )
-            RETURNING author_id INTO v_author_id;
+            FROM json_array_elements(p_book->'authors') AS author
+        );
+
+        -- Сохраняем существующие связи с жанрами
+        SELECT array_agg(genre_id) INTO v_existing_genres
+        FROM book_genres
+        WHERE book_id = p_book_id;
+
+        -- Проверяем наличие жанров
+        IF p_book->'genres' IS NULL OR json_array_length(p_book->'genres') = 0 THEN
+            RETURN QUERY SELECT false, 'Необходимо указать хотя бы один жанр';
+            RETURN;
         END IF;
 
-        INSERT INTO book_authors (book_id, author_id)
-        VALUES (p_book_id, v_author_id)
-        ON CONFLICT DO NOTHING;
-    END LOOP;
+        -- Добавляем новые жанры
+        FOR genre_name IN SELECT json_array_elements_text(p_book->'genres')
+        LOOP
+            RAISE NOTICE 'Processing genre: %', genre_name;
+            
+            SELECT create_or_get_genre(genre_name) INTO v_genre_id;
+            
+            -- Проверяем, существует ли уже такая связь
+            IF NOT EXISTS (
+                SELECT 1 FROM book_genres 
+                WHERE book_id = p_book_id AND genre_id = v_genre_id
+            ) THEN
+                INSERT INTO book_genres (book_id, genre_id)
+                VALUES (p_book_id, v_genre_id);
+            END IF;
+        END LOOP;
 
-    -- Удаляем старые связи жанров
-    DELETE FROM book_genres WHERE book_id = p_book_id;
+        -- Удаляем связи с жанрами, которых больше нет в списке
+        DELETE FROM book_genres 
+        WHERE book_id = p_book_id 
+        AND genre_id NOT IN (
+            SELECT create_or_get_genre(genre_name)
+            FROM json_array_elements_text(p_book->'genres') AS genre_name
+        );
 
-    -- Обработка жанров
-    FOR genre_name IN SELECT json_array_elements_text(p_book->'genres')
-    LOOP
-        SELECT genre_id INTO v_genre_id
-        FROM genres
-        WHERE genre = genre_name
-        LIMIT 1;
-
-        IF v_genre_id IS NULL THEN
-            INSERT INTO genres (genre)
-            VALUES (genre_name)
-            RETURNING genre_id INTO v_genre_id;
-        END IF;
-
-        INSERT INTO book_genres (book_id, genre_id)
-        VALUES (p_book_id, v_genre_id)
-        ON CONFLICT DO NOTHING;
-    END LOOP;
-
-    RETURN rows_updated > 0;
-
-EXCEPTION
-    WHEN OTHERS THEN
-        RAISE NOTICE 'Error in edit_book: %', SQLERRM;
-        RETURN FALSE;
+        RETURN QUERY SELECT true, 'Книга успешно обновлена';
+        
+    EXCEPTION WHEN OTHERS THEN
+        -- В случае ошибки откатываем изменения
+        RAISE NOTICE 'Error in edit_book: %, SQLSTATE: %', SQLERRM, SQLSTATE;
+        RETURN QUERY SELECT false, 'Ошибка при обновлении книги: ' || SQLERRM;
+    END;
 END;
 $$ LANGUAGE plpgsql;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,35 +9,44 @@ import AdminDashboard from "./pages/admin/adminDashboard.tsx";
 import ModerDashboard from "./pages/moder/moderDashboard.tsx";
 import { LibraryProvider, useLibrary } from "./libraryContext";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { AuthProvider } from "./components/auth/authContext.tsx";
+import { AuthProvider, useAuth } from "./components/auth/authContext.tsx";
 import LoginForm from "./components/auth/loginForm.tsx";
 import RegisterForm from "./components/auth/registerForm.tsx";
+import { setupAxiosInterceptors } from "./components/auth/axiosInstanse.tsx";
 
 function Main() {
 	console.log('Main component rendering');
 	return (
-		<AuthProvider>
-			<LibraryProvider>
-				<App />
-				<ToastContainer
-					position="top-right"
-					autoClose={3000}
-					hideProgressBar={false}
-					newestOnTop
-					closeOnClick
-					rtl={false}
-					pauseOnFocusLoss
-					draggable
-					pauseOnHover
-					theme="light"
-				/>
-			</LibraryProvider>
-		</AuthProvider>
+		<BrowserRouter>
+			<AuthProvider>
+				<LibraryProvider>
+					<AppWithAuth />
+					<ToastContainer
+						position="top-right"
+						autoClose={3000}
+						hideProgressBar={false}
+						newestOnTop
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+						theme="light"
+					/>
+				</LibraryProvider>
+			</AuthProvider>
+		</BrowserRouter>
 	);
 }
 
-function App() {
+function AppWithAuth() {
+	const { logout } = useAuth();
 	const { user, token } = useLibrary();
+
+	useEffect(() => {
+		// Настраиваем интерцепторы при монтировании компонента
+		setupAxiosInterceptors(logout);
+	}, [logout]);
 
 	const getDashboard = () => {
 		// Если токен есть, но пользователь еще не загружен, показываем загрузку
@@ -65,21 +74,19 @@ function App() {
 	};
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				{!token ? (
-					<>
-						<Route path="/login" element={<LoginForm />} />
-						<Route path="/register" element={<RegisterForm />} />
-						<Route path="*" element={<Navigate to="/login" />} />
-					</>
-				) : (
-					<>
-						<Route path="/*" element={getDashboard()} />
-					</>
-				)}
-			</Routes>
-		</BrowserRouter>
+		<Routes>
+			{!token ? (
+				<>
+					<Route path="/login" element={<LoginForm />} />
+					<Route path="/register" element={<RegisterForm />} />
+					<Route path="*" element={<Navigate to="/login" />} />
+				</>
+			) : (
+				<>
+					<Route path="/*" element={getDashboard()} />
+				</>
+			)}
+		</Routes>
 	);
 }
 

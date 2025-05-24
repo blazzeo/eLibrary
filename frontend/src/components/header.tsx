@@ -1,18 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLibrary } from "../libraryContext";
+import { useAuth } from "./auth/authContext";
 
 export default function Header() {
-	const { user, refreshAll } = useLibrary()
-
-	const navigate = useNavigate();
+	const { user, clearLibraryState } = useLibrary();
+	const { logout } = useAuth();
 	const [isOpen, setIsOpen] = useState(false);
 
-	function logout() {
-		sessionStorage.clear();
-		navigate("/");
-		refreshAll()
-	}
+	const handleLogout = () => {
+		clearLibraryState(); // Сначала очищаем состояние библиотеки
+		logout(); // Затем выполняем выход через AuthContext
+	};
 
 	return (
 		<div className="container-fluid bg-info py-2">
@@ -97,7 +96,7 @@ export default function Header() {
 									:{user?.user_role}
 								</span>
 							</span>
-							<button className="btn btn-outline-light" onClick={logout} title="Выйти">
+							<button className="btn btn-outline-light" onClick={handleLogout} title="Выйти">
 								<svg
 									width="20px"
 									height="20px"

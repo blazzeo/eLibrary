@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useAuth } from './authContext';
 
 const SERVER = import.meta.env.VITE_API_SERVER || "http://localhost:3000"; // пример
 
@@ -21,16 +22,22 @@ axiosInstance.interceptors.request.use(
 	(error) => Promise.reject(error)
 );
 
-// Обработка 401 (Unauthorized)
-axiosInstance.interceptors.response.use(
-	(response) => response,
-	(error) => {
-		if (error.response?.status === 401) {
-			sessionStorage.clear();
-			window.location.href = "/login"; // редирект на логин
+// Создаем обработчик ошибок
+const createErrorHandler = (logout: () => void) => {
+	return async (error: any) => {
+		if (error.response?.status === 401 || error.response?.status === 403) {
+			logout(); // Используем функцию logout из контекста
 		}
 		return Promise.reject(error);
-	}
-);
+	};
+};
+
+// Экспортируем функцию для установки обработчика ошибок
+export const setupAxiosInterceptors = (logout: () => void) => {
+	axiosInstance.interceptors.response.use(
+		(response) => response,
+		createErrorHandler(logout)
+	);
+};
 
 export default axiosInstance;
