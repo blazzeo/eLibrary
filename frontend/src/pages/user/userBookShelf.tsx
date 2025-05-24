@@ -4,8 +4,8 @@ import {
 	useMaterialReactTable,
 	type MRT_ColumnDef,
 } from "material-react-table";
-import { BookData } from "../../components/structs";
-import { askExtension } from "../../components/api/DatabaseAPI";
+import { BookData } from "../../components/structs.tsx";
+import { askExtension } from "../../components/api/DatabaseAPI.tsx";
 import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

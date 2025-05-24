@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useLibrary } from "../../libraryContext";
-import { extentLoan, returnBook } from "../api/DatabaseAPI";
-import { BookInfo } from "../structs";
+import { extentLoan, returnBook } from "../api/DatabaseAPI.tsx";
+import { BookInfo } from "../structs.tsx";
 import { toast } from "react-toastify";
 
 interface LoanListItemProps {

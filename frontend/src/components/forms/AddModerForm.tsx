@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createModer } from '../api/DatabaseAPI';
+import { createModer } from '../api/DatabaseAPI.tsx';
 import { toast } from 'react-toastify';
 import { useLibrary } from '../../libraryContext';
 

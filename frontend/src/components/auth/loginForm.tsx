@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { authenticate } from "../api/DatabaseAPI";
+import { authenticate } from "../api/DatabaseAPI.tsx";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../libraryContext";
 import { useNavigate } from "react-router";

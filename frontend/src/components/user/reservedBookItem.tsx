@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLibrary } from "../../libraryContext";
-import { addLoan, toggleWishlist } from "../api/DatabaseAPI";
-import { BookInfo, UserData } from "../structs";
+import { addLoan, toggleWishlist } from "../api/DatabaseAPI.tsx";
+import { BookInfo, UserData } from "../structs.tsx";
 import { toast } from "react-toastify";
 
 interface ReservedBookItemProps {
@@ -23,7 +23,7 @@ export const ReservedBookItem = ({ book, user, requestDate, isTaken }: ReservedB
 			setIsLoading(true);
 			console.log('Calling toggleWishlist with book_id:', book.book.book_id);
 			await toggleWishlist(user.user_id, book.book.book_id);
-			
+
 			// Обновляем данные через контекст
 			console.log('Calling refreshAll...');
 			await refreshAll();
@@ -68,16 +68,16 @@ export const ReservedBookItem = ({ book, user, requestDate, isTaken }: ReservedB
 					</div>
 					<div className="btn-group btn-group-sm">
 						{!isTaken && (
-							<button 
-								className="btn btn-outline-success" 
+							<button
+								className="btn btn-outline-success"
 								onClick={onIssue}
 								disabled={isLoading}
 							>
 								Выдать
 							</button>
 						)}
-						<button 
-							className="btn btn-outline-danger" 
+						<button
+							className="btn btn-outline-danger"
 							onClick={onRemove}
 							disabled={isLoading}
 						>
@@ -106,16 +106,16 @@ export const ReservedBookItem = ({ book, user, requestDate, isTaken }: ReservedB
 								/>
 							</div>
 							<div className="modal-footer">
-								<button 
-									className="btn btn-secondary" 
+								<button
+									className="btn btn-secondary"
 									onClick={() => setShowModal(false)}
 									disabled={isLoading}
 								>
 									Отмена
 								</button>
-								<button 
-									className="btn btn-primary" 
-									onClick={onConfirmIssue} 
+								<button
+									className="btn btn-primary"
+									onClick={onConfirmIssue}
 									disabled={!newDate || isLoading}
 								>
 									Подтвердить

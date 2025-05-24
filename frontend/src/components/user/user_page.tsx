@@ -1,8 +1,8 @@
-import { UserData, BookInfo } from "../structs";
+import { UserData, BookInfo } from "../structs.tsx";
 import { LoanListItem } from "./loanListItem";
 import { ReservedBookItem } from "./reservedBookItem";
 import { ExtensionRequestItem } from "./extensionRequestItem";
-import { deleteUser } from "../api/DatabaseAPI";
+import { deleteUser } from "../api/DatabaseAPI.tsx";
 import { Button, Card, Badge, Alert, Row, Col, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

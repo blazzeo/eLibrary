@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UserPage from "./user_page";
-import { BookInfo, UserData } from "../structs";
+import { BookInfo, UserData } from "../structs.tsx";
 import { Spinner } from "react-bootstrap";
 import { useLibrary } from "../../libraryContext";
-import { getUser } from "../api/DatabaseAPI";
+import { getUser } from "../api/DatabaseAPI.tsx";
 
 export default function UserPageWrapper() {
 	const { moderBooks } = useLibrary()

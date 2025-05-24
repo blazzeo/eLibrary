@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { checkAvailableLogin, createUser } from "../api/DatabaseAPI";
+import { checkAvailableLogin, createUser } from "../api/DatabaseAPI.tsx";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 

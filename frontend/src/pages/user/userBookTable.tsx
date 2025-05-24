@@ -4,8 +4,8 @@ import {
 	useMaterialReactTable,
 	type MRT_ColumnDef,
 } from "material-react-table";
-import { BookData } from "../../components/structs";
-import { toggleWishlist } from "../../components/api/DatabaseAPI";
+import { BookData } from "../../components/structs.tsx";
+import { toggleWishlist } from "../../components/api/DatabaseAPI.tsx";
 import { useLibrary } from "../../libraryContext";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
