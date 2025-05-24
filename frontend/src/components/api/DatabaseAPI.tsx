@@ -247,3 +247,53 @@ export async function toggleWishlist(user_id: number, book_id: number) {
 		throw error;
 	}
 }
+
+export async function searchAuthors(searchTerm: string) {
+	try {
+		console.log('API searchAuthors: отправка запроса с термином:', searchTerm);
+		const response = await axios.get(`${SERVER}/api/authors/search`, {
+			params: { term: searchTerm },
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		});
+		console.log('API searchAuthors: получен ответ:', response.data);
+		return response.data;
+	} catch (error) {
+		console.error("API searchAuthors: ошибка:", error);
+		throw error;
+	}
+}
+
+export async function searchGenres(searchTerm: string) {
+	try {
+		console.log('API searchGenres: отправка запроса с термином:', searchTerm);
+		const response = await axios.get(`${SERVER}/api/genres/search`, {
+			params: { term: searchTerm },
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		});
+		console.log('API searchGenres: получен ответ:', response.data);
+		return response.data;
+	} catch (error) {
+		console.error("API searchGenres: ошибка:", error);
+		throw error;
+	}
+}
+
+export async function getAuthors() {
+	try {
+		console.log('API getAuthors: запрос списка авторов');
+		const response = await axios.get(`${SERVER}/api/authors`, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		});
+		console.log('API getAuthors: получен ответ:', response.data);
+		return response.data;
+	} catch (error) {
+		console.error("API getAuthors: ошибка:", error);
+		throw error;
+	}
+}

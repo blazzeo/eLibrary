@@ -110,13 +110,14 @@ export async function getBooks(user_id) {
 
 export async function addBook(book) {
 	try {
-		const admin = dbadmin(5432)
-		const normalizedBook = normalizeAuthors(book)
-		const result = await admin.query('select add_full_book($1::json);', [JSON.stringify(normalizedBook)])
-		console.log(result)
-		return result.rows
+		const admin = dbadmin(5432);
+		const normalizedBook = normalizeAuthors(book);
+		console.log('Normalized book:', JSON.stringify(normalizedBook, null, 2));
+		const result = await admin.query('select add_full_book($1::json);', [JSON.stringify(normalizedBook)]);
+		return result.rows;
 	} catch (err) {
-		throw err
+		console.error('Error in addBook:', err);
+		throw err;
 	}
 }
 
@@ -176,18 +177,24 @@ export async function getLoans() {
 
 function normalizeAuthors(book) {
 	const parseAuthor = (fullName) => {
-		const parts = fullName.trim().split(/\s+/); // разделить по пробелам
-
+		const parts = fullName.trim().split(/\s+/);
 		return {
 			first_name: parts[0] || '',
 			middle_name: parts.length === 3 ? parts[1] : '',
-			last_name: parts.length === 3 ? parts[2] : parts[1] || '',
+			last_name: parts.length >= 2 ? parts[parts.length - 1] : ''
 		};
 	};
 
 	return {
 		...book,
-		authors: book.authors.map(parseAuthor),
+		authors: book.authors.map(author => {
+			// Если автор уже в правильном формате, возвращаем как есть
+			if (typeof author === 'object' && author.first_name) {
+				return author;
+			}
+			// Иначе парсим строку
+			return parseAuthor(author);
+		})
 	};
 }
 
@@ -313,5 +320,35 @@ export async function rejectExtension(book_id, user_id, request_date) {
 	} catch (error) {
 		console.error(error)
 		throw error
+	}
+}
+
+export async function getAuthors() {
+	try {
+		const user = dbuser(5432);
+		const result = await user.query('SELECT * FROM get_authors();');
+		return result.rows;
+	} catch (err) {
+		throw err;
+	}
+}
+
+export async function searchAuthors(searchTerm) {
+	try {
+		const user = dbuser(5432);
+		const result = await user.query('SELECT * FROM search_authors($1);', [searchTerm]);
+		return result.rows;
+	} catch (err) {
+		throw err;
+	}
+}
+
+export async function searchGenres(searchTerm) {
+	try {
+		const user = dbuser(5432);
+		const result = await user.query('SELECT * FROM search_genres($1);', [searchTerm]);
+		return result.rows;
+	} catch (err) {
+		throw err;
 	}
 }

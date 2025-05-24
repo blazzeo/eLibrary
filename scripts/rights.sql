@@ -17,12 +17,19 @@ grant delete on wishlist to moder;
 GRANT EXECUTE ON PROCEDURE confirm_extension TO moder;
 GRANT EXECUTE ON PROCEDURE reject_extension TO moder;
 grant delete on extention_requests to moder;
+grant execute on function get_authors() to moder;
+grant execute on function search_authors(varchar) to moder;
+grant execute on function search_genres(varchar) to moder;
+
 
 
 --  ADMIN
 grant select on users to admin;
 grant select on genres to admin;
 grant execute on function get_genres to admin;
+grant execute on function get_authors() to admin;
+grant execute on function search_authors(varchar) to admin;
+grant execute on function search_genres(varchar) to admin;
 
 
 

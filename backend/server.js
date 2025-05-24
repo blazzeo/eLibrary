@@ -309,6 +309,72 @@ app.post('/api/askextension', verifyToken, requireRole(['admin', 'moder', 'user'
 	}
 })
 
+// Authors endpoints
+app.get('/api/authors', verifyToken, requireRole(['admin', 'moder',]), async (_req, res) => {
+	try {
+		console.log('GET /api/authors: Получение списка авторов');
+		const result = await db_request.getAuthors();
+		console.log('GET /api/authors: Получено авторов:', result.length);
+		res.json(result);
+		log('getAuthors success');
+	} catch (error) {
+		console.error('GET /api/authors error:', error);
+		res.status(500).json({ error: error.message });
+		log(`getAuthors failed: ${error.message}`);
+	}
+});
+
+app.get('/api/authors/search', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
+	try {
+		const searchTerm = req.query.term;
+		console.log('GET /api/authors/search: Поиск авторов по термину:', searchTerm);
+		if (!searchTerm) {
+			return res.status(400).json({ error: 'Search term is required' });
+		}
+		const result = await db_request.searchAuthors(searchTerm);
+		console.log('GET /api/authors/search: Найдено авторов:', result.length);
+		res.json(result);
+		log(`searchAuthors success: term=${searchTerm}`);
+	} catch (error) {
+		console.error('GET /api/authors/search error:', error);
+		res.status(500).json({ error: error.message });
+		log(`searchAuthors failed: ${error.message}`);
+	}
+});
+
+// Genres endpoints
+app.get('/api/genres/search', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
+	try {
+		const searchTerm = req.query.term;
+		console.log('GET /api/genres/search: Поиск жанров по термину:', searchTerm);
+		if (!searchTerm) {
+			return res.status(400).json({ error: 'Search term is required' });
+		}
+		const result = await db_request.searchGenres(searchTerm);
+		console.log('GET /api/genres/search: Найдено жанров:', result.length);
+		res.json(result);
+		log(`searchGenres success: term=${searchTerm}`);
+	} catch (error) {
+		console.error('GET /api/genres/search error:', error);
+		res.status(500).json({ error: error.message });
+		log(`searchGenres failed: ${error.message}`);
+	}
+});
+
+app.get('/api/genres', verifyToken, requireRole(['admin', 'moder']), async (_req, res) => {
+	try {
+		console.log('GET /api/genres: Получение списка жанров');
+		const result = await db_request.getGenres();
+		console.log('GET /api/genres: Получено жанров:', result.length);
+		res.json(result);
+		log('getGenres success');
+	} catch (error) {
+		console.error('GET /api/genres error:', error);
+		res.status(500).json({ error: error.message });
+		log(`getGenres failed: ${error.message}`);
+	}
+});
+
 app.listen(PORT, () => {
 	console.log('JWT_SECRET length:', JWT_SECRET.length);
 	console.log('JWT_SECRET raw:', JSON.stringify(JWT_SECRET));

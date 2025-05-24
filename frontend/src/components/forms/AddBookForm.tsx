@@ -1,10 +1,65 @@
-import { useState } from "react";
-import { Card, Button, Form, Row, Col, Container } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Card, Button, Form, Row, Col, Container, ListGroup, ProgressBar } from "react-bootstrap";
 import { BookData } from "../structs";
-import { addBook } from "../api/DatabaseAPI";
+import { addBook, searchAuthors, searchGenres } from "../api/DatabaseAPI";
 import { toast, ToastContainer } from "react-toastify";
 import { useLibrary } from "../../libraryContext";
 import 'react-toastify/dist/ReactToastify.css';
+
+interface Author {
+	author_id: number;
+	first_name: string;
+	middle_name: string | null;
+	last_name: string | null;
+	full_name: string;
+}
+
+interface Genre {
+	genre_id: number;
+	genre: string;
+	parent_id: number | null;
+	parent_genre: string | null;
+}
+
+// Стили для контейнера полоски загрузки
+const loadingBarStyle: React.CSSProperties = {
+	position: 'absolute',
+	bottom: '-8px',
+	left: 0,
+	right: 0,
+	backgroundColor: 'transparent',
+	zIndex: 2,
+	padding: '4px 0',
+};
+
+// Стили для самой полоски
+const progressBarStyle: React.CSSProperties = {
+	height: '4px',
+	borderRadius: 0,
+	boxShadow: '0 0 4px rgba(0,123,255,0.5)'
+};
+
+// Функция для создания нового автора из строки
+const createNewAuthor = (fullName: string): Author => {
+	const parts = fullName.trim().split(/\s+/);
+	return {
+		author_id: -Date.now(), // Временный отрицательный ID для новых авторов
+		first_name: parts[0] || '',
+		middle_name: parts.length === 3 ? parts[1] : null,
+		last_name: parts.length >= 2 ? parts[parts.length - 1] : null,
+		full_name: fullName.trim()
+	};
+};
+
+// Функция для создания нового жанра из строки
+const createNewGenre = (genreName: string): Genre => {
+	return {
+		genre_id: -Date.now(), // Временный отрицательный ID для новых жанров
+		genre: genreName.trim(),
+		parent_id: null,
+		parent_genre: null
+	};
+};
 
 export function AddBookForm() {
 	const { refreshAll } = useLibrary();
@@ -15,31 +70,196 @@ export function AddBookForm() {
 	const [isbn, setIsbn] = useState<number | null>(null);
 	const [publishedDate, setPublishedDate] = useState<string>("");
 
-	const [authorInput, setAuthorInput] = useState("");
-	const [genreInput, setGenreInput] = useState("");
-	const [authors, setAuthors] = useState<string[]>([]);
-	const [genres, setGenres] = useState<string[]>([]);
+	// Состояния для поиска
+	const [authorSearchTerm, setAuthorSearchTerm] = useState("");
+	const [genreSearchTerm, setGenreSearchTerm] = useState("");
+	const [authorResults, setAuthorResults] = useState<Author[]>([]);
+	const [genreResults, setGenreResults] = useState<Genre[]>([]);
+	const [showAuthorDropdown, setShowAuthorDropdown] = useState(false);
+	const [showGenreDropdown, setShowGenreDropdown] = useState(false);
+
+	// Выбранные авторы и жанры
+	const [selectedAuthors, setSelectedAuthors] = useState<Author[]>([]);
+	const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
+
+	// Состояния для индикаторов загрузки
+	const [isLoadingAuthors, setIsLoadingAuthors] = useState(false);
+	const [isLoadingGenres, setIsLoadingGenres] = useState(false);
+
+	// Состояния для отслеживания ввода
+	const [isTypingAuthors, setIsTypingAuthors] = useState(false);
+	const [isTypingGenres, setIsTypingGenres] = useState(false);
+	const [typingTimeoutAuthors, setTypingTimeoutAuthors] = useState<ReturnType<typeof setTimeout> | null>(null);
+	const [typingTimeoutGenres, setTypingTimeoutGenres] = useState<ReturnType<typeof setTimeout> | null>(null);
+
+	// Поиск авторов
+	useEffect(() => {
+		const searchAuthorsDebounced = async () => {
+			if (authorSearchTerm.trim().length < 2) {
+				setAuthorResults([]);
+				return;
+			}
+
+			try {
+				setIsLoadingAuthors(true);
+				console.log('Поиск авторов:', authorSearchTerm);
+				const results = await searchAuthors(authorSearchTerm);
+				console.log('Результаты поиска авторов:', results);
+				setAuthorResults(results);
+			} catch (error) {
+				console.error('Ошибка при поиске авторов:', error);
+			} finally {
+				setIsLoadingAuthors(false);
+			}
+		};
+
+		const timeoutId = setTimeout(searchAuthorsDebounced, 300);
+		return () => clearTimeout(timeoutId);
+	}, [authorSearchTerm]);
+
+	// Поиск жанров
+	useEffect(() => {
+		const searchGenresDebounced = async () => {
+			if (genreSearchTerm.trim().length < 2) {
+				setGenreResults([]);
+				return;
+			}
+
+			try {
+				setIsLoadingGenres(true);
+				console.log('Поиск жанров:', genreSearchTerm);
+				const results = await searchGenres(genreSearchTerm);
+				console.log('Результаты поиска жанров:', results);
+				setGenreResults(results);
+			} catch (error) {
+				console.error('Ошибка при поиске жанров:', error);
+			} finally {
+				setIsLoadingGenres(false);
+			}
+		};
+
+		const timeoutId = setTimeout(searchGenresDebounced, 300);
+		return () => clearTimeout(timeoutId);
+	}, [genreSearchTerm]);
+
+	// Обработчик ввода для авторов
+	const handleAuthorInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setAuthorSearchTerm(value);
+		setShowAuthorDropdown(true);
+		setIsTypingAuthors(true);
+
+		if (typingTimeoutAuthors) {
+			clearTimeout(typingTimeoutAuthors);
+		}
+
+		const newTimeout = setTimeout(() => {
+			setIsTypingAuthors(false);
+		}, 500);
+
+		setTypingTimeoutAuthors(newTimeout);
+	};
+
+	// Обработчик ввода для жанров
+	const handleGenreInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setGenreSearchTerm(value);
+		setShowGenreDropdown(true);
+		setIsTypingGenres(true);
+
+		if (typingTimeoutGenres) {
+			clearTimeout(typingTimeoutGenres);
+		}
+
+		const newTimeout = setTimeout(() => {
+			setIsTypingGenres(false);
+		}, 500);
+
+		setTypingTimeoutGenres(newTimeout);
+	};
+
+	// Очистка таймеров при размонтировании
+	useEffect(() => {
+		return () => {
+			if (typingTimeoutAuthors) clearTimeout(typingTimeoutAuthors);
+			if (typingTimeoutGenres) clearTimeout(typingTimeoutGenres);
+		};
+	}, []);
+
+	const handleAuthorSelect = (author: Author) => {
+		console.log('Выбран автор:', author);
+		if (!selectedAuthors.some(a => a.author_id === author.author_id)) {
+			setSelectedAuthors([...selectedAuthors, author]);
+		}
+		setAuthorSearchTerm("");
+		setShowAuthorDropdown(false);
+	};
+
+	const handleGenreSelect = (genre: Genre) => {
+		console.log('Выбран жанр:', genre);
+		if (!selectedGenres.some(g => g.genre_id === genre.genre_id)) {
+			setSelectedGenres([...selectedGenres, genre]);
+		}
+		setGenreSearchTerm("");
+		setShowGenreDropdown(false);
+	};
+
+	const removeAuthor = (authorId: number) => {
+		console.log('Удален автор с ID:', authorId);
+		setSelectedAuthors(selectedAuthors.filter(a => a.author_id !== authorId));
+	};
+
+	const removeGenre = (genreId: number) => {
+		console.log('Удален жанр с ID:', genreId);
+		setSelectedGenres(selectedGenres.filter(g => g.genre_id !== genreId));
+	};
+
+	const handleAuthorKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter' && authorSearchTerm.trim()) {
+			e.preventDefault();
+			if (!authorResults.length) {
+				// Если нет результатов поиска, создаем нового автора
+				const newAuthor = createNewAuthor(authorSearchTerm);
+				if (!selectedAuthors.some(a => a.full_name.toLowerCase() === newAuthor.full_name.toLowerCase())) {
+					setSelectedAuthors([...selectedAuthors, newAuthor]);
+					toast.info(`Будет создан новый автор: ${newAuthor.full_name}`);
+				}
+			}
+			setAuthorSearchTerm('');
+			setShowAuthorDropdown(false);
+		}
+	};
+
+	const handleGenreKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter' && genreSearchTerm.trim()) {
+			e.preventDefault();
+			if (!genreResults.length) {
+				// Если нет результатов поиска, создаем новый жанр
+				const newGenre = createNewGenre(genreSearchTerm);
+				if (!selectedGenres.some(g => g.genre.toLowerCase() === newGenre.genre.toLowerCase())) {
+					setSelectedGenres([...selectedGenres, newGenre]);
+					toast.info(`Будет создан новый жанр: ${newGenre.genre}`);
+				}
+			}
+			setGenreSearchTerm('');
+			setShowGenreDropdown(false);
+		}
+	};
 
 	const validateForm = (): boolean => {
 		if (!title || !totalPages || !rating || !publishedDate) {
 			toast.error("Все обязательные поля должны быть заполнены!");
 			return false;
 		}
+		if (selectedAuthors.length === 0) {
+			toast.error("Добавьте хотя бы одного автора!");
+			return false;
+		}
+		if (selectedGenres.length === 0) {
+			toast.error("Добавьте хотя бы один жанр!");
+			return false;
+		}
 		return true;
-	};
-
-	const addAuthor = () => {
-		if (authorInput.trim()) {
-			setAuthors([...authors, authorInput.trim()]);
-			setAuthorInput("");
-		}
-	};
-
-	const addGenre = () => {
-		if (genreInput.trim()) {
-			setGenres([...genres, genreInput.trim()]);
-			setGenreInput("");
-		}
 	};
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,11 +273,11 @@ export function AddBookForm() {
 			rating: Number(rating),
 			isbn: isbn ? Number(isbn) : 0,
 			published_date: new Date(publishedDate),
+			borrow_date: new Date(),
+			return_date: new Date(),
 			loan_status: 0,
-			// @ts-ignore
-			authors,
-			// @ts-ignore
-			genres
+			authors: selectedAuthors.map(a => a.full_name),
+			genres: selectedGenres.map(g => g.genre)
 		};
 
 		try {
@@ -67,8 +287,8 @@ export function AddBookForm() {
 			setRating(null);
 			setIsbn(null);
 			setPublishedDate("");
-			setAuthors([]);
-			setGenres([]);
+			setSelectedAuthors([]);
+			setSelectedGenres([]);
 			toast.success("Книга успешно добавлена!");
 			refreshAll();
 		} catch (error) {
@@ -126,8 +346,18 @@ export function AddBookForm() {
 						<Col md={6}>
 							<Form.Group>
 								<Form.Label>ISBN</Form.Label>
-								<Form.Control type="number" value={isbn ?? ""} onChange={(e) => setIsbn(Number(e.target.value))} />
-								<Form.Text className="text-muted">13-ти значный номер</Form.Text>
+								<Form.Control 
+									type="number" 
+									value={isbn ?? ""} 
+									onChange={(e) => {
+										const value = e.target.value;
+										if (value.length <= 13) {
+											setIsbn(value === "" ? null : Number(value));
+										}
+									}}
+									maxLength={13}
+								/>
+								<Form.Text className="text-muted">13-значный номер (максимум 13 цифр)</Form.Text>
 							</Form.Group>
 						</Col>
 						<Col md={6}>
@@ -142,25 +372,118 @@ export function AddBookForm() {
 
 					<Row className="mb-3">
 						<Col md={6}>
-							<Form.Group>
-								<Form.Label>Добавить автора</Form.Label>
-								<div className="d-flex">
-									<Form.Control value={authorInput} onChange={(e) => setAuthorInput(e.target.value)} />
-									<Button variant="secondary" className="ms-2" onClick={addAuthor}>+</Button>
+							<Form.Group className="mb-4">
+								<Form.Label>Поиск авторов</Form.Label>
+								<div className="position-relative">
+									<Form.Control
+										type="text"
+										value={authorSearchTerm}
+										onChange={handleAuthorInputChange}
+										onKeyDown={handleAuthorKeyDown}
+										placeholder="Начните вводить имя автора..."
+										onFocus={() => setShowAuthorDropdown(true)}
+									/>
+									{isTypingAuthors && (
+										<div style={loadingBarStyle}>
+											<ProgressBar 
+												animated 
+												now={100} 
+												variant="primary"
+												style={progressBarStyle}
+											/>
+										</div>
+									)}
+									{showAuthorDropdown && authorResults.length > 0 && (
+										<ListGroup className="position-absolute w-100 mt-1 shadow-sm" style={{ zIndex: 1000 }}>
+											{authorResults.map((author) => (
+												<ListGroup.Item
+													key={author.author_id}
+													action
+													onClick={() => handleAuthorSelect(author)}
+													className="cursor-pointer"
+												>
+													{author.full_name}
+												</ListGroup.Item>
+											))}
+										</ListGroup>
+									)}
 								</div>
-								<ul className="mt-2">{authors.map((a, i) => <li key={i}>{a}</li>)}</ul>
 							</Form.Group>
+							<div className="selected-items">
+								{selectedAuthors.map((author) => (
+									<div key={author.author_id} className="d-inline-block me-2 mb-2">
+										<span className="badge bg-primary p-2">
+											{author.full_name}
+											<button
+												type="button"
+												className="btn-close btn-close-white ms-2"
+												style={{ fontSize: '0.5rem' }}
+												onClick={() => removeAuthor(author.author_id)}
+											></button>
+										</span>
+									</div>
+								))}
+							</div>
 						</Col>
 
 						<Col md={6}>
-							<Form.Group>
-								<Form.Label>Добавить жанр</Form.Label>
-								<div className="d-flex">
-									<Form.Control value={genreInput} onChange={(e) => setGenreInput(e.target.value)} />
-									<Button variant="secondary" className="ms-2" onClick={addGenre}>+</Button>
+							<Form.Group className="mb-4">
+								<Form.Label>Поиск жанров</Form.Label>
+								<div className="position-relative">
+									<Form.Control
+										type="text"
+										value={genreSearchTerm}
+										onChange={handleGenreInputChange}
+										onKeyDown={handleGenreKeyDown}
+										placeholder="Начните вводить название жанра..."
+										onFocus={() => setShowGenreDropdown(true)}
+									/>
+									{isTypingGenres && (
+										<div style={loadingBarStyle}>
+											<ProgressBar 
+												animated 
+												now={100} 
+												variant="primary"
+												style={progressBarStyle}
+											/>
+										</div>
+									)}
+									{showGenreDropdown && genreResults.length > 0 && (
+										<ListGroup className="position-absolute w-100 mt-1 shadow-sm" style={{ zIndex: 1000 }}>
+											{genreResults.map((genre) => (
+												<ListGroup.Item
+													key={genre.genre_id}
+													action
+													onClick={() => handleGenreSelect(genre)}
+													className="cursor-pointer"
+												>
+													{genre.genre}
+													{genre.parent_genre && (
+														<small className="text-muted ms-2">
+															(подкатегория {genre.parent_genre})
+														</small>
+													)}
+												</ListGroup.Item>
+											))}
+										</ListGroup>
+									)}
 								</div>
-								<ul className="mt-2">{genres.map((g, i) => <li key={i}>{g}</li>)}</ul>
 							</Form.Group>
+							<div className="selected-items">
+								{selectedGenres.map((genre) => (
+									<div key={genre.genre_id} className="d-inline-block me-2 mb-2">
+										<span className="badge bg-success p-2">
+											{genre.genre}
+											<button
+												type="button"
+												className="btn-close btn-close-white ms-2"
+												style={{ fontSize: '0.5rem' }}
+												onClick={() => removeGenre(genre.genre_id)}
+											></button>
+										</span>
+									</div>
+								))}
+							</div>
 						</Col>
 					</Row>
 

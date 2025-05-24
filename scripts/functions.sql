@@ -125,158 +125,78 @@ $$;
 
 
 --	ADD BOOK - json
+DROP PROCEDURE IF EXISTS add_full_book(json);
+
 CREATE OR REPLACE FUNCTION add_full_book(book JSON)
 RETURNS BOOLEAN AS $$
 DECLARE
-    -- Основные поля книги
     v_title VARCHAR := book->>'title';
     v_total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
     v_rating DECIMAL(4,2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4,2);
     v_isbn VARCHAR := NULLIF(book->>'isbn', '');
     v_published_date DATE := NULLIF(book->>'published_date', '')::DATE;
-
     v_book_id INT;
-
     author JSON;
     genre_name TEXT;
     v_author_id INT;
     v_genre_id INT;
 BEGIN
-    -- Вставка книги
+    RAISE NOTICE 'Starting add_full_book with title: %', v_title;
+
+    -- Создаем книгу
     INSERT INTO books (title, total_pages, rating, isbn, published_date)
     VALUES (v_title, v_total_pages, v_rating, v_isbn, v_published_date)
     RETURNING book_id INTO v_book_id;
+    
+    RAISE NOTICE 'Created book with ID: %', v_book_id;
 
-    -- Обработка авторов
+    -- Добавляем авторов
     FOR author IN SELECT * FROM json_array_elements(book->'authors')
     LOOP
-        SELECT author_id INTO v_author_id
-        FROM authors
-        WHERE first_name = author->>'first_name'
-          AND COALESCE(middle_name, '') = COALESCE(author->>'middle_name', '')
-          AND COALESCE(last_name, '') = COALESCE(author->>'last_name', '')
-        LIMIT 1;
+        RAISE NOTICE 'Processing author: %', author;
+        
+        SELECT create_or_get_author(
+            author->>'first_name',
+            author->>'middle_name',
+            author->>'last_name'
+        ) INTO v_author_id;
+        
+        RAISE NOTICE 'Got author ID: %', v_author_id;
 
-        IF v_author_id IS NULL THEN
-            INSERT INTO authors (first_name, middle_name, last_name)
-            VALUES (
-                author->>'first_name',
-                NULLIF(author->>'middle_name', ''),
-                NULLIF(author->>'last_name', '')
-            )
-            RETURNING author_id INTO v_author_id;
-        END IF;
-
-        -- Добавление связи книга-автор
         INSERT INTO book_authors (book_id, author_id)
-        VALUES (v_book_id, v_author_id)
-        ON CONFLICT DO NOTHING;
+        VALUES (v_book_id, v_author_id);
+        
+        RAISE NOTICE 'Added book-author relation: % - %', v_book_id, v_author_id;
     END LOOP;
 
-    -- Обработка жанров
+    -- Добавляем жанры
     FOR genre_name IN SELECT json_array_elements_text(book->'genres')
     LOOP
-        SELECT genre_id INTO v_genre_id
-        FROM genres
-        WHERE genre = genre_name
-        LIMIT 1;
+        RAISE NOTICE 'Processing genre: %', genre_name;
+        
+        SELECT create_or_get_genre(genre_name) INTO v_genre_id;
+        
+        RAISE NOTICE 'Got genre ID: %', v_genre_id;
 
-        IF v_genre_id IS NULL THEN
-            INSERT INTO genres (genre)
-            VALUES (genre_name)
-            RETURNING genre_id INTO v_genre_id;
-        END IF;
-
-        -- Добавление связи книга-жанр
         INSERT INTO book_genres (book_id, genre_id)
-        VALUES (v_book_id, v_genre_id)
-        ON CONFLICT DO NOTHING;
+        VALUES (v_book_id, v_genre_id);
+        
+        RAISE NOTICE 'Added book-genre relation: % - %', v_book_id, v_genre_id;
     END LOOP;
 
     RETURN TRUE;
-EXCEPTION
-    WHEN OTHERS THEN
-        RAISE NOTICE 'Ошибка: %', SQLERRM;
-        RETURN FALSE;
+
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'Error in add_full_book: %, SQLSTATE: %', SQLERRM, SQLSTATE;
+    
+    -- Если книга была создана, удаляем её
+    IF v_book_id IS NOT NULL THEN
+        DELETE FROM books WHERE book_id = v_book_id;
+    END IF;
+    
+    RETURN FALSE;
 END;
 $$ LANGUAGE plpgsql;
-
-
--- 	ADD_BOOK_FULL JSON
-CREATE OR REPLACE PROCEDURE add_full_book(book JSON)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-    -- Книга
-    v_book_id INT;
-    v_title TEXT := book->>'title';
-    v_total_pages INT := COALESCE(NULLIF(book->>'total_pages', ''), NULL)::INT;
-    v_rating DECIMAL(4,2) := COALESCE(NULLIF(book->>'rating', ''), NULL)::DECIMAL(4,2);
-    v_isbn TEXT := NULLIF(book->>'isbn', '');
-    v_published_date DATE := NULLIF(book->>'published_date', '')::DATE;
-
-    -- Автор / Жанр
-    author JSON;
-    genre_name TEXT;
-    v_author_id INT;
-    v_genre_id INT;
-BEGIN
-    -- Добавление книги
-    INSERT INTO books (title, total_pages, rating, isbn, published_date)
-    VALUES (v_title, v_total_pages, v_rating, v_isbn, v_published_date)
-    RETURNING book_id INTO v_book_id;
-
-    -- Обработка авторов
-    FOR author IN SELECT * FROM json_array_elements(book->'authors')
-    LOOP
-        SELECT author_id INTO v_author_id
-        FROM authors
-        WHERE first_name = author->>'first_name'
-          AND COALESCE(middle_name, '') = COALESCE(author->>'middle_name', '')
-          AND COALESCE(last_name, '') = COALESCE(author->>'last_name', '')
-        LIMIT 1;
-
-        -- Если нет такого автора — добавляем
-        IF v_author_id IS NULL THEN
-            INSERT INTO authors (first_name, middle_name, last_name)
-            VALUES (
-                author->>'first_name',
-                NULLIF(author->>'middle_name', ''),
-                NULLIF(author->>'last_name', '')
-            )
-            RETURNING author_id INTO v_author_id;
-        END IF;
-
-        -- Добавляем связь
-        INSERT INTO book_authors (book_id, author_id)
-        VALUES (v_book_id, v_author_id)
-        ON CONFLICT DO NOTHING;
-    END LOOP;
-
-    -- Обработка жанров
-    FOR genre_name IN SELECT json_array_elements_text(book->'genres')
-    LOOP
-        SELECT genre_id INTO v_genre_id
-        FROM genres
-        WHERE genre = genre_name
-        LIMIT 1;
-
-        IF v_genre_id IS NULL THEN
-            INSERT INTO genres (genre)
-            VALUES (genre_name)
-            RETURNING genre_id INTO v_genre_id;
-        END IF;
-
-        -- Добавляем связь
-        INSERT INTO book_genres (book_id, genre_id)
-        VALUES (v_book_id, v_genre_id)
-        ON CONFLICT DO NOTHING;
-    END LOOP;
-
-    RAISE NOTICE 'Книга успешно добавлена (id = %)', v_book_id;
-END;
-$$;
-
 
 
 --	BORROW BOOK
@@ -1200,5 +1120,160 @@ BEGIN
     FROM wishlist w
     JOIN users u ON w.user_id = u.user_id
 	JOIN books b ON w.book_id = b.book_id;
+END;
+$$ LANGUAGE plpgsql;
+
+-- get authors
+create or replace function get_authors()
+RETURNS TABLE(
+    author_id INT,
+    first_name VARCHAR,
+    middle_name VARCHAR,
+    last_name VARCHAR,
+    full_name VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        a.author_id,
+        a.first_name,
+        a.middle_name,
+        a.last_name,
+        CASE 
+            WHEN a.middle_name IS NOT NULL AND a.middle_name != '' 
+            THEN a.first_name || ' ' || a.middle_name || ' ' || COALESCE(a.last_name, '')
+            ELSE a.first_name || ' ' || COALESCE(a.last_name, '')
+        END as full_name
+    FROM authors a
+    ORDER BY a.first_name, a.last_name;
+END;
+$$ LANGUAGE plpgsql;
+
+-- search authors
+create or replace function search_authors(search_term VARCHAR)
+RETURNS TABLE(
+    author_id INT,
+    first_name VARCHAR,
+    middle_name VARCHAR,
+    last_name VARCHAR,
+    full_name VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        a.author_id,
+        a.first_name,
+        a.middle_name,
+        a.last_name,
+        CASE 
+            WHEN a.middle_name IS NOT NULL AND a.middle_name != '' 
+            THEN a.first_name || ' ' || a.middle_name || ' ' || COALESCE(a.last_name, '')
+            ELSE a.first_name || ' ' || COALESCE(a.last_name, '')
+        END as full_name
+    FROM authors a
+    WHERE 
+        lower(a.first_name) LIKE lower('%' || search_term || '%')
+        OR lower(COALESCE(a.middle_name, '')) LIKE lower('%' || search_term || '%')
+        OR lower(COALESCE(a.last_name, '')) LIKE lower('%' || search_term || '%')
+    ORDER BY a.first_name, a.last_name;
+END;
+$$ LANGUAGE plpgsql;
+
+-- search genres
+create or replace function search_genres(search_term VARCHAR)
+RETURNS TABLE(
+    genre_id INT,
+    genre VARCHAR,
+    parent_id INT,
+    parent_genre VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        g.genre_id,
+        g.genre,
+        g.parent_id,
+        pg.genre as parent_genre
+    FROM genres g
+    LEFT JOIN genres pg ON g.parent_id = pg.genre_id
+    WHERE 
+        lower(g.genre) LIKE lower('%' || search_term || '%')
+    ORDER BY g.genre;
+END;
+$$ LANGUAGE plpgsql;
+
+-- create_or_get_author
+drop function create_or_get_author(varchar,varchar,varchar);
+CREATE OR REPLACE FUNCTION create_or_get_author(
+    p_first_name VARCHAR,
+    p_middle_name VARCHAR,
+    p_last_name VARCHAR
+) RETURNS INT AS $$
+DECLARE
+    v_author_id INT;
+    v_exists BOOLEAN;
+BEGIN
+    RAISE NOTICE 'Starting create_or_get_author with: first_name=%, middle_name=%, last_name=%',
+        p_first_name, p_middle_name, p_last_name;
+
+    -- Проверяем существование автора
+    SELECT EXISTS (
+        SELECT 1 
+        FROM authors 
+        WHERE LOWER(first_name) = LOWER(p_first_name)
+        AND COALESCE(LOWER(middle_name), '') = COALESCE(LOWER(p_middle_name), '')
+        AND COALESCE(LOWER(last_name), '') = COALESCE(LOWER(p_last_name), '')
+    ) INTO v_exists;
+
+    IF v_exists THEN
+        -- Если автор существует, получаем его ID
+        SELECT author_id INTO v_author_id
+        FROM authors
+        WHERE LOWER(first_name) = LOWER(p_first_name)
+        AND COALESCE(LOWER(middle_name), '') = COALESCE(LOWER(p_middle_name), '')
+        AND COALESCE(LOWER(last_name), '') = COALESCE(LOWER(p_last_name), '');
+
+        RAISE NOTICE 'Found existing author with ID: %', v_author_id;
+        RETURN v_author_id;
+    ELSE
+        -- Если автор не существует, создаем нового
+        INSERT INTO authors (first_name, middle_name, last_name)
+        VALUES (
+            INITCAP(p_first_name),
+            NULLIF(INITCAP(p_middle_name), ''),
+            NULLIF(INITCAP(p_last_name), '')
+        )
+        RETURNING author_id INTO v_author_id;
+
+        RAISE NOTICE 'Created new author with ID: %', v_author_id;
+        RETURN v_author_id;
+    END IF;
+
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'Error in create_or_get_author: %, SQLSTATE: %', SQLERRM, SQLSTATE;
+    RAISE;
+END;
+$$ LANGUAGE plpgsql;
+
+-- create_or_get_genre
+CREATE OR REPLACE FUNCTION create_or_get_genre(
+    p_genre VARCHAR
+) RETURNS INT AS $$
+DECLARE
+    v_genre_id INT;
+BEGIN
+    -- Пытаемся найти существующий жанр
+    SELECT genre_id INTO v_genre_id
+    FROM genres
+    WHERE LOWER(genre) = LOWER(p_genre);
+
+    -- Если жанр не найден, создаем новый
+    IF v_genre_id IS NULL THEN
+        INSERT INTO genres (genre)
+        VALUES (p_genre)
+        RETURNING genre_id INTO v_genre_id;
+    END IF;
+
+    RETURN v_genre_id;
 END;
 $$ LANGUAGE plpgsql;
