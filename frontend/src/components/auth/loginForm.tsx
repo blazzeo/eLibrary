@@ -4,22 +4,44 @@ import { authenticate } from "../api/DatabaseAPI";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../libraryContext";
 import { useNavigate } from "react-router";
+import { Spinner } from "react-bootstrap";
 
 const LoginForm: React.FC = () => {
+	console.log('LoginForm rendering');
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 	const { setAuthToken } = useLibrary();
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
+		if (isLoading) return;
+
+		setIsLoading(true);
 		try {
+			console.log('Attempting to authenticate...');
 			const token = await authenticate(username, password);
-			setAuthToken(token); // сохранение в context и localStorage
+			console.log('Authentication successful, got token');
+			
+			// Очищаем форму
+			setUsername("");
+			setPassword("");
+			
+			// Устанавливаем токен
+			setAuthToken(token);
+			
+			console.log('Token set, showing success message');
 			toast.success("Вход выполнен успешно");
-			navigate("/"); // переход на домашнюю страницу
+			
+			// Перенаправляем на главную
+			navigate("/");
 		} catch (err) {
+			console.error('Authentication error:', err);
 			toast.error("Неверный логин или пароль");
+			setAuthToken(null);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -36,6 +58,7 @@ const LoginForm: React.FC = () => {
 						id="username"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
+						disabled={isLoading}
 						required
 					/>
 				</div>
@@ -48,13 +71,38 @@ const LoginForm: React.FC = () => {
 						id="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
+						disabled={isLoading}
 						required
 					/>
 				</div>
-				<button type="submit" className="btn btn-primary w-100">Войти</button>
+				<button 
+					type="submit" 
+					className="btn btn-primary w-100"
+					disabled={isLoading || !username || !password}
+				>
+					{isLoading ? (
+						<>
+							<Spinner
+								as="span"
+								animation="border"
+								size="sm"
+								role="status"
+								aria-hidden="true"
+								className="me-2"
+							/>
+							Вход...
+						</>
+					) : (
+						'Войти'
+					)}
+				</button>
 			</form>
 			<div className="mt-3 text-center">
-				<button className="btn btn-secondary" onClick={() => navigate('/register')}>
+				<button 
+					className="btn btn-secondary" 
+					onClick={() => navigate('/register')}
+					disabled={isLoading}
+				>
 					Нет аккаунта? Создать аккаунт.
 				</button>
 			</div>

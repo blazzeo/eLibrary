@@ -9,15 +9,15 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-	const [token, setToken] = useState<string | null>(() => localStorage.getItem("token"));
+	const [token, setToken] = useState<string | null>(() => sessionStorage.getItem("token"));
 
 	const login = (newToken: string) => {
-		localStorage.setItem("token", newToken);
+		sessionStorage.setItem("token", newToken);
 		setToken(newToken);
 	};
 
 	const logout = () => {
-		localStorage.removeItem("token");
+		sessionStorage.removeItem("token");
 		setToken(null);
 	};
 

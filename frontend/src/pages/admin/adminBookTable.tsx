@@ -58,7 +58,7 @@ export function AdminBookTable() {
 				},
 			},
 		],
-		[moderBooks]
+		[]
 	);
 
 	const table = useMaterialReactTable<BookInfo>({
@@ -67,7 +67,7 @@ export function AdminBookTable() {
 		muiTableBodyRowProps: ({ row }) => ({
 			onClick: () => {
 				const bookId = row.original.book.book_id;
-				navigate(`/book?id=${bookId}`);
+				navigate(`/book/${bookId}`);
 			},
 			sx: {
 				cursor: "pointer",

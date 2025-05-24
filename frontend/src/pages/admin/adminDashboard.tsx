@@ -10,25 +10,28 @@ import { useLibrary } from "../../libraryContext";
 import AddModerForm from "../../components/forms/AddModerForm";
 
 export default function AdminDashboard() {
-	const { refreshAll } = useLibrary();
+	const { refreshAll, moderBooks, users } = useLibrary();
 
 	useEffect(() => {
-		refreshAll()
+		if (!moderBooks || !users) {
+			console.log('AdminDashboard: refreshing data because moderBooks or users is null');
+			refreshAll();
+		}
 	}, []);
+
+	if (!moderBooks || !users) return <h1>Загрузка...</h1>;
 
 	return (
 		<>
 			<Header />
-
-			{/* Ограничиваем ширину и центрируем */}
 			<div className="container my-4">
 				<Routes>
-					<Route path="/" element={<AdminBookTable />} />
-					<Route path="/usercontrol" element={<UserTable />} />
-					<Route path="/addbook" element={<AddBookForm />} />
-					<Route path="/book" element={<BookPageWrapper />} />
-					<Route path="/user" element={<UserPageWrapper />} />
-					<Route path="/createmoder" element={<AddModerForm />} />
+					<Route index element={<AdminBookTable />} />
+					<Route path="usercontrol" element={<UserTable />} />
+					<Route path="addbook" element={<AddBookForm />} />
+					<Route path="book/:id" element={<BookPageWrapper />} />
+					<Route path="user/:id" element={<UserPageWrapper />} />
+					<Route path="createmoder" element={<AddModerForm />} />
 				</Routes>
 			</div>
 		</>

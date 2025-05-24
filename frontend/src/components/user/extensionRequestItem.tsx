@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 interface ExtensionRequestItemProps {
 	book: BookInfo;
-	requestDate: Date;
+	requestDate: string;
 }
 
 export const ExtensionRequestItem = ({ book, requestDate }: ExtensionRequestItemProps) => {
@@ -13,7 +13,7 @@ export const ExtensionRequestItem = ({ book, requestDate }: ExtensionRequestItem
 
 	const onApprove = async () => {
 		try {
-			await confirmExtension(book.book.book_id, book.owner.user_id, requestDate)
+			await confirmExtension(book.book.book_id, book.owner.user_id, new Date(requestDate))
 			toast.success("Бронь успешно продлена")
 		} catch (err) {
 			console.error(err)
@@ -25,7 +25,7 @@ export const ExtensionRequestItem = ({ book, requestDate }: ExtensionRequestItem
 
 	const onReject = async () => {
 		try {
-			await rejectExtension(book.book.book_id, book.owner.user_id, requestDate)
+			await rejectExtension(book.book.book_id, book.owner.user_id, new Date(requestDate))
 		} catch (err) {
 			console.error(err)
 		} finally {

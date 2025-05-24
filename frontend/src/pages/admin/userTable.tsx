@@ -82,7 +82,7 @@ export function UserTable() {
 									transition: "background-color 0.2s",
 									"&:hover": { backgroundColor: "#f0f0f0" },
 								}}
-								onClick={() => navigate(`/user?id=${user.user_id}`)}
+								onClick={() => navigate(`/user/${user.user_id}`)}
 							>
 								<TableCell>{user.user_id}</TableCell>
 								<TableCell>{user.user_name}</TableCell>

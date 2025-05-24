@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BookPage from "./book_page";
 import { BookInfo } from "../structs";
 import { Spinner } from "react-bootstrap";
@@ -7,15 +7,13 @@ import { useLibrary } from "../../libraryContext";
 
 export default function BookPageWrapper() {
 	const { moderBooks } = useLibrary();
-
-	const [searchParams] = useSearchParams();
-	const id = searchParams.get("id");
+	const { id } = useParams();
 
 	const [bookInfo, setBookInfo] = useState<BookInfo | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
-	const updateBooks = () => {
+	useEffect(() => {
 		if (!id || !moderBooks) {
 			setBookInfo(null);
 			setLoading(false);
@@ -31,22 +29,32 @@ export default function BookPageWrapper() {
 				setBookInfo(book);
 				setError(null);
 			}
-		} catch {
+		} catch (error) {
+			console.error("Ошибка при загрузке книги:", error);
 			setError("Ошибка при загрузке книги");
 			setBookInfo(null);
 		} finally {
 			setLoading(false);
 		}
-	};
-
-	useEffect(() => {
-		updateBooks();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id, moderBooks]);
 
-	if (loading) return <Spinner animation="border" />;
-	if (error) return <p>{error}</p>;
-	if (!bookInfo) return <p>Книга не найдена</p>;
+	if (loading) {
+		return (
+			<div className="d-flex justify-content-center p-5">
+				<Spinner animation="border" role="status">
+					<span className="visually-hidden">Загрузка...</span>
+				</Spinner>
+			</div>
+		);
+	}
+
+	if (error) {
+		return <div className="alert alert-danger m-3">{error}</div>;
+	}
+
+	if (!bookInfo) {
+		return <div className="alert alert-warning m-3">Книга не найдена</div>;
+	}
 
 	return <BookPage bookInfo={bookInfo} />;
 }

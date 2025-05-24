@@ -6,7 +6,7 @@ import { BookInfo } from "../structs";
 interface WishlistItemProps {
 	user_name: string;
 	book: BookInfo;
-	requestDate: Date;
+	requestDate: string;
 	isTaken: boolean;
 }
 
@@ -48,7 +48,7 @@ export const WishlistItem = ({ book, user_name, requestDate, isTaken }: Wishlist
 						<span className="text-warning fs-4 lh-1">💡</span>
 						<div>
 							<strong>{book.book.title}</strong>
-							<div className="small text-muted">Запрошена {new Date(requestDate).toLocaleDateString()}</div>
+							<div className="small text-muted">Запрошена {requestDate}</div>
 						</div>
 					</div>
 					<div className="btn-group btn-group-sm">

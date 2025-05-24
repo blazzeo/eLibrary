@@ -7,9 +7,11 @@ import { Button, Card, Badge, Alert, Row, Col, ListGroup } from "react-bootstrap
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../libraryContext";
+import { BookInfo } from "../structs";
 
 interface Props {
 	user: UserData;
+	books?: BookInfo[] | null;
 }
 
 export default function UserPage({ user }: Props) {
@@ -28,7 +30,10 @@ export default function UserPage({ user }: Props) {
 		} finally {
 			refreshAll();
 		}
+	};
 
+	const formatDate = (date: string | Date) => {
+		return new Date(date).toLocaleDateString();
 	};
 
 	return (
@@ -48,7 +53,7 @@ export default function UserPage({ user }: Props) {
 										</Badge>
 										<Badge bg="info" className="fs-6 px-3 py-2">
 											<i className="bi bi-calendar me-2"></i>
-											Регистрация: {user.registration_date}
+											Регистрация: {formatDate(user.registration_date)}
 										</Badge>
 									</div>
 								</div>
@@ -73,15 +78,11 @@ export default function UserPage({ user }: Props) {
 						<Card.Header className="bg-success bg-opacity-10 text-success border-success">
 							<div className="d-flex justify-content-between align-items-center">
 								<span><i className="bi bi-book me-2"></i>На руках</span>
-								<Badge bg="success" pill>{moderBooks?.filter(b =>
-									user.loans?.some(l => l.book_id === b.book.book_id)
-								).length}</Badge>
+								<Badge bg="success" pill>{user.loans?.length || 0}</Badge>
 							</div>
 						</Card.Header>
 						<Card.Body className="p-0">
-							{moderBooks?.filter(b =>
-								user.loans?.some(l => l.book_id === b.book.book_id)
-							).length === 0 ? (
+							{!user.loans || user.loans.length === 0 ? (
 								<Alert variant="light" className="text-center m-3">
 									Нет книг на руках
 								</Alert>
@@ -89,14 +90,12 @@ export default function UserPage({ user }: Props) {
 								<ListGroup variant="flush">
 									{moderBooks?.filter(b =>
 										user.loans?.some(l => l.book_id === b.book.book_id)
-									).map(book => {
-										return (
-											<LoanListItem
-												key={book.book.book_id}
-												book={book}
-											/>
-										);
-									})}
+									).map(book => (
+										<LoanListItem
+											key={book.book.book_id}
+											book={book}
+										/>
+									))}
 								</ListGroup>
 							)}
 						</Card.Body>
@@ -109,19 +108,17 @@ export default function UserPage({ user }: Props) {
 						<Card.Header className="bg-warning bg-opacity-10 text-warning border-warning">
 							<div className="d-flex justify-content-between align-items-center">
 								<span><i className="bi bi-heart me-2"></i>Желаемые</span>
-								<Badge bg="warning" pill>{moderBooks?.filter(b =>
-									b.wishlist?.some(w => w.user_id === user.user_id)
-								).length}</Badge>
+								<Badge bg="warning" pill>{user.wishlist?.length || 0}</Badge>
 							</div>
 						</Card.Header>
 						<Card.Body className="p-0">
-							{!user.wishlist ? (
+							{!user.wishlist || user.wishlist.length === 0 ? (
 								<Alert variant="light" className="text-center m-3">
 									Нет желаемых книг
 								</Alert>
 							) : (
 								<ListGroup variant="flush">
-									{user.wishlist!.map(item => {
+									{user.wishlist.map(item => {
 										const book = moderBooks?.find(b => b.book.book_id === item.book_id);
 										if (!book) return null;
 										return (
@@ -129,8 +126,8 @@ export default function UserPage({ user }: Props) {
 												key={`wish-${item.book_id}`}
 												user_name={user.user_name}
 												book={book}
-												requestDate={item.request_date!}
-												isTaken={book.owner}
+												requestDate={formatDate(item.request_date)}
+												isTaken={book.owner !== null}
 											/>
 										);
 									})}
@@ -146,24 +143,24 @@ export default function UserPage({ user }: Props) {
 						<Card.Header className="bg-info bg-opacity-10 text-info border-info">
 							<div className="d-flex justify-content-between align-items-center">
 								<span><i className="bi bi-clock me-2"></i>Продления</span>
-								<Badge bg="info" pill>{(user.extension_requests) ? user.extension_requests!.length : 0}</Badge>
+								<Badge bg="info" pill>{user.extension_requests?.length || 0}</Badge>
 							</div>
 						</Card.Header>
 						<Card.Body className="p-0">
-							{!user.extension_requests ? (
+							{!user.extension_requests || user.extension_requests.length === 0 ? (
 								<Alert variant="light" className="text-center m-3">
 									Нет запросов на продление
 								</Alert>
 							) : (
 								<ListGroup variant="flush">
-									{user.extension_requests!.map(ext => {
+									{user.extension_requests.map(ext => {
 										const book = moderBooks?.find(b => b.book.book_id === ext.book_id);
 										if (!book) return null;
 										return (
 											<ExtensionRequestItem
 												key={`ext-${ext.book_id}`}
 												book={book}
-												requestDate={ext.request_date}
+												requestDate={formatDate(ext.request_date)}
 											/>
 										);
 									})}

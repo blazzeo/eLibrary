@@ -10,42 +10,28 @@ import { useEffect } from "react";
 import { useLibrary } from "../../libraryContext";
 
 export default function ModerDashboard() {
-	const { refreshAll } = useLibrary()
+	const { refreshAll, moderBooks, users } = useLibrary()
 
 	useEffect(() => {
-		refreshAll()
-	}, [])
+		if (!moderBooks || !users) {
+			console.log('ModerDashboard: refreshing data because moderBooks or users is null');
+			refreshAll();
+		}
+	}, []);
+
+	if (!moderBooks || !users) return <h1>Загрузка...</h1>;
 
 	return (
 		<>
 			<Header />
-
 			<div className="container my-4">
 				<Routes>
-					<Route
-						path="/"
-						element={<ModerBookTable />}
-					/>
-					<Route
-						path="/usercontrol"
-						element={<UserTable />}
-					/>
-					<Route
-						path="/createloan"
-						element={<AddLoanForm />}
-					/>
-					<Route
-						path="/requests"
-						element={<RequestsList />}
-					/>
-					<Route
-						path="/book"
-						element={<BookPageWrapper />}
-					/>
-					<Route
-						path="/user"
-						element={<UserPageWrapper />}
-					/>
+					<Route index element={<ModerBookTable />} />
+					<Route path="usercontrol" element={<UserTable />} />
+					<Route path="createloan" element={<AddLoanForm />} />
+					<Route path="requests" element={<RequestsList />} />
+					<Route path="book/:id" element={<BookPageWrapper />} />
+					<Route path="user/:id" element={<UserPageWrapper />} />
 				</Routes>
 			</div>
 		</>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import UserPage from "./user_page";
 import { BookInfo, UserData } from "../structs";
 import { Spinner } from "react-bootstrap";
@@ -7,8 +7,7 @@ import { useLibrary } from "../../libraryContext";
 
 export default function UserPageWrapper() {
 	const { moderBooks, users } = useLibrary()
-	const [searchParams] = useSearchParams();
-	const id = searchParams.get("id");
+	const { id } = useParams();
 
 	const [user, setUser] = useState<UserData | null>(null);
 	const [userBooks, setUserBooks] = useState<BookInfo[] | null>(null);

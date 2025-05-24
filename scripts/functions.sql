@@ -838,8 +838,6 @@ RETURNS TABLE(
     -- 1: do wishlish,
     -- 2: not wishlish
 ) AS $$
-DECLARE
-    p_user_id INT;
 BEGIN
     RETURN QUERY
     SELECT
