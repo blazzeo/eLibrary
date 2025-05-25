@@ -19,8 +19,8 @@ export default function AddLoanForm() {
 	const [userSearch, setUserSearch] = useState('');
 
 	// Filter books based on search input
-	const filteredBooks = moderBooks!.filter(book =>
-		book.book.title.toLowerCase().includes(bookSearch.toLowerCase())
+	const filteredBooks = moderBooks!.filter(b =>
+		b.book.title.toLowerCase().includes(bookSearch.toLowerCase())
 	);
 
 	const handle_form = async (event: React.FormEvent) => {
@@ -36,13 +36,6 @@ export default function AddLoanForm() {
 				return;
 			}
 			toast.success('Бронь успешно добавлена');
-			// Очищаем форму
-			setSelectedUser('');
-			setSelectedBook({ id: -1, name: '' });
-			setSelectedDate(new Date());
-			setBookSearch('');
-			setUserSearch('');
-			refreshAll();
 		} catch (err: any) {
 			console.error('Ошибка при создании брони:', err);
 			if (err.response?.data?.error) {
@@ -52,6 +45,13 @@ export default function AddLoanForm() {
 			} else {
 				toast.error('Произошла неизвестная ошибка при создании брони');
 			}
+		} finally {
+			setSelectedUser('');
+			setSelectedBook({ id: -1, name: '' });
+			setSelectedDate(new Date());
+			setBookSearch('');
+			setUserSearch('');
+			refreshAll();
 		}
 	};
 

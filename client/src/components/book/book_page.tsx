@@ -12,8 +12,8 @@ import {
 	Row,
 	Col
 } from "react-bootstrap";
-import { BookData, BookInfo, UserData, Author, AuthorInput } from "../structs";
-import { addLoan, confirmExtension, deleteBook, editBook, rejectExtension, toggleWishlist, searchAuthors, searchGenres } from "../api/DatabaseAPI";
+import { BookData, BookInfo, UserData, Author } from "../structs";
+import { addLoan, confirmExtension, deleteBook, editBook, rejectExtension, toggleWishlist, searchAuthors, searchGenres, returnBook } from "../api/DatabaseAPI";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../libraryContext";
 import { useNavigate } from "react-router";
@@ -30,6 +30,7 @@ export default function BookPage({ bookInfo }: Props) {
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [showLoanModal, setShowLoanModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [showBorrowBook, setShowBorrowBook] = useState(false);
 	const [selectedUser, setSelectedUser] = useState('');
 	const [returnDate, setReturnDate] = useState('');
 
@@ -51,13 +52,13 @@ export default function BookPage({ bookInfo }: Props) {
 				last_name: null,
 				full_name: ''
 			};
-			
+
 			const parts = authorName.split(' ');
 			return {
 				author_id: 0,
 				first_name: parts[0] || '',
-				middle_name: parts[1] || null,
-				last_name: parts[2] || null,
+				middle_name: parts[2] || null,
+				last_name: parts[1] || null,
 				full_name: authorName
 			};
 		}).filter(author => author.first_name !== '') // Удаляем пустых авторов
@@ -68,12 +69,13 @@ export default function BookPage({ bookInfo }: Props) {
 	const [authorInput, setAuthorInput] = useState("");
 	const [genreInput, setGenreInput] = useState("");
 	const [publishedDate, setPublishedDate] = useState<string>(
-		book.published_date instanceof Date 
+		book.published_date instanceof Date
 			? book.published_date.toISOString().split('T')[0]
 			: new Date(book.published_date).toISOString().split('T')[0]
 	);
 	const [totalPages, setTotalPages] = useState(book.total_pages);
 	const [rating, setRating] = useState(book.rating);
+	const [isbn, setIsbn] = useState(book.isbn || '');
 
 	useEffect(() => {
 		if (searchTerm.trim() === "") {
@@ -124,9 +126,15 @@ export default function BookPage({ bookInfo }: Props) {
 	};
 
 	const selectAuthor = (author: Author) => {
+		console.log('Selecting author:', author);
+		console.log('Current authors:', authors);
 		const isDuplicate = authors.some(a => a.full_name === author.full_name);
 		if (!isDuplicate) {
-			setAuthors([...authors, author]);
+			const updatedAuthors = [...authors, author];
+			console.log('Updated authors after selection:', updatedAuthors);
+			setAuthors(updatedAuthors);
+		} else {
+			console.log('Duplicate author detected, not adding');
 		}
 		setAuthorInput('');
 		setShowAuthorDropdown(false);
@@ -140,42 +148,53 @@ export default function BookPage({ bookInfo }: Props) {
 		setShowGenreDropdown(false);
 	};
 
-	const addAuthor = () => {
-		if (authorInput.trim()) {
-			const parts = authorInput.trim().split(' ');
-			const newAuthor: Author = {
-				author_id: 0,
-				first_name: parts[0] || '',
-				middle_name: parts[1] || null,
-				last_name: parts[2] || null,
-				full_name: authorInput.trim()
-			};
-			if (newAuthor.first_name) {
-				setAuthors([...authors, newAuthor]);
-				setAuthorInput('');
-			} else {
-				toast.error('Имя автора обязательно');
-			}
-		}
-	};
+	// const addAuthor = () => {
+	// 	console.log('Adding author, current input:', authorInput);
+	// 	if (authorInput.trim()) {
+	// 		const parts = authorInput.trim().split(' ');
+	// 		const newAuthor: Author = {
+	// 			author_id: 0,
+	// 			first_name: parts[0] || '',
+	// 			middle_name: parts[1] || null,
+	// 			last_name: parts[2] || null,
+	// 			full_name: authorInput.trim()
+	// 		};
+	// 		console.log('New author object:', newAuthor);
+	// 		if (newAuthor.first_name) {
+	// 			const updatedAuthors = [...authors, newAuthor];
+	// 			console.log('Updated authors array:', updatedAuthors);
+	// 			setAuthors(updatedAuthors);
+	// 			setAuthorInput('');
+	// 		} else {
+	// 			toast.error('Имя автора обязательно');
+	// 		}
+	// 	}
+	// };
 
 	const removeAuthor = (indexToRemove: number) => {
-		setAuthors(authors.filter((_, index) => index !== indexToRemove));
+		console.log('Removing author:', {
+			indexToRemove,
+			currentAuthors: authors,
+			authorToRemove: authors[indexToRemove]
+		});
+		const newAuthors = authors.filter((_, index) => index !== indexToRemove);
+		console.log('Authors after removal:', newAuthors);
+		setAuthors(newAuthors);
 	};
 
-	const addGenre = () => {
-		if (genreInput.trim()) {
-			setGenres([...genres, genreInput.trim()]);
-			setGenreInput("");
-		}
-	};
+	// const addGenre = () => {
+	// 	if (genreInput.trim()) {
+	// 		setGenres([...genres, genreInput.trim()]);
+	// 		setGenreInput("");
+	// 	}
+	// };
 
 	const removeGenre = (indexToRemove: number) => {
 		setGenres(genres.filter((_, index) => index !== indexToRemove));
 	};
 
 	const validateForm = (): boolean => {
-		if (!title || !totalPages || !rating) {
+		if (!title || !totalPages || !rating || !isbn) {
 			toast.error("Все обязательные поля должны быть заполнены!");
 			return false;
 		}
@@ -203,6 +222,12 @@ export default function BookPage({ bookInfo }: Props) {
 			return false;
 		}
 
+		// Валидация ISBN
+		if (!/^\d{13}$/.test(isbn)) {
+			toast.error("ISBN должен содержать ровно 13 цифр!");
+			return false;
+		}
+
 		return true;
 	};
 
@@ -210,26 +235,31 @@ export default function BookPage({ bookInfo }: Props) {
 		if (!validateForm()) return;
 
 		try {
+			console.log('Saving book with authors:', authors);
 			const editedBook: BookData = {
 				book_id: book.book_id,
 				title: title,
 				published_date: new Date(publishedDate),
-				authors: authors.filter(a => a.first_name).map(a => ({
-					first_name: a.first_name,
-					middle_name: a.middle_name,
-					last_name: a.last_name
-				})) as AuthorInput[],
+				authors: authors.filter(a => a.first_name).map(a => {
+					console.log('Processing author for save:', a);
+					return {
+						first_name: a.first_name,
+						middle_name: a.middle_name,
+						last_name: a.last_name
+					};
+				}),
 				genres: genres,
-				total_pages: totalPages,
-				rating: rating,
-				isbn: book.isbn,
+				total_pages: Number(totalPages),
+				rating: Number(rating),
+				isbn: Number(isbn),
 				borrow_date: new Date(),
 				return_date: new Date(),
 				loan_status: 0
 			};
+			console.log('Final editedBook object:', editedBook);
 
 			const response = await editBook(editedBook);
-			
+
 			if (response.error) {
 				toast.error(response.error);
 				return;
@@ -299,6 +329,7 @@ export default function BookPage({ bookInfo }: Props) {
 			}
 			toast.success(`Книга выдана пользователю ${selectedUser}`);
 			setShowLoanModal(false);
+			setShowBorrowBook(false);
 			refreshAll();
 		} catch (err: any) {
 			if (err.response?.data?.error) {
@@ -309,6 +340,9 @@ export default function BookPage({ bookInfo }: Props) {
 				toast.error('Произошла неизвестная ошибка при выдаче книги');
 			}
 			console.error('Ошибка при выдаче книги:', err);
+		} finally {
+			setSelectedUser("")
+			setReturnDate("")
 		}
 	};
 
@@ -318,7 +352,19 @@ export default function BookPage({ bookInfo }: Props) {
 			toast.success('Пользователь удален из списка')
 		} catch (error) {
 			console.error(error)
-			toast.success('Пользователь не был удален из списка')
+			toast.error('Пользователь не был удален из списка')
+		} finally {
+			refreshAll()
+		}
+	}
+
+	const return_book = async () => {
+		try {
+			await returnBook(bookInfo.book.book_id)
+			toast.success('Запись аннулирована')
+		} catch (error) {
+			console.error(error)
+			toast.error('Произошла ошибка аннулирования записи')
 		} finally {
 			refreshAll()
 		}
@@ -359,23 +405,24 @@ export default function BookPage({ bookInfo }: Props) {
 									</div>
 								</div>
 
-								{user?.user_role == 'admin' && <div>
-									<Button
-										variant="outline-danger"
-										size="sm"
-										onClick={() => setShowDeleteModal(true)}
-									>
-										<i className="bi bi-trash"></i> Удалить
-									</Button>
+								{user?.user_role == 'admin' &&
+									<div className="d-flex gap-2">
+										<Button
+											variant="outline-danger"
+											size="sm"
+											onClick={() => setShowDeleteModal(true)}
+										>
+											<i className="bi bi-trash"></i> Удалить
+										</Button>
 
-									<Button
-										variant="outline-primary"
-										size="sm"
-										onClick={() => setShowEditModal(true)}
-									>
-										<i className="bi bi-pencil"></i> Редактировать
-									</Button>
-								</div>}
+										<Button
+											variant="outline-primary"
+											size="sm"
+											onClick={() => setShowEditModal(true)}
+										>
+											<i className="bi bi-pencil"></i> Редактировать
+										</Button>
+									</div>}
 							</div>
 
 							<Row className="g-3 mb-3">
@@ -426,6 +473,14 @@ export default function BookPage({ bookInfo }: Props) {
 													</div>
 												</div>
 											)}
+											<Button
+												variant="outline-danger"
+												size="lg"
+												onClick={() => { return_book() }}
+												className="ms-3"
+											>
+												<i className="bi bi-trash">Удалить</i>
+											</Button>
 										</div>
 									</ListGroup.Item>
 								</ListGroup>
@@ -467,12 +522,23 @@ export default function BookPage({ bookInfo }: Props) {
 													Отложил(а): {formatDate(user.request_date)}
 												</div>
 											</div>
-											<button
-												className="btn btn-outline-danger btn-sm"
-												onClick={() => delete_wish(user.user_id)}
-											>
-												Снять
-											</button>
+											<div className="d-flex gap-2">
+												{!bookInfo.owner && <button
+													className="btn btn-outline-success btn-md"
+													onClick={() => {
+														setSelectedUser(user.user_name)
+														setShowBorrowBook(true)
+													}}
+												>
+													Выдать
+												</button>}
+												<button
+													className="btn btn-outline-danger btn-md"
+													onClick={() => delete_wish(user.user_id)}
+												>
+													Удалить
+												</button>
+											</div>
 										</div>
 									</div>
 								))}
@@ -512,16 +578,16 @@ export default function BookPage({ bookInfo }: Props) {
 											onFocus={() => setShowAuthorDropdown(true)}
 											placeholder="Начните вводить имя автора..."
 										/>
-										<Button 
-											variant="secondary" 
-											className="ms-2" 
+										<Button
+											variant="secondary"
+											className="ms-2"
 											onClick={() => {
 												if (authorInput.trim()) {
 													selectAuthor({
 														author_id: 0,
 														first_name: authorInput.trim().split(' ')[0] || '',
-														middle_name: authorInput.trim().split(' ')[1] || null,
-														last_name: authorInput.trim().split(' ')[2] || null,
+														last_name: authorInput.trim().split(' ')[1] || null,
+														middle_name: authorInput.trim().split(' ')[2] || null,
 														full_name: authorInput.trim()
 													});
 												}
@@ -530,8 +596,8 @@ export default function BookPage({ bookInfo }: Props) {
 											+
 										</Button>
 										{showAuthorDropdown && authorSearchResults.length > 0 && (
-											<div 
-												className="position-absolute w-100 bg-white border rounded mt-1 shadow-sm" 
+											<div
+												className="position-absolute w-100 bg-white border rounded mt-1 shadow-sm"
 												style={{ top: '100%', zIndex: 1000, maxHeight: '200px', overflowY: 'auto' }}
 											>
 												{authorSearchResults.map((author, index) => (
@@ -551,9 +617,9 @@ export default function BookPage({ bookInfo }: Props) {
 										{authors.map((author, i) => (
 											<li key={i} className="d-flex align-items-center mb-2">
 												<span>{author.full_name}</span>
-												<Button 
-													variant="link" 
-													className="text-danger ms-2 p-0" 
+												<Button
+													variant="link"
+													className="text-danger ms-2 p-0"
 													onClick={() => removeAuthor(i)}
 													style={{ textDecoration: 'none' }}
 												>
@@ -575,9 +641,9 @@ export default function BookPage({ bookInfo }: Props) {
 											onFocus={() => setShowGenreDropdown(true)}
 											placeholder="Начните вводить название жанра..."
 										/>
-										<Button 
-											variant="secondary" 
-											className="ms-2" 
+										<Button
+											variant="secondary"
+											className="ms-2"
 											onClick={() => {
 												if (genreInput.trim()) {
 													selectGenre(genreInput.trim());
@@ -587,8 +653,8 @@ export default function BookPage({ bookInfo }: Props) {
 											+
 										</Button>
 										{showGenreDropdown && genreSearchResults.length > 0 && (
-											<div 
-												className="position-absolute w-100 bg-white border rounded mt-1 shadow-sm" 
+											<div
+												className="position-absolute w-100 bg-white border rounded mt-1 shadow-sm"
 												style={{ top: '100%', zIndex: 1000, maxHeight: '200px', overflowY: 'auto' }}
 											>
 												{genreSearchResults.map((genre, index) => (
@@ -608,9 +674,9 @@ export default function BookPage({ bookInfo }: Props) {
 										{genres.map((g, i) => (
 											<li key={i} className="d-flex align-items-center mb-2">
 												<span>{g}</span>
-												<Button 
-													variant="link" 
-													className="text-danger ms-2 p-0" 
+												<Button
+													variant="link"
+													className="text-danger ms-2 p-0"
 													onClick={() => removeGenre(i)}
 													style={{ textDecoration: 'none' }}
 												>
@@ -650,19 +716,38 @@ export default function BookPage({ bookInfo }: Props) {
 								</Form.Group>
 							</Col>
 							<Col md={4}>
-								<Form.Group>
+								<Form.Group className="mb-3">
 									<Form.Label>Рейтинг</Form.Label>
 									<Form.Control
 										type="number"
+										min="0"
+										max="5"
 										step="0.1"
-										min={0}
-										max={5}
 										value={rating}
-										onChange={(e) => setRating(Number(e.target.value))}
+										onChange={(e) => setRating(parseFloat(e.target.value))}
 									/>
 								</Form.Group>
 							</Col>
 						</Row>
+
+						<Form.Group className="mb-3">
+							<Form.Label>ISBN</Form.Label>
+							<Form.Control
+								type="text"
+								pattern="\d{13}"
+								maxLength={13}
+								placeholder="Введите 13 цифр ISBN"
+								value={isbn}
+								onChange={(e) => {
+									const value = e.target.value.replace(/\D/g, '').slice(0, 13);
+									setIsbn(value);
+								}}
+								required
+							/>
+							<Form.Text className="text-muted">
+								ISBN должен содержать ровно 13 цифр
+							</Form.Text>
+						</Form.Group>
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
@@ -756,6 +841,33 @@ export default function BookPage({ bookInfo }: Props) {
 				</Modal.Footer>
 			</Modal>
 
-		</div>
+			<Modal show={showBorrowBook} centered onHide={() => setShowBorrowBook(false)}>
+				<Modal.Header closeButton>
+					<Modal.Title>Выдача книги</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form>
+						<Form.Group>
+							<Form.Label>Дата возврата</Form.Label>
+							<Form.Control
+								type="date"
+								value={returnDate}
+								onChange={(e) => setReturnDate(e.target.value)}
+								min={new Date().toISOString().split("T")[0]}
+							/>
+						</Form.Group>
+					</Form>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="success" onClick={handle_borrow} disabled={!returnDate}>
+						Выдать
+					</Button>
+					<Button variant="secondary" onClick={() => setShowBorrowBook(false)}>
+						Отмена
+					</Button>
+				</Modal.Footer>
+			</Modal>
+
+		</div >
 	);
 }

@@ -4,6 +4,7 @@ import { useLibrary } from "../../libraryContext";
 import { extentLoan, returnBook } from "../api/DatabaseAPI.tsx";
 import { BookInfo } from "../structs.tsx";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 interface LoanListItemProps {
 	book: BookInfo;
@@ -15,6 +16,8 @@ export const LoanListItem = ({ book }: LoanListItemProps) => {
 	const [newDate, setNewDate] = useState(
 		book.owner?.return_date || new Date().toISOString().slice(0, 10)
 	);
+
+	const navigate = useNavigate()
 
 	const onExtend = async () => {
 		try {
@@ -50,7 +53,7 @@ export const LoanListItem = ({ book }: LoanListItemProps) => {
 					<div className="d-flex gap-3 align-items-center">
 						<span className="text-success fs-4 lh-1">📖</span>
 						<div>
-							<strong>{book.book.title}</strong>
+							<strong onClick={() => navigate(`/book/${book.book.book_id}`)}>{book.book.title}</strong>
 							<div className="small text-muted">
 								{book.owner ? `До ${book.owner.return_date}` : "Возвращена"}
 							</div>

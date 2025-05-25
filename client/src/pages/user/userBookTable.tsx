@@ -145,7 +145,7 @@ export default function UserBookTable() {
 		enableColumnFilters: false,
 		enablePagination: true,
 		enableSorting: true,
-		enableTopToolbar: false,
+		enableTopToolbar: true,
 		muiTableBodyRowProps: ({ row }) => ({
 			onClick: () => {
 				const bookId = row.original.book_id;

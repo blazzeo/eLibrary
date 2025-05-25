@@ -1216,8 +1216,8 @@ BEGIN
         a.middle_name,
         a.last_name,
         CASE 
-            WHEN a.middle_name IS NOT NULL AND a.middle_name != '' 
-            THEN a.first_name || ' ' || a.middle_name || ' ' || COALESCE(a.last_name, '')
+            WHEN a.last_name IS NOT NULL AND a.last_name != '' 
+            THEN a.first_name || ' ' || a.last_name || ' ' || COALESCE(a.middle_name, '')
             ELSE a.first_name || ' ' || COALESCE(a.last_name, '')
         END as full_name
     FROM authors a
@@ -1226,6 +1226,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- search authors
+drop function search_authors(varchar);
 create or replace function search_authors(search_term VARCHAR)
 RETURNS TABLE(
     author_id INT,
@@ -1241,16 +1242,23 @@ BEGIN
         a.first_name,
         a.middle_name,
         a.last_name,
-        CASE 
-            WHEN a.middle_name IS NOT NULL AND a.middle_name != '' 
-            THEN a.first_name || ' ' || a.middle_name || ' ' || COALESCE(a.last_name, '')
+        (CASE 
+            WHEN a.last_name IS NOT NULL AND a.last_name != '' 
+            THEN a.first_name || ' ' || a.last_name || ' ' || COALESCE(a.middle_name, '')
             ELSE a.first_name || ' ' || COALESCE(a.last_name, '')
-        END as full_name
+        END)::VARCHAR as full_name
     FROM authors a
     WHERE 
         lower(a.first_name) LIKE lower('%' || search_term || '%')
         OR lower(COALESCE(a.middle_name, '')) LIKE lower('%' || search_term || '%')
         OR lower(COALESCE(a.last_name, '')) LIKE lower('%' || search_term || '%')
+        OR lower(
+            CASE 
+                 WHEN a.last_name IS NOT NULL AND a.last_name != '' 
+            THEN a.first_name || ' ' || a.last_name || ' ' || COALESCE(a.middle_name, '')
+            ELSE a.first_name || ' ' || COALESCE(a.last_name, '')
+            END
+        ) LIKE lower('%' || search_term || '%')
     ORDER BY a.first_name, a.last_name;
 END;
 $$ LANGUAGE plpgsql;

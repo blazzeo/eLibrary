@@ -56,16 +56,16 @@ export default function ExtensionCard({ bookInfo }: Props) {
 							{book.book.book_id}: {book.book.title}
 						</h5>
 						<p className="card-text text-muted">
-							ISBN: {book.book.isbn} | Pages: {book.book.total_pages}
+							ISBN: {book.book.isbn} | Страниц: {book.book.total_pages}
 						</p>
 						{book.book.authors && (
 							<p className="mb-1">
-								<strong>Authors:</strong> {book.book.authors.join(", ")}
+								<strong>Авторы:</strong> {book.book.authors.join(", ")}
 							</p>
 						)}
 						{book.book.genres && (
 							<p className="mb-0">
-								<strong>Genres:</strong> {book.book.genres.join(", ")}
+								<strong>Жанры:</strong> {book.book.genres.join(", ")}
 							</p>
 						)}
 					</div>
@@ -73,30 +73,30 @@ export default function ExtensionCard({ bookInfo }: Props) {
 					{book.owner && (
 						<div className="text-end ms-4">
 							<h4 className="text-muted mb-1">
-								Owner:{" "}
+								Находится у :{" "}
 								<span className="fw-semibold text-primary mb-0">
 									{book.owner.user_name}
 								</span>
 							</h4>
-							<h6>Borrow date: {book.owner.borrow_date.toString()}</h6>
-							<h6>Return date: {book.owner.return_date.toString()}</h6>
+							<h6>Дата получения: {book.owner.borrow_date.toString()}</h6>
+							<h6>Дата возврата: {book.owner.return_date.toString()}</h6>
 						</div>
 					)}
 				</div>
 
 				{book.extension_request && (
 					<div className="card-body border-top border-warning-subtle">
-						<h5 className="card-title text-warning">Extension Request</h5>
+						<h5 className="card-title text-warning">Запрос на продление</h5>
 						<p className="card-text">
-							Requested return extension to:{" "}
+							Запрос на продление до :{" "}
 							<strong>{book.extension_request.toString()}</strong>
 						</p>
 						<div className="d-flex gap-2">
 							<button className="btn btn-success" onClick={confirm_request}>
-								Confirm
+								Подтвердить
 							</button>
 							<button className="btn btn-danger" onClick={reject_request}>
-								Reject
+								Отклонить
 							</button>
 						</div>
 					</div>
