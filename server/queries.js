@@ -12,6 +12,17 @@ export async function checkLogin(userLogin) {
 	}
 }
 
+export async function createUser(user_name, user_password, user_role) {
+	try {
+		const admin = dbadmin(5432)
+		const hashed_password = await hashPassword(user_password)
+		const result = await admin.query('select create_user($1, $2, $3);', [user_name, hashed_password, user_role])
+		return result.rows[0].create_user
+	} catch (error) {
+		throw error
+	}
+}
+
 export async function getUser(user_id) {
 	try {
 		const admin = dbadmin(5432)
@@ -213,9 +224,7 @@ export async function editBook(book) {
 export async function toggleWishlist(user_id, book_id) {
 	try {
 		const user = dbuser(5432)
-		console.log('Connecting to database...')
 
-		// Начинаем транзакцию
 		await user.query('BEGIN');
 
 		try {
@@ -225,17 +234,10 @@ export async function toggleWishlist(user_id, book_id) {
 				'SELECT EXISTS(SELECT 1 FROM wishlist WHERE user_id = $1 AND book_id = $2)',
 				[user_id, book_id]
 			)
-			console.log('Current wishlist status:', wishlistResult.rows[0].exists)
 
-			// Переключаем wishlist
-			console.log('Toggling wishlist...')
 			await user.query('call toggle_wishlist($1,$2);', [user_id, book_id])
-			console.log('Wishlist toggled')
 
-			// Получаем обновленные данные пользователя
-			console.log('Getting updated user data...')
 			const userResult = await user.query('SELECT get_user($1);', [user_id])
-			console.log('Raw user result:', userResult.rows)
 
 			if (!userResult.rows || userResult.rows.length === 0) {
 				throw new Error('Failed to get updated user data after toggle')
@@ -248,12 +250,10 @@ export async function toggleWishlist(user_id, book_id) {
 
 			console.log('Processed user data:', userData)
 
-			// Фиксируем транзакцию
 			await user.query('COMMIT');
 
 			return userData
 		} catch (err) {
-			// В случае ошибки откатываем транзакцию
 			await user.query('ROLLBACK');
 			throw err;
 		}
@@ -278,7 +278,6 @@ export async function getModerBooks() {
 	try {
 		const moder = dbmoder(5432)
 		const result = await moder.query('select * from get_moder_books();')
-		// console.dir(result, { depth: null, colors: true });
 		return result.rows
 	} catch (error) {
 		console.error(error)
@@ -289,9 +288,7 @@ export async function getModerBooks() {
 export async function requestExtent(user_name, book_id, request_date) {
 	try {
 		const user = dbuser(5432)
-		console.log(user_name, book_id, request_date)
 		const result = await user.query(`call request_extent_loan($1, $2, $3);`, [user_name, book_id, request_date])
-		console.log(result)
 		return result
 	} catch (error) {
 		console.error(error)

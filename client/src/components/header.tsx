@@ -61,7 +61,7 @@ export default function Header() {
 									</li>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/createmoder">
-											Добавить модератора
+											Добавить пользователя
 										</Link>
 									</li>
 								</>

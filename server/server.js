@@ -13,7 +13,6 @@ dotenv.config()
 
 const PORT = 3000;
 const app = express();
-const JWT_SECRET = process.env.JWT_SECRET || 'island_club';
 
 app.use(cors())
 app.use(express.json())
@@ -52,7 +51,7 @@ app.post('/api/books', verifyToken, requireRole(['admin']), async (req, res) => 
 		// Парсим строку ответа, которая приходит в формате '(success,"message")'
 		const responseStr = result[0].add_full_book;
 		const match = responseStr.match(/\((.*?),(.*?)\)/);
-		
+
 		if (!match) {
 			res.status(500).json({ error: 'Не удалось разобрать ответ от базы данных' });
 			log(`addBook failed: cannot parse response ${responseStr}`);
@@ -157,7 +156,7 @@ app.put('/api/books', verifyToken, requireRole(['admin', 'moder']), async (req, 
 		const book = req.body.book
 		console.log('Editing book:', book)
 		const result = await db_request.editBook(book)
-		
+
 		console.log('Server received result:', result)
 
 		// Проверяем, что результат существует и имеет нужное поле
@@ -170,7 +169,7 @@ app.put('/api/books', verifyToken, requireRole(['admin', 'moder']), async (req, 
 		// Парсим строку ответа, которая приходит в формате '(success,"message")'
 		const responseStr = result[0].edit_book;
 		const match = responseStr.match(/\((.*?),(.*?)\)/);
-		
+
 		if (!match) {
 			res.status(500).json({ error: 'Не удалось разобрать ответ от базы данных' });
 			log(`editBook failed: cannot parse response ${responseStr}`);
@@ -221,6 +220,46 @@ app.get('/api/checklogin', async (req, res) => {
 		log(`checkLogin failed:\t${error.message}`)
 	}
 });
+
+app.post('/api/users', verifyToken, requireRole(['admin']), async (req, res) => {
+	try {
+		const name = req.body.login;
+		const password = req.body.password;
+		const role = req.body.role;
+		const result = await db_request.createUser(name, password, role);
+
+		console.log(result)
+
+		if (!result) {
+			res.status(500).json({ error: 'Неожиданный формат ответа от базы данных' });
+			log(`addUser failed: unexpected response format`);
+			return;
+		}
+
+		const match = result.match(/\((.*?),(.*?)\)/);
+
+		if (!match) {
+			res.status(500).json({ error: 'Не удалось разобрать ответ от базы данных' });
+			log(`addUser failed: cannot parse response ${responseStr}`);
+			return;
+		}
+
+		const success = match[1].trim() === 't';
+		const message = match[2].replace(/"/g, '');
+
+		if (!success) {
+			res.status(400).json({ error: message });
+			log(`addUser failed: ${message}`);
+			return;
+		}
+
+		res.json({ success: success, message: message });
+		log(`addUser success: User: ${name}`);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+		log(`addUser failed: ${error.message}`);
+	}
+})
 
 // moder
 app.post('/api/returnbook', verifyToken, requireRole(['admin', 'moder']), async (req, res) => {
@@ -432,7 +471,5 @@ app.get('/api/genres', verifyToken, requireRole(['admin', 'moder']), async (_req
 });
 
 app.listen(PORT, () => {
-	console.log('JWT_SECRET length:', JWT_SECRET.length);
-	console.log('JWT_SECRET raw:', JSON.stringify(JWT_SECRET));
 	console.log(`Server running at http://localhost:${PORT}`);
 });

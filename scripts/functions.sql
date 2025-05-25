@@ -1072,6 +1072,31 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+--	CREATE USER
+CREATE OR REPLACE FUNCTION create_user(
+  p_user_name VARCHAR,
+  p_user_password VARCHAR,
+  p_user_role user_role
+)
+RETURNS TABLE(success BOOLEAN, message TEXT) AS $$
+BEGIN
+  -- Проверка: существует ли пользователь с таким именем
+  IF EXISTS (
+    SELECT 1 FROM users WHERE user_name = p_user_name
+  ) THEN
+    RETURN QUERY SELECT false, 'Имя пользователя уже занято';
+  ELSE
+    -- Добавление нового пользователя
+    INSERT INTO users (user_name, user_password, user_role)
+    VALUES (p_user_name, p_user_password, p_user_role);
+
+    RETURN QUERY SELECT true, 'Пользователь успешно создан';
+  END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
 -- get genres
 create or replace function get_genres()
 RETURNS TABLE(genre_id INT, genre varchar) AS $$

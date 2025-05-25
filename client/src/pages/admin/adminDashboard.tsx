@@ -7,7 +7,7 @@ import BookPageWrapper from "../../components/book/book_page_wrapper";
 import UserPageWrapper from "../../components/user/user_page_wrapper";
 import { useEffect } from "react";
 import { useLibrary } from "../../libraryContext";
-import AddModerForm from "../../components/forms/AddModerForm";
+import AddUserForm from "../../components/forms/AddUserForm";
 
 export default function AdminDashboard() {
 	const { refreshAll, moderBooks, users } = useLibrary();
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
 					<Route path="addbook" element={<AddBookForm />} />
 					<Route path="book/:id" element={<BookPageWrapper />} />
 					<Route path="user/:id" element={<UserPageWrapper />} />
-					<Route path="createmoder" element={<AddModerForm />} />
+					<Route path="createmoder" element={<AddUserForm />} />
 				</Routes>
 			</div>
 		</>

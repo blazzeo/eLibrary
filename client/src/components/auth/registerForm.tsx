@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { checkAvailableLogin, createUser } from "../api/DatabaseAPI.tsx";
+import { checkAvailableLogin, register } from "../api/DatabaseAPI.tsx";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
@@ -23,7 +23,7 @@ const RegisterForm = () => {
 			if (password !== confirmPassword)
 				throw "Пароли должны совпадать"
 
-			await createUser(username, password);
+			await register(username, password);
 			toast.success('Регистрация прошла успешно')
 			navigate('/login')
 		} catch (error) {

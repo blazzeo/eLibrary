@@ -63,7 +63,26 @@ export async function checkAvailableLogin(userLogin: string) {
 	}
 }
 
-export async function createUser(user_name: string, user_password: string) {
+export enum userRole {
+	admin = 'admin',
+	moder = 'moder',
+	user = 'user'
+}
+
+export async function createUser(user_name: string, user_password: string, user_role: userRole) {
+	try {
+		const response = await axios.post(
+			SERVER + `/api/users`, { login: user_name, password: user_password, role: user_role }
+		);
+		console.log(response.data)
+		return response.data;
+	} catch (error) {
+		console.error(`Error creating user: ${error}`);
+		throw error;
+	}
+}
+
+export async function register(user_name: string, user_password: string) {
 	try {
 		const response = await axios.post(
 			SERVER + `/api/register`, { login: user_name, password: user_password }
