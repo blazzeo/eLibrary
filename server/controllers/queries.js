@@ -1,5 +1,5 @@
-import { dbuser, dbadmin, dbmoder } from './db_roles.js'
-import { hashPassword } from './auth.js'
+import { dbuser, dbadmin, dbmoder } from '../db_roles.js'
+import { hashPassword } from '../middleware/auth.js'
 import bcrypt from 'bcrypt'
 
 export async function checkLogin(userLogin) {
