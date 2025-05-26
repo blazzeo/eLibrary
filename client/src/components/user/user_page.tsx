@@ -23,7 +23,7 @@ export default function UserPage({ user, books }: Props) {
 		try {
 			await deleteUser(user.user_id);
 			toast.success(`Пользователь ${user.user_name} удален`);
-			navigate('/');
+			navigate('/usercontrol');
 		} catch (error) {
 			toast.error('Ошибка при удалении пользователя');
 		} finally {
@@ -48,7 +48,7 @@ export default function UserPage({ user, books }: Props) {
 									<div className="d-flex flex-wrap gap-3 mb-4">
 										<Badge bg="secondary" className="fs-6 px-3 py-2">ID: {user.user_id}</Badge>
 										<Badge bg={user?.user_role === 'admin' ? 'danger' : 'primary'} className="fs-6 px-3 py-2">
-											{user?.user_role === 'admin' || user.user_name === 'moder' ? 'Администратор' : 'Пользователь'}
+											{user.user_role === 'admin' || user.user_role === 'moder' ? 'Администратор' : 'Пользователь'}
 										</Badge>
 										<Badge bg="info" className="fs-6 px-3 py-2">
 											<i className="bi bi-calendar me-2"></i>

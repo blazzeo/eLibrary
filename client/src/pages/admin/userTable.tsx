@@ -21,7 +21,23 @@ export function UserTable() {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 
-	if (!users) return <p>Загрузка пользователей...</p>;
+	if (!users) {
+		return (
+			<div
+				className="d-flex justify-content-center align-items-center bg-light"
+				style={{ height: "100vh", width: "100vw" }}
+			>
+				<div className="text-center">
+					<div
+						className="spinner-border text-primary"
+						style={{ width: "4rem", height: "4rem" }}
+						role="status"
+					/>
+					<p className="mt-3 text-muted fs-5">Загрузка...</p>
+				</div>
+			</div>
+		);
+	}
 
 	const visibleUsers = users.filter(
 		(u) => u.user_name !== user?.user_name
