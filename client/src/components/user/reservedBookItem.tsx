@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useLibrary } from "../../libraryContext";
-import { addLoan, toggleWishlist } from "../api/DatabaseAPI.tsx";
+import { useLibrary } from "../../context/libraryContext";
+import { addLoan, toggleWishlist } from "../../api/DatabaseAPI.tsx";
 import { BookInfo, UserData } from "../structs.tsx";
 import { toast } from "react-toastify";
 

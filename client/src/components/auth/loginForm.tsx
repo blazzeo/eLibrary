@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { authenticate } from "../api/DatabaseAPI.tsx";
+import { authenticate } from "../../api/DatabaseAPI.tsx";
 import { toast } from "react-toastify";
-import { useLibrary } from "../../libraryContext";
-import { useAuth } from "./authContext";
+import { useLibrary } from "../../context/libraryContext";
+import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router";
 import { Spinner } from "react-bootstrap";
 

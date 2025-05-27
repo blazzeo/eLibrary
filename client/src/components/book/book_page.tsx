@@ -12,10 +12,10 @@ import {
 	Row,
 	Col
 } from "react-bootstrap";
-import { BookData, BookInfo, UserData, Author } from "../structs";
-import { addLoan, confirmExtension, deleteBook, editBook, rejectExtension, toggleWishlist, searchAuthors, searchGenres, returnBook } from "../api/DatabaseAPI";
+import { BookData, BookInfo, UserData } from "../structs";
+import { addLoan, confirmExtension, deleteBook, editBook, rejectExtension, toggleWishlist, searchAuthors, searchGenres, returnBook } from "../../api/DatabaseAPI";
 import { toast } from "react-toastify";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 import { useNavigate } from "react-router";
 
 interface Props {

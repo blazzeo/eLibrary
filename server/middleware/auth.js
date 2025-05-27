@@ -11,22 +11,22 @@ if (!JWT_SECRET) {
 	throw new Error("JWT_SECRET is not defined in environment variables");
 }
 
-// 📌 Хеширование пароля
+//  Хеширование пароля
 export async function hashPassword(plainPassword) {
 	return bcrypt.hash(plainPassword, saltRounds);
 }
 
-// 📌 Проверка пароля
+//  Проверка пароля
 export async function verifyPassword(inputPassword, hashedPassword) {
 	return bcrypt.compare(inputPassword, hashedPassword);
 }
 
-// 📌 Генерация JWT токена
+//  Генерация JWT токена
 export function generateToken(payload, expiresIn = '1h') {
 	return jwt.sign(payload, JWT_SECRET, { expiresIn });
 }
 
-// 📌 Middleware: Проверка JWT токена
+//  Middleware: Проверка JWT токена
 export function verifyToken(req, res, next) {
 	const authHeader = req.headers['authorization'];
 
@@ -47,7 +47,7 @@ export function verifyToken(req, res, next) {
 	}
 }
 
-// 📌 Middleware: Проверка роли пользователя
+//  Middleware: Проверка роли пользователя
 export function requireRole(roles = []) {
 	return (req, res, next) => {
 		const userRole = req.user?.role;

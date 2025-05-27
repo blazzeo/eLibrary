@@ -9,10 +9,7 @@ const router = express.Router()
 router.post('/books', verifyToken, requireRole(['admin']), async (req, res) => {
 	try {
 		const book = req.body.book
-		console.log('Adding book:', book)
 		const result = await db_request.addBook(book)
-
-		console.log('Server received result:', result)
 
 		// Проверяем, что результат существует и имеет нужное поле
 		if (!result || !result[0] || !result[0].add_full_book) {
@@ -67,10 +64,10 @@ router.get('/users/:user_id', verifyToken, requireRole(['admin', 'user', 'moder'
 		const result = await db_request.getUser(user_id)
 
 		res.json(result)
-		log('/users/ get-method success')
+		log('users/ get-method success')
 	} catch (error) {
 		res.status(500).statusMessage(error.message)
-		log(`/users/ get-method failed:\t${error.message}`)
+		log(`users/ get-method failed:\t${error.message}`)
 	}
 })
 
@@ -82,6 +79,17 @@ router.get('/loans', verifyToken, requireRole(['admin', 'moder']), async (_req, 
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 		log(`getLoans failed:\t${error.message}`)
+	}
+})
+
+router.get('/wishlist', verifyToken, requireRole(['admin', 'moder']), async (_req, res) => {
+	try {
+		const result = await db_request.getWishlist()
+		res.json(result)
+		log(`getWishlist success:\tWishes:\t[${result}]`)
+	} catch (error) {
+		res.status(500).json({ error: error.message })
+		log(`getWishlist failed:\t${error.message}`)
 	}
 })
 
@@ -99,7 +107,6 @@ router.get('/users', verifyToken, requireRole(['admin', 'moder']), async (_req, 
 router.delete('/users/:user_id', verifyToken, requireRole(['admin']), async (req, res) => {
 	try {
 		const user_id = req.params.user_id
-		console.log(user_id)
 		const result = await db_request.deleteUser(user_id)
 
 		res.json(result)
@@ -127,10 +134,8 @@ router.post('/register', async (req, res) => {
 router.put('/books', verifyToken, requireRole(['admin', 'moder']), async (req, res) => {
 	try {
 		const book = req.body.book
-		console.log('Editing book:', book)
 		const result = await db_request.editBook(book)
 
-		console.log('Server received result:', result)
 
 		// Проверяем, что результат существует и имеет нужное поле
 		if (!result || !result[0] || !result[0].edit_book) {
@@ -172,7 +177,6 @@ router.post('/createmoder', verifyToken, requireRole(['admin']), async (req, res
 		const password = req.body.password;
 		const userLogin = req.body.login;
 		const result = await db_request.createModer(login, password);
-		console.log(result)
 		res.json({ result: result });
 		log(`createmoder success:\tLogin:\t{${userLogin}}`)
 	} catch (error) {
@@ -185,7 +189,6 @@ router.get('/checklogin', async (req, res) => {
 	try {
 		const login = req.query.login;
 		const result = await db_request.checkLogin(login);
-		console.log(result)
 		res.json({ result: result });
 		log(`checkLogin success:\tLogin:\t{${login}}`)
 	} catch (error) {
@@ -200,8 +203,6 @@ router.post('/users', verifyToken, requireRole(['admin']), async (req, res) => {
 		const password = req.body.password;
 		const role = req.body.role;
 		const result = await db_request.createUser(name, password, role);
-
-		console.log(result)
 
 		if (!result) {
 			res.status(500).json({ error: 'Неожиданный формат ответа от базы данных' });
@@ -252,7 +253,6 @@ router.put('/loans', verifyToken, requireRole(['admin', 'moder']), async (req, r
 		const user_name = req.body.user_name;
 		const book_id = req.body.book_id;
 		const new_date = req.body.new_date;
-		console.log(user_name, book_id, new_date)
 		const result = await db_request.extentLoan(user_name, book_id, new_date);
 		res.json({ result: result });
 		log(`extentLoan success:\tBook:\t{${user_name}, ${book_id}, ${new_date}}`)
@@ -307,10 +307,10 @@ router.post('/rejectextension', verifyToken, requireRole(['admin', 'moder']), as
 		const request_date = req.body.request_date
 		const result = await db_request.rejectExtension(book_id, user_id, request_date)
 		res.json({ result: result })
-		console.log('reject exntension success')
+		log('reject exntension success')
 	} catch (error) {
 		res.status(500).json({ error: error })
-		console.log('reject extension failed: ', error)
+		log('reject extension failed: ', error)
 	}
 })
 
@@ -326,7 +326,6 @@ router.post('/togglewishlist', verifyToken, requireRole(['admin', 'moder', 'user
 		res.json(userData);
 		log(`toggleWishlist success:\tUser:\t{${user_id}}, Book:\t{${book_id}}`);
 	} catch (error) {
-		console.error('toggleWishlist error:', error);
 		res.status(500).json({ error: error.message });
 		log(`toggleWishlist failed:\t${error.message}`);
 	}
@@ -334,6 +333,7 @@ router.post('/togglewishlist', verifyToken, requireRole(['admin', 'moder', 'user
 
 router.post('/login', async (req, res) => {
 	try {
+		console.log("LOGIN")
 		const { login, password } = req.body;
 
 		const result = await db_request.login(login, password);
@@ -380,13 +380,10 @@ router.post('/askextension', verifyToken, requireRole(['admin', 'moder', 'user']
 // Authors endpoints
 router.get('/authors', verifyToken, requireRole(['admin', 'moder',]), async (_req, res) => {
 	try {
-		console.log('GET /authors: Получение списка авторов');
 		const result = await db_request.getAuthors();
-		console.log('GET /authors: Получено авторов:', result.length);
 		res.json(result);
 		log('getAuthors success');
 	} catch (error) {
-		console.error('GET /authors error:', error);
 		res.status(500).json({ error: error.message });
 		log(`getAuthors failed: ${error.message}`);
 	}
@@ -395,12 +392,10 @@ router.get('/authors', verifyToken, requireRole(['admin', 'moder',]), async (_re
 router.get('/authors/search', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
 	try {
 		const searchTerm = req.query.term;
-		console.log('GET /authors/search: Поиск авторов по термину:', searchTerm);
 		if (!searchTerm) {
 			return res.status(400).json({ error: 'Search term is required' });
 		}
 		const result = await db_request.searchAuthors(searchTerm);
-		console.log('GET /authors/search: Найдено авторов:', result.length);
 		res.json(result);
 		log(`searchAuthors success: term=${searchTerm}`);
 	} catch (error) {
@@ -414,16 +409,13 @@ router.get('/authors/search', verifyToken, requireRole(['admin', 'moder', 'user'
 router.get('/genres/search', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
 	try {
 		const searchTerm = req.query.term;
-		console.log('GET /genres/search: Поиск жанров по термину:', searchTerm);
 		if (!searchTerm) {
 			return res.status(400).json({ error: 'Search term is required' });
 		}
 		const result = await db_request.searchGenres(searchTerm);
-		console.log('GET /genres/search: Найдено жанров:', result.length);
 		res.json(result);
 		log(`searchGenres success: term=${searchTerm}`);
 	} catch (error) {
-		console.error('GET /genres/search error:', error);
 		res.status(500).json({ error: error.message });
 		log(`searchGenres failed: ${error.message}`);
 	}
@@ -431,16 +423,17 @@ router.get('/genres/search', verifyToken, requireRole(['admin', 'moder', 'user']
 
 router.get('/genres', verifyToken, requireRole(['admin', 'moder']), async (_req, res) => {
 	try {
-		console.log('GET /genres: Получение списка жанров');
 		const result = await db_request.getGenres();
-		console.log('GET /genres: Получено жанров:', result.length);
 		res.json(result);
 		log('getGenres success');
 	} catch (error) {
-		console.error('GET /genres error:', error);
 		res.status(500).json({ error: error.message });
 		log(`getGenres failed: ${error.message}`);
 	}
 });
+
+router.get('/health', async (_req, res) => {
+	res.status(200).end()
+})
 
 export default router

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useAuth } from './authContext';
 
 const SERVER = import.meta.env.VITE_API_SERVER || "http://localhost:3000"; // пример
 

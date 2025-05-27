@@ -1,6 +1,6 @@
 import { BookInfo } from "../structs.tsx";
-import { useLibrary } from "../../libraryContext";
-import { confirmExtension, rejectExtension } from "../api/DatabaseAPI.tsx";
+import { useLibrary } from "../../context/libraryContext";
+import { confirmExtension, rejectExtension } from "../../api/DatabaseAPI.tsx";
 import { toast } from "react-toastify";
 
 interface ExtensionRequestItemProps {

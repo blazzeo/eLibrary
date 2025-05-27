@@ -6,9 +6,9 @@ import {
 	Col
 } from "react-bootstrap";
 import { BookData } from "../structs";
-import { toggleWishlist } from "../api/DatabaseAPI";
+import { toggleWishlist } from "../../api/DatabaseAPI";
 import { toast } from "react-toastify";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 
 interface Props {
 	book: BookData;

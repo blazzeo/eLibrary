@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Card, Button, Form, Row, Col, Container, ListGroup, ProgressBar } from "react-bootstrap";
 import { BookData } from "../structs";
-import { addBook, searchAuthors, searchGenres } from "../api/DatabaseAPI";
+import { addBook, searchAuthors, searchGenres } from "../../api/DatabaseAPI";
 import { toast, ToastContainer } from "react-toastify";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 import 'react-toastify/dist/ReactToastify.css';
 
 interface Author {
@@ -297,7 +297,7 @@ export function AddBookForm() {
 				toast.error(response.error);
 				return;
 			}
-			
+
 			// Очищаем форму только при успешном добавлении
 			setTitle("");
 			setTotalPages(null);
@@ -374,9 +374,9 @@ export function AddBookForm() {
 						<Col md={6}>
 							<Form.Group>
 								<Form.Label>ISBN</Form.Label>
-								<Form.Control 
-									type="number" 
-									value={isbn ?? ""} 
+								<Form.Control
+									type="number"
+									value={isbn ?? ""}
 									onChange={(e) => {
 										const value = e.target.value;
 										if (value.length <= 13) {
@@ -391,13 +391,13 @@ export function AddBookForm() {
 						<Col md={6}>
 							<Form.Group>
 								<Form.Label>Дата публикации</Form.Label>
-								<Form.Control 
-									type="date" 
-									value={publishedDate} 
-									onChange={(e) => setPublishedDate(e.target.value)} 
+								<Form.Control
+									type="date"
+									value={publishedDate}
+									onChange={(e) => setPublishedDate(e.target.value)}
 									min="1800-01-01"
 									max={new Date().toISOString().split('T')[0]}
-									required 
+									required
 								/>
 								<Form.Text className="text-muted">
 									Дата должна быть между 1800 годом и текущей датой
@@ -423,9 +423,9 @@ export function AddBookForm() {
 									/>
 									{isTypingAuthors && (
 										<div style={loadingBarStyle}>
-											<ProgressBar 
-												animated 
-												now={100} 
+											<ProgressBar
+												animated
+												now={100}
 												variant="primary"
 												style={progressBarStyle}
 											/>
@@ -478,9 +478,9 @@ export function AddBookForm() {
 									/>
 									{isTypingGenres && (
 										<div style={loadingBarStyle}>
-											<ProgressBar 
-												animated 
-												now={100} 
+											<ProgressBar
+												animated
+												now={100}
 												variant="primary"
 												style={progressBarStyle}
 											/>

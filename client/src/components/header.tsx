@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useLibrary } from "../libraryContext";
-import { useAuth } from "./auth/authContext";
+import { useLibrary } from "../context/libraryContext";
+import { useAuth } from "../context/authContext";
 
 export default function Header() {
 	const { user, clearLibraryState } = useLibrary();

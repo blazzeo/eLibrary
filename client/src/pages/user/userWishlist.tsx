@@ -5,8 +5,8 @@ import {
 	type MRT_ColumnDef,
 } from "material-react-table";
 import { BookData } from "../../components/structs.tsx";
-import { toggleWishlist } from "../../components/api/DatabaseAPI.tsx";
-import { useLibrary } from "../../libraryContext";
+import { toggleWishlist } from "../../api/DatabaseAPI.tsx";
+import { useLibrary } from "../../context/libraryContext";
 
 interface Props {
 	books: BookData[] | undefined;

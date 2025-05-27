@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import BookPage from "./book_page";
 import { BookInfo } from "../structs";
 import { Spinner } from "react-bootstrap";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 
 export default function BookPageWrapper() {
 	const { moderBooks } = useLibrary();

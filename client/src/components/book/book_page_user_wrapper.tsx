@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { BookData } from "../structs";
 import { Spinner } from "react-bootstrap";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 import UserBookPage from "./book_page_user";
 
 export default function BookPageUserWrapper() {

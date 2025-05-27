@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 
 export async function checkLogin(userLogin) {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const result = await admin.query('SELECT check_available_login($1);', [userLogin])
 		return result.rows[0].check_available_login
 	} catch (err) {
@@ -12,9 +12,20 @@ export async function checkLogin(userLogin) {
 	}
 }
 
+export async function getWishlist() {
+	try {
+		const admin = dbadmin()
+		const loans = await admin.query('select * from get_wishlist();')
+
+		return loans.rows
+	} catch (err) {
+		throw err
+	}
+}
+
 export async function createUser(user_name, user_password, user_role) {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const hashed_password = await hashPassword(user_password)
 		const result = await admin.query('select create_user($1, $2, $3);', [user_name, hashed_password, user_role])
 		return result.rows[0].create_user
@@ -25,7 +36,7 @@ export async function createUser(user_name, user_password, user_role) {
 
 export async function getUser(user_id) {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const result = await admin.query('SELECT get_user($1);', [user_id])
 		let user = result.rows[0].get_user
 		return user
@@ -36,7 +47,7 @@ export async function getUser(user_id) {
 
 export async function login(userLogin, userPassword) {
 	try {
-		const db = dbadmin(5432);
+		const db = dbadmin();
 		const res = await db.query(`
 			SELECT user_id, user_password, user_role 
 			FROM users
@@ -57,7 +68,7 @@ export async function login(userLogin, userPassword) {
 
 export async function register(userLogin, userPassword, role) {
 	try {
-		const db = dbadmin(5432);
+		const db = dbadmin();
 		const hashedPassword = await hashPassword(userPassword);
 
 		const existingUser = await db.query(`SELECT * FROM users WHERE user_name = $1`, [userLogin]);
@@ -75,12 +86,9 @@ export async function register(userLogin, userPassword, role) {
 
 export async function createModer(login, password) {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const hashed_password = await hashPassword(password)
-		console.log(login, password)
 		const result = await admin.query('SELECT * from create_moder($1, $2);', [login, hashed_password])
-		console.log(result.rows[0])
-
 		return result.rows[0];
 	} catch (err) {
 		throw err
@@ -89,8 +97,7 @@ export async function createModer(login, password) {
 
 export async function addLoan(user_name, book_id, return_date) {
 	try {
-		const user = dbmoder(5432)
-		console.log(user_name, book_id, return_date)
+		const user = dbmoder()
 		const result = await user.query('SELECT borrow_book($1, $2, $3);', [user_name, book_id, return_date])
 		return result.rows;
 	} catch (err) {
@@ -100,7 +107,7 @@ export async function addLoan(user_name, book_id, return_date) {
 
 export async function returnBook(book_id) {
 	try {
-		const user = dbmoder(5432)
+		const user = dbmoder()
 		const result = await user.query('select return_book($1);', [book_id])
 		return result.rows;
 	} catch (err) {
@@ -110,7 +117,7 @@ export async function returnBook(book_id) {
 
 export async function getBooks(user_id) {
 	try {
-		const user = dbuser(5432)
+		const user = dbuser()
 		const res = await user.query('select * from get_books($1);', [user_id])
 
 		return res.rows;
@@ -121,20 +128,18 @@ export async function getBooks(user_id) {
 
 export async function addBook(book) {
 	try {
-		const admin = dbadmin(5432);
+		const admin = dbadmin();
 		const normalizedBook = normalizeAuthors(book);
-		console.log('Normalized book:', JSON.stringify(normalizedBook, null, 2));
 		const result = await admin.query('select add_full_book($1::json);', [JSON.stringify(normalizedBook)]);
 		return result.rows;
 	} catch (err) {
-		console.error('Error in addBook:', err);
 		throw err;
 	}
 }
 
 export async function getGenres() {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const res = await admin.query('select * from get_genres();', [])
 
 		return res.rows;
@@ -145,7 +150,7 @@ export async function getGenres() {
 
 export async function deleteUser(user_id) {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const result = await admin.query('select delete_user($1);', [user_id])
 		return result.rows
 	} catch (err) {
@@ -155,7 +160,7 @@ export async function deleteUser(user_id) {
 
 export async function deleteBook(book_id) {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const result = await admin.query('select delete_book($1);', [book_id])
 		return result.rows
 	} catch (err) {
@@ -166,7 +171,7 @@ export async function deleteBook(book_id) {
 
 export async function getUsers() {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const users = await admin.query('select * from get_users();')
 
 		return users.rows
@@ -177,7 +182,7 @@ export async function getUsers() {
 
 export async function getLoans() {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const loans = await admin.query('select * from get_loans();')
 
 		return loans.rows
@@ -211,7 +216,7 @@ function normalizeAuthors(book) {
 
 export async function editBook(book) {
 	try {
-		const admin = dbadmin(5432)
+		const admin = dbadmin()
 		const normalizedBook = normalizeAuthors(book)
 		console.log(normalizedBook)
 		const result = await admin.query('select edit_book($1::json);', [JSON.stringify(book)])
@@ -223,7 +228,7 @@ export async function editBook(book) {
 
 export async function toggleWishlist(user_id, book_id) {
 	try {
-		const user = dbuser(5432)
+		const user = dbuser()
 
 		await user.query('BEGIN');
 
@@ -265,7 +270,7 @@ export async function toggleWishlist(user_id, book_id) {
 
 export async function extentLoan(user_name, book_id, new_date) {
 	try {
-		const moder = dbmoder(5432)
+		const moder = dbmoder()
 		const result = await moder.query(`call extent_loan($1,$2,$3);`, [user_name, book_id, new_date])
 		return result
 	} catch (error) {
@@ -276,7 +281,7 @@ export async function extentLoan(user_name, book_id, new_date) {
 
 export async function getModerBooks() {
 	try {
-		const moder = dbmoder(5432)
+		const moder = dbmoder()
 		const result = await moder.query('select * from get_moder_books();')
 		return result.rows
 	} catch (error) {
@@ -287,7 +292,7 @@ export async function getModerBooks() {
 
 export async function requestExtent(user_name, book_id, request_date) {
 	try {
-		const user = dbuser(5432)
+		const user = dbuser()
 		const result = await user.query(`call request_extent_loan($1, $2, $3);`, [user_name, book_id, request_date])
 		return result
 	} catch (error) {
@@ -298,7 +303,7 @@ export async function requestExtent(user_name, book_id, request_date) {
 
 export async function confirmExtension(book_id, user_id, request_date) {
 	try {
-		const moder = dbmoder(5432)
+		const moder = dbmoder()
 		const result = await moder.query(`select confirm_extension($1, $2, $3);`, [book_id, user_id, request_date])
 		console.log(result)
 		return result;
@@ -310,7 +315,7 @@ export async function confirmExtension(book_id, user_id, request_date) {
 
 export async function rejectExtension(book_id, user_id, request_date) {
 	try {
-		const moder = dbmoder(5432)
+		const moder = dbmoder()
 		const result = await moder.query(`select reject_extension($1, $2, $3);`, [book_id, user_id, request_date])
 		console.log(result)
 		return result;
@@ -322,7 +327,7 @@ export async function rejectExtension(book_id, user_id, request_date) {
 
 export async function getAuthors() {
 	try {
-		const user = dbuser(5432);
+		const user = dbuser();
 		const result = await user.query('SELECT * FROM get_authors();');
 		return result.rows;
 	} catch (err) {
@@ -332,7 +337,7 @@ export async function getAuthors() {
 
 export async function searchAuthors(searchTerm) {
 	try {
-		const user = dbuser(5432);
+		const user = dbuser();
 		const result = await user.query('SELECT * FROM search_authors($1);', [searchTerm]);
 		return result.rows;
 	} catch (err) {
@@ -342,7 +347,7 @@ export async function searchAuthors(searchTerm) {
 
 export async function searchGenres(searchTerm) {
 	try {
-		const user = dbuser(5432);
+		const user = dbuser();
 		const result = await user.query('SELECT * FROM search_genres($1);', [searchTerm]);
 		return result.rows;
 	} catch (err) {

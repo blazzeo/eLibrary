@@ -3,8 +3,8 @@ import Form from 'react-bootstrap/Form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { addLoan } from '../api/DatabaseAPI.tsx';
-import { useLibrary } from '../../libraryContext';
+import { addLoan } from '../../api/DatabaseAPI.tsx';
+import { useLibrary } from '../../context/libraryContext';
 import { toast } from 'react-toastify';
 
 export default function AddLoanForm() {

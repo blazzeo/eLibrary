@@ -1,5 +1,5 @@
-import { useLibrary } from "../libraryContext";
-import { addLoan, confirmExtension, rejectExtension } from "./api/DatabaseAPI.tsx";
+import { useLibrary } from "../context/libraryContext";
+import { addLoan, confirmExtension, rejectExtension } from "../api/DatabaseAPI.tsx";
 import { BookInfo } from "./structs.tsx";
 import WishCard from "./wish_card";
 import { toast } from "react-toastify";

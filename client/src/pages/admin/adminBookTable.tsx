@@ -6,7 +6,7 @@ import {
 } from "material-react-table";
 import { BookInfo } from "../../components/structs";
 import { useNavigate } from "react-router-dom";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 
 export function AdminBookTable() {
 	const { moderBooks } = useLibrary(); // Используем moderBooks из контекста
@@ -69,7 +69,7 @@ export function AdminBookTable() {
 		initialState: {
 			sorting: [{ id: 'book_id', desc: false }],
 		},
-		
+
 		enableSorting: true,
 		muiTableBodyRowProps: ({ row }) => ({
 			onClick: () => {

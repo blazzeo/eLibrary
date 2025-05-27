@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { useLibrary } from "../../libraryContext";
-import { extentLoan, returnBook } from "../api/DatabaseAPI.tsx";
+import { useLibrary } from "../../context/libraryContext";
+import { extentLoan, returnBook } from "../../api/DatabaseAPI.tsx";
 import { BookInfo } from "../structs.tsx";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";

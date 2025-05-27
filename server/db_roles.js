@@ -1,33 +1,35 @@
 import pkg from 'pg'
 const { Pool } = pkg
 
-export const dbadmin = (port) => {
+import dotenv from 'dotenv'
+dotenv.config()
+
+export const dbadmin = () => {
 	return new Pool({
-		user: 'admin',
-		host: 'localhost',
-		database: 'elibrary',
-		password: 'admin',
-		port: port,
+		user: process.env.ADMIN,
+		host: process.env.DATABASE_HOST,
+		database: process.env.DATABASE_NAME,
+		password: process.env.ADMIN_PASS,
+		port: process.env.DATABASE_PORT,
 	})
 }
 
-export const dbmoder = (port) => {
+export const dbmoder = () => {
 	return new Pool({
-		user: 'moder',
-		host: 'localhost',
-		database: 'elibrary',
-		password: 'master_moder',
-		port: port,
+		user: process.env.MODER,
+		host: process.env.DATABASE_HOST,
+		database: process.env.DATABASE_NAME,
+		password: process.env.MODER_PASS,
+		port: process.env.DATABASE_PORT,
 	})
 }
 
-export const dbuser = (port) => {
+export const dbuser = () => {
 	return new Pool({
-		user: 'dbuser',
-		host: 'localhost',
-		database: 'elibrary',
-		password: 'master_user',
-		// masteruser
-		port: port,
+		user: process.env.DBUSER,
+		host: process.env.DATABASE_HOST,
+		database: process.env.DATABASE_NAME,
+		password: process.env.DBUSER_PASS,
+		port: process.env.DATABASE_PORT,
 	})
 }

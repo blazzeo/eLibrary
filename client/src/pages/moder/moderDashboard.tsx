@@ -7,7 +7,7 @@ import BookPageWrapper from "../../components/book/book_page_wrapper";
 import UserPageWrapper from "../../components/user/user_page_wrapper";
 import { UserTable } from "../admin/userTable";
 import { useEffect } from "react";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 
 export default function ModerDashboard() {
 	const { refreshAll, moderBooks, users } = useLibrary()

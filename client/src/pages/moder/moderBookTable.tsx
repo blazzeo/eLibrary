@@ -5,7 +5,7 @@ import {
 	type MRT_ColumnDef,
 } from "material-react-table";
 import { BookInfo } from "../../components/structs";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 import { useNavigate } from "react-router-dom";
 
 export default function ModerBookTable() {

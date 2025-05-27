@@ -5,11 +5,11 @@ import {
 	type MRT_ColumnDef,
 } from "material-react-table";
 import { BookData } from "../../components/structs.tsx";
-import { askExtension } from "../../components/api/DatabaseAPI.tsx";
+import { askExtension } from "../../api/DatabaseAPI.tsx";
 import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 
 interface Props {
 	books: BookData[] | undefined

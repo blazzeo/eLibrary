@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { createUser, userRole } from '../api/DatabaseAPI.tsx';
+import { createUser, userRole } from '../../api/DatabaseAPI.tsx';
 import { toast } from 'react-toastify';
-import { useLibrary } from '../../libraryContext';
+import { useLibrary } from '../../context/libraryContext';
 
 export default function AddUserForm() {
 	const { refreshAll } = useLibrary()

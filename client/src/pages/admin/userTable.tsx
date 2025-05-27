@@ -12,7 +12,7 @@ import {
 	Box,
 	TablePagination,
 } from "@mui/material";
-import { useLibrary } from "../../libraryContext";
+import { useLibrary } from "../../context/libraryContext";
 
 export function UserTable() {
 	const navigate = useNavigate();
