@@ -1,5 +1,5 @@
 import type { AxiosResponse } from "axios";
-import type { BookData, UserData, Author } from "../structs";
+import type { BookData, UserData, Author } from "../components/structs";
 import axios from "../components/auth/axiosInstanse";
 
 const SERVER = import.meta.env.VITE_API_SERVER;

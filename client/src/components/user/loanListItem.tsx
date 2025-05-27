@@ -13,15 +13,17 @@ interface LoanListItemProps {
 export const LoanListItem = ({ book }: LoanListItemProps) => {
 	const { refreshAll } = useLibrary();
 	const [showModal, setShowModal] = useState(false);
-	const [newDate, setNewDate] = useState(
-		book.owner?.return_date || new Date().toISOString().slice(0, 10)
+	const [newDate, setNewDate] = useState<string>(
+		book.owner?.return_date
+			? book.owner.return_date.toISOString().slice(0, 10)
+			: new Date().toISOString().slice(0, 10)
 	);
 
 	const navigate = useNavigate()
 
 	const onExtend = async () => {
 		try {
-			await extentLoan(book.owner.user_name, book.book.book_id, newDate);
+			await extentLoan(book.owner.user_name, book.book.book_id, new Date(newDate));
 			console.log()
 			await refreshAll()
 			toast.success('Бронь успешно обновлена')
@@ -83,9 +85,9 @@ export const LoanListItem = ({ book }: LoanListItemProps) => {
 						<Form.Label>Дата возврата</Form.Label>
 						<Form.Control
 							type="date"
-							value={typeof newDate === "string" ? newDate.slice(0, 10) : new Date(newDate).toISOString().slice(0, 10)}
+							value={newDate}
 							onChange={(e) => setNewDate(e.target.value)}
-							min={book.owner?.return_date?.slice(0, 10) || undefined}
+							min={book.owner?.return_date?.toISOString().slice(0, 10)}
 						/>
 					</Form.Group>
 				</Modal.Body>

@@ -1,10 +1,18 @@
 import { UserData } from "./structs";
 
 interface Props {
-	user: UserData;
+	user: UserData | null;
 }
 
 export default function UserProfile({ user }: Props) {
+	if (user === null)
+		return (
+			<h1>
+				Ooops, error occured
+			</h1>
+		)
+
+
 	return (
 		<div className="container my-5">
 			<h1 className="mb-4">Профиль пользователя</h1>

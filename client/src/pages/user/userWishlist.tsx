@@ -71,7 +71,7 @@ export function WishList({ books }: Props) {
 
 	const table = useMaterialReactTable<BookData>({
 		columns,
-		data: books,
+		data: books!,
 	});
 
 	return (

@@ -12,7 +12,7 @@ import {
 	Row,
 	Col
 } from "react-bootstrap";
-import { BookData, BookInfo, UserData } from "../structs";
+import { BookData, BookInfo, UserData, Author } from "../structs";
 import { addLoan, confirmExtension, deleteBook, editBook, rejectExtension, toggleWishlist, searchAuthors, searchGenres, returnBook } from "../../api/DatabaseAPI";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../context/libraryContext";
@@ -64,6 +64,7 @@ export default function BookPage({ bookInfo }: Props) {
 		}).filter(author => author.first_name !== '') // Удаляем пустых авторов
 	);
 
+	const [book_id, _setBookId] = useState<number | null>(book.book_id)
 	const [title, setTitle] = useState(book.title);
 	const [genres, setGenres] = useState(book.genres);
 	const [authorInput, setAuthorInput] = useState("");
@@ -223,7 +224,7 @@ export default function BookPage({ bookInfo }: Props) {
 		}
 
 		// Валидация ISBN
-		if (!/^\d{13}$/.test(isbn)) {
+		if (!/^\d{13}$/.test(isbn.toString())) {
 			toast.error("ISBN должен содержать ровно 13 цифр!");
 			return false;
 		}
@@ -237,16 +238,13 @@ export default function BookPage({ bookInfo }: Props) {
 		try {
 			console.log('Saving book with authors:', authors);
 			const editedBook: BookData = {
-				book_id: book.book_id,
+				book_id: book_id,
 				title: title,
 				published_date: new Date(publishedDate),
 				authors: authors.filter(a => a.first_name).map(a => {
 					console.log('Processing author for save:', a);
-					return {
-						first_name: a.first_name,
-						middle_name: a.middle_name,
-						last_name: a.last_name
-					};
+					// IDK
+					return a.full_name;
 				}),
 				genres: genres,
 				total_pages: Number(totalPages),

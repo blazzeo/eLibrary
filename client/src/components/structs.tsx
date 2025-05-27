@@ -1,3 +1,17 @@
+export type Author = {
+	author_id: number;
+	first_name: string;
+	middle_name: string | null;
+	last_name: string | null;
+	full_name: string;
+}
+
+export type AuthorInput = {
+	first_name: string;
+	middle_name: string | null;
+	last_name: string | null;
+}
+
 export type Loan = {
 	book_id: number;
 	borrow_date: Date;

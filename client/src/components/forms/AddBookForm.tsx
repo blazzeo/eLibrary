@@ -83,8 +83,8 @@ export function AddBookForm() {
 	const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
 
 	// Состояния для индикаторов загрузки
-	const [isLoadingAuthors, setIsLoadingAuthors] = useState(false);
-	const [isLoadingGenres, setIsLoadingGenres] = useState(false);
+	const [_isLoadingAuthors, setIsLoadingAuthors] = useState(false);
+	const [_isLoadingGenres, setIsLoadingGenres] = useState(false);
 
 	// Состояния для отслеживания ввода
 	const [isTypingAuthors, setIsTypingAuthors] = useState(false);
