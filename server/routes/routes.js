@@ -131,11 +131,13 @@ router.post('/register', async (req, res) => {
 	}
 });
 
-router.put('/books', verifyToken, requireRole(['admin', 'moder']), async (req, res) => {
+router.put('/books', verifyToken, requireRole(['admin']), async (req, res) => {
 	try {
 		const book = req.body.book
 		const result = await db_request.editBook(book)
 
+		console.log(book)
+		console.log(result)
 
 		// Проверяем, что результат существует и имеет нужное поле
 		if (!result || !result[0] || !result[0].edit_book) {

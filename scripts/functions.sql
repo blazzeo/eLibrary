@@ -918,7 +918,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
---	EDIT BOOK
+--	EDIT BOOK (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ)
 CREATE OR REPLACE FUNCTION edit_book(p_book JSON)
 RETURNS TABLE(success BOOLEAN, message TEXT) AS $$
 DECLARE
@@ -931,12 +931,13 @@ DECLARE
     p_published_date DATE := NULLIF(p_book->>'published_date', '')::DATE;
 
     -- Вспомогательные переменные
-    author JSON;
-    genre_name TEXT;
+    author JSON; -- Используется для элементов JSON-массива авторов
+    genre_text TEXT; -- Используется для элементов JSON-массива жанров (текстовые значения)
     v_author_id INT;
     v_genre_id INT;
-    v_existing_authors INT[];
-    v_existing_genres INT[];
+    v_new_author_ids INT[] := '{}'; -- Массив для сбора ID авторов из обновленного списка
+    v_new_genre_ids INT[] := '{}';  -- Массив для сбора ID жанров из обновленного списка
+
 BEGIN
     -- Валидация входных данных
     IF p_title IS NULL OR trim(p_title) = '' THEN
@@ -971,31 +972,36 @@ BEGIN
             published_date = p_published_date
         WHERE book_id = p_book_id;
 
-        -- Сохраняем существующие связи с авторами
-        SELECT array_agg(author_id) INTO v_existing_authors
-        FROM book_authors
-        WHERE book_id = p_book_id;
-
+        -- ************** ОБРАБОТКА АВТОРОВ **************
         -- Проверяем наличие авторов
         IF p_book->'authors' IS NULL OR json_array_length(p_book->'authors') = 0 THEN
             RETURN QUERY SELECT false, 'Необходимо указать хотя бы одного автора';
             RETURN;
         END IF;
 
-        -- Добавляем новых авторов
+        -- Цикл по всем авторам из входящего JSON (теперь они НОРМАЛИЗОВАНЫ до объектов)
         FOR author IN SELECT * FROM json_array_elements(p_book->'authors')
         LOOP
-            RAISE NOTICE 'Processing author: %', author;
-            
+            -- Проверяем, что first_name не NULL или пустая строка
+            -- Эта проверка уже происходит в create_or_get_author, но можно оставить для быстрой валидации
+            IF author->>'first_name' IS NULL OR trim(author->>'first_name') = '' THEN
+                RETURN QUERY SELECT false, 'Имя автора не может быть пустым';
+                RETURN;
+            END IF;
+
+            -- Получаем или создаем ID автора
             SELECT create_or_get_author(
                 author->>'first_name',
-                author->>'middle_name',
+                NULLIF(trim(author->>'middle_name'), ''), -- NULLIF для пустых строк
                 author->>'last_name'
             ) INTO v_author_id;
             
-            -- Проверяем, существует ли уже такая связь
+            -- Добавляем ID автора в массив для дальнейшего использования (удаления старых связей)
+            v_new_author_ids := array_append(v_new_author_ids, v_author_id);
+
+            -- Вставляем связь между книгой и автором, если ее еще нет
             IF NOT EXISTS (
-                SELECT 1 FROM book_authors 
+                SELECT 1 FROM book_authors
                 WHERE book_id = p_book_id AND author_id = v_author_id
             ) THEN
                 INSERT INTO book_authors (book_id, author_id)
@@ -1003,39 +1009,31 @@ BEGIN
             END IF;
         END LOOP;
 
-        -- Удаляем связи с авторами, которых больше нет в списке
-        DELETE FROM book_authors 
-        WHERE book_id = p_book_id 
-        AND author_id NOT IN (
-            SELECT create_or_get_author(
-                author->>'first_name',
-                author->>'middle_name',
-                author->>'last_name'
-            )
-            FROM json_array_elements(p_book->'authors') AS author
-        );
+        -- Удаляем связи с авторами, которых нет в обновленном списке (эффективное удаление)
+        DELETE FROM book_authors
+        WHERE book_id = p_book_id
+        AND author_id NOT IN (SELECT unnest(v_new_author_ids));
 
-        -- Сохраняем существующие связи с жанрами
-        SELECT array_agg(genre_id) INTO v_existing_genres
-        FROM book_genres
-        WHERE book_id = p_book_id;
-
+        -- ************** ОБРАБОТКА ЖАНРОВ **************
         -- Проверяем наличие жанров
         IF p_book->'genres' IS NULL OR json_array_length(p_book->'genres') = 0 THEN
             RETURN QUERY SELECT false, 'Необходимо указать хотя бы один жанр';
             RETURN;
         END IF;
 
-        -- Добавляем новые жанры
-        FOR genre_name IN SELECT json_array_elements_text(p_book->'genres')
+        -- Цикл по всем жанрам из входящего JSON (они являются текстовыми значениями)
+        FOR genre_text IN SELECT json_array_elements_text(p_book->'genres')
         LOOP
-            RAISE NOTICE 'Processing genre: %', genre_name;
+            RAISE NOTICE 'Processing genre: %', genre_text; -- Для отладки
             
-            SELECT create_or_get_genre(genre_name) INTO v_genre_id;
+            SELECT create_or_get_genre(genre_text) INTO v_genre_id;
             
-            -- Проверяем, существует ли уже такая связь
+            -- Добавляем ID жанра в массив для дальнейшего использования (удаления старых связей)
+            v_new_genre_ids := array_append(v_new_genre_ids, v_genre_id);
+
+            -- Вставляем связь между книгой и жанром, если ее еще нет
             IF NOT EXISTS (
-                SELECT 1 FROM book_genres 
+                SELECT 1 FROM book_genres
                 WHERE book_id = p_book_id AND genre_id = v_genre_id
             ) THEN
                 INSERT INTO book_genres (book_id, genre_id)
@@ -1043,24 +1041,21 @@ BEGIN
             END IF;
         END LOOP;
 
-        -- Удаляем связи с жанрами, которых больше нет в списке
-        DELETE FROM book_genres 
-        WHERE book_id = p_book_id 
-        AND genre_id NOT IN (
-            SELECT create_or_get_genre(genre_name)
-            FROM json_array_elements_text(p_book->'genres') AS genre_name
-        );
+        -- Удаляем связи с жанрами, которых нет в обновленном списке (эффективное удаление)
+        DELETE FROM book_genres
+        WHERE book_id = p_book_id
+        AND genre_id NOT IN (SELECT unnest(v_new_genre_ids));
 
+        -- ************** ЗАВЕРШЕНИЕ **************
         RETURN QUERY SELECT true, 'Книга успешно обновлена';
         
     EXCEPTION WHEN OTHERS THEN
-        -- В случае ошибки откатываем изменения
+        -- В случае любой ошибки в транзакции, откатываем изменения и возвращаем сообщение об ошибке
         RAISE NOTICE 'Error in edit_book: %, SQLSTATE: %', SQLERRM, SQLSTATE;
         RETURN QUERY SELECT false, 'Ошибка при обновлении книги: ' || SQLERRM;
     END;
 END;
 $$ LANGUAGE plpgsql;
-
 
 --	CREATE USER
 CREATE OR REPLACE FUNCTION create_user(
@@ -1305,47 +1300,53 @@ CREATE OR REPLACE FUNCTION create_or_get_author(
 ) RETURNS INT AS $$
 DECLARE
     v_author_id INT;
-    v_exists BOOLEAN;
+    v_clean_first_name VARCHAR;
+    v_clean_middle_name VARCHAR;
+    v_clean_last_name VARCHAR;
 BEGIN
-    RAISE NOTICE 'Starting create_or_get_author with: first_name=%, middle_name=%, last_name=%',
-        p_first_name, p_middle_name, p_last_name;
+    -- Нормализация входных данных
+    v_clean_first_name := NULLIF(TRIM(p_first_name), '');
+    v_clean_middle_name := NULLIF(TRIM(p_middle_name), '');
+    v_clean_last_name := NULLIF(TRIM(p_last_name), '');
 
-    -- Проверяем существование автора
-    SELECT EXISTS (
-        SELECT 1 
-        FROM authors 
-        WHERE LOWER(first_name) = LOWER(p_first_name)
-        AND COALESCE(LOWER(middle_name), '') = COALESCE(LOWER(p_middle_name), '')
-        AND COALESCE(LOWER(last_name), '') = COALESCE(LOWER(p_last_name), '')
-    ) INTO v_exists;
+    -- Обязательная проверка: имя автора не может быть пустым
+    IF v_clean_first_name IS NULL THEN
+        RAISE EXCEPTION 'Имя автора (first_name) не может быть пустым';
+    END IF;
 
-    IF v_exists THEN
-        -- Если автор существует, получаем его ID
-        SELECT author_id INTO v_author_id
-        FROM authors
-        WHERE LOWER(first_name) = LOWER(p_first_name)
-        AND COALESCE(LOWER(middle_name), '') = COALESCE(LOWER(p_middle_name), '')
-        AND COALESCE(LOWER(last_name), '') = COALESCE(LOWER(p_last_name), '');
+    -- Проверяем существование автора (с учетом возможных NULL в middle_name)
+    SELECT author_id INTO v_author_id
+    FROM authors
+    WHERE 
+        first_name = v_clean_first_name AND
+        (
+            (middle_name IS NULL AND v_clean_middle_name IS NULL) OR
+            (middle_name = v_clean_middle_name)
+        ) AND
+        -- COALESCE для last_name, чтобы корректно сравнивать NULL с пустой строкой
+        COALESCE(last_name, '') = COALESCE(v_clean_last_name, '')
+    LIMIT 1;
 
+    IF v_author_id IS NOT NULL THEN
         RAISE NOTICE 'Found existing author with ID: %', v_author_id;
-        RETURN v_author_id;
-    ELSE
-        -- Если автор не существует, создаем нового
-        INSERT INTO authors (first_name, middle_name, last_name)
-        VALUES (
-            INITCAP(p_first_name),
-            NULLIF(INITCAP(p_middle_name), ''),
-            NULLIF(INITCAP(p_last_name), '')
-        )
-        RETURNING author_id INTO v_author_id;
-
-        RAISE NOTICE 'Created new author with ID: %', v_author_id;
         RETURN v_author_id;
     END IF;
 
+    -- Если автор не найден, создаем нового
+    INSERT INTO authors (first_name, middle_name, last_name)
+    VALUES (
+        v_clean_first_name,
+        v_clean_middle_name,
+        v_clean_last_name
+    )
+    RETURNING author_id INTO v_author_id;
+
+    RAISE NOTICE 'Created new author with ID: %', v_author_id;
+    RETURN v_author_id;
+
 EXCEPTION WHEN OTHERS THEN
     RAISE NOTICE 'Error in create_or_get_author: %, SQLSTATE: %', SQLERRM, SQLSTATE;
-    RAISE;
+    RAISE EXCEPTION 'Ошибка при создании/поиске автора: %', SQLERRM;
 END;
 $$ LANGUAGE plpgsql;
 

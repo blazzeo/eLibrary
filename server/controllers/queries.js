@@ -193,23 +193,56 @@ export async function getLoans() {
 
 function normalizeAuthors(book) {
 	const parseAuthor = (fullName) => {
-		const parts = fullName.trim().split(/\s+/);
+		const parts = fullName.trim().split(/\s+/).filter(part => part !== ''); // Убираем пустые строки от лишних пробелов
+
+		let firstName = '';
+		let middleName = '';
+		let lastName = '';
+
+		if (parts.length === 0) {
+			// Если строка пустая
+			return { first_name: '', middle_name: '', last_name: '' };
+		} else if (parts.length === 1) {
+			// "Имя"
+			firstName = parts[0];
+		} else if (parts.length === 2) {
+			// "Имя Фамилия"
+			firstName = parts[0];
+			lastName = parts[1];
+		} else {
+			// "Имя Отчество Фамилия" или "Имя Отчество1 Отчество2 Фамилия"
+			firstName = parts[0];
+			lastName = parts[parts.length - 1];
+			middleName = parts.slice(1, parts.length - 1).join(' '); // Все между первым и последним
+		}
+
 		return {
-			first_name: parts[0] || '',
-			middle_name: parts.length === 3 ? parts[1] : '',
-			last_name: parts.length >= 2 ? parts[parts.length - 1] : ''
+			first_name: firstName,
+			middle_name: middleName, // Может быть пустой строкой, если нет отчества
+			last_name: lastName
 		};
 	};
+
+	// Проверяем, существует ли book.authors и является ли он массивом
+	if (!book || !Array.isArray(book.authors)) {
+		console.warn('Expected book.authors to be an array, but got:', book.authors);
+		return book; // Возвращаем оригинальный объект, если authors не массив
+	}
 
 	return {
 		...book,
 		authors: book.authors.map(author => {
-			// Если автор уже в правильном формате, возвращаем как есть
-			if (typeof author === 'object' && author.first_name) {
+			// Если автор уже в правильном формате (объект с first_name)
+			if (typeof author === 'object' && author !== null && typeof author.first_name === 'string') {
 				return author;
 			}
-			// Иначе парсим строку
-			return parseAuthor(author);
+			// Если автор - строка, парсим её
+			if (typeof author === 'string') {
+				return parseAuthor(author);
+			}
+			// Если автор имеет неожиданный формат (например, число, null), возвращаем пустые значения
+			console.warn('Unexpected author format:', author);
+			return { first_name: '', middle_name: '', last_name: '' };
 		})
 	};
 }
@@ -219,7 +252,7 @@ export async function editBook(book) {
 		const admin = dbadmin()
 		const normalizedBook = normalizeAuthors(book)
 		console.log(normalizedBook)
-		const result = await admin.query('select edit_book($1::json);', [JSON.stringify(book)])
+		const result = await admin.query('select edit_book($1::json);', [JSON.stringify(normalizedBook)])
 		return result.rows
 	} catch (err) {
 		throw err
