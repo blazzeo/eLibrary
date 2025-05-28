@@ -69,11 +69,10 @@ export default function BookPage({ bookInfo }: Props) {
 	const [genres, setGenres] = useState(book.genres);
 	const [authorInput, setAuthorInput] = useState("");
 	const [genreInput, setGenreInput] = useState("");
-	const [publishedDate, setPublishedDate] = useState<string>(
-		book.published_date instanceof Date
-			? book.published_date.toISOString().split('T')[0]
-			: new Date(book.published_date).toISOString().split('T')[0]
-	);
+	const [publishedDate, setPublishedDate] = useState<string>(() => {
+		const date = new Date(book.published_date);
+		return isNaN(date.getTime()) ? '' : date.toISOString().split('T')[0];
+	});
 	const [totalPages, setTotalPages] = useState(book.total_pages);
 	const [rating, setRating] = useState(book.rating);
 	const [isbn, setIsbn] = useState(book.isbn || '');
