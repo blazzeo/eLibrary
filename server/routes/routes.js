@@ -2,7 +2,7 @@ import * as db_request from '../controllers/queries.js'
 import express from 'express'
 import { verifyToken, requireRole, generateToken } from '../middleware/auth.js'
 import { log } from '../server.js'
-import { sendBookReturnedNotification } from '../tgbot/telegramBot.js'
+import { sendTelegramNotification } from '../tgbot/telegramBot.js'
 
 const router = express.Router()
 
@@ -467,23 +467,47 @@ router.put('/chpassword', verifyToken, requireRole(['admin', 'moder', 'user']), 
 	}
 });
 
-router.put('/users/:user_id/telegram-chatid', verifyToken, requireRole(['user']), async (req, res) => {
+router.put('/users/:user_id/telegram-chatid', verifyToken, requireRole(['user', 'admin', 'moder']), async (req, res) => {
 	try {
-		const { user_id } = req.params;
+		const userIdFromParams = parseInt(req.params.user_id);
 		const { chat_id } = req.body;
 
-		if (req.user.user_id != user_id)
-			res.status(403).json({ error: 'У вас нет прав менять чужой chat_id' })
+		const authenticatedUserId = req.user.user_id
+		const authenticatedUserRole = req.user.user_role;
 
-		await db_request.toggleUserSubsciption(user_id, chat_id);
+		// --- Логика авторизации ---
+		// Обычный пользователь ('user') может менять chat_id только для себя.
+		// Администратор ('admin') или модератор ('moder') могут менять chat_id для любого пользователя.
+		if (authenticatedUserRole === 'user' && authenticatedUserId !== userIdFromParams) {
+			return res.status(403).json({ error: 'У вас нет прав изменять Telegram Chat ID другого пользователя.' });
+		}
 
-		res.status(200).end()
+		// Валидация chat_id: если передан, должен быть корректным числом
+		// chat_id может быть пустой строкой, если пользователь отписывается
+		let chat_id_to_save = null;
+		if (chat_id !== '' && chat_id !== null && chat_id !== undefined) {
+			const parsedChatId = parseInt(chat_id);
+			if (isNaN(parsedChatId)) {
+				return res.status(400).json({ error: 'Некорректный Telegram Chat ID. Должен быть числом.' });
+			}
+			chat_id_to_save = parsedChatId;
+		}
+
+		// Вызываем функцию базы данных для обновления подписки
+		// Функция будет либо устанавливать chat_id, либо делать его NULL
+		await db_request.toggleUserSubscription(userIdFromParams, chat_id_to_save);
+
+		res.status(200).json({ message: 'Telegram Chat ID успешно обновлен.' });
+		log(`Telegram Chat ID for user ${userIdFromParams} updated by user ${authenticatedUserId}.`);
 	} catch (error) {
-		res.status(500).json({ error: error });
-		log(`changePassword failed for user ${req.user.id} (target: ${req.body.user_id}): ${errorMessage}`);
-		console.error(error); // Для более подробного логирования на сервере
+		console.error('Ошибка в маршруте /users/:user_id/telegram-chatid:', error);
+
+		const errorMessage = error.message || 'Произошла непредвиденная ошибка на сервере.';
+
+		res.status(500).json({ error: errorMessage });
+		log(`Failed to update Telegram Chat ID for user ${req.params.user_id} by user ${req.user.user_id}: ${errorMessage}`);
 	}
-})
+});
 
 router.get('/health', async (_req, res) => {
 	res.status(200).end()

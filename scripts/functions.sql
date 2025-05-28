@@ -763,10 +763,13 @@ END;
 $$;
 
 -- Функция для получения списка пользователей, отложивших книгу, по book_id
+drop function get_wishlist_by_book_id(int);
 CREATE OR REPLACE FUNCTION get_wishlist_by_book_id(p_book_id INT)
 RETURNS TABLE (
     user_id INT,
     user_name VARCHAR,
+    telegram_chat_id bigint,
+    book_title varchar,
     request_date DATE
 )
 LANGUAGE plpgsql
@@ -776,11 +779,15 @@ BEGIN
     SELECT
         w.user_id,
         u.user_name,
+		u.telegram_chat_id,
+		b.title,
         w.request_date
     FROM
         wishlist w
     JOIN
         users u ON w.user_id = u.user_id
+	join
+		books b on b.book_id = p_book_id
     WHERE
         w.book_id = p_book_id
     ORDER BY

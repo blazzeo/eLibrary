@@ -1,6 +1,7 @@
 import { dbuser, dbadmin, dbmoder } from '../db_roles.js'
 import { hashPassword, verifyPassword } from '../middleware/auth.js'
 import bcrypt from 'bcrypt'
+import { sendTelegramNotification, escapeMDV2 } from '../tgbot/telegramBot.js'
 
 export async function checkLogin(userLogin) {
 	try {
@@ -109,6 +110,18 @@ export async function returnBook(book_id) {
 	try {
 		const user = dbmoder()
 		const result = await user.query('select return_book($1);', [book_id])
+
+		const books = await getWishListbyID(book_id);
+		let subscribed_users = books.filter(b => b.telegram_chat_id != null)
+
+		for (const user of subscribed_users) {
+			console.log(user)
+			if (user.telegram_chat_id) {
+				const message = escapeMDV2(`Отличная новость, ${user.user_name}! Книга "${user.book_title}", которую вы бронировали, теперь доступна в библиотеке.`);
+				await sendTelegramNotification(user.telegram_chat_id, message, 'MarkdownV2');
+			}
+		}
+
 		return result.rows;
 	} catch (err) {
 		throw err
@@ -425,10 +438,23 @@ export async function changePassword(user_id, old_password, new_password) {
 }
 
 
-export async function toggleUserSubsciption(user_id, chat_id) {
+export async function toggleUserSubscription(user_id, chat_id) {
 	try {
+		const admin = dbadmin(); // Получаем экземпляр клиента базы данных
+		// Проверяем, существует ли пользователь. Это важно, чтобы избежать обновления несуществующих записей.
+		const userCheck = await admin.query('SELECT user_id FROM users WHERE user_id = $1', [user_id]);
+		if (userCheck.rowCount === 0) {
+			throw { status: 404, message: `Пользователь с ID ${user_id} не найден.` };
+		}
 
+		// Выполняем обновление поля telegram_chat_id
+		await admin.query('UPDATE users SET telegram_chat_id = $1 WHERE user_id = $2', [chat_id, user_id]);
+
+		// Можно вернуть подтверждение
+		return { success: true, message: 'Статус подписки на Telegram-уведомления обновлен.' };
 	} catch (error) {
-		throw error
+		console.error(`Ошибка в db_request.toggleUserSubscription для user_id ${user_id}:`, error);
+		// Перебрасываем ошибку, чтобы её обработал вызывающий маршрут
+		throw error;
 	}
 }

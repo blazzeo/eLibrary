@@ -344,7 +344,7 @@ export async function changePassword(user_id: number, old_password: string, new_
 
 export const updateTelegramChatId = async (user_id: number, chat_id: string | null) => {
 	try {
-		const response = await axios.put(`${SERVER}/users/${user_id}/telegram-chatid`, { chat_id }, {
+		const response = await axios.put(`${SERVER}/api/users/${user_id}/telegram-chatid`, { chat_id }, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`
 			}
