@@ -125,8 +125,6 @@ $$;
 
 
 --	ADD BOOK - json
-DROP function IF EXISTS add_full_book(json);
-
 CREATE OR REPLACE FUNCTION add_full_book(book JSON)
 RETURNS TABLE(success BOOLEAN, message TEXT) AS $$
 DECLARE
@@ -454,7 +452,6 @@ $$;
 
 
 -- 	CONFIRM EXNTENSION
-drop procedure confirm_extension(integer, integer, date);
 CREATE OR REPLACE FUNCTION confirm_extension(
     p_book_id INTEGER,
     p_user_id INTEGER,
@@ -504,7 +501,6 @@ $$;
 
 
 -- 	REJECT EXNTENSION
-drop procedure reject_extension(integer, integer,date);
 CREATE OR REPLACE FUNCTION reject_extension(
     p_book_id INTEGER,
     p_user_id INTEGER,
@@ -535,10 +531,7 @@ EXCEPTION
 END;
 $$;
 
-crea
-
 -- 	EXTENT LOAN
-drop procedure extent_loan(varchar, integer);
 CREATE OR REPLACE PROCEDURE extent_loan(
     p_user_name VARCHAR,
     p_book_id INTEGER,
@@ -693,7 +686,6 @@ END;
 $$;
 
 --	GET USER
-drop function get_user(integer);
 CREATE OR REPLACE FUNCTION get_user(p_user_id INTEGER)
 RETURNS JSON AS $$
 DECLARE
@@ -747,6 +739,7 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
     v_user_id INTEGER;
+	req_exists BOOLEAN;
 BEGIN
     -- Get user ID
     SELECT u.user_id
@@ -777,7 +770,6 @@ $$;
 
 
 --  GET BOOKS + USER's BOOKSHELF
---drop function get_books(integer);
 CREATE OR REPLACE FUNCTION get_books(p_user_id INTEGER)
 RETURNS TABLE(
     book_id INT,
@@ -857,7 +849,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 --	GET USERS
--- drop function get_users();
 CREATE OR REPLACE FUNCTION get_users()
 RETURNS SETOF JSON AS $$
 BEGIN
@@ -928,7 +919,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 --	EDIT BOOK
-DROP FUNCTION IF EXISTS edit_book(json);
 CREATE OR REPLACE FUNCTION edit_book(p_book JSON)
 RETURNS TABLE(success BOOLEAN, message TEXT) AS $$
 DECLARE
@@ -1108,7 +1098,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- toggle wishlist
-drop procedure toggle_wishlist(integer, integer);
 CREATE OR REPLACE PROCEDURE toggle_wishlist (
     p_user_id INTEGER,
     p_book_id INTEGER
@@ -1198,7 +1187,6 @@ END;
 $$;
 
 -- GET WISHLIST user
---drop function get_user_wishlist(varchar);
 CREATE OR REPLACE FUNCTION get_user_wishlist(p_user_name VARCHAR)
 RETURNS TABLE(user_id INT, user_name varchar, book_id INT, book_title varchar, request_date DATE) AS $$
 BEGIN
@@ -1212,7 +1200,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- get wishlist all
---drop function get_wishlists();
 CREATE OR REPLACE FUNCTION get_wishlists()
 RETURNS TABLE(user_id INT, user_name varchar, book_id INT, book_title varchar, request_date DATE) AS $$
 BEGIN
@@ -1251,7 +1238,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- search authors
-drop function search_authors(varchar);
 create or replace function search_authors(search_term VARCHAR)
 RETURNS TABLE(
     author_id INT,
@@ -1312,7 +1298,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- create_or_get_author
-drop function create_or_get_author(varchar,varchar,varchar);
 CREATE OR REPLACE FUNCTION create_or_get_author(
     p_first_name VARCHAR,
     p_middle_name VARCHAR,

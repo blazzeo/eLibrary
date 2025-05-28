@@ -30,4 +30,4 @@ export function log(message) {
 	});
 }
 
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running at port: ${PORT}`));

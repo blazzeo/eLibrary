@@ -11,6 +11,7 @@ export const dbadmin = () => {
 		database: process.env.DATABASE_NAME,
 		password: process.env.ADMIN_PASS,
 		port: process.env.DATABASE_PORT,
+		ssl: { rejectUnauthorized: false }
 	})
 }
 
@@ -21,6 +22,7 @@ export const dbmoder = () => {
 		database: process.env.DATABASE_NAME,
 		password: process.env.MODER_PASS,
 		port: process.env.DATABASE_PORT,
+		ssl: { rejectUnauthorized: false }
 	})
 }
 
@@ -31,5 +33,6 @@ export const dbuser = () => {
 		database: process.env.DATABASE_NAME,
 		password: process.env.DBUSER_PASS,
 		port: process.env.DATABASE_PORT,
+		ssl: { rejectUnauthorized: false }
 	})
 }

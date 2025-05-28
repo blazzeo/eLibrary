@@ -1,5 +1,5 @@
 --	MODER
-grant connect on database elibrary to moder;
+grant connect on database elibrary_hg6t to moder;
 grant insert on book_loans to moder;
 grant delete on book_loans to moder;
 grant update on book_loans to moder;
@@ -14,8 +14,8 @@ grant select on extention_requests to moder;
 grant select on wishlist to moder;
 GRANT USAGE, SELECT ON SEQUENCE book_loans_loan_id_seq TO moder;
 grant delete on wishlist to moder;
-GRANT EXECUTE ON PROCEDURE confirm_extension TO moder;
-GRANT EXECUTE ON PROCEDURE reject_extension TO moder;
+GRANT EXECUTE ON FUNCTION confirm_extension TO moder;
+GRANT EXECUTE ON function reject_extension TO moder;
 grant delete on extention_requests to moder;
 grant execute on function get_authors() to moder;
 grant execute on function search_authors(varchar) to moder;
@@ -24,17 +24,17 @@ grant execute on function search_genres(varchar) to moder;
 
 
 --  ADMIN
-grant select on users to admin;
-grant select on genres to admin;
-grant execute on function get_genres to admin;
-grant execute on function get_authors() to admin;
-grant execute on function search_authors(varchar) to admin;
-grant execute on function search_genres(varchar) to admin;
+grant select on users to blazzeo;
+grant select on genres to blazzeo;
+grant execute on function get_genres to blazzeo;
+grant execute on function get_authors() to blazzeo;
+grant execute on function search_authors(varchar) to blazzeo;
+grant execute on function search_genres(varchar) to blazzeo;
 
 
 
 --	USER
-grant connect on database elibrary to dbuser;
+grant connect on database elibrary_hg6t to dbuser;
 grant select on books to dbuser;
 grant select on users to dbuser;
 grant select on book_authors to dbuser;
@@ -45,9 +45,9 @@ grant select on book_loans to dbuser;
 grant insert on wishlist to dbuser;
 grant select on wishlist to dbuser;
 grant delete on wishlist to dbuser;
-grant execute on function get_books(varchar) to dbuser;
+grant execute on function get_books(integer) to dbuser;
 grant execute on function authentificate(varchar, varchar) to dbuser;
-grant execute on procedure toggle_wishlist(varchar, integer) to dbuser;
+grant execute on procedure toggle_wishlist(integer, integer) to dbuser;
 grant insert on extention_requests to dbuser;
 grant select on extention_requests to dbuser;
 grant update on extention_requests to dbuser;
