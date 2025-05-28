@@ -251,7 +251,7 @@ export async function editBook(book) {
 	try {
 		const admin = dbadmin()
 		const normalizedBook = normalizeAuthors(book)
-		console.log(normalizedBook)
+		// console.log(normalizedBook)
 		const result = await admin.query('select edit_book($1::json);', [JSON.stringify(normalizedBook)])
 		return result.rows
 	} catch (err) {

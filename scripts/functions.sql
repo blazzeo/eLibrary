@@ -769,7 +769,7 @@ END;
 $$;
 
 
---  GET BOOKS + USER's BOOKSHELF
+--  GET BOOKS + USER's BOOKSHELF (Оптимизированная версия)
 CREATE OR REPLACE FUNCTION get_books(p_user_id INTEGER)
 RETURNS TABLE(
     book_id INT,
@@ -780,16 +780,26 @@ RETURNS TABLE(
     rating DECIMAL(4, 2),
     isbn VARCHAR,
     published_date DATE,
-    borrow_date DATE,
-    return_date DATE,
+    borrow_date DATE, -- Дата, если книга на руках у p_user_id
+    return_date DATE, -- Дата возврата, если книга на руках у p_user_id
+    current_loan_return_date DATE, -- Дата возврата, если книга на руках у ЛЮБОГО пользователя (NULL, если на руках)
     loan_status INT 
-    -- 0: mine 
+    -- 0: mine (currently borrowed)
     -- 1: in wishlist,
-    -- 2: not in wishlist
+    -- 2: not in wishlist, not currently borrowed by me
+    -- 3: borrowed by someone else
 ) AS $$
 BEGIN
     RETURN QUERY
-    WITH book_status AS (
+    WITH book_current_loan AS (
+        SELECT
+            book_id,
+            borrow_date AS actual_borrow_date,
+            return_date AS actual_return_date -- Будет NULL для активного займа
+        FROM book_loans
+        WHERE return_date IS NULL -- Ищем активные займы
+    ),
+    book_status AS (
         SELECT
             b.book_id,
             b.title,
@@ -797,57 +807,53 @@ BEGIN
             b.rating,
             b.isbn,
             b.published_date,
-            bl.borrow_date,
-            bl.return_date,
+            -- Даты займа для ТЕКУЩЕГО пользователя
+            (SELECT bl_mine.borrow_date FROM book_loans bl_mine WHERE bl_mine.book_id = b.book_id AND bl_mine.user_id = p_user_id ORDER BY bl_mine.borrow_date DESC LIMIT 1) AS my_borrow_date,
+            (SELECT bl_mine.return_date FROM book_loans bl_mine WHERE bl_mine.book_id = b.book_id AND bl_mine.user_id = p_user_id ORDER BY bl_mine.borrow_date DESC LIMIT 1) AS my_return_date,
+            
+            -- Дата возврата, если книга на руках у ЛЮБОГО пользователя
+            bcl.actual_return_date AS current_loan_return_date, -- Будет NULL, если на руках у кого-то
             CASE
                 WHEN EXISTS (
                     SELECT 1
-                    FROM book_loans bl2
-                    WHERE bl2.book_id = b.book_id 
-                    AND bl2.user_id = p_user_id
-                ) THEN 0  -- Book is mine
+                    FROM book_loans bl_mine
+                    WHERE bl_mine.book_id = b.book_id 
+                    AND bl_mine.user_id = p_user_id
+                    AND bl_mine.return_date IS NULL -- Активный займ у p_user_id
+                ) THEN 0  -- Book is mine (currently borrowed)
                 WHEN EXISTS (
                     SELECT 1 
                     FROM wishlist w 
                     WHERE w.book_id = b.book_id 
                     AND w.user_id = p_user_id
                 ) THEN 1  -- book is in my wishlist
-                ELSE 2  -- book is not in my wishlist
+                WHEN bcl.book_id IS NOT NULL THEN 3 -- Borrowed by someone else (active loan exists)
+                ELSE 2  -- book is not in my wishlist, not currently borrowed by me, not borrowed by anyone
             END AS loan_status
         FROM 
             books b
         LEFT JOIN
-            book_loans bl ON bl.book_id = b.book_id
+            book_current_loan bcl ON bcl.book_id = b.book_id
     )
     SELECT
         bs.book_id,
         bs.title,
-        ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) as authors,
-        ARRAY_AGG(DISTINCT g.genre) as genres,
+        -- Используем подзапросы для агрегации авторов и жанров для лучшей производительности
+        (SELECT ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) FROM book_authors ba JOIN authors a ON a.author_id = ba.author_id WHERE ba.book_id = bs.book_id) as authors,
+        (SELECT ARRAY_AGG(DISTINCT g.genre) FROM book_genres bg JOIN genres g ON bg.genre_id = g.genre_id WHERE bg.book_id = bs.book_id) as genres,
         bs.total_pages,
         bs.rating,
         bs.isbn,
         bs.published_date,
-        bs.borrow_date,
-        bs.return_date,
+        bs.my_borrow_date,
+        bs.my_return_date,
+        bs.current_loan_return_date,
         bs.loan_status
     FROM 
         book_status bs
-    JOIN
-        book_authors ba ON bs.book_id = ba.book_id
-    JOIN
-        authors a ON a.author_id = ba.author_id
-    JOIN
-        book_genres bg ON bs.book_id = bg.book_id
-    JOIN
-        genres g ON bg.genre_id = g.genre_id
-    GROUP BY
-        bs.book_id, bs.title, bs.total_pages, bs.rating, bs.isbn, bs.published_date, 
-        bs.borrow_date, bs.return_date, bs.loan_status
     ORDER BY bs.book_id ASC;
 END;
 $$ LANGUAGE plpgsql;
-
 --	GET USERS
 CREATE OR REPLACE FUNCTION get_users()
 RETURNS SETOF JSON AS $$

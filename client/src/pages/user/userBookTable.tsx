@@ -114,24 +114,26 @@ export default function UserBookTable() {
 								На книжной полке
 							</button>
 						);
+					} else if {
+
 					}
 
 					return (
-						<button
-							className={`btn ${loanStatus === 1 ? "btn-danger" : "btn-success"}`}
-							onClick={(e) => {
-								e.stopPropagation();
-								handleWishlist(bookId, loanStatus);
-							}}
-							disabled={isLoading}
-						>
-							{isLoading ? (
-								"Загрузка..."
-							) : (
-								loanStatus === 1 ? "Удалить из отложенных" : "Отложить книгу"
-							)}
-						</button>
-					);
+							<button
+								className={`btn ${loanStatus === 1 ? "btn-danger" : "btn-success"}`}
+								onClick={(e) => {
+									e.stopPropagation();
+									handleWishlist(bookId, loanStatus);
+								}}
+								disabled={isLoading}
+							>
+								{isLoading ? (
+									"Загрузка..."
+								) : (
+									loanStatus === 1 ? "Удалить из отложенных" : "Отложить книгу"
+								)}
+							</button>
+						);
 				},
 			},
 		],
