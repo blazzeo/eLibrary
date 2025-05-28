@@ -699,6 +699,7 @@ BEGIN
         'user_name', u.user_name,
         'user_role', u.user_role,
         'registration_date', u.registration_date,
+		'telegram_chat_id', u.telegram_chat_id,
         'loans', COALESCE((
             SELECT json_agg(json_build_object(
                 'book_id', bl.book_id,
@@ -758,6 +759,32 @@ BEGIN
         INSERT INTO extention_requests(user_id, book_id, request_date)
         VALUES (v_user_id, p_book_id, p_request_date);
     END IF;
+END;
+$$;
+
+-- Функция для получения списка пользователей, отложивших книгу, по book_id
+CREATE OR REPLACE FUNCTION get_wishlist_by_book_id(p_book_id INT)
+RETURNS TABLE (
+    user_id INT,
+    user_name VARCHAR,
+    request_date DATE
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        w.user_id,
+        u.user_name,
+        w.request_date
+    FROM
+        wishlist w
+    JOIN
+        users u ON w.user_id = u.user_id
+    WHERE
+        w.book_id = p_book_id
+    ORDER BY
+        w.request_date ASC; -- Сортировка по дате запроса, чтобы видеть, кто первый в очереди
 END;
 $$;
 
@@ -909,6 +936,7 @@ BEGIN
 	DELETE FROM extention_requests where user_id = p_user_id;
 
     DELETE FROM users WHERE user_id = p_user_id;
+	delete from telegram_subscriptions where user_id = p_user_id;
 
     IF NOT EXISTS (SELECT 1 FROM users WHERE user_id = p_user_id) THEN
         RETURN QUERY SELECT TRUE, 'User deleted successfully';

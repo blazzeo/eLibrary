@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import fs from 'fs'
 import path from 'path'
 import router from './routes/routes.js';
+import { bot } from './tgbot/telegramBot.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,4 +31,5 @@ export function log(message) {
 	});
 }
 
+bot.startPolling()
 app.listen(PORT, () => console.log(`Server running at port: ${PORT}`));

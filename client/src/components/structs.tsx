@@ -33,6 +33,7 @@ export type UserData = {
 	user_name: string;
 	user_role: string;
 	registration_date: Date;
+	telegram_chat_id: string | null;
 
 	loans: Loan[] | null;
 	wishlist: WishlistItem[] | null;

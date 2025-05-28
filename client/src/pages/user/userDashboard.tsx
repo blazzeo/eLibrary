@@ -6,7 +6,7 @@ import { WishList } from "./userWishlist";
 import { useLibrary } from "../../context/libraryContext";
 import { useEffect } from "react";
 import BookPageUserWrapper from "../../components/book/book_page_user_wrapper";
-import UserProfile from "../../components/user_profile";
+import UserProfile from "../profilePage";
 
 export default function UserDashboard() {
 	const { books, refreshAll, user } = useLibrary()

@@ -1,5 +1,5 @@
 import { dbuser, dbadmin, dbmoder } from '../db_roles.js'
-import { hashPassword } from '../middleware/auth.js'
+import { hashPassword, verifyPassword } from '../middleware/auth.js'
 import bcrypt from 'bcrypt'
 
 export async function checkLogin(userLogin) {
@@ -385,5 +385,50 @@ export async function searchGenres(searchTerm) {
 		return result.rows;
 	} catch (err) {
 		throw err;
+	}
+}
+
+export async function getWishListbyID(bookId) {
+	try {
+		const admin = dbadmin();
+		const result = await admin.query('SELECT * FROM get_wishlist_by_book_id($1);', [bookId]);
+		return result.rows;
+	} catch (error) {
+		throw error
+	}
+}
+
+export async function changePassword(user_id, old_password, new_password) {
+	try {
+		const admin = dbadmin();
+		const user_info = await admin.query(`
+			SELECT user_password
+			FROM users
+			WHERE user_id = $1
+		`, [user_id]);
+
+		if (user_info.rowCount === 0)
+			return { success: false, message: "Пользователь не найден" };
+
+		let hashed_user_password = user_info.rows[0].user_password;
+		const isPasswordValid = await verifyPassword(old_password, hashed_user_password);
+
+		if (!isPasswordValid)
+			throw { success: false, message: "Неверный пароль" }
+
+		const hashed_password = await hashPassword(new_password)
+
+		await admin.query('UPDATE users SET user_password = $1 WHERE user_id = $2', [hashed_password, user_id]);
+	} catch (error) {
+		throw error // Перебрасываем ошибку дальше
+	}
+}
+
+
+export async function toggleUserSubsciption(user_id, chat_id) {
+	try {
+
+	} catch (error) {
+		throw error
 	}
 }

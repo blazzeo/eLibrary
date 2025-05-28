@@ -325,3 +325,32 @@ export async function getAuthors() {
 		throw error;
 	}
 }
+
+export async function changePassword(user_id: number, old_password: string, new_password: string) {
+	try {
+		console.log('API changePassword');
+		const response = await axios.put(`${SERVER}/api/chpassword`, { user_id, old_password, new_password }, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		});
+		console.log('API changePassword: получен ответ:', response.data);
+		return response.data;
+	} catch (error) {
+		console.error("API changePassword: ошибка:", error);
+		throw error;
+	}
+}
+
+export const updateTelegramChatId = async (user_id: number, chat_id: string | null) => {
+	try {
+		const response = await axios.put(`${SERVER}/users/${user_id}/telegram-chatid`, { chat_id }, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		});
+		return response.data;
+	} catch (error: any) {
+		throw error;
+	}
+};

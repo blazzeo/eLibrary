@@ -2,6 +2,7 @@ import * as db_request from '../controllers/queries.js'
 import express from 'express'
 import { verifyToken, requireRole, generateToken } from '../middleware/auth.js'
 import { log } from '../server.js'
+import { sendBookReturnedNotification } from '../tgbot/telegramBot.js'
 
 const router = express.Router()
 
@@ -66,7 +67,7 @@ router.get('/users/:user_id', verifyToken, requireRole(['admin', 'user', 'moder'
 		res.json(result)
 		log('users/ get-method success')
 	} catch (error) {
-		res.status(500).statusMessage(error.message)
+		res.status(500).json({ error: error.message })
 		log(`users/ get-method failed:\t${error.message}`)
 	}
 })
@@ -241,6 +242,9 @@ router.post('/returnbook', verifyToken, requireRole(['admin', 'moder']), async (
 		const result = await db_request.returnBook(book_id);
 		res.json({ result: result });
 		log(`returnBook success:\tBook:\t{${book_id}}`)
+		//	add logic to check if book was booked by somebody
+
+		//sendBookReturnedNotification()
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 		log(`returnBook failed:\t${error.message}`)
@@ -430,6 +434,56 @@ router.get('/genres', verifyToken, requireRole(['admin', 'moder']), async (_req,
 		log(`getGenres failed: ${error.message}`);
 	}
 });
+
+router.put('/chpassword', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
+	try {
+		const authenticatedUserId = req.user.user_id;
+		const requestedUserId = parseInt(req.body.user_id);
+		const old_password = req.body.old_password;
+		const new_password = req.body.new_password;
+
+		// Определяем, для какого пользователя меняем пароль
+		let targetUserId;
+		if (req.user.user_role === 'admin' || req.user.user_role === 'moder') {
+			targetUserId = requestedUserId;
+		} else {
+			targetUserId = authenticatedUserId;
+			if (requestedUserId && requestedUserId !== authenticatedUserId) {
+				return res.status(403).json({ error: 'У вас нет прав для изменения пароля другого пользователя.' });
+			}
+		}
+
+		await db_request.changePassword(targetUserId, old_password, new_password);
+
+		res.status(200).json({ message: 'Пароль успешно изменен.' });
+		log('changePassword success');
+	} catch (error) {
+		const statusCode = error.status || 500;
+		const errorMessage = error.message || 'Произошла непредвиденная ошибка на сервере.';
+
+		res.status(statusCode).json({ error: errorMessage });
+		log(`changePassword failed for user ${req.user.id} (target: ${req.body.user_id}): ${errorMessage}`);
+		console.error(error); // Для более подробного логирования на сервере
+	}
+});
+
+router.put('/users/:user_id/telegram-chatid', verifyToken, requireRole(['user']), async (req, res) => {
+	try {
+		const { user_id } = req.params;
+		const { chat_id } = req.body;
+
+		if (req.user.user_id != user_id)
+			res.status(403).json({ error: 'У вас нет прав менять чужой chat_id' })
+
+		await db_request.toggleUserSubsciption(user_id, chat_id);
+
+		res.status(200).end()
+	} catch (error) {
+		res.status(500).json({ error: error });
+		log(`changePassword failed for user ${req.user.id} (target: ${req.body.user_id}): ${errorMessage}`);
+		console.error(error); // Для более подробного логирования на сервере
+	}
+})
 
 router.get('/health', async (_req, res) => {
 	res.status(200).end()

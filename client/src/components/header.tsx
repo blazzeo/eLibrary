@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useLibrary } from "../context/libraryContext";
 import { useAuth } from "../context/authContext";
 
 export default function Header() {
+	const navigate = useNavigate();
 	const { user, clearLibraryState } = useLibrary();
 	const { logout } = useAuth();
 	const [isOpen, setIsOpen] = useState(false);
@@ -101,6 +102,16 @@ export default function Header() {
 									:{user?.user_role}
 								</span>
 							</span>
+							{/* Profile Button */}
+							<button
+								className="btn btn-outline-light me-2" // Added me-2 for margin between buttons
+								onClick={() => navigate('/profile')} // Navigate to /profile on click
+								title="Мой профиль"
+							>
+								Мой профиль
+							</button>
+
+							{/* Original Logout Button */}
 							<button className="btn btn-outline-light" onClick={handleLogout} title="Выйти">
 								<svg
 									width="20px"

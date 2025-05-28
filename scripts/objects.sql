@@ -66,6 +66,7 @@ create TABLE users(
   user_password TEXT NOT NULL,
   user_role user_role not null default 'user',
   registration_date date not null default CURRENT_DATE,
+  telegram_chat_id BIGINT unique,
   PRIMARY KEY(user_id)
 );
 
@@ -110,6 +111,7 @@ create table extention_requests(
         FOREIGN KEY (book_id)
         REFERENCES books(book_id)
 );
+
 
 --	drop all objects
 --drop table authors cascade;
