@@ -43,8 +43,8 @@ export default function UserDashboard() {
 			<div className="container my-4">
 				<Routes>
 					<Route index element={<UserBookTable />} />
-					<Route path="bookshelf" element={<BookShelf books={books.filter(x => x.loan_status === 0)} />} />
-					<Route path="wishlist" element={<WishList books={books.filter(x => x.loan_status === 1)} />} />
+					<Route path="bookshelf" element={<BookShelf books={books.filter(x => x.loan_status === 1)} />} />
+					<Route path="wishlist" element={<WishList books={books.filter(x => x.is_in_my_wishlist === true)} />} />
 					<Route path="book/:id" element={<BookPageUserWrapper />} />
 					<Route path="profile" element={<UserProfile user={user} />} />
 				</Routes>

@@ -323,10 +323,10 @@ export async function getModerBooks() {
 	}
 }
 
-export async function requestExtent(user_name, book_id, request_date) {
+export async function requestExtent(user_id, book_id, request_date) {
 	try {
 		const user = dbuser()
-		const result = await user.query(`call request_extent_loan($1, $2, $3);`, [user_name, book_id, request_date])
+		const result = await user.query(`call request_extent_loan($1, $2, $3);`, [user_id, book_id, request_date])
 		return result
 	} catch (error) {
 		console.error(error)

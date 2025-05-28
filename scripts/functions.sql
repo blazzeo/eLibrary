@@ -648,27 +648,20 @@ $$;
 
 --	REQUEST LOAN EXTENTION
 CREATE OR REPLACE PROCEDURE request_extent_loan(
-    p_user_name VARCHAR,
+    p_user_id INTEGER,
     p_book_id INTEGER,
     p_request_date DATE
 )
 LANGUAGE plpgsql
 AS $$
 DECLARE
-    v_user_id INTEGER;
     req_exists BOOLEAN;
 BEGIN
-    -- Get user ID
-    SELECT u.user_id
-    INTO v_user_id
-    FROM users u
-    WHERE u.user_name = p_user_name;
-
     -- Check if there is already request
     SELECT EXISTS (
         SELECT 1
         FROM extention_requests er
-        WHERE er.book_id = p_book_id AND er.user_id = v_user_id
+        WHERE er.book_id = p_book_id AND er.user_id = p_user_id
     )
     INTO req_exists;
 
@@ -676,11 +669,11 @@ BEGIN
         -- There IS request: update date
         UPDATE extention_requests
         SET request_date = p_request_date
-        WHERE book_id = p_book_id AND user_id = v_user_id;
+        WHERE book_id = p_book_id AND user_id = p_user_id;
     ELSE
         -- No request: insert new one
         INSERT INTO extention_requests(user_id, book_id, request_date)
-        VALUES (v_user_id, p_book_id, p_request_date);
+        VALUES (p_user_id, p_book_id, p_request_date);
     END IF;
 END;
 $$;
@@ -769,37 +762,42 @@ END;
 $$;
 
 
---  GET BOOKS + USER's BOOKSHELF (Оптимизированная версия)
+--  GET BOOKS + USER's BOOKSHELF (Финальная версия с учетом return_date как даты "до которой")
 CREATE OR REPLACE FUNCTION get_books(p_user_id INTEGER)
 RETURNS TABLE(
     book_id INT,
     title VARCHAR,
     authors text[],
-    genres varchar[],    
+    genres varchar[],
     total_pages INT,
     rating DECIMAL(4, 2),
     isbn VARCHAR,
     published_date DATE,
-    borrow_date DATE, -- Дата, если книга на руках у p_user_id
-    return_date DATE, -- Дата возврата, если книга на руках у p_user_id
-    current_loan_return_date DATE, -- Дата возврата, если книга на руках у ЛЮБОГО пользователя (NULL, если на руках)
-    loan_status INT 
-    -- 0: mine (currently borrowed)
-    -- 1: in wishlist,
-    -- 2: not in wishlist, not currently borrowed by me
-    -- 3: borrowed by someone else
+    borrow_date DATE,   -- Дата выдачи текущего активного займа (у кого-то)
+    return_date DATE,   -- Ожидаемая дата возврата текущего активного займа (у кого-то)
+    loan_status INT,    -- 0: Available, 1: My Book, 3: Borrowed By Other
+    is_in_my_wishlist BOOLEAN -- Новое поле: находится ли книга в списке желаний текущего пользователя
 ) AS $$
 BEGIN
     RETURN QUERY
-    WITH book_current_loan AS (
+    WITH book_active_loans AS (
         SELECT
-            book_id,
-            borrow_date AS actual_borrow_date,
-            return_date AS actual_return_date -- Будет NULL для активного займа
-        FROM book_loans
-        WHERE return_date IS NULL -- Ищем активные займы
+            bl.book_id,
+            bl.user_id AS loan_user_id,
+            bl.borrow_date AS loan_borrow_date,
+            bl.return_date AS loan_expected_return_date
+        FROM book_loans bl
+        WHERE bl.return_date IS NOT NULL -- Предполагаем, что return_date всегда указана для активного займа
+        -- ИЛИ, если вы используете поле is_active: WHERE bl.is_active = TRUE
+        -- ИЛИ, если return_date может быть в будущем: WHERE bl.return_date >= CURRENT_DATE
     ),
-    book_status AS (
+    user_wishlist_books AS (
+        SELECT
+            w.book_id
+        FROM wishlist w
+        WHERE w.user_id = p_user_id
+    ),
+    book_status_cte AS (
         SELECT
             b.book_id,
             b.title,
@@ -807,53 +805,49 @@ BEGIN
             b.rating,
             b.isbn,
             b.published_date,
-            -- Даты займа для ТЕКУЩЕГО пользователя
-            (SELECT bl_mine.borrow_date FROM book_loans bl_mine WHERE bl_mine.book_id = b.book_id AND bl_mine.user_id = p_user_id ORDER BY bl_mine.borrow_date DESC LIMIT 1) AS my_borrow_date,
-            (SELECT bl_mine.return_date FROM book_loans bl_mine WHERE bl_mine.book_id = b.book_id AND bl_mine.user_id = p_user_id ORDER BY bl_mine.borrow_date DESC LIMIT 1) AS my_return_date,
-            
-            -- Дата возврата, если книга на руках у ЛЮБОГО пользователя
-            bcl.actual_return_date AS current_loan_return_date, -- Будет NULL, если на руках у кого-то
+
+            -- Информация о текущем активном займе (любого пользователя)
+            bal.loan_borrow_date AS borrow_date,
+            bal.loan_expected_return_date AS return_date,
+
+            -- Определяем loan_status без статуса 2 (In My Wishlist)
             CASE
-                WHEN EXISTS (
-                    SELECT 1
-                    FROM book_loans bl_mine
-                    WHERE bl_mine.book_id = b.book_id 
-                    AND bl_mine.user_id = p_user_id
-                    AND bl_mine.return_date IS NULL -- Активный займ у p_user_id
-                ) THEN 0  -- Book is mine (currently borrowed)
-                WHEN EXISTS (
-                    SELECT 1 
-                    FROM wishlist w 
-                    WHERE w.book_id = b.book_id 
-                    AND w.user_id = p_user_id
-                ) THEN 1  -- book is in my wishlist
-                WHEN bcl.book_id IS NOT NULL THEN 3 -- Borrowed by someone else (active loan exists)
-                ELSE 2  -- book is not in my wishlist, not currently borrowed by me, not borrowed by anyone
-            END AS loan_status
-        FROM 
+                WHEN bal.loan_user_id = p_user_id THEN 1 -- My Book (Книга на руках у p_user_id)
+                WHEN bal.book_id IS NOT NULL THEN 3      -- Borrowed By Other (Книга на руках у другого пользователя)
+                ELSE 0                                    -- Available (Доступна для бронирования/добавления в вишлист)
+            END AS loan_status,
+            
+            -- Определяем is_in_my_wishlist
+            CASE
+                WHEN uwb.book_id IS NOT NULL THEN TRUE
+                ELSE FALSE
+            END AS is_in_my_wishlist
+        FROM
             books b
         LEFT JOIN
-            book_current_loan bcl ON bcl.book_id = b.book_id
+            book_active_loans bal ON bal.book_id = b.book_id
+        LEFT JOIN
+            user_wishlist_books uwb ON uwb.book_id = b.book_id
     )
     SELECT
         bs.book_id,
         bs.title,
-        -- Используем подзапросы для агрегации авторов и жанров для лучшей производительности
-        (SELECT ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) FROM book_authors ba JOIN authors a ON a.author_id = ba.author_id WHERE ba.book_id = bs.book_id) as authors,
-        (SELECT ARRAY_AGG(DISTINCT g.genre) FROM book_genres bg JOIN genres g ON bg.genre_id = g.genre_id WHERE bg.book_id = bs.book_id) as genres,
+        (SELECT ARRAY_AGG(DISTINCT a.first_name || ' ' || a.last_name) FROM book_authors ba JOIN authors a ON a.author_id = ba.author_id WHERE ba.book_id = bs.book_id) AS authors,
+        (SELECT ARRAY_AGG(DISTINCT g.genre) FROM book_genres bg JOIN genres g ON bg.genre_id = g.genre_id WHERE bg.book_id = bs.book_id) AS genres,
         bs.total_pages,
         bs.rating,
         bs.isbn,
         bs.published_date,
-        bs.my_borrow_date,
-        bs.my_return_date,
-        bs.current_loan_return_date,
-        bs.loan_status
-    FROM 
-        book_status bs
+        bs.borrow_date,
+        bs.return_date,
+        bs.loan_status,
+        bs.is_in_my_wishlist
+    FROM
+        book_status_cte bs
     ORDER BY bs.book_id ASC;
 END;
 $$ LANGUAGE plpgsql;
+
 --	GET USERS
 CREATE OR REPLACE FUNCTION get_users()
 RETURNS SETOF JSON AS $$

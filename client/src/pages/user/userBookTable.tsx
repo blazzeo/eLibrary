@@ -9,45 +9,47 @@ import { toggleWishlist } from "../../api/DatabaseAPI.tsx";
 import { useLibrary } from "../../context/libraryContext";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { AskExtensionForm } from "../../components/forms/AskExtensionForm.tsx";
 
 export default function UserBookTable() {
 	const { books, refreshAll, user } = useLibrary();
 	const navigate = useNavigate();
 	const [loadingBookId, setLoadingBookId] = useState<number | null>(null);
 
-	const handleWishlist = useCallback(async (bookId: number, currentStatus: number) => {
-		console.log("Handling wishlist for book:", bookId, "current status:", currentStatus);
-		if (!user?.user_name || loadingBookId === bookId) return;
+	const [showExtensionModal, setShowExtensionModal] = useState(false);
+	const [selectedBookForExtension, setSelectedBookForExtension] = useState<{ id: number; currentReturnDate: Date | null } | null>(null);
 
-		// Нельзя добавить в желаемое книгу, которая уже на руках
-		if (currentStatus === 0) {
-			toast.warning("Эта книга уже у вас на руках");
-			return;
-		}
+	const handleToggleWishlist = useCallback(async (bookId: number, currentIsInWishlist: boolean) => {
+		if (!user?.user_id || loadingBookId === bookId) return;
 
 		try {
 			setLoadingBookId(bookId);
-
-			const user_id = user.user_id;
-			// Отправляем запрос на сервер
-			await toggleWishlist(user_id, bookId);
-
-			// Показываем уведомление
-			toast.success(
-				currentStatus === 1
-					? "Книга удалена из списка отложенных"
-					: "Книга добавлена в список отложенных"
-			);
-
-			// Принудительно обновляем данные
+			await toggleWishlist(user.user_id, bookId);
+			toast.success(currentIsInWishlist ? "Книга удалена из списка желаний/бронирований" : "Книга добавлена в список желаний/забронирована");
 			await refreshAll();
-		} catch (error) {
-			console.error("Ошибка при обновлении списка отложенных:", error);
-			toast.error("Не удалось обновить список отложенных");
+		} catch (error: any) {
+			console.error("Ошибка при обновлении списка желаний/бронирований:", error);
+			toast.error(`Не удалось обновить список желаний/бронирований: ${error.message || 'Неизвестная ошибка'}`);
 		} finally {
 			setLoadingBookId(null);
 		}
 	}, [user, loadingBookId, refreshAll]);
+
+	const handleOpenExtensionModal = useCallback((bookId: number) => {
+		const book = books?.find((b) => b.book_id === bookId);
+		if (book && book.return_date) {
+			setSelectedBookForExtension({ id: bookId, currentReturnDate: book.return_date });
+			setShowExtensionModal(true);
+		} else {
+			toast.error("Не удалось получить дату возврата для продления.");
+		}
+	}, [books]);
+
+	const handleCloseExtensionModal = useCallback(() => {
+		setShowExtensionModal(false);
+		setSelectedBookForExtension(null);
+	}, []);
+
 
 	const columns = useMemo<MRT_ColumnDef<BookData>[]>(
 		() => [
@@ -100,44 +102,67 @@ export default function UserBookTable() {
 			},
 			{
 				accessorKey: "loan_status",
-				header: "Статус 🔓",
-				size: 50,
+				header: "Действие",
+				size: 150,
 				grow: false,
-				Cell: ({ cell, row }) => {
-					const loanStatus = cell.getValue() as number;
-					const bookId = row.original.book_id!;
-					const isLoading = loadingBookId === bookId;
+				Cell: ({ row }) => {
+					const book = row.original;
+					const loanStatus = book.loan_status;
+					const isInWishlist = book.is_in_my_wishlist;
+					const isLoading = loadingBookId === book.book_id!;
 
-					if (loanStatus === 0) {
+					// Форматируем дату для отображения на кнопке
+					const formattedReturnDate = book.return_date
+						? new Date(book.return_date).toLocaleDateString()
+						: '';
+
+					if (loanStatus === 1) {
 						return (
-							<button className="btn btn-secondary" disabled>
-								На книжной полке
-							</button>
-						);
-					} else if {
-
-					}
-
-					return (
 							<button
-								className={`btn ${loanStatus === 1 ? "btn-danger" : "btn-success"}`}
+								className="btn btn-warning"
 								onClick={(e) => {
 									e.stopPropagation();
-									handleWishlist(bookId, loanStatus);
+									handleOpenExtensionModal(book.book_id!);
 								}}
 								disabled={isLoading}
 							>
-								{isLoading ? (
-									"Загрузка..."
-								) : (
-									loanStatus === 1 ? "Удалить из отложенных" : "Отложить книгу"
-								)}
+								{isLoading ? "Загрузка..." : `Продлить срок (до ${formattedReturnDate})`}
 							</button>
 						);
+					}
+					else if (loanStatus === 3 || (loanStatus === 0 && isInWishlist)) {
+						return (
+							<button
+								className={`btn ${isInWishlist ? "btn-danger" : "btn-info"}`}
+								onClick={(e) => {
+									e.stopPropagation();
+									handleToggleWishlist(book.book_id!, isInWishlist);
+								}}
+								disabled={isLoading}
+							>
+								{isLoading ? "Загрузка..." : (isInWishlist ? "Отменить бронь" : `Забронировать (занята до ${formattedReturnDate})`)}
+							</button>
+						);
+					}
+					else if (loanStatus === 0 && !isInWishlist) {
+						return (
+							<button
+								className="btn btn-success"
+								onClick={(e) => {
+									e.stopPropagation();
+									handleToggleWishlist(book.book_id!, isInWishlist);
+								}}
+								disabled={isLoading}
+							>
+								{isLoading ? "Загрузка..." : "Забронировать"}
+							</button>
+						);
+					}
+					return null;
 				},
 			},
 		],
-		[handleWishlist, loadingBookId]
+		[handleToggleWishlist, handleOpenExtensionModal, loadingBookId]
 	);
 
 	const table = useMaterialReactTable<BookData>({
@@ -162,5 +187,18 @@ export default function UserBookTable() {
 		}),
 	});
 
-	return books ? <MaterialReactTable table={table} /> : <h1>Загрузка...</h1>;
+	return (
+		<>
+			<MaterialReactTable table={table} />
+
+			{showExtensionModal && selectedBookForExtension && (
+				<AskExtensionForm
+					show={showExtensionModal}
+					onClose={handleCloseExtensionModal}
+					bookId={selectedBookForExtension.id}
+					currentReturnDate={selectedBookForExtension.currentReturnDate ? new Date(selectedBookForExtension.currentReturnDate) : null}
+				/>
+			)}
+		</>
+	);
 }

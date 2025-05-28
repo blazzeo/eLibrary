@@ -179,9 +179,9 @@ export async function returnBook(bookId: number | null) {
 	}
 }
 
-export async function askExtension(userName: string, bookId: number, request_date: Date) {
+export async function askExtension(userId: number, bookId: number, request_date: Date) {
 	try {
-		const response = await axios.post(SERVER + `/api/askextension`, { user_name: userName, book_id: bookId, request_date: request_date })
+		const response = await axios.post(SERVER + `/api/askextension`, { user_id: userId, book_id: bookId, request_date: request_date })
 		return response.data
 	} catch (error) {
 		console.error(error)

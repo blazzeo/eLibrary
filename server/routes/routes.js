@@ -365,10 +365,10 @@ router.get('/books/:user_id', verifyToken, requireRole(['admin', 'moder', 'user'
 
 router.post('/askextension', verifyToken, requireRole(['admin', 'moder', 'user']), async (req, res) => {
 	try {
-		const user_name = req.body.user_name
+		const user_id = req.body.user_id
 		const book_id = req.body.book_id
 		const request_date = req.body.request_date
-		const result = await db_request.requestExtent(user_name, book_id, request_date)
+		const result = await db_request.requestExtent(user_id, book_id, request_date)
 		res.json(result)
 	} catch (error) {
 		res.status(500).json({ error: error.message })

@@ -9,6 +9,8 @@ import { BookData } from "../structs";
 import { toggleWishlist } from "../../api/DatabaseAPI";
 import { toast } from "react-toastify";
 import { useLibrary } from "../../context/libraryContext";
+import { AskExtensionForm } from "../../components/forms/AskExtensionForm";
+import { useState } from "react";
 
 interface Props {
 	book: BookData;
@@ -17,30 +19,90 @@ interface Props {
 export default function UserBookPage({ book }: Props) {
 	const { refreshAll, user } = useLibrary();
 
-	// 0 - mine
-	// 1 - in my wishlist
-	// 2 - not in my wishlist
-	const handle_wish = async () => {
-		let init_state = book.loan_status;
+	// Состояния для модального окна продления
+	const [showExtensionModal, setShowExtensionModal] = useState(false);
+
+	const handleToggleWishlist = async () => {
+		const wasInWishlist = book.is_in_my_wishlist; // Используем новое булево поле
 		try {
-			const user_name = user?.user_name
-			if (user_name === null || user_name === undefined)
-				throw Error("Имя пользователя не было получено")
-			await toggleWishlist(user?.user_id!, book.book_id!);
-			if (init_state === 1)
-				toast.success('Книга удалена')
-			else
-				toast.success('Книга добавлена')
-		} catch (error) {
-			console.error(error)
-			if (init_state == 2)
-				toast.error("Ошибка: книга не была добавлена в ожидаемоe")
-			else
-				toast.error("Ошибка: книга не была удалена из ожидаемого")
+			if (!user?.user_id) {
+				throw new Error("ID пользователя не был получен. Пожалуйста, войдите в систему.");
+			}
+
+			await toggleWishlist(user.user_id, book.book_id);
+
+			if (wasInWishlist) { // Была в вишлисте -> удалили
+				toast.success('Книга удалена из списка бронирований!');
+			} else { // Не была в вишлисте -> добавили
+				toast.success('Книга добавлена в список желаний/забронирована!');
+			}
+
+		} catch (error: any) {
+			console.error("Ошибка при обновлении статуса списка бронирований:", error);
+			let errorMessage = "Произошла неизвестная ошибка.";
+			if (error.message) {
+				errorMessage = error.message;
+			}
+			toast.error(`Ошибка: ${errorMessage}`);
 		} finally {
-			refreshAll()
+			refreshAll(); // Всегда обновляем данные, чтобы UI отражал изменения
 		}
 	}
+
+	// Открытие модального окна запроса на продление
+	const handleOpenExtensionModal = () => {
+		if (book.loan_status === 1 && book.return_date) { // Используем book.return_date
+			setShowExtensionModal(true);
+		} else {
+			toast.error("Невозможно продлить срок: книга не на руках у вас или нет даты возврата.");
+		}
+	};
+
+	// Закрытие модального окна запроса на продление
+	const handleCloseExtensionModal = () => {
+		setShowExtensionModal(false);
+	};
+
+	// --- Текст и логика кнопки действия ---
+	const getActionButton = () => {
+		const isInWishlist = book.is_in_my_wishlist; // Используем новое булево поле
+
+		// 1: My Book (Книга на руках у p_user_id)
+		if (book.loan_status === 1) {
+			const returnDateText = book.return_date
+				? `(до ${new Date(book.return_date).toLocaleDateString()})`
+				: '';
+			return (
+				<Button className="btn btn-warning" onClick={handleOpenExtensionModal}>
+					Продлить срок {returnDateText}
+				</Button>
+			);
+		}
+		// Книга не у меня на руках
+		else {
+			// Если книга в моём вишлисте
+			if (isInWishlist) {
+				return (
+					<Button className="btn btn-danger" onClick={handleToggleWishlist}>
+						Отменить бронь / Удалить из списка желаний
+					</Button>
+				);
+			}
+			// Если книга не в моём вишлисте
+			else {
+				const borrowedByOtherText = book.loan_status === 3 ? '(занята)' : '';
+				const returnDateText = book.loan_status === 3 && book.return_date
+					? ` до ${new Date(book.return_date).toLocaleDateString()}`
+					: '';
+
+				return (
+					<Button className="btn btn-success" onClick={handleToggleWishlist}>
+						Забронировать  {borrowedByOtherText}{returnDateText}
+					</Button>
+				);
+			}
+		}
+	};
 
 	return (
 		<div className="container py-4">
@@ -72,7 +134,6 @@ export default function UserBookPage({ book }: Props) {
 										))}
 									</div>
 								</div>
-
 							</div>
 
 							<Row className="g-3 mb-3">
@@ -81,7 +142,7 @@ export default function UserBookPage({ book }: Props) {
 										<p>
 											<strong>Дата публикации:</strong>{' '}
 											{book.published_date
-												? new Date(book.published_date).toDateString()
+												? new Date(book.published_date).toLocaleDateString()
 												: 'Не указана'}
 										</p>
 										<p><strong>Страниц:</strong> {book.total_pages}</p>
@@ -89,23 +150,46 @@ export default function UserBookPage({ book }: Props) {
 											<span className="ms-2">{book.rating}</span>
 										</p>
 										<p><strong>ISBN:</strong> {book.isbn || 'Не указан'}</p>
+
+										{/* Информация о текущем займе */}
+										{(book.loan_status === 1 || book.loan_status === 3) && (
+											<>
+												<p>
+													<strong>Дата выдачи:</strong>{' '}
+													{book.borrow_date
+														? new Date(book.borrow_date).toLocaleDateString()
+														: 'Неизвестно'}
+												</p>
+												<p>
+													<strong>Ожидаемая дата возврата:</strong>{' '}
+													{book.return_date
+														? new Date(book.return_date).toLocaleDateString()
+														: 'Неизвестно'}
+												</p>
+											</>
+										)}
 									</div>
 								</Col>
 							</Row>
 						</Col>
 					</Row>
-					<Row>
-						<Button className="btn" disabled={book.loan_status === 0} onClick={() => handle_wish()}>
-							{book.loan_status === 0
-								? "Моя"
-								: book.loan_status === 1
-									? "Удалить из ожидаемого"
-									: "Добавить в ожидаемое"}
-						</Button>
+					<Row className="mt-3">
+						<Col>
+							{getActionButton()}
+						</Col>
 					</Row>
 				</Card.Body>
 			</Card>
 
+			{/* Модальное окно для запроса на продление */}
+			{showExtensionModal && (
+				<AskExtensionForm
+					show={showExtensionModal}
+					onClose={handleCloseExtensionModal}
+					bookId={book.book_id!}
+					currentReturnDate={book.return_date ? new Date(book.return_date) : null}
+				/>
+			)}
 		</div>
 	);
 }

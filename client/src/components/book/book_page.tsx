@@ -64,7 +64,7 @@ export default function BookPage({ bookInfo }: Props) {
 		}).filter(author => author.first_name !== '') // Удаляем пустых авторов
 	);
 
-	const [book_id, _setBookId] = useState<number | null>(book.book_id)
+	const [book_id, _setBookId] = useState<number>(book.book_id)
 	const [title, setTitle] = useState(book.title);
 	const [genres, setGenres] = useState(book.genres);
 	const [authorInput, setAuthorInput] = useState("");
@@ -76,6 +76,12 @@ export default function BookPage({ bookInfo }: Props) {
 	const [totalPages, setTotalPages] = useState(book.total_pages);
 	const [rating, setRating] = useState(book.rating);
 	const [isbn, setIsbn] = useState(book.isbn || '');
+
+	// --- Логика определения просрочки ---
+	const isOverdue = owner && owner.return_date
+		? new Date(owner.return_date) < new Date() // Compare return_date with current date
+		: false;
+	// -----------------------------------
 
 	useEffect(() => {
 		if (searchTerm.trim() === "") {
@@ -149,29 +155,6 @@ export default function BookPage({ bookInfo }: Props) {
 		setShowGenreDropdown(false);
 	};
 
-	// const addAuthor = () => {
-	// 	console.log('Adding author, current input:', authorInput);
-	// 	if (authorInput.trim()) {
-	// 		const parts = authorInput.trim().split(' ');
-	// 		const newAuthor: Author = {
-	// 			author_id: 0,
-	// 			first_name: parts[0] || '',
-	// 			middle_name: parts[1] || null,
-	// 			last_name: parts[2] || null,
-	// 			full_name: authorInput.trim()
-	// 		};
-	// 		console.log('New author object:', newAuthor);
-	// 		if (newAuthor.first_name) {
-	// 			const updatedAuthors = [...authors, newAuthor];
-	// 			console.log('Updated authors array:', updatedAuthors);
-	// 			setAuthors(updatedAuthors);
-	// 			setAuthorInput('');
-	// 		} else {
-	// 			toast.error('Имя автора обязательно');
-	// 		}
-	// 	}
-	// };
-
 	const removeAuthor = (indexToRemove: number) => {
 		console.log('Removing author:', {
 			indexToRemove,
@@ -182,13 +165,6 @@ export default function BookPage({ bookInfo }: Props) {
 		console.log('Authors after removal:', newAuthors);
 		setAuthors(newAuthors);
 	};
-
-	// const addGenre = () => {
-	// 	if (genreInput.trim()) {
-	// 		setGenres([...genres, genreInput.trim()]);
-	// 		setGenreInput("");
-	// 	}
-	// };
 
 	const removeGenre = (indexToRemove: number) => {
 		setGenres(genres.filter((_, index) => index !== indexToRemove));
@@ -208,7 +184,6 @@ export default function BookPage({ bookInfo }: Props) {
 			return false;
 		}
 
-		// Валидация даты публикации
 		const publishedYear = new Date(publishedDate).getFullYear();
 		const currentYear = new Date().getFullYear();
 		const minYear = 1800;
@@ -223,7 +198,6 @@ export default function BookPage({ bookInfo }: Props) {
 			return false;
 		}
 
-		// Валидация ISBN
 		if (!/^\d{13}$/.test(isbn.toString())) {
 			toast.error("ISBN должен содержать ровно 13 цифр!");
 			return false;
@@ -243,16 +217,19 @@ export default function BookPage({ bookInfo }: Props) {
 				published_date: new Date(publishedDate),
 				authors: authors.filter(a => a.first_name).map(a => {
 					console.log('Processing author for save:', a);
-					// IDK
 					return a.full_name;
 				}),
 				genres: genres,
 				total_pages: Number(totalPages),
 				rating: Number(rating),
 				isbn: Number(isbn),
-				borrow_date: new Date(),
-				return_date: new Date(),
-				loan_status: 0
+				// These fields are not relevant for editing book info,
+				// but required by BookData type definition.
+				// They are typically managed by loan/wishlist API calls.
+				borrow_date: owner?.borrow_date || new Date(), // Keep existing if present
+				return_date: owner?.return_date || new Date(), // Keep existing if present
+				is_in_my_wishlist: false, // This will be set by the API based on user's wishlist
+				loan_status: owner ? (owner.user_id === user?.user_id ? 1 : 3) : 0 // Determine based on current owner
 			};
 			console.log('Final editedBook object:', editedBook);
 
@@ -293,6 +270,14 @@ export default function BookPage({ bookInfo }: Props) {
 
 	const confirm_request = async () => {
 		try {
+			if (!owner) { // Ensure owner exists
+				toast.error("Невозможно подтвердить продление без текущего владельца.");
+				return;
+			}
+			if (!extension_request) { // Ensure extension_request exists
+				toast.error("Нет активного запроса на продление.");
+				return;
+			}
 			await confirmExtension(book.book_id, owner.user_id, extension_request);
 			toast.success('Продление подтверждено');
 		} catch (err: any) {
@@ -305,6 +290,14 @@ export default function BookPage({ bookInfo }: Props) {
 
 	const reject_request = async () => {
 		try {
+			if (!owner) { // Ensure owner exists
+				toast.error("Невозможно отклонить продление без текущего владельца.");
+				return;
+			}
+			if (!extension_request) { // Ensure extension_request exists
+				toast.error("Нет активного запроса на продление.");
+				return;
+			}
 			await rejectExtension(book.book_id, owner.user_id, extension_request);
 			toast.success('Продление отклонено');
 		} catch (err: any) {
@@ -369,7 +362,9 @@ export default function BookPage({ bookInfo }: Props) {
 	}
 
 	const formatDate = (date: string | Date) => {
-		return new Date(date).toLocaleDateString('ru-RU');
+		// Ensure date is a Date object if it's a string from props
+		const d = typeof date === 'string' ? new Date(date) : date;
+		return d.toLocaleDateString('ru-RU');
 	};
 
 	return (
@@ -450,7 +445,14 @@ export default function BookPage({ bookInfo }: Props) {
 									<ListGroup.Item>
 										<div className="d-flex justify-content-between align-items-center">
 											<div>
-												<h5>{owner.user_name}</h5>
+												<h5>
+													{owner.user_name}
+													{isOverdue && ( // <--- ПРОСРОЧЕНО плашка здесь!
+														<Badge bg="danger" className="ms-2">
+															ПРОСРОЧЕНО
+														</Badge>
+													)}
+												</h5>
 												<div className="text-muted">
 													<small>С {formatDate(owner.borrow_date)} по {formatDate(owner.return_date)}</small>
 												</div>
@@ -477,7 +479,7 @@ export default function BookPage({ bookInfo }: Props) {
 												onClick={() => { return_book() }}
 												className="ms-3"
 											>
-												<i className="bi bi-trash">Удалить</i>
+												<i className="bi bi-trash"></i> Аннулировать
 											</Button>
 										</div>
 									</ListGroup.Item>

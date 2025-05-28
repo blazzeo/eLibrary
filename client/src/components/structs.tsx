@@ -40,7 +40,7 @@ export type UserData = {
 }
 
 export type BookData = {
-	book_id: number | null;
+	book_id: number;
 	title: string;
 	authors: string[];
 	genres: string[];
@@ -50,7 +50,8 @@ export type BookData = {
 	published_date: Date;
 	borrow_date: Date;
 	return_date: Date;
-	loan_status: number;
+	loan_status: 0 | 1 | 3;
+	is_in_my_wishlist: boolean;
 };
 
 export type BookLoan = {

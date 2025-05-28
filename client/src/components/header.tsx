@@ -42,7 +42,7 @@ export default function Header() {
 									</li>
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/wishlist">
-											Мои отложенные
+											Мои брони
 										</Link>
 									</li>
 								</>
@@ -52,6 +52,11 @@ export default function Header() {
 									<li className="nav-item">
 										<Link className="nav-link text-white" to="/usercontrol">
 											Пользователи
+										</Link>
+									</li>
+									<li className="nav-item">
+										<Link className="nav-link text-white" to="/requests">
+											Запросы
 										</Link>
 									</li>
 									<li className="nav-item">
