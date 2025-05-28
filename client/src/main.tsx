@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter, Routes, Route, Navigate, HashRouter } from 'react-router-dom';
+import { Routes, Route, Navigate, HashRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import UserDashboard from "./pages/user/userDashboard.tsx";
 import AdminDashboard from "./pages/admin/adminDashboard.tsx";
