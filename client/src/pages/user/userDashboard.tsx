@@ -9,7 +9,7 @@ import BookPageUserWrapper from "../../components/book/book_page_user_wrapper";
 import UserProfile from "../profilePage";
 
 export default function UserDashboard() {
-	const { books, refreshAll, user } = useLibrary()
+	const { books, refreshAll } = useLibrary()
 
 	useEffect(() => {
 		// Вызываем refreshAll только если нет данных
@@ -46,7 +46,7 @@ export default function UserDashboard() {
 					<Route path="bookshelf" element={<BookShelf books={books.filter(x => x.loan_status === 1)} />} />
 					<Route path="wishlist" element={<WishList books={books.filter(x => x.is_in_my_wishlist === true)} />} />
 					<Route path="book/:id" element={<BookPageUserWrapper />} />
-					<Route path="profile" element={<UserProfile user={user} />} />
+					<Route path="profile" element={<UserProfile />} />
 				</Routes>
 			</div>
 		</>

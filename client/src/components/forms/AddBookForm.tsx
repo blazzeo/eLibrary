@@ -287,6 +287,7 @@ export function AddBookForm() {
 			borrow_date: new Date(),
 			return_date: new Date(),
 			loan_status: 0,
+			is_in_my_wishlist: false,
 			authors: selectedAuthors.map(a => a.full_name),
 			genres: selectedGenres.map(g => g.genre)
 		};
