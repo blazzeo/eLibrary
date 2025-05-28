@@ -8,6 +8,7 @@ import UserPageWrapper from "../../components/user/user_page_wrapper";
 import { UserTable } from "../admin/userTable";
 import { useEffect } from "react";
 import { useLibrary } from "../../context/libraryContext";
+import ProfilePage from "../profilePage";
 
 export default function ModerDashboard() {
 	const { refreshAll, moderBooks, users } = useLibrary()
@@ -48,6 +49,7 @@ export default function ModerDashboard() {
 					<Route path="requests" element={<RequestsList />} />
 					<Route path="book/:id" element={<BookPageWrapper />} />
 					<Route path="user/:id" element={<UserPageWrapper />} />
+					<Route path="profile" element={<ProfilePage />} />
 				</Routes>
 			</div>
 		</>

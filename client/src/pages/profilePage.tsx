@@ -182,7 +182,7 @@ export default function ProfilePage() {
 									/>
 									<Form.Text className="text-muted">
 										Начните диалог с вашим ботом и используйте команду /start.
-										Бот сообщит вам ваш Chat ID. Или используйте бота @userinfobot.
+										Бот сообщит вам ваш Chat ID. Или используйте бота @eLibrary_BSTUBot.
 										Оставьте поле пустым, чтобы удалить Telegram ID.
 									</Form.Text>
 								</Form.Group>

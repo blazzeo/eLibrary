@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useLibrary } from "../../context/libraryContext";
 import AddUserForm from "../../components/forms/AddUserForm";
 import RequestsList from "../moder/requestsList";
+import ProfilePage from "../profilePage";
 
 export default function AdminDashboard() {
 	const { refreshAll, moderBooks, users } = useLibrary();
@@ -50,6 +51,7 @@ export default function AdminDashboard() {
 					<Route path="book/:id" element={<BookPageWrapper />} />
 					<Route path="user/:id" element={<UserPageWrapper />} />
 					<Route path="createmoder" element={<AddUserForm />} />
+					<Route path="profile" element={<ProfilePage />} />
 				</Routes>
 			</div>
 		</>

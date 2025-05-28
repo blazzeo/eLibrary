@@ -763,7 +763,7 @@ END;
 $$;
 
 -- Функция для получения списка пользователей, отложивших книгу, по book_id
-drop function get_wishlist_by_book_id(int);
+--drop function get_wishlist_by_book_id(int);
 CREATE OR REPLACE FUNCTION get_wishlist_by_book_id(p_book_id INT)
 RETURNS TABLE (
     user_id INT,

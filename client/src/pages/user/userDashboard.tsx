@@ -6,7 +6,7 @@ import { WishList } from "./userWishlist";
 import { useLibrary } from "../../context/libraryContext";
 import { useEffect } from "react";
 import BookPageUserWrapper from "../../components/book/book_page_user_wrapper";
-import UserProfile from "../profilePage";
+import ProfilePage from "../profilePage";
 
 export default function UserDashboard() {
 	const { books, refreshAll } = useLibrary()
@@ -46,7 +46,7 @@ export default function UserDashboard() {
 					<Route path="bookshelf" element={<BookShelf books={books.filter(x => x.loan_status === 1)} />} />
 					<Route path="wishlist" element={<WishList books={books.filter(x => x.is_in_my_wishlist === true)} />} />
 					<Route path="book/:id" element={<BookPageUserWrapper />} />
-					<Route path="profile" element={<UserProfile />} />
+					<Route path="profile" element={<ProfilePage />} />
 				</Routes>
 			</div>
 		</>
