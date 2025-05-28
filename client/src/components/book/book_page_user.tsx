@@ -78,7 +78,12 @@ export default function UserBookPage({ book }: Props) {
 							<Row className="g-3 mb-3">
 								<Col md={6}>
 									<div className="book-meta">
-										<p><strong>Дата публикации:</strong> {book.published_date.toDateString()}</p>
+										<p>
+											<strong>Дата публикации:</strong>{' '}
+											{book.published_date
+												? new Date(book.published_date).toDateString()
+												: 'Не указана'}
+										</p>
 										<p><strong>Страниц:</strong> {book.total_pages}</p>
 										<p><strong>Рейтинг:</strong>
 											<span className="ms-2">{book.rating}</span>

@@ -13,11 +13,12 @@ interface LoanListItemProps {
 export const LoanListItem = ({ book }: LoanListItemProps) => {
 	const { refreshAll } = useLibrary();
 	const [showModal, setShowModal] = useState(false);
-	const [newDate, setNewDate] = useState<string>(
-		book.owner?.return_date
-			? book.owner.return_date.toISOString().slice(0, 10)
-			: new Date().toISOString().slice(0, 10)
-	);
+	const [newDate, setNewDate] = useState<string>(() => {
+		const date = book.owner?.return_date
+			? new Date(book.owner.return_date)
+			: new Date();
+		return date.toISOString().slice(0, 10);
+	});
 
 	const navigate = useNavigate()
 
@@ -87,7 +88,11 @@ export const LoanListItem = ({ book }: LoanListItemProps) => {
 							type="date"
 							value={newDate}
 							onChange={(e) => setNewDate(e.target.value)}
-							min={book.owner?.return_date?.toISOString().slice(0, 10)}
+							min={
+								book.owner?.return_date
+									? new Date(book.owner.return_date).toISOString().slice(0, 10)
+									: undefined
+							}
 						/>
 					</Form.Group>
 				</Modal.Body>
