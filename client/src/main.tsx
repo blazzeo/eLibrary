@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, HashRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import UserDashboard from "./pages/user/userDashboard.tsx";
 import AdminDashboard from "./pages/admin/adminDashboard.tsx";
@@ -17,7 +17,7 @@ import { setupAxiosInterceptors } from "./components/auth/axiosInstanse.tsx";
 function Main() {
 	console.log('Main component rendering');
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<AuthProvider>
 				<LibraryProvider>
 					<AppWithAuth />
@@ -35,7 +35,7 @@ function Main() {
 					/>
 				</LibraryProvider>
 			</AuthProvider>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
 

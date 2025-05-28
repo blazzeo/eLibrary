@@ -84,6 +84,7 @@ export default function BookPage({ bookInfo }: Props) {
 		}
 
 		const filtered = users?.filter((u) =>
+			u.user_role === 'user' &&
 			u.user_name.toLowerCase().includes(searchTerm.toLowerCase())
 		) || [];
 		setFilteredUsers(filtered);
