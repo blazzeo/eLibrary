@@ -943,7 +943,6 @@ BEGIN
 	DELETE FROM extention_requests where user_id = p_user_id;
 
     DELETE FROM users WHERE user_id = p_user_id;
-	delete from telegram_subscriptions where user_id = p_user_id;
 
     IF NOT EXISTS (SELECT 1 FROM users WHERE user_id = p_user_id) THEN
         RETURN QUERY SELECT TRUE, 'User deleted successfully';

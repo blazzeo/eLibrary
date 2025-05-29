@@ -57,7 +57,7 @@ export default function AddLoanForm() {
 
 	return (
 		<div className="container mt-4">
-			<h2>Добавить новую бронь</h2>
+			<h2>Добавить новый займ</h2>
 			<Form>
 				{/* User List */}
 				<Form.Group className="mb-3" style={{ position: 'relative' }}>
